@@ -1,0 +1,28 @@
+{
+  "name": "factory-dukaan",
+  "version": "1.0.0",
+  "description": "Connecting sellers and buyers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anirudhganwal06/factory-dukaan.git"
+  },
+  "author": "GAWDS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anirudhganwal06/factory-dukaan/issues"
+  },
+  "homepage": "https://github.com/anirudhganwal06/factory-dukaan#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  }
+}
