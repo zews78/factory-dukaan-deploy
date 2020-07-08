@@ -1,0 +1,37 @@
+body{
+    margin: 5px;
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+.form-control, .btn, .d-flex{
+    margin: auto;
+}
+.d-flex{
+    justify-content: space-between;
+}
+@media screen and (min-width: 500px) {
+    .form-control{
+        max-width: 50%;
+
+    }
+    .btn{
+        max-width: 50%;
+
+    }
+    .d-flex{
+        max-width: 50%;
+    }
+
+}
+#signIn{
+    cursor: pointer;
+    /* margin-left: 10px; */
+}
+#signIn:hover{
+    font-weight: bold;
+}
+.header{
+    display: flex;
+    flex: wrap;
+    justify-content: space-between;
+}
