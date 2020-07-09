@@ -17,7 +17,7 @@ const authRoutes = require('./routes/auth');
 // using all necessary routes
 app.use(authRoutes);
 
-const PORT = 3001;
+const PORT = 3000;
 app.listen(PORT, () =>
 	console.log(`Server started @${PORT}`)
 );
