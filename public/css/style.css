@@ -1,29 +1,58 @@
-body{
-    margin: 5px;
-    padding: 5px;
-    font-family: 'Poppins', sans-serif;
+body {
+	/* margin: 5px; */
+	/* padding: 5px; */
+	font-family: 'Poppins', sans-serif;
 }
-.form-control, .btn, .d-flex{
-    margin: auto;
+.form-control,
+.btn,
+.d-flex {
+	margin: auto;
 }
-.d-flex{
-    justify-content: space-between;
+.d-flex {
+	justify-content: space-between;
 }
 @media screen and (min-width: 500px) {
+<<<<<<< HEAD
     .form-control, .btn, .d-flex{
         max-width: 40%;
     }
 
+=======
+	.form-control {
+		max-width: 50%;
+	}
+	.btn {
+		max-width: 50%;
+	}
+	.d-flex {
+		max-width: 50%;
+	}
 }
-#signIn{
-    cursor: pointer;
-    /* margin-left: 10px; */
+#signIn {
+	cursor: pointer;
+	/* margin-left: 10px; */
+>>>>>>> 0c058a480a95d8e35ac1d1f3260fa3990214ccd5
 }
-#signIn:hover{
-    font-weight: bold;
+#signIn:hover {
+	font-weight: bold;
 }
-.header{
-    display: flex;
-    flex: wrap;
-    justify-content: space-between;
+.header {
+	display: flex;
+	flex: wrap;
+	justify-content: space-between;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+}
+
+.footer {
+	width: 100vw;
+	background: #333333;
+	display: flex;
+	color: white;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
