@@ -1,7 +1,10 @@
 body {
-	/* margin: 0px;
-	padding: 0px; */
 	font-family: 'Poppins', sans-serif;
+}
+
+body a:hover {
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .form-control,
@@ -19,23 +22,12 @@ body {
 		max-width: 40%;
 	}
 }
-#signIn {
-	cursor: pointer;
-}
-#signIn:hover {
-	font-weight: bold;
-}
-/* #logo{
-    margin-left: 5px;
-    line-height: 5px;
-} */
+
 .header {
 	display: flex;
 	flex: wrap;
 	justify-content: space-between;
-	/* margin: 5px; */
 	padding: 5px;
-	/* line-height: 5px; */
 }
 
 footer {
