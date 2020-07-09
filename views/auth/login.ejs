@@ -1,55 +1,61 @@
-<%- include('../includes/start.ejs') %> 
-<%- include('../includes/headBody.ejs') %> 
-<%- include('../layout/header.ejs') %>
+<%- include('../includes/start.ejs') %> <%- include('../includes/headBody.ejs')
+%> <%- include('../layout/header.ejs') %>
+
+<!-- Page 1 - START -->
 <div>
-  <h2 align="center">Log in</h2>
-
-  <form class="text-center border border-light p-5" action="#!">
-    <!-- Email -->
-    <input
-      type="email"
-      id="defaultLoginFormEmail"
-      class="form-control mb-4"
-      placeholder="E-mail"
-    />
-
-    <!-- Password -->
-    <input
-      type="password"
-      id="defaultLoginFormPassword"
-      class="form-control mb-4"
-      placeholder="Password"
-    />
-
-    <div class="d-flex">
-      <div>
-        <!-- Remember me -->
-        <div class="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            class="custom-control-input"
-            id="defaultLoginFormRemember"
-          />
-          <!-- <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label> -->
-        </div>
-      </div>
-      <div>
-        <!-- Forgot password -->
-        <a href="">Forgot password?</a>
-      </div>
-    </div>
-
-    <!-- Sign in button -->
-    <button class="btn btn-info btn-block my-4" type="submit">Login</button>
-
-    <!-- Register -->
-    <p>
-      Not a member?
-      <a href="">Sign Up</a>
-    </p>
-  </form>
+  <h2 class="text-center my-5">Log in</h2>
+  <div id="firebaseui-auth-container"></div>
 </div>
-<%- include('../layout/footer.ejs') %>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
+/>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+    authDomain: "factory-dukaan.firebaseapp.com",
+    databaseURL: "https://factory-dukaan.firebaseio.com",
+    projectId: "factory-dukaan",
+    storageBucket: "factory-dukaan.appspot.com",
+    messagingSenderId: "901783648307",
+    appId: "1:901783648307:web:41d71e94413adcbdb74b46",
+    measurementId: "G-LH7XKNLQE5",
+  };
 
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-<%- include('../includes/end.ejs') %>
+  const uiConfig = {
+    callbacks: {
+      signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+        const xhr = new XMLHttpRequest();
+        const url = "/login";
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(authResult));
+        return false;
+      },
+    },
+    signInSuccessUrl: "/dashboard",
+    signInOptions: [
+      {
+        provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+        recaptchaParameters: {
+          type: "image", // 'audio'
+          size: "invisible", // 'invisible' or 'compact'
+          badge: "bottomright", // ' bottomright' or 'inline' applies to invisible.
+        },
+        defaultCountry: "IN",
+      },
+    ],
+  };
+
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  ui.start("#firebaseui-auth-container", uiConfig);
+</script>
+<!-- Page 1 - END -->
+<%- include('../layout/footer.ejs') %> <%- include('../includes/end.ejs') %>

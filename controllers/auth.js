@@ -1,6 +1,14 @@
+// const firebase = require('../firebase');
+
 exports.getLogin = (req, res) => {
 	res.render('auth/login.ejs');
 };
-exports.signUp =(req, res) => {
+
+exports.postLogin = (req, res) => {
+	console.log(req.body);
+	res.json({message: 'Success'});
+};
+
+exports.signUp = (req, res) => {
 	res.render('auth/signup.ejs');
-}
+};

@@ -1,12 +1,15 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 
 // Setting public path
 app.use(express.static('public'));
 
-// to recognise incoming request object as array/string
-app.use(express.urlencoded({extended: false}));
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: false}));
+// parse application/json
+app.use(bodyParser.json());
 
 // setting views folder as the default view folder
 app.set('views', path.join(__dirname, 'views'));
