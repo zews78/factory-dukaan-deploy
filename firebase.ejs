@@ -1,0 +1,24 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+    authDomain: "factory-dukaan.firebaseapp.com",
+    databaseURL: "https://factory-dukaan.firebaseio.com",
+    projectId: "factory-dukaan",
+    storageBucket: "factory-dukaan.appspot.com",
+    messagingSenderId: "901783648307",
+    appId: "1:901783648307:web:ad8ba6eba0121dceb74b46",
+    measurementId: "G-V9ZES6PTLK"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  console.log(firebase.app().name);
+</script>
