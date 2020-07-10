@@ -7,10 +7,12 @@ exports.getLogin = async(req, res) => {
 	} else {
 		console.log('jwt token not found');
 	}
-	res.render('auth/login.ejs');
+	res.render('../views/login.hbs');
 };
 
+
 exports.postLogin = async(req, res) => {
+	console.log(req.body);
 	if (req.body.additionalUserInfo.isNewUser) {
 		// Create a new user
 		const userData = {};
@@ -29,5 +31,5 @@ exports.postLogin = async(req, res) => {
 };
 
 exports.signUp = (req, res) => {
-	res.render('auth/signup.ejs');
+	res.render('views/signup.hbs');
 };

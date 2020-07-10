@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const hbs = require('hbs');
 
 // Setting public path
 app.use(express.static('public'));
@@ -15,8 +16,14 @@ app.use(bodyParser.json());
 // parse cookies
 app.use(cookieParser());
 
-// setting views folder as the default view folder
-app.set('views', path.join(__dirname, 'views'));
+// Define paths for express config
+const viewsDirectory = path.join(__dirname, '/templates/views');
+const partialsDirectory = path.join(__dirname, '/templates/partials');
+
+// Setting hbs as view engine
+app.set('view engine', 'hbs');
+app.set('views', viewsDirectory);
+hbs.registerPartials(partialsDirectory);
 
 // importing all necessary routes
 const authRoutes = require('./routes/auth');
@@ -25,6 +32,4 @@ const authRoutes = require('./routes/auth');
 app.use(authRoutes);
 
 const PORT = 3000;
-app.listen(PORT, () =>
-	console.log(`Server started @${PORT}`)
-);
+app.listen(PORT, () => console.log(`Server started @${PORT}`));
