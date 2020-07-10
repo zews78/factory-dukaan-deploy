@@ -1,10 +1,10 @@
 const firebase = require('../firebase');
 
 exports.getLogin = (req, res) => {
-	res.render('auth/login.ejs');
+	res.render('../views/login.hbs');
 };
 
-exports.postLogin = async(req, res) => {
+exports.postLogin = async (req, res) => {
 	console.log(req.body);
 	if (req.body.additionalUserInfo.isNewUser) {
 		// Create a new user
@@ -16,9 +16,9 @@ exports.postLogin = async(req, res) => {
 		// Login
 		console.log('for login');
 	}
-	res.json({message: 'Success'});
+	res.json({ message: 'Success' });
 };
 
 exports.signUp = (req, res) => {
-	res.render('auth/signup.ejs');
+	res.render('views/signup.hbs');
 };

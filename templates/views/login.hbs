@@ -1,5 +1,7 @@
-<%- include('../includes/start.ejs') %> <%- include('../includes/headBody.ejs')
-%> <%- include('../layout/header.ejs') %>
+
+{{>start}}
+{{>headBody}}
+{{>header}}
 
 <!-- Page 1 - START -->
 <div>
@@ -58,4 +60,7 @@
   ui.start("#firebaseui-auth-container", uiConfig);
 </script>
 <!-- Page 1 - END -->
-<%- include('../layout/footer.ejs') %> <%- include('../includes/end.ejs') %>
+
+{{>footer}}
+{{>end}}
+
