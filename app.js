@@ -1,6 +1,8 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
+const cookieParser = require('cookie-parser');
+
 const app = express();
 
 // Setting public path
@@ -10,6 +12,8 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
+// parse cookies
+app.use(cookieParser());
 
 // setting views folder as the default view folder
 app.set('views', path.join(__dirname, 'views'));

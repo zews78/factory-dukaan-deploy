@@ -1,11 +1,16 @@
 const firebase = require('../firebase');
 
-exports.getLogin = (req, res) => {
+exports.getLogin = async(req, res) => {
+	let token = req.cookies['firebase-jwt-token'];
+	if (token) {
+		token = token.substring('Bearer '.length);
+	} else {
+		console.log('jwt token not found');
+	}
 	res.render('auth/login.ejs');
 };
 
 exports.postLogin = async(req, res) => {
-	console.log(req.body);
 	if (req.body.additionalUserInfo.isNewUser) {
 		// Create a new user
 		const userData = {};
@@ -16,7 +21,11 @@ exports.postLogin = async(req, res) => {
 		// Login
 		console.log('for login');
 	}
-	res.json({message: 'Success'});
+	res.cookie(
+		'firebase-jwt-token',
+		'Bearer ' + req.body.user.stsTokenManager.accessToken, {httpOnly: true}
+	);
+	res.redirect('/login');
 };
 
 exports.signUp = (req, res) => {
