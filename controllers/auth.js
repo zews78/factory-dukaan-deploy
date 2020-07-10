@@ -1,12 +1,6 @@
 const firebase = require('../firebase');
 
 exports.getLogin = async(req, res) => {
-	let token = req.cookies['firebase-jwt-token'];
-	if (token) {
-		token = token.substring('Bearer '.length);
-	} else {
-		console.log('jwt token not found');
-	}
 	res.render('../views/login.hbs');
 };
 

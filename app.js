@@ -27,9 +27,12 @@ hbs.registerPartials(partialsDirectory);
 
 // importing all necessary routes
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+const isAuth = require('./middlewares/isAuth');
 
 // using all necessary routes
 app.use(authRoutes);
+app.use(isAuth, userRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server started @${PORT}`));
