@@ -2,7 +2,10 @@
 {{>headBody}}
 {{>header}}
 
-<!-- Page 1 - START -->
+{{!-- I am passing an argument name page whose value will either be 1 or 2, use condition(if/else) and render page accordingly --}}
+
+{{log page}}
+{{!-- Page 1 - START --}}
 <div>
   <h2 class="text-center my-5">Log in</h2>
   <div id="firebaseui-auth-container"></div>
@@ -28,14 +31,14 @@
     callbacks: {
       signInSuccessWithAuthResult: (authResult, redirectUrl) => {
         const xhr = new XMLHttpRequest();
-        const url = "/users/login";
+        const url = "/login";
         xhr.open("POST", url);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(authResult));
         return false;
       },
     },
-    signInSuccessUrl: "/dashboard",
+    signInSuccessUrl: "/login",
     signInOptions: [
       {
         provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
@@ -51,7 +54,10 @@
   var ui = new firebaseui.auth.AuthUI(firebase.auth());
   ui.start("#firebaseui-auth-container", uiConfig);
 </script>
-<!-- Page 1 - END -->
+{{!-- Page 1 - END --}}
+{{!-- Page 2 - START --}}
+{{!-- Create a page that asks user for his information other than mobile number like name, company name, etc --}}
+{{!-- Page 2 - END --}}
 
 {{>footer}}
 {{>end}}

@@ -1,20 +1,43 @@
 const firebase = require('../firebase');
 
+const loginPageNumber = async(req) => {
+	try {
+		let token = req.cookies['firebase-jwt-token'];
+		if (token) {
+			token = token.substring('Bearer '.length);
+			const decodedToken = await firebase.auth().verifyIdToken(token);
+			const user = await firebase.firestore().collection('users').doc(decodedToken.uid).get();
+			console.log(user.data());
+			if (user.data().name) {
+				return 3;
+			} else {
+				return 2;
+			}
+		} else {
+			return 1;
+		}
+	} catch (err) {
+		return 1;
+	}
+};
+
 exports.getLogin = async(req, res) => {
-	res.render('../views/login.hbs');
+	const page = await loginPageNumber(req);
+	console.log(page);
+	if (page === 3) {
+		res.redirect('/home');
+	} else {
+		res.render('../views/login.hbs', {page});
+	}
 };
 
 exports.postLogin = async(req, res) => {
-	console.log(req.body);
 	if (req.body.additionalUserInfo.isNewUser) {
 		// Create a new user
 		const userData = {};
 		const uid = req.body.user.uid;
 		userData.mobile = req.body.user.phoneNumber;
 		firebase.firestore().collection('users').doc(uid).set(userData);
-	} else {
-		// Login
-		console.log('for login');
 	}
 	res.cookie(
 		'firebase-jwt-token',
@@ -22,5 +45,5 @@ exports.postLogin = async(req, res) => {
 		{httpOnly: true}
 	);
 
-	res.redirect('/home');
+	res.redirect('/login');
 };
