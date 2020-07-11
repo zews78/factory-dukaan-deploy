@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/anirudhganwal06/factory-dukaan#readme",
   "devDependencies": {
+    "eslint": "^7.4.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
@@ -27,5 +30,16 @@
     "express": "^4.17.1",
     "firebase-admin": "^8.13.0",
     "hbs": "^4.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "./node_modules/.bin/eslint --fix .",
+      "git add"
+    ]
   }
 }
