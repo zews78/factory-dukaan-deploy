@@ -17,6 +17,6 @@ exports.postLogin = async(req, res) => {
 		'Bearer ' + req.body.user.stsTokenManager.accessToken,
 		{httpOnly: true}
 	);
-	// res.redirect("/login");
-	res.render('../views/home.hbs');
+
+	res.redirect('/home');
 };

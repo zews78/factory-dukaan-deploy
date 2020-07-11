@@ -10,11 +10,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
 <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-<link
-  type="text/css"
-  rel="stylesheet"
-  href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
-/>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
@@ -32,7 +28,7 @@
     callbacks: {
       signInSuccessWithAuthResult: (authResult, redirectUrl) => {
         const xhr = new XMLHttpRequest();
-        const url = "/login";
+        const url = "/users/login";
         xhr.open("POST", url);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(authResult));
