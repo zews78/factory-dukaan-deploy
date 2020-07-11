@@ -9,6 +9,6 @@ const router = express.Router();
 router.get('/login', viewsController.getLogin);
 
 // mainRoutes
-router.get('/home', viewsController.getHome);
+router.get('/', viewsController.getHome);
 
 module.exports = router;
