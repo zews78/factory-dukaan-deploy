@@ -7,7 +7,7 @@ body a:hover {
 	cursor: pointer;
 }
 
-.form-control,
+/* .form-control,
 .btn,
 .d-flex {
 	margin: auto;
@@ -21,7 +21,7 @@ body a:hover {
 	.d-flex {
 		max-width: 40%;
 	}
-}
+} */
 
 .header {
 	display: flex;
@@ -33,6 +33,20 @@ body a:hover {
 .navbar-brand img {
 	transform: scale(1.4);
 	margin-left: 1rem;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80vw;
+	height: 400px;
+	margin-top: 20px;
+	padding-top: 20px;
+	background-image: url("/images/landingBack.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 10px;
 }
 
 footer {

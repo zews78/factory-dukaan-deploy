@@ -13,7 +13,7 @@ router.get('/login', viewsController.getLogin);
 router.post('/login', authController.postLogin);
 // Sign up page
 router.get('/users/signup', viewsController.getSignUp);
-router.get('/home', viewsHome.getSignUp);
+router.get('/home', viewsHome.goHome);
 
 
 module.exports = router;
