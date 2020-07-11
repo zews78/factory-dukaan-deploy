@@ -1,4 +1,4 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -7,9 +7,10 @@
 }
 body {
 	font-family: 'Poppins', sans-serif;
+	padding-top: 70px;
 	/* background-color: rgb(56, 245, 71); */
 }
-.wrapper{
+.wrapper {
 	display: flex;
 	position: relative;
 	/* position: sticky; */
@@ -26,22 +27,22 @@ body {
 .wrapper .sidebar ul li {
 	padding: 15px;
 }
-.wrapper .sidebar ul li a{
+.wrapper .sidebar ul li a {
 	color: #000;
 }
-.wrapper .sidebar ul li .fas{
+.wrapper .sidebar ul li .fas {
 	width: 25px;
 }
-.wrapper .sidebar ul li:hover{
+.wrapper .sidebar ul li:hover {
 	background: #fff;
 }
 
-.wrapper .main_content{
+.wrapper .main_content {
 	width: 100%;
 	margin-left: 120px;
 }
 
-.box{
+.box {
 	/* height: 50vh; */
 	margin-left: 30px;
 	margin: 20px;
@@ -49,14 +50,14 @@ body {
 	flex-wrap: wrap;
 	justify-content: center;
 }
-.card{
-	margin:6px;
+.card {
+	margin: 6px;
 	width: 253px;
 	/* height: 40vw; */
 	/* padding: 10px; */
 	cursor: pointer;
 }
-.card:hover{
+.card:hover {
 	transform: scale(1.05);
 	z-index: 1;
 	transition: ease 0.4s;
@@ -106,6 +107,40 @@ body a:hover {
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-radius: 10px;
+}
+
+.form-group select {
+	width: 10vw;
+	height: 45px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+form.form-group input[type=text] {
+	margin-left: -4px;
+	padding-left: 5px;
+	width: 40vw;
+	height: 45px;
+	font-size: 16px;
+	border: 1px solid grey;
+}
+
+form.form-group button {
+	background: #2196f3;
+	margin-left: -4px;
+	color: white;
+	font-size: 0.8em;
+	width: 5vw;
+	height: 46px;
+	/* border: 1px solid grey; */
+	border-left: none;
+	cursor: pointer;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+form.form-group button:hover {
+	background: #1b77c2;
 }
 
 footer {
