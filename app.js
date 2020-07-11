@@ -26,11 +26,17 @@ app.set('views', viewsDirectory);
 hbs.registerPartials(partialsDirectory);
 
 // importing all necessary routes
-const userRouter = require('./routes/userRouter');
 const viewRouter = require('./routes/viewRouter');
+const mainRouter = require('./routes/mainRouter');
+const authRouter = require('./routes/authRouter');
+const userRouter = require('./routes/userRouter');
+
+const isAuth = require('./middlewares/isAuth');
 
 // using all necessary routes
-app.use('/', viewRouter);
-app.use('/users', userRouter);
+app.use(viewRouter); // Comment me during backend development
+app.use(mainRouter);
+app.use(authRouter);
+app.use('/user', isAuth, userRouter);
 
 module.exports = app;

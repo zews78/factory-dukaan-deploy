@@ -1,5 +1,9 @@
 const firebase = require('../firebase');
 
+exports.getLogin = async(req, res) => {
+	res.render('../views/login.hbs');
+};
+
 exports.postLogin = async(req, res) => {
 	console.log(req.body);
 	if (req.body.additionalUserInfo.isNewUser) {
