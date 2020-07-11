@@ -14,10 +14,10 @@
             "warn",
             "tab"
         ],
-        "linebreak-style": [
-            "warn",
-            "unix"
-        ],
+        // "linebreak-style": [
+        //     "warn",
+        //     "unix"
+        // ],
         "semi": [
             "warn",
             "always"
