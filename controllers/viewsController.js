@@ -5,3 +5,6 @@ exports.getLogin = async (req, res) => {
 exports.getSignUp = (req, res) => {
   res.render("../views/signup.hbs");
 };
+exports.goHome = (req, res) =>{
+  res.render("../views/home.hbs");
+}
