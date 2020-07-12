@@ -1,37 +1,15 @@
 const firebase = require('../firebase');
 
-const loginPageNumber = async(req) => {
-	try {
-		let token = req.cookies['firebase-jwt-token'];
-		if (token) {
-			token = token.substring('Bearer '.length);
-			const decodedToken = await firebase.auth().verifyIdToken(token);
-			const user = await firebase
-				.firestore()
-				.collection('users')
-				.doc(decodedToken.uid)
-				.get();
-			if (user.data().name) {
-				return 3;
-			} else {
-				return 2;
-			}
-		} else {
-			return 1;
-		}
-	} catch (err) {
-		return 1;
-	}
-};
+const loginPageNumber = require('../utils/loginPageNumber');
 
 exports.getLogin = async(req, res) => {
 	const page = await loginPageNumber(req);
-	if (page === 3) {
-		res.redirect('/');
-	} else if (page == 2) {
+	if (page === 1) {
+		res.render('../views/login.hbs');
+	} else if (page === 2) {
 		res.render('../views/login2.hbs');
 	} else {
-		res.render('../views/login.hbs');
+		res.redirect('/');
 	}
 };
 
