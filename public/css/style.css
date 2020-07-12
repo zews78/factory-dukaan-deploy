@@ -16,32 +16,27 @@ body {
 	/* position: sticky; */
 }
 @media screen and (max-width: 500px) {
-	.sidebar{
+	.sidebar {
 		display: none;
 	}
 	.form-group .city-select {
 		width: 16vw;
-		
 	}
 	/* .search-area{
 		width: 60%;
 	} */
 	form.form-group input[type=text] {
-		min-width:62vw;
+		min-width: 62vw;
 	}
 	form.form-group button {
 		min-width: 14vw;
 	}
-
-
-
 }
 @media screen and (min-width: 500px) {
-	.wrapper .main_content{
+	.wrapper .main_content {
 		margin-left: 120px;
 	}
 }
-
 
 .wrapper .sidebar {
 	position: fixed;
@@ -69,7 +64,6 @@ body {
 
 .wrapper .main_content {
 	width: 100%;
-	
 }
 
 .box {
@@ -88,7 +82,7 @@ body {
 	/* padding: 10px; */
 	cursor: pointer;
 }
-.card .card-header{
+.card .card-header {
 	background-color: #ff922b;
 	font-weight: bold;
 }
@@ -176,6 +170,40 @@ form.form-group button {
 
 form.form-group button:hover {
 	background: #1b77c2;
+}
+
+.note {
+	text-align: center;
+	height: 80px;
+	background: #0062cc;
+	color: #fff;
+	font-weight: bold;
+	line-height: 80px;
+}
+
+.register-form {
+	width: 80vw;
+	margin-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-content {
+	padding: 5%;
+	border: 1px solid #ced4da;
+	margin-bottom: 2%;
+}
+.form-control {
+	border-radius: 1.5rem;
+}
+.btnSubmit {
+	border: none;
+	border-radius: 1.5rem;
+	padding: 1%;
+	width: 20%;
+	cursor: pointer;
+	background: #0062cc;
+	color: #fff;
 }
 
 footer {
