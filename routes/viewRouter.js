@@ -12,5 +12,7 @@ router.get('/user/profile', viewsController.getUserProfile);
 
 // mainRoutes
 router.get('/', viewsController.getHome);
+router.get('/buyer', viewsController.buyProducts);
+
 
 module.exports = router;

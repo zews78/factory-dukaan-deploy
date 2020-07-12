@@ -11,6 +11,9 @@ exports.getLogin2 = (req, res) => {
 exports.getHome = (req, res) =>{
 	res.render('../views/home.hbs');
 };
+exports.buyProducts = (req, res) =>{
+	res.render('../views/buy.hbs');
+};
 
 exports.getUserProfile = (req, res) => {
 	res.render('../views/user/profile.hbs');
