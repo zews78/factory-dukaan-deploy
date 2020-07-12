@@ -6,7 +6,11 @@ const loginPageNumber = async(req) => {
 		if (token) {
 			token = token.substring('Bearer '.length);
 			const decodedToken = await firebase.auth().verifyIdToken(token);
-			const user = await firebase.firestore().collection('users').doc(decodedToken.uid).get();
+			const user = await firebase
+				.firestore()
+				.collection('users')
+				.doc(decodedToken.uid)
+				.get();
 			console.log(user.data());
 			if (user.data().name) {
 				return 3;
@@ -46,4 +50,13 @@ exports.postLogin = async(req, res) => {
 	);
 
 	res.redirect('/login');
+};
+
+exports.logout = async(req, res) => {
+	res.cookie('firebase-jwt-token', 'loggedout', {
+		expires: new Date(Date.now() + 10 * 1000),
+		httpOnly: true
+	});
+	console.log('successfully logged out');
+	res.redirect('/');
 };
