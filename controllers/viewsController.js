@@ -1,7 +1,11 @@
 // This file contains all GET controllers for frontend testing
 
-exports.getLogin = async(req, res) => {
+exports.getLogin = (req, res) => {
 	res.render('../views/login.hbs');
+};
+
+exports.getLogin2 = (req, res) => {
+	res.render('../views/login2.hbs');
 };
 
 exports.getHome = (req, res) =>{

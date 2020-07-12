@@ -11,7 +11,6 @@ const loginPageNumber = async(req) => {
 				.collection('users')
 				.doc(decodedToken.uid)
 				.get();
-			console.log(user.data());
 			if (user.data().name) {
 				return 3;
 			} else {
@@ -27,11 +26,12 @@ const loginPageNumber = async(req) => {
 
 exports.getLogin = async(req, res) => {
 	const page = await loginPageNumber(req);
-	console.log(page);
 	if (page === 3) {
-		res.redirect('/home');
+		res.redirect('/');
+	} else if (page == 2) {
+		res.render('../views/login2.hbs');
 	} else {
-		res.render('../views/login.hbs', {page});
+		res.render('../views/login.hbs');
 	}
 };
 
@@ -48,7 +48,6 @@ exports.postLogin = async(req, res) => {
 		'Bearer ' + req.body.user.stsTokenManager.accessToken,
 		{httpOnly: true}
 	);
-
 	res.redirect('/login');
 };
 
