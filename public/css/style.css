@@ -5,26 +5,27 @@
 	list-style: none;
 	text-decoration: none;
 }
+
 body {
 	font-family: 'Poppins', sans-serif;
 	padding-top: 70px;
 	/* background-color: rgb(56, 245, 71); */
 }
-#trade-area{
+#trade-area {
 	display: flex;
 	/* flex-wrap: wrap; */
 	margin: 50px 0 0 101px;
 	padding: 10px;
 }
-#trade-area .text-area .trade-header{
+#trade-area .text-area .trade-header {
 	font-size: 4vw;
 	width: 77%;
 	font-weight: bold;
 }
-#trade-area .text-area{
+#trade-area .text-area {
 	width: 50%;
 }
-#trade-area .text-area .trade-btns button{
+#trade-area .text-area .trade-btns button {
 	margin: 0 5px 0 0;
 	/* padding: 8px; */
 	/* border-style: none; */
@@ -33,14 +34,13 @@ body {
 	color: #0a1f18;
 	border-color: #0a1f18;
 }
-#trade-area .text-area .trade-btns button:hover{
+#trade-area .text-area .trade-btns button:hover {
 	background-color: #0a1f18;
 	color: #fff;
 }
-#trade-area .trade-img{
+#trade-area .trade-img {
 	margin: 10px 0 0 0;
 }
-
 
 .wrapper {
 	display: flex;
@@ -54,15 +54,15 @@ body {
 	.form-group .city-select {
 		width: 16vw;
 	}
-	.carousel-inner{
+	.carousel-inner {
 		height: 60vw;
 	}
-	.pricing-header .display-4{
+	.pricing-header .display-4 {
 		font-size: 35px;
 	}
-	.pricing-header .lead{
+	.pricing-header .lead {
 		font-size: 17px;
-		color: #32292F;
+		color: #32292f;
 	}
 	/* .search-area{
 		width: 60%;
@@ -93,7 +93,6 @@ body {
 }
 .wrapper .sidebar ul li a {
 	color: #000;
-
 }
 .wrapper .sidebar ul li .fas {
 	width: 25px;
@@ -134,11 +133,9 @@ body {
 	z-index: 1;
 	transition: ease 0.4s;
 }
-.pricing-header .lead{
-	color: #32292F;
-
+.pricing-header .lead {
+	color: #32292f;
 }
-
 
 body a:hover {
 	text-decoration: none;
@@ -278,6 +275,49 @@ form.form-group button:hover {
 	cursor: pointer;
 	background: #0062cc;
 	color: #fff;
+}
+
+.btnEditProfile {
+	border: none;
+	color: #fff;
+	width: 10vw;
+	padding: 0.5%;
+	background: #2196f3;
+	border-radius: 20px;
+}
+
+.edit-profile button:hover {
+	background: #0062cc;
+}
+
+.edit-profile {
+	display: flex;
+	flex-direction: row-reverse;
+	margin-right: 20px;
+	/* justify-content: space-between; */
+}
+
+.edit-profile .btnSubmit {
+	width: 10vw;
+	border: none;
+}
+
+.profile-container {
+	width: 60vw;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.glyphicon {
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+small {
+	display: block;
+	line-height: 1.428571429;
+	color: #999;
 }
 
 footer {
