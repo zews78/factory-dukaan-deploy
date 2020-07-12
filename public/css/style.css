@@ -22,6 +22,16 @@ body {
 	.form-group .city-select {
 		width: 16vw;
 	}
+	.carousel-inner{
+		height: 60vw;
+	}
+	.pricing-header .display-4{
+		font-size: 35px;
+	}
+	.pricing-header .lead{
+		font-size: 17px;
+		color: #32292F;
+	}
 	/* .search-area{
 		width: 60%;
 	} */
@@ -51,6 +61,7 @@ body {
 }
 .wrapper .sidebar ul li a {
 	color: #000;
+
 }
 .wrapper .sidebar ul li .fas {
 	width: 25px;
@@ -91,6 +102,12 @@ body {
 	z-index: 1;
 	transition: ease 0.4s;
 }
+.pricing-header .lead{
+	color: #32292F;
+
+}
+
+
 body a:hover {
 	text-decoration: none;
 	cursor: pointer;
