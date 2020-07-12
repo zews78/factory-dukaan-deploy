@@ -7,7 +7,9 @@ exports.getLogin = async(req, res) => {
 exports.getHome = (req, res) =>{
 	res.render('../views/home.hbs');
 };
-
+exports.buyProducts = (req, res) =>{
+	res.render('../views/buy.hbs');
+};
 // Signup is not needed
 // exports.getSignUp = (req, res) => {
 // 	res.render('../views/signup.hbs');

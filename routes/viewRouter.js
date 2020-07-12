@@ -10,5 +10,7 @@ router.get('/login', viewsController.getLogin);
 
 // mainRoutes
 router.get('/', viewsController.getHome);
+router.get('/buyer', viewsController.buyProducts);
+
 
 module.exports = router;

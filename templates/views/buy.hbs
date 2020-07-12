@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy</title>
+    <link type="text/css" rel="stylesheet" href="/css/buy.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+<body>
+{{>header}}
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+    authDomain: "factory-dukaan.firebaseapp.com",
+    databaseURL: "https://factory-dukaan.firebaseio.com",
+    projectId: "factory-dukaan",
+    storageBucket: "factory-dukaan.appspot.com",
+    messagingSenderId: "901783648307",
+    appId: "1:901783648307:web:41d71e94413adcbdb74b46",
+    measurementId: "G-LH7XKNLQE5",
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<div>
+    <h1>Here are the relevant products for you</h1>
+    <div class="item-lists">
+
+    <div class="buy-items">
+        <div class='indItem'>
+            <div class="item-img"><img height="80px" width="auto" src="/images/family-values.png"/></div>
+            <div class="item-data">
+                <h2 class="item-name">Name</h2>
+                <p class="hotel-des">Description</p>
+
+            </div>
+        </div>
+    </div>
+        <div class="buy-items">
+        <div class='indItem'>
+            <div class="item-img"></div>
+            <div class="item-data">
+                <h2 class="item-name">Name</h2>
+                <p class="hotel-des">Description</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+{{>footer}}
+{{>end}}
