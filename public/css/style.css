@@ -20,14 +20,14 @@ body {
 		display: none;
 	}
 	.form-group .city-select {
-		width: 23vw;
+		width: 16vw;
 		
 	}
 	/* .search-area{
 		width: 60%;
 	} */
 	form.form-group input[type=text] {
-		min-width:49vw;
+		min-width:62vw;
 	}
 	form.form-group button {
 		min-width: 14vw;
@@ -45,7 +45,7 @@ body {
 
 .wrapper .sidebar {
 	position: fixed;
-	width: 134px;
+	width: 113px;
 	height: 100%;
 	background-color: #fff;
 	padding: 30px 0;
@@ -59,9 +59,12 @@ body {
 }
 .wrapper .sidebar ul li .fas {
 	width: 25px;
+	color: #ff922b;
 }
 .wrapper .sidebar ul li:hover {
 	background: #fff;
+	transform: translateX(5px);
+	transition: ease 0.3s;
 }
 
 .wrapper .main_content {
@@ -76,6 +79,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	/* background-color: #d1e3dd; */
 }
 .card {
 	margin: 6px;
@@ -83,6 +87,10 @@ body {
 	/* height: 40vw; */
 	/* padding: 10px; */
 	cursor: pointer;
+}
+.card .card-header{
+	background-color: #ff922b;
+	font-weight: bold;
 }
 .card:hover {
 	transform: scale(1.05);
