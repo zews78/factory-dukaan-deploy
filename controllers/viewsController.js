@@ -12,6 +12,10 @@ exports.getHome = (req, res) =>{
 	res.render('../views/home.hbs');
 };
 
+exports.getUserProfile = (req, res) => {
+	res.render('../views/user/profile.hbs');
+};
+
 // Signup is not needed
 // exports.getSignUp = (req, res) => {
 // 	res.render('../views/signup.hbs');
