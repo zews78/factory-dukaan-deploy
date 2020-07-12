@@ -22,6 +22,16 @@ body {
 	.form-group .city-select {
 		width: 16vw;
 	}
+	.carousel-inner{
+		height: 60vw;
+	}
+	.pricing-header .display-4{
+		font-size: 35px;
+	}
+	.pricing-header .lead{
+		font-size: 17px;
+		color: #32292F;
+	}
 	/* .search-area{
 		width: 60%;
 	} */
@@ -51,6 +61,7 @@ body {
 }
 .wrapper .sidebar ul li a {
 	color: #000;
+
 }
 .wrapper .sidebar ul li .fas {
 	width: 25px;
@@ -83,7 +94,7 @@ body {
 	cursor: pointer;
 }
 .card .card-header {
-	background-color: #ff922b;
+	background-color: #2196f3;
 	font-weight: bold;
 }
 .card:hover {
@@ -91,6 +102,12 @@ body {
 	z-index: 1;
 	transition: ease 0.4s;
 }
+.pricing-header .lead{
+	color: #32292F;
+
+}
+
+
 body a:hover {
 	text-decoration: none;
 	cursor: pointer;
@@ -122,6 +139,31 @@ body a:hover {
 .navbar-brand img {
 	transform: scale(1.4);
 	margin-left: 1rem;
+}
+
+.advertisement {
+	width: 80vw;
+	margin-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.pricing-container {
+	width: 60vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.carousel .carousel-item {
+	height: 500px;
+}
+
+.carousel-item img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* min-height: 300px; */
+	object-fit: cover !important;
 }
 
 .container {
