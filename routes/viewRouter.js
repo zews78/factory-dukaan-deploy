@@ -7,6 +7,7 @@ const router = express.Router();
 
 // authRoutes
 router.get('/login', viewsController.getLogin);
+router.get('/login2', viewsController.getLogin2);
 
 // mainRoutes
 router.get('/', viewsController.getHome);
