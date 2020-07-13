@@ -91,15 +91,21 @@ body {
 		font-size: larger;
 	}
 
+}
 
 
 
-}	
 @media screen and (min-width: 500px) {
 	.wrapper .main_content {
 		margin-left: 120px;
 	}
+	#trade-area .text-area {
+		margin: 0 -26px 0 34px;
+	}
+
 }
+
+
 
 .wrapper .sidebar {
 	position: fixed;
