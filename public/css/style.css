@@ -90,15 +90,10 @@ body {
 	#trade-area .text-area .trade-header {
 		font-size: larger;
 	}
-<<<<<<< HEAD
 
 }
 
 
-
-=======
-}
->>>>>>> a912734116b1d057a3989bb8a8217cdace4571f8
 @media screen and (min-width: 500px) {
 	.wrapper .main_content {
 		margin-left: 120px;
