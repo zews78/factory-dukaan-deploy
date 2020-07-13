@@ -5,9 +5,9 @@ const loginPageNumber = require('../utils/loginPageNumber');
 exports.getLogin = async(req, res) => {
 	const page = await loginPageNumber(req);
 	if (page === 1) {
-		res.render('../views/login.hbs');
+		res.render('../views/auth/login.hbs');
 	} else if (page === 2) {
-		res.render('../views/login2.hbs');
+		res.render('../views/auth/login2.hbs');
 	} else {
 		res.redirect('/');
 	}
