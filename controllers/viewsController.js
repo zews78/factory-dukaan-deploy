@@ -9,10 +9,10 @@ exports.getLogin2 = (req, res) => {
 };
 
 exports.getHome = (req, res) =>{
-	res.render('../views/home.hbs');
+	res.render('../views/main/home.hbs');
 };
-exports.buyProducts = (req, res) =>{
-	res.render('../views/buy.hbs');
+exports.getProducts = (req, res) =>{
+	res.render('../views/main/products.hbs');
 };
 
 exports.getUserProfile = (req, res) => {
