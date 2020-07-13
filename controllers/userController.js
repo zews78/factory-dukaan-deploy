@@ -2,7 +2,7 @@ const firebase = require('../firebase');
 // const validator = require('validator');
 
 exports.getUserProfile = (req, res) => {
-	res.render('../views/user/profile.hbs');
+	res.render('../views/user/profile.hbs', {auth: true});
 };
 
 exports.postUpdateUser = async(req, res) => {

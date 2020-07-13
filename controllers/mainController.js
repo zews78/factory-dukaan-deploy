@@ -1,11 +1,15 @@
 const firebase = require('../firebase');
 
-exports.getHome = (req, res) => {
-	res.render('../views/main/home.hbs');
+const isAuth = require('../utils/isAuth');
+
+exports.getHome = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('../views/main/home.hbs', {auth});
 };
 
-exports.getProducts = (req, res) => {
-	res.render('../views/main/products.hbs');
+exports.getProducts = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('../views/main/products.hbs', {auth});
 };
 
 exports.postCreateProduct = async(req, res) => {
