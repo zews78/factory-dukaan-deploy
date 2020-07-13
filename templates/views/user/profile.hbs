@@ -5,17 +5,17 @@
     <div class="wrapper">
         {{>sidenav}}
         <div class="main_content">
-            <div class="edit-profile">
-                <button type="button" class="btnEditProfile">Edit Profile</button>
-            </div>
             
             <div class="profile-container">
-                <h2>User Profile</h2>
+                <div class="edit-profile">
+                    {{!-- <h2>User Profile</h2> --}}
+                    <button type="button" class="btnEditProfile">Edit</button>
+                </div>
                 <div class="row">
-                    <div class="column">
+                    <div class="column col-left">
                         <img class="profile-img" src="/images/user.png" alt="">
                     </div>
-                    <div class="column">
+                    <div class="column col-right">
                         <h1>Sam Kolder</h1>
                         <p>
                             <i class="fas fa-building"></i>Company Name <br>
@@ -24,6 +24,56 @@
                             <i class="fas fa-phone-square-alt"></i>9876543210 <br>
                         </p>
                     </div>
+                </div>
+            </div>
+
+            <div class="products-section">
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'my-products')" id="defaultOpen">My Products</button>
+                    <button class="tablinks" onclick="openTab(event, 'my-wishlist')">Wishlist</button>
+                </div>
+
+                <div id="my-products" class="tabcontent">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4">
+                            <div class="card" style="width: 18rem;">
+                                <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                            <div class="card" style="width: 18rem;">
+                                <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                            <div class="card" style="width: 18rem;">
+                                <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="my-wishlist" class="tabcontent">
+                    <ul class="list-group">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
                 </div>
             </div>
         </div>
