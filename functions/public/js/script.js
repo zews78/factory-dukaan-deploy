@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 function openTab(evt, tabName) {
 	var i, tabcontent, tablinks;
 	tabcontent = document.getElementsByClassName('tabcontent');
@@ -13,4 +14,5 @@ function openTab(evt, tabName) {
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById('defaultOpen').click();
+document.getElementById('defaultOpen')
+	.click();

@@ -2,9 +2,9 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const hbs = require('hbs');
 
 const app = express();
-const hbs = require('hbs');
 
 // Setting public path
 app.use(express.static('public'));
