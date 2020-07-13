@@ -1,4 +1,6 @@
 
+
+
 {{>start}}
 {{>headBody}}
 {{>header}}
@@ -18,11 +20,20 @@
                     <div class="column col-right">
                         <h1>Sam Kolder</h1>
                         <p>
-                            <i class="fas fa-building"></i>Company Name <br>
-                            <i class="fas fa-envelope"></i>email@example.com <br>
+                            <i class="fas fa-building"></i>Company Name &nbsp; {{#if true}} <i class="fas fa-check-circle"></i> {{/if}} <br>
+                            <i class="fas fa-envelope"></i>email@example.com <br> 
+                            <i class="fas fa-money-check-alt"></i>GST TIN 75758658147574 <br>
                             <i class="far fa-calendar-alt"></i>Date Joined <br>
-                            <i class="fas fa-phone-square-alt"></i>9876543210 <br>
+                            <i class="fas fa-phone-square-alt"></i>9876543210 
+                            <hr style="width: 20vw; margin: 0">
                         </p>
+                        <div class="company-desc">
+                            <strong>Company Description</strong>
+                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet vehicula magna, eu feugiat dui. 
+                               Pellentesque condimentum lorem at arcu ultrices feugiat. Sed blandit sapien maximus lobortis auctor. 
+                               Morbi ac risus ac metus mollis pretium at vel enim. Vivamus dictum dictum porttitor.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -31,6 +42,7 @@
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'my-products')" id="defaultOpen">My Products</button>
                     <button class="tablinks" onclick="openTab(event, 'my-wishlist')">Wishlist</button>
+                    <button class="tablinks" onclick="openTab(event, 'my-requirements')">My Requirements</button>
                 </div>
 
                 <div id="my-products" class="tabcontent">
@@ -74,6 +86,10 @@
                         <li class="list-group-item">Porta ac consectetur ac</li>
                         <li class="list-group-item">Vestibulum at eros</li>
                     </ul>
+                </div>
+
+                <div id="my-requirements" class="tabcontent">
+                    <h1>My requirements goes here...</h1>
                 </div>
             </div>
         </div>
