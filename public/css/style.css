@@ -84,17 +84,13 @@ body {
 		font-size: 3.5vw;
 	}
 	#trade-area {
-		width:88%;
-		margin: 20px 20px 20px 63px; 
+		width: 88%;
+		margin: 20px 20px 20px 63px;
 	}
 	#trade-area .text-area .trade-header {
 		font-size: larger;
 	}
-
-
-
-
-}	
+}
 @media screen and (min-width: 500px) {
 	.wrapper .main_content {
 		margin-left: 120px;
@@ -200,6 +196,9 @@ body a:hover {
 
 .pricing-container {
 	width: 60vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -216,10 +215,12 @@ body a:hover {
 	object-fit: cover !important;
 }
 
-.container {
+.search-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
 	width: 80vw;
 	height: 400px;
 	margin-top: 20px;
@@ -328,17 +329,42 @@ form.form-group button:hover {
 	margin-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
+	background: #e6e6e6;
+	color: black;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-radius: 5px;
 }
 
-.glyphicon {
-	margin-bottom: 10px;
+.profile-container h2 {
+	text-align: center;
+}
+
+.fas,
+.far {
 	margin-right: 10px;
 }
 
-small {
-	display: block;
-	line-height: 1.428571429;
-	color: #999;
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+}
+
+.profile-img {
+	border-radius: 50%;
 }
 
 footer {
