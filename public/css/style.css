@@ -73,7 +73,28 @@ body {
 	form.form-group button {
 		min-width: 14vw;
 	}
-}
+	#trade-area .trade-img {
+		display: none;
+	}
+	#trade-area .text-area .trade-btns {
+		width: 45vw;
+	}
+	#trade-area .text-area .trade-btns button {
+		width: 15vw;
+		font-size: 3.5vw;
+	}
+	#trade-area {
+		width:88%;
+		margin: 20px 20px 20px 63px; 
+	}
+	#trade-area .text-area .trade-header {
+		font-size: larger;
+	}
+
+
+
+
+}	
 @media screen and (min-width: 500px) {
 	.wrapper .main_content {
 		margin-left: 120px;
