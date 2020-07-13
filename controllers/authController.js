@@ -19,7 +19,10 @@ exports.postLogin = async(req, res) => {
 		const userData = {};
 		const uid = req.body.user.uid;
 		userData.mobile = req.body.user.phoneNumber;
-		firebase.firestore().collection('users').doc(uid).set(userData);
+		firebase.firestore()
+			.collection('users')
+			.doc(uid)
+			.set(userData);
 	}
 	res.cookie(
 		'firebase-jwt-token',

@@ -5,7 +5,8 @@ module.exports = async(req) => {
 		let token = req.cookies['firebase-jwt-token'];
 		if (token) {
 			token = token.substring('Bearer '.length);
-			const decodedToken = await firebase.auth().verifyIdToken(token);
+			const decodedToken = await firebase.auth()
+				.verifyIdToken(token);
 			const user = await firebase
 				.firestore()
 				.collection('users')

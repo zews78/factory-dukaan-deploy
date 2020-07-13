@@ -62,6 +62,12 @@
             "warn",
             "never"
         ],
+        "newline-per-chained-call": [
+            "warn",
+            {
+                "ignoreChainWithDepth": 1
+            }
+        ],
         ///////////// arrays ///////////////
         "array-bracket-spacing": "warn",
         "array-bracket-newline": [
