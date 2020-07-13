@@ -4,7 +4,12 @@
     <a class="navbar-brand" href="/">
       <img src="/images/logo.png" height="30" class="d-inline-block align-top" alt="logo">
     </a>
-
-    <a href="/login">Sign in</a>
+    {{#if auth}}
+    <form action="/logout" method="POST">
+      <button type="submit" >Logout</button>
+    </form>
+    {{else}}
+    <a href="/login">Login</a>
+    {{/if}}
   </nav>
 </header>

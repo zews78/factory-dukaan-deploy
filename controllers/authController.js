@@ -5,9 +5,9 @@ const loginPageNumber = require('../utils/loginPageNumber');
 exports.getLogin = async(req, res) => {
 	const page = await loginPageNumber(req);
 	if (page === 1) {
-		res.render('../views/auth/login.hbs');
+		res.render('../views/auth/login.hbs', {auth: false});
 	} else if (page === 2) {
-		res.render('../views/auth/login2.hbs');
+		res.render('../views/auth/login2.hbs', {auth: true});
 	} else {
 		res.redirect('/');
 	}
@@ -32,11 +32,7 @@ exports.postLogin = async(req, res) => {
 	res.redirect('/login');
 };
 
-exports.logout = async(req, res) => {
-	res.cookie('firebase-jwt-token', 'loggedout', {
-		expires: new Date(Date.now() + 10 * 1000),
-		httpOnly: true
-	});
-	console.log('successfully logged out');
+exports.postLogout = async(req, res) => {
+	res.clearCookie('firebase-jwt-token');
 	res.redirect('/');
 };
