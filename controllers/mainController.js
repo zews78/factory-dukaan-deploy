@@ -12,11 +12,23 @@ exports.getProducts = async(req, res) => {
 	res.render('../views/main/products.hbs', {auth});
 };
 
-exports.postCreateProduct = async(req, res) => {
+exports.postProduct = async(req, res) => {
 	try {
 		await firebase.firestore()
 			.collection('products')
 			.add(req.body);
+		res.redirect('/user/products');
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+exports.patchProduct = async(req, res) => {
+	try {
+		await firebase.firestore()
+			.collection('products')
+			.doc(req.params.productId)
+			.update(req.body);
 		res.redirect('/user/products');
 	} catch (err) {
 		console.log(err);

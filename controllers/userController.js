@@ -5,7 +5,7 @@ exports.getUserProfile = (req, res) => {
 	res.render('../views/user/profile.hbs', {auth: true});
 };
 
-exports.postUpdateUser = async(req, res) => {
+exports.patchUser = async(req, res) => {
 	try {
 		await firebase
 			.firestore()
