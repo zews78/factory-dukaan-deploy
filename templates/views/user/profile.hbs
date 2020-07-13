@@ -11,7 +11,7 @@
             <div class="profile-container">
                 <div class="edit-profile">
                     {{!-- <h2>User Profile</h2> --}}
-                    <button type="button" class="btnEditProfile">Edit</button>
+                    <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm">Edit</button>
                 </div>
                 <div class="row">
                     <div class="column col-left">
@@ -96,3 +96,62 @@
     </div>
 {{>footer}}
 {{>end}}
+
+<div id="ModalEditForm" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Edit Profile</h1>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="POST" action="">
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="user-name" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Company Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="company-name">
+                        </div>
+                    </div>
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">GST Number</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="gst-number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Contact Number</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="contact-number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Company Description</label>
+                        <div>
+                            {{!-- <input type="textarea" class="form-control input-lg" name="description"> --}}
+                            <textarea class="form-control" name="" id="" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="submit" class="btn btn-secondary">Cancel</button>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
