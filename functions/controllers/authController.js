@@ -24,15 +24,25 @@ exports.postLogin = async(req, res) => {
 			.doc(uid)
 			.set(userData);
 	}
-	res.cookie(
-		'firebase-jwt-token',
-		'Bearer ' + req.body.user.stsTokenManager.accessToken,
-		{httpOnly: true}
-	);
+	const expiresIn = 1000 * 60 * 60 * 1.1;
+	const sessionCookie = await firebase.auth()
+		.createSessionCookie(req.body.user.stsTokenManager.accessToken, {expiresIn});
+	const cookieOptions = {
+		maxAge: expiresIn,
+		httpOnly: true,
+		secure: true
+	};
+	res.cookie('session', sessionCookie, cookieOptions);
 	res.redirect('/login');
 };
 
 exports.postLogout = async(req, res) => {
-	res.clearCookie('firebase-jwt-token');
-	res.redirect('/');
+	try {
+		res.clearCookie('session');
+		await firebase.auth()
+			.revokeRefreshTokens(req.uid);
+		res.redirect('/');
+	} catch (err) {
+		res.redirect('/login');
+	}
 };

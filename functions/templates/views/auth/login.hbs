@@ -31,7 +31,7 @@
         xhr.open("POST", url);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(authResult));
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
           if (xhr.readyState == XMLHttpRequest.DONE) {
             document.open();
             document.write(xhr.responseText);
