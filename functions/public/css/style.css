@@ -223,27 +223,29 @@ body a:hover {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-left: auto;
-	margin-right: auto;
-	width: 80vw;
-	height: 400px;
-	margin-top: 20px;
-	padding-top: 20px;
-	background-image: url("/images/landingBack.jpg");
+	/* margin-left: auto;
+	margin-right: auto; */
+	margin: auto;
+	/* width: 80vw; */
+	/* height: 400px; */
+	/* margin-top: 20px; */
+	/* padding-top: 20px; */
+	/* background-image: url("/images/landingBack.jpg"); */
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-radius: 10px;
 }
 
 .form-group select {
-	width: 8vw;
+	width: 5vw;
 	height: 45px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+	border-radius: 20px 0 0 20px;
+	text-align: right;
+	padding-left: 10px;
 }
 
 form.form-group input[type=text] {
-	margin-left: -4px;
+	margin-left: -5px;
 	padding-left: 5px;
 	width: 40vw;
 	height: 45px;
@@ -253,16 +255,16 @@ form.form-group input[type=text] {
 
 form.form-group button {
 	background: #2196f3;
-	margin-left: -4px;
+	margin-left: -4.2px;
 	color: white;
-	font-size: 0.8em;
-	width: 5vw;
+	font-size: 1em;
+	width: 4vw;
 	height: 46px;
 	/* border: 1px solid grey; */
 	border-left: none;
 	cursor: pointer;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-radius: 0 20px 20px 0;
+	padding: 0 0 0 8px;
 }
 
 form.form-group button:hover {
