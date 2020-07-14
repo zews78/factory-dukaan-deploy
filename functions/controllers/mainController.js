@@ -41,7 +41,7 @@ exports.postProduct = async(req, res) => {
 	}
 };
 
-exports.patchProduct = async(req, res) => {
+exports.postUpdateProduct = async(req, res) => {
 	try {
 		await firebase
 			.firestore()

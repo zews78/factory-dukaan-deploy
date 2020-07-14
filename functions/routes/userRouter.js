@@ -4,6 +4,6 @@ const userController = require('../controllers/userController');
 const router = express.Router();
 
 router.get('/profile', userController.getUserProfile);
-router.patch('/', userController.patchUser);
+router.post('/profile/update', userController.postUpdateUser);
 
 module.exports = router;
