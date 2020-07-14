@@ -2,11 +2,10 @@ const firebase = require('../firebase');
 
 module.exports = async(req) => {
 	try {
-		let token = req.cookies['firebase-jwt-token'];
-		if (token) {
-			token = token.substring('Bearer '.length);
+		let sessionCookie = req.cookies['session'];
+		if (sessionCookie) {
 			const decodedToken = await firebase.auth()
-				.verifyIdToken(token);
+				.verifySessionCookie(sessionCookie, true);
 			return [true, decodedToken];
 		} else {
 			return [false, {}];
