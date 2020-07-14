@@ -14,8 +14,32 @@ body {
 #trade-area {
 	display: flex;
 	/* flex-wrap: wrap; */
-	margin: 50px 0 0 101px;
+	margin: 12px -26px 94px 34px;
 	padding: 10px;
+}
+.lang-select{
+	font-weight: lighter;
+	display: flex;
+	font-size: small;
+	color: rgb(126, 126, 126);
+	margin-top: -10px;
+
+}
+.lang-select span{
+	cursor: pointer;
+	/* color: aquamarine; */
+	font-size: x-small;
+	padding: 3px;
+}
+.lang-select span:hover{
+	text-decoration: underline;
+}
+
+
+#trade-area .text-area .defination {
+	font-size: smaller;
+	font-weight: lighter;
+	color: rgb(126, 126, 126);
 }
 #trade-area .text-area .trade-header {
 	font-size: 4vw;
@@ -33,13 +57,18 @@ body {
 	/* font-weight: bold; */
 	color: #0a1f18;
 	border-color: #0a1f18;
+	min-width: 73px;
 }
 #trade-area .text-area .trade-btns button:hover {
 	background-color: #0a1f18;
 	color: #fff;
 }
 #trade-area .trade-img {
-	margin: 10px 0 0 0;
+	margin: 113px 0 0 -6px;
+	/* height: 30vw; */
+}
+#trade-area .trade-img img {
+	height: 24vw;
 }
 
 .wrapper {
@@ -97,13 +126,13 @@ body {
 		margin-left: 120px;
 	}
 	#trade-area .text-area {
-		margin: 0 -26px 0 34px;
+		margin: 0 -26px 0 41px;
 	}
 }
 
 .wrapper .sidebar {
 	position: fixed;
-	width: 121px;
+	width: 129px;
 	height: 100%;
 	background-color: #fff;
 	padding: 30px 0;
