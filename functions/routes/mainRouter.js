@@ -7,6 +7,6 @@ const router = express.Router();
 router.get('/', mainController.getHome);
 router.get('/products', mainController.getProducts);
 router.post('/products', isAuth, mainController.postProduct);
-router.patch('/products/:productId', isAuth, mainController.patchProduct);
+router.post('/products/:productId/update', isAuth, mainController.postUpdateProduct);
 
 module.exports = router;

@@ -30,13 +30,16 @@ const viewRouter = require('./routes/viewRouter');
 const mainRouter = require('./routes/mainRouter');
 const authRouter = require('./routes/authRouter');
 const userRouter = require('./routes/userRouter');
+const adminRouter = require('./routes/adminRouter');
 
 const isAuth = require('./middlewares/isAuth');
+const isAdmin = require('./middlewares/isAdmin');
 
 // using all necessary routes
 app.use(viewRouter); // Comment me during backend development
 app.use(mainRouter);
 app.use(authRouter);
 app.use('/user', isAuth, userRouter);
+app.use('/admin', isAdmin, adminRouter);
 
 module.exports = app;
