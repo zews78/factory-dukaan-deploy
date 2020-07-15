@@ -1,0 +1,41 @@
+{{> admin/start}}
+{{> headBody}}
+{{> admin/header}}
+
+<div class="container-fluid">
+	<h1 class="page-heading">Products</h1>
+	<a href={{links.previous}}>Previous</a>
+	<a href={{links.next}}>Next</a>
+	<div class="horizontal-scroll-wrapper">
+		<div class="horizontal-scroll-container">
+			<div class="list-group">
+				<a href="#" class="list-group-item list-group-item-action bg-dark text-light">
+					<div class="row">
+						<div class="col-1">Status</div>
+						<div class="col-1">Creation Date</div>
+						<div class="col-2">Product Name</div>
+						<div class="col-2">Seller's Name</div>
+						<div class="col-2">Product Price</div>
+						<div class="col-3">Tags</div>
+						<div class="col-1 text-right">Edit</div>
+					</div>
+				</a>
+				{{#each products}}
+				<a href="#" class="list-group-item list-group-item-action">
+					<div class="row">
+						<div class="col-1">{{this.verified}}</div>
+						<div class="col-1">{{this.createdOn}}</div>
+						<div class="col-2">{{this.title}}</div>
+						<div class="col-2">{{this.sellerName}}</div>
+						<div class="col-2">{{this.price}}</div>
+						<div class="col-3">{{this.tags}}</div>
+						<div class="col-1 text-right"><span class="fa fa-pencil-square-o"></span></div>
+					</div>
+				</a>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>
+
+{{> end}}
