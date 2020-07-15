@@ -17,24 +17,22 @@ body {
 	margin: 12px 0 94px 30px;
 	padding: 10px;
 }
-.lang-select{
+.lang-select {
 	font-weight: lighter;
 	display: flex;
 	font-size: small;
 	color: rgb(126, 126, 126);
 	margin-top: -10px;
-
 }
-.lang-select span{
+.lang-select span {
 	cursor: pointer;
 	/* color: aquamarine; */
 	font-size: x-small;
 	padding: 3px;
 }
-.lang-select span:hover{
+.lang-select span:hover {
 	text-decoration: underline;
 }
-
 
 #trade-area .text-area .defination {
 	font-size: smaller;
