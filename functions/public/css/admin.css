@@ -1,0 +1,22 @@
+/*************** general *************/
+
+.page-heading {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.horizontal-scroll-wrapper {
+	overflow-x: auto;
+}
+
+.horizontal-scroll-container {
+	min-width: 1200px;
+}
+
+/*************** header **************/
+
+.navbar {
+	box-shadow: 0 0 5px -2px;
+	margin-bottom: 30px;
+}
+
