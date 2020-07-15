@@ -15,7 +15,6 @@ exports.getLogin = async(req, res) => {
 
 exports.postLogin = async(req, res) => {
 	try {
-
 		if (req.body.additionalUserInfo.isNewUser) {
 			// Create a new user
 			const userData = {};
@@ -27,16 +26,17 @@ exports.postLogin = async(req, res) => {
 				.set(userData);
 		}
 		const expiresIn = 1000 * 60 * 60 * 24 * 14;
-		const sessionCookie = await firebase.auth()
+		const sessionCookie = await firebase
+			.auth()
 			.createSessionCookie(req.body.user.stsTokenManager.accessToken, {expiresIn});
 		const cookieOptions = {
 			maxAge: expiresIn,
-			httpOnly: true,
-			secure: true
+			httpOnly: true
+			// secure: true
 		};
 		res.cookie('session', sessionCookie, cookieOptions);
 		res.redirect('/login');
-	} catch(err) {
+	} catch (err) {
 		console.log(err);
 		res.status(500)
 			.json({message: 'Something went wrong!'});

@@ -31,8 +31,17 @@ exports.postVerifyGst = async(req, res) => {
 			payload,
 			{headers: {'Content-Type': 'application/json'}}
 		);
-		res.json(data.data);
+		if (data.data.error) {
+			res.json({status: 'Invalid gst number'});
+		} else {
+			if (req.body.panNo === data.data.taxpayerInfo.panNo.substr(data.data.taxpayerInfo.panNo.length - 4)) {
+				res.json({status: 'verified'});
+			} else {
+				res.json({status: 'Invalid GST Number or PAN number'});
+			}
+		}
 	} catch (err) {
+		console.log(err);
 		res.status(500)
 			.json(err);
 	}
