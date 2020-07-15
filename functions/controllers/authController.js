@@ -26,7 +26,7 @@ exports.postLogin = async(req, res) => {
 				.doc(uid)
 				.set(userData);
 		}
-		const expiresIn = 1000 * 60 * 60 * 2;
+		const expiresIn = 1000 * 60 * 60 * 24 * 14;
 		const sessionCookie = await firebase.auth()
 			.createSessionCookie(req.body.user.stsTokenManager.accessToken, {expiresIn});
 		const cookieOptions = {
