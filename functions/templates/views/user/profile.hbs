@@ -104,6 +104,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Edit Profile</h1>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form role="form" method="POST" action="">
@@ -143,7 +144,7 @@
                     <div class="form-group">
                         <div>
                             <button type="submit" class="btn btn-success">Save</button>
-                            <button type="submit" class="btn btn-secondary">Cancel</button>
+                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             
                         </div>
                     </div>
@@ -164,7 +165,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Verify Account</h4>
-				<button style="padding: 27px 13px 0 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				{{!-- <button style="padding: 27px 13px 0 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button> --}}
             </div>
             <div class="modal-body">
                 <form role="form" method="POST" action="">
