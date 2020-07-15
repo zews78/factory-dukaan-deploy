@@ -14,26 +14,33 @@ exports.getLogin = async(req, res) => {
 };
 
 exports.postLogin = async(req, res) => {
-	if (req.body.additionalUserInfo.isNewUser) {
-		// Create a new user
-		const userData = {};
-		const uid = req.body.user.uid;
-		userData.mobile = req.body.user.phoneNumber;
-		firebase.firestore()
-			.collection('users')
-			.doc(uid)
-			.set(userData);
+	try {
+
+		if (req.body.additionalUserInfo.isNewUser) {
+			// Create a new user
+			const userData = {};
+			const uid = req.body.user.uid;
+			userData.mobile = req.body.user.phoneNumber;
+			firebase.firestore()
+				.collection('users')
+				.doc(uid)
+				.set(userData);
+		}
+		const expiresIn = 1000 * 60 * 60 * 2;
+		const sessionCookie = await firebase.auth()
+			.createSessionCookie(req.body.user.stsTokenManager.accessToken, {expiresIn});
+		const cookieOptions = {
+			maxAge: expiresIn,
+			httpOnly: true,
+			secure: true
+		};
+		res.cookie('session', sessionCookie, cookieOptions);
+		res.redirect('/login');
+	} catch(err) {
+		console.log(err);
+		res.status(500)
+			.json({message: 'Something went wrong!'});
 	}
-	const expiresIn = 1000 * 60 * 60 * 1.1;
-	const sessionCookie = await firebase.auth()
-		.createSessionCookie(req.body.user.stsTokenManager.accessToken, {expiresIn});
-	const cookieOptions = {
-		maxAge: expiresIn,
-		httpOnly: true,
-		secure: true
-	};
-	res.cookie('session', sessionCookie, cookieOptions);
-	res.redirect('/login');
 };
 
 exports.postLogout = async(req, res) => {
