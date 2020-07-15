@@ -7,17 +7,34 @@ exports.getDashboard = async(req, res) => {
 
 exports.getProducts = async(req, res) => {
 	try {
+
+		// Creating a reference to products
 		let productsRef = firebase.firestore()
 			.collection('products')
 			.orderBy('createdOn', 'desc');
-		if (req.query.createdAfter) {
-			productsRef = productsRef.startAfter(firebase.firestore.Timestamp.fromMillis(req.query.createdAfter));
-		} else if (req.query.createdBefore) {
-			productsRef = productsRef.endBefore(firebase.firestore.Timestamp.fromMillis(req.query.createdBefore));
+
+		// If there is a query param after/before
+		if (req.query.after) {
+			let lastSnapshot = await firebase.firestore()
+				.collection('products')
+				.doc(req.query.after)
+				.get();
+			productsRef = productsRef.startAfter(lastSnapshot);
+		} else if (req.query.before) {
+			let firstSnapshot = await firebase.firestore()
+				.collection('products')
+				.doc(req.query.before)
+				.get();
+			productsRef = productsRef.endBefore(firstSnapshot);
 		}
-		productsRef = productsRef.limit(1);
-		console.log(productsRef);
+
+		// Settings limit
+		productsRef = productsRef.limit(15);
+
+		// Fetching the productsSnapshot
 		const productsSnapshot = await productsRef.get();
+
+		// Making products ready for passing to templating engine for rendering
 		const products = [];
 		productsSnapshot.forEach(product => {
 			products.push({
@@ -28,14 +45,15 @@ exports.getProducts = async(req, res) => {
 			});
 		});
 
-		const createdAfter = productsSnapshot.docs[productsSnapshot.docs.length - 1].data().createdOn.toMillis();
-		const createdBefore = productsSnapshot.docs[0].data().createdOn.toMillis();
+		// Pagination buttons after/before links
+		const after = productsSnapshot.docs[productsSnapshot.docs.length - 1].id;
+		const before = productsSnapshot.docs[0].id;
 
 		res.render('../views/admin/products.hbs', {
 			products,
 			links: {
-				previous: `?createdBefore=${createdBefore}`,
-				next: `?createdAfter=${createdAfter}`
+				previous: `?before=${before}`,
+				next: `?after=${after}`
 			}
 		});
 	} catch(err) {
