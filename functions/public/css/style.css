@@ -87,10 +87,10 @@ body {
 		height: 60vw;
 	}
 	.pricing-header .display-4 {
-		font-size: 35px;
+		font-size: 22px;
 	}
 	.pricing-header .lead {
-		font-size: 17px;
+		font-size: small;
 		color: #32292f;
 	}
 	/* .search-area{
@@ -99,25 +99,50 @@ body {
 	form.form-group input[type=text] {
 		min-width: 62vw;
 	}
+
+
 	form.form-group button {
 		min-width: 14vw;
 	}
 	#trade-area .trade-img {
 		display: none;
 	}
+	#trade-area .trade-img-mob img{
+		/* height: 10vw; */
+		height: 30vw;
+	}
+	#trade-area .trade-img-mob img{
+		height: 32vw;
+		margin:19px -19px 0 0 ;
+		
+	}
+	#trade-area .text-area #head-img {
+		display: flex;
+	}
+
 	#trade-area .text-area .trade-btns {
 		width: 45vw;
 	}
 	#trade-area .text-area .trade-btns button {
-		width: 15vw;
+		/* width: 100%; */
 		font-size: 3.5vw;
 	}
 	#trade-area {
 		width: 88%;
-		margin: 20px 20px 20px 63px;
+		margin: -9px 5px 5px 5px;
+		font-size: smaller;
 	}
+	#trade-area .text-area{
+		width: 100%;
+	}
+	#trade-area .text-area .trade-btns #require {
+		min-width: 99px;
+		margin: 5px 0 0 0;
+	}
+
 	#trade-area .text-area .trade-header {
-		font-size: larger;
+		font-size: 26px;
+		width: 55%;
 	}
 }
 
@@ -128,6 +153,10 @@ body {
 	#trade-area .text-area {
 		margin: 0 -26px 0 41px;
 	}
+	#trade-area .trade-img-mob {
+		display: none;
+	}
+
 }
 
 .wrapper .sidebar {
@@ -193,6 +222,7 @@ body {
 
 .pricing-header .lead {
 	color: #32292f;
+	/* font-size: small; */
 }
 
 body a:hover {
