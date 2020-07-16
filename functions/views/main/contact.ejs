@@ -4,47 +4,48 @@
 <%- include("../partials/header") %>
 
 <div class="wrapper">
-        <%- include("../partials/sidenav") %>
-        <div class="main_content">
-            <div class="" id="accordion">
-        <div class="faqHeader">General questions</div>
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-header">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
-                </h4>
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+        <div class="" id="accordion">
+            <div class="faqHeader">FAQs</div>
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-header">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Some Random Question goes here?</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="card-block">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo turpis, pretium in aliquet ac, molestie sed odio. Nullam sit amet tellus convallis, ornare tortor vitae, feugiat dui.
+                    </div>
+                </div>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="card-block">
-                    Account registration at <strong>PrepBootstrap</strong> is only required if you will be selling or buying themes. 
-                    This ensures a valid communication channel for all parties involved in any transactions. 
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-header">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Some Random Question goes here?</a>
+                    </h4>
+                </div>
+                <div id="collapseTen" class="panel-collapse collapse">
+                    <div class="card-block">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo turpis, pretium in aliquet ac, molestie sed odio. Nullam sit amet tellus convallis, ornare tortor vitae, feugiat dui.
+                    </div>
+                </div>
+            </div>
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-header">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">Some Random Question goes here?</a>
+                    </h4>
+                </div>
+                <div id="collapseEleven" class="panel-collapse collapse">
+                    <div class="card-block">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo turpis, pretium in aliquet ac, molestie sed odio. Nullam sit amet tellus convallis, ornare tortor vitae, feugiat dui.
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-header">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a>
-                </h4>
-            </div>
-            <div id="collapseTen" class="panel-collapse collapse">
-                <div class="card-block">
-                    A lot of the content of the site has been submitted by the community. Whether it is a commercial element/template/theme 
-                    or a free one, you are encouraged to contribute. All credits are published along with the resources. 
-                </div>
-            </div>
-        </div>
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-header">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a>
-                </h4>
-            </div>
-            <div id="collapseEleven" class="panel-collapse collapse">
-                <div class="card-block">
-                    All prices for themes, templates and other items, including each seller's or buyer's account balance are in <strong>USD</strong>
-                </div>
-            </div>
-        </div>
-        </div>
+    </div>
 </div>
+<%- include('../partials/footer.ejs') %>
+<% include('../partials/end.ejs') %> 
