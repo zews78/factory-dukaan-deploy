@@ -1,18 +1,20 @@
-{{> admin/start}}
-{{> headBody}}
-{{> admin/header}}
+<%- include('../partials/admin/start.ejs') %> <%-
+include('../partials/headBody.ejs') %> <%-
+include('../partials/admin/header.ejs') %>
 
 <div class="container-fluid">
 	<h1 class="page-heading">Products</h1>
 	<form action="/admin/products">
 		<div class="input-group" id="search_group">
 			<input class="form-control" id="search_input" name="search" type="search" placeholder="Search"
-				aria-label="Search">
-			{{!-- {{#each queryParams}}
-			<input name={{@key}} value={{this}} hidden />
-			{{/each}} --}}
+				aria-label="Search" />
+			<% for (let query in queryParams) { %>
+			<% if(query !== 'search') { %>
+			<input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
+			<% } %>
+			<% } %>
 			<div class="input-group-append">
-				<button class="btn py-0 px-2 my-sm-0 " id="search_btn" type="submit">
+				<button class="btn py-0 px-2 my-sm-0" id="search_btn" type="submit">
 					<span class="fa fa-search"></span>
 				</button>
 			</div>
@@ -24,10 +26,17 @@
 			Sort By
 		</button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			<a class="dropdown-item" href="?sortBy=createdOn&order=asc&search={{queryParams.search}}">Newest</a>
-			<a class="dropdown-item" href="?sortBy=createdOn&order=desc&search={{queryParams.search}}">Oldest</a>
-			<a class="dropdown-item" href="?sortBy=price&order=asc&search={{queryParams.search}}">Price - (Low to High)</a>
-			<a class="dropdown-item" href="?sortBy=price&order=desc&search={{queryParams.search}}">Price - (High to Low)</a>
+			<a class="dropdown-item"
+				href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=createdOn&order=asc">Newest</a>
+			<a class="dropdown-item"
+				href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=createdOn&order=desc">Oldest</a>
+			<a class="dropdown-item"
+				href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=price&order=asc">Price - (Low to
+				High)</a>
+			<a class="dropdown-item"
+				href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=price&order=desc">Price - (High
+				to
+				Low)</a>
 		</div>
 	</div>
 	<div class="clearfix my-3"></div>
@@ -45,31 +54,33 @@
 						<div class="col-1 text-right">Edit</div>
 					</div>
 				</a>
-				{{#each products}}
+				<% for (let product of products) { %>
 				<a href="#" class="list-group-item list-group-item-action">
 					<div class="row">
-						<div class="col-1">{{this.verified}}</div>
-						<div class="col-1">{{this.createdOn}}</div>
-						<div class="col-2">{{this.title}}</div>
-						<div class="col-2">{{this.sellerName}}</div>
-						<div class="col-2">{{this.price}}</div>
-						<div class="col-3">{{this.tags}}</div>
-						<div class="col-1 text-right"><span class="fa fa-pencil-square-o"></span></div>
+						<div class="col-1"><%= product.verified %></div>
+						<div class="col-1"><%= product.createdOn %></div>
+						<div class="col-2"><%= product.title %></div>
+						<div class="col-2"><%= product.sellerName %></div>
+						<div class="col-2"><%= product.price %></div>
+						<div class="col-3"><%= product.tags %></div>
+						<div class="col-1 text-right">
+							<span class="fa fa-pencil-square-o"></span>
+						</div>
 					</div>
 				</a>
-				{{/each}}
+				<% } %>
 			</div>
 		</div>
 	</div>
 	<nav class="my-4">
 		<ul class="pagination justify-content-center">
 			<li class="page-item {{#unless links.prev}}disabled{{/unless}}">
-				<a class="page-link" href={{links.prev}}>
+				<a class="page-link" href="{{ links.prev }}">
 					<span class="fa fa-arrow-left"></span>
 				</a>
 			</li>
 			<li class="page-item {{#unless links.next}}disabled{{/unless}}">
-				<a class="page-link" href={{links.next}}>
+				<a class="page-link" href="{{ links.next }}">
 					<span class="fa fa-arrow-right"></span>
 				</a>
 			</li>
@@ -77,4 +88,4 @@
 	</nav>
 </div>
 
-{{> end}}
+<%- include('../partials/end.ejs') %>

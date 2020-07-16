@@ -4,7 +4,7 @@ const config = require('../../config');
 // const validator = require('validator');
 
 exports.getUserProfile = (req, res) => {
-	res.render('../views/user/profile.hbs', {auth: true});
+	res.render('user/profile.ejs', {auth: true});
 };
 
 exports.postUpdateUser = async(req, res) => {
@@ -31,8 +31,17 @@ exports.postVerifyGst = async(req, res) => {
 			payload,
 			{headers: {'Content-Type': 'application/json'}}
 		);
-		res.json(data.data);
+		if (data.data.error) {
+			res.json({status: 'Invalid gst number'});
+		} else {
+			if (req.body.panNo === data.data.taxpayerInfo.panNo.substr(data.data.taxpayerInfo.panNo.length - 4)) {
+				res.json({status: 'verified'});
+			} else {
+				res.json({status: 'Invalid GST Number or PAN number'});
+			}
+		}
 	} catch (err) {
+		console.log(err);
 		res.status(500)
 			.json(err);
 	}

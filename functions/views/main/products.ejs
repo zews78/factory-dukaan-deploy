@@ -1,14 +1,14 @@
 
-{{>start}}
+<%- include("../partials/start") %>
 <link type="text/css" rel="stylesheet" href="/css/products.css" />
 <body class="d-flex flex-column min-vh-100">
 
-{{>header}}
-    {{>header}}
+<%- include("../partials/header") %>
+    
     <div class="wrapper">
-        {{>sidenav}}
+        <%- include("../partials/sidenav") %>
         <div class="main_content">
-            {{>search}}
+            <%- include("../partials/search") %>
 
             <div class="product-data">
                 <h6 id="recomended">Recommended</h6>
@@ -41,5 +41,5 @@
 
 
 
-{{>footer}}
-{{>end}}
+<%- include("../partials/footer") %>
+<%- include("../partials/end") %>

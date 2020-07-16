@@ -90,7 +90,7 @@ exports.getProducts = async(req, res) => {
 			last = false;
 		}
 
-		res.render('../views/admin/products.hbs', {
+		res.render('admin/products', {
 			products,
 			links: {
 				prev: first,

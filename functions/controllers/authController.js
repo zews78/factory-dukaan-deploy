@@ -5,9 +5,9 @@ const loginPageNumber = require('../utils/loginPageNumber');
 exports.getLogin = async(req, res) => {
 	const page = await loginPageNumber(req);
 	if (page === 1) {
-		res.render('../views/auth/login.hbs', {auth: false});
+		res.render('auth/login.ejs', {auth: false});
 	} else if (page === 2) {
-		res.render('../views/auth/login2.hbs', {auth: true});
+		res.render('auth/login2.ejs', {auth: true});
 	} else {
 		res.redirect('/');
 	}
@@ -15,7 +15,6 @@ exports.getLogin = async(req, res) => {
 
 exports.postLogin = async(req, res) => {
 	try {
-
 		if (req.body.additionalUserInfo.isNewUser) {
 			// Create a new user
 			const userData = {};
@@ -27,16 +26,17 @@ exports.postLogin = async(req, res) => {
 				.set(userData);
 		}
 		const expiresIn = 1000 * 60 * 60 * 24 * 14;
-		const sessionCookie = await firebase.auth()
+		const sessionCookie = await firebase
+			.auth()
 			.createSessionCookie(req.body.user.stsTokenManager.accessToken, {expiresIn});
 		const cookieOptions = {
 			maxAge: expiresIn,
-			httpOnly: true,
-			secure: true
+			httpOnly: true
+			// secure: true
 		};
 		res.cookie('session', sessionCookie, cookieOptions);
 		res.redirect('/login');
-	} catch(err) {
+	} catch (err) {
 		console.log(err);
 		res.status(500)
 			.json({message: 'Something went wrong!'});

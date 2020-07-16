@@ -1,6 +1,6 @@
-{{>start}}
-{{>headBody}}
-{{>header}}
+<%- include("../partials/start") %>
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
 
 <div>
   <h2 class="text-center my-5">Log in</h2>
@@ -57,5 +57,5 @@
   ui.start("#firebaseui-auth-container", uiConfig);
 </script>
 
-{{>footer}}
-{{>end}}
+<%- include("../partials/footer") %>
+<%- include("../partials/end") %>
