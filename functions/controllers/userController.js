@@ -4,7 +4,10 @@ const config = require('../../config');
 // const validator = require('validator');
 
 exports.getUserProfile = (req, res) => {
-	res.render('user/profile.ejs', {auth: true});
+	res.render('user/profile.ejs', {
+		auth: true,
+		gstVerification: req.gstVerification
+	});
 };
 
 exports.postUpdateUser = async(req, res) => {
@@ -35,6 +38,11 @@ exports.postVerifyGst = async(req, res) => {
 			res.json({status: 'Invalid gst number'});
 		} else {
 			if (req.body.panNo === data.data.taxpayerInfo.panNo.substr(data.data.taxpayerInfo.panNo.length - 4)) {
+
+				await firebase.firestore()
+					.collection('users')
+					.doc(req.uid)
+					.update({gstNo: req.body.gstNo});
 				res.json({status: 'verified'});
 			} else {
 				res.json({status: 'Invalid GST Number or PAN number'});

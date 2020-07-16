@@ -53,3 +53,8 @@ exports.postUpdateProduct = async(req, res) => {
 		console.log(err);
 	}
 };
+
+exports.getContacts = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('main/contact.ejs', {auth});
+};
