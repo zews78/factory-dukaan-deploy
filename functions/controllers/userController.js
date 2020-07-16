@@ -4,7 +4,7 @@ const config = require('../../config');
 // const validator = require('validator');
 
 exports.getUserProfile = (req, res) => {
-	res.render('../views/user/profile.hbs', {auth: true});
+	res.render('user/profile.ejs', {auth: true});
 };
 
 exports.postUpdateUser = async(req, res) => {

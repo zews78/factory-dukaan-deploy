@@ -1,25 +1,25 @@
 // This file contains all GET controllers for frontend testing
 
 exports.getLogin = (req, res) => {
-	res.render('../views/auth/login.hbs');
+	res.render('auth/login.ejs');
 };
 
 exports.getLogin2 = (req, res) => {
-	res.render('../views/auth/login2.hbs');
+	res.render('auth/login2.ejs');
 };
 
 exports.getHome = (req, res) =>{
-	res.render('../views/main/home.hbs');
+	res.render('main/home.ejs');
 };
 exports.getProducts = (req, res) =>{
-	res.render('../views/main/products.hbs');
+	res.render('main/products.ejs');
 };
 
 exports.getUserProfile = (req, res) => {
-	res.render('../views/user/profile.hbs');
+	res.render('user/profile.ejs');
 };
 
 // Signup is not needed
 // exports.getSignUp = (req, res) => {
-// 	res.render('../views/signup.hbs');
+// 	res.render('signup.ejs');
 // };

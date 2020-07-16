@@ -1,3 +1,3 @@
 exports.getAdminDashboard = (req, res) => {
-	res.render('../views/admin/dashboard.hbs');
+	res.render('admin/dashboard');
 };
