@@ -1,0 +1,103 @@
+<%- include('../partials/admin/start.ejs') %> <%-
+include('../partials/headBody.ejs') %> <%-
+include('../partials/admin/header.ejs') %>
+
+<div class="container-fluid">
+	<h1 class="page-heading">Users</h1>
+	<form action="/admin/users">
+		<div class="input-group" id="search_group">
+			<input class="form-control" id="search_input" name="search" type="search"
+				placeholder="Search by Name" aria-label="Search" />
+			<% for (let query in queryParams) { %>
+			<% if(!(query === 'search' || query === 'after' || query === 'before')) { %>
+			<input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
+			<% } %>
+			<% } %>
+			<div class="input-group-append">
+				<button class="btn py-0 px-2 my-sm-0" id="search_btn" type="submit">
+					<span class="fa fa-search"></span>
+				</button>
+			</div>
+		</div>
+	</form>
+	<div class="dropdown mx-3" id="sort_dropdown">
+		<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+			aria-haspopup="true" aria-expanded="false">
+			Sort By
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item"
+				href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=createdOn&order=desc">Newest</a>
+			<a class="dropdown-item"
+				href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=createdOn&order=asc">Oldest</a>
+		</div>
+	</div>
+	<div class="clearfix my-3"></div>
+	<% if (users.length > 0) { %>
+	<div class="horizontal-scroll-wrapper">
+		<div class="horizontal-scroll-container">
+			<div class="list-group">
+				<div href="#" class="list-group-item list-group-item-action bg-dark text-light">
+					<div class="row">
+						<div class="col-2">Account Opening Date</div>
+						<div class="col-2">Name</div>
+						<div class="col-2">Company's Name</div>
+						<div class="col-1">Mobile Number</div>
+						<div class="col-2">Email</div>
+						<div class="col-1">GST Number</div>
+						<div class="col-1">Subscribed</div>
+						<div class="col-1 text-right">Edit</div>
+					</div>
+				</div>
+				<% for (let user of users) { %>
+				<div href="#" class="list-group-item list-group-item-action">
+					<div class="row">
+						<div class="col-2"><%= user.createdOn %></div>
+						<div class="col-2"><%= user.name %></div>
+						<div class="col-2"><%= user.company && user.company.name %></div>
+						<div class="col-1"><%= user.mobile %></div>
+						<div class="col-2"><%= user.email %></div>
+						<div class="col-1">
+							<span class="badge badge-<%= user.gstNo ? 'success' : 'danger' %>">
+								<%= user.gstNo || 'Not Verified' %>
+							</span>
+						</div>
+						<div class="col-1">
+							<span class="badge badge-<%= user.gstNo ? 'success' : 'danger' %>">
+								<%= user.gstNo ? 'YES' : 'NO' %>
+							</span>
+						</div>
+						<div class="col-1 text-right">
+							<a href="/admin/user/<%= user.id %>">
+								<span class="fa fa-pencil-square-o"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<nav class="my-4">
+		<ul class="pagination justify-content-center">
+			<li class="page-item <%= !links.prev && 'disabled' %>">
+				<a class="page-link" href="<%= queryString + 'before=' + links.prev %>">
+					<span class="fa fa-arrow-left"></span>
+				</a>
+			</li>
+			<li class="page-item <%= !links.next && 'disabled' %>">
+				<a class="page-link" href="<%= queryString + 'after=' + links.next %>">
+					<span class="fa fa-arrow-right"></span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<% } else { %>
+	<div class="text-center">
+		<h1>No users found!</h1>
+		<span class="fa fa-frown-o fa-5x"></span>
+	</div>
+	<% } %>
+</div>
+
+<%- include('../partials/end.ejs') %>
