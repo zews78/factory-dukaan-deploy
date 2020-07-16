@@ -20,7 +20,7 @@ exports.getUserProfile = (req, res) => {
 };
 
 exports.getContacts = (req, res) => {
-	res.render('../views/main/contact.hbs');
+	res.render('../views/main/contact.ejs');
 };
 // Signup is not needed
 // exports.getSignUp = (req, res) => {

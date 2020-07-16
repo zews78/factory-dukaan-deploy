@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const ejs = require('ejs');
 
 const app = express();
 
@@ -30,7 +31,7 @@ const isAuth = require('./middlewares/isAuth');
 const isAdmin = require('./middlewares/isAdmin');
 
 // using all necessary routes
-app.use(viewRouter); // Comment me during backend development
+// app.use(viewRouter); // Comment me during backend development
 app.use(mainRouter);
 app.use(authRouter);
 app.use('/user', isAuth, userRouter);
