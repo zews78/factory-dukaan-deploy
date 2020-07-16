@@ -98,21 +98,19 @@ body {
 		min-width: 62vw;
 	}
 
-
 	form.form-group button {
 		min-width: 14vw;
 	}
 	#trade-area .trade-img {
 		display: none;
 	}
-	#trade-area .trade-img-mob img{
+	#trade-area .trade-img-mob img {
 		/* height: 10vw; */
 		height: 30vw;
 	}
-	#trade-area .trade-img-mob img{
+	#trade-area .trade-img-mob img {
 		height: 32vw;
-		margin:19px -19px 0 0 ;
-		
+		margin: 19px -19px 0 0;
 	}
 	#trade-area .text-area #head-img {
 		display: flex;
@@ -130,7 +128,7 @@ body {
 		margin: -9px 5px 5px 5px;
 		font-size: smaller;
 	}
-	#trade-area .text-area{
+	#trade-area .text-area {
 		width: 100%;
 	}
 	#trade-area .text-area .trade-btns #require {
@@ -154,7 +152,6 @@ body {
 	#trade-area .trade-img-mob {
 		display: none;
 	}
-
 }
 
 .wrapper .sidebar {
@@ -370,6 +367,20 @@ form.form-group button:hover {
 	color: #fff;
 }
 
+.btnAuth {
+	border: none;
+	border-radius: 20px;
+	color: #fff;
+	width: 60px;
+	padding: 5px;
+	background: #2196f3;
+	cursor: pointer;
+}
+
+.btnAuth:hover {
+	background: #0062cc;
+}
+
 .btnEditProfile {
 	border: none;
 	color: #fff;
@@ -531,6 +542,102 @@ form.form-group button:hover {
 
 .list-group {
 	width: 30vw;
+}
+
+.product-card {
+	width: 300px;
+	position: relative;
+	box-shadow: 0 2px 7px #dfdfdf;
+	margin: 20px auto;
+	background: #fafafa;
+}
+
+.product-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 200px;
+	padding: 30px;
+	background: #f0f0f0;
+}
+
+.product-image img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.product-details {
+	padding: 20px;
+}
+
+.product-seller {
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #ccc;
+	margin-bottom: 10px;
+}
+
+.product-details h4 a {
+	font-weight: 500;
+	display: block;
+	margin-bottom: 18px;
+	text-transform: uppercase;
+	color: #363636;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+.product-details h4 a:hover {
+	color: #ff922b;
+}
+
+.product-details p {
+	font-size: 15px;
+	line-height: 22px;
+	color: #999;
+}
+
+.product-bottom-details {
+	overflow: hidden;
+	border-top: 1px solid #eee;
+	padding-top: 10px;
+}
+
+.product-bottom-details div {
+	float: left;
+	width: 50%;
+}
+
+.product-price {
+	font-size: 18px;
+	color: #ff922b;
+	font-weight: 600;
+}
+
+.product-price small {
+	font-size: 80%;
+	font-weight: 400;
+	text-decoration: line-through;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.product-links {
+	text-align: right;
+}
+
+.product-links a {
+	display: inline-block;
+	margin-left: 5px;
+	color: #e1e1e1;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+.product-links a:hover {
+	color: #ff922b;
 }
 
 footer {
