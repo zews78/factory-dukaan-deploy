@@ -95,7 +95,8 @@ exports.getProducts = async(req, res) => {
 			links: {
 				prev: first,
 				next: last
-			}
+			},
+			queryParams: req.query
 		});
 	} catch (err) {
 		console.log(err);

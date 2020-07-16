@@ -4,6 +4,33 @@
 
 <div class="container-fluid">
 	<h1 class="page-heading">Products</h1>
+	<form action="/admin/products">
+		<div class="input-group" id="search_group">
+			<input class="form-control" id="search_input" name="search" type="search" placeholder="Search"
+				aria-label="Search">
+			{{!-- {{#each queryParams}}
+			<input name={{@key}} value={{this}} hidden />
+			{{/each}} --}}
+			<div class="input-group-append">
+				<button class="btn py-0 px-2 my-sm-0 " id="search_btn" type="submit">
+					<span class="fa fa-search"></span>
+				</button>
+			</div>
+		</div>
+	</form>
+	<div class="dropdown mx-3" id="sort_dropdown">
+		<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+			aria-haspopup="true" aria-expanded="false">
+			Sort By
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="?sortBy=createdOn&order=asc&search={{queryParams.search}}">Newest</a>
+			<a class="dropdown-item" href="?sortBy=createdOn&order=desc&search={{queryParams.search}}">Oldest</a>
+			<a class="dropdown-item" href="?sortBy=price&order=asc&search={{queryParams.search}}">Price - (Low to High)</a>
+			<a class="dropdown-item" href="?sortBy=price&order=desc&search={{queryParams.search}}">Price - (High to Low)</a>
+		</div>
+	</div>
+	<div class="clearfix my-3"></div>
 	<div class="horizontal-scroll-wrapper">
 		<div class="horizontal-scroll-container">
 			<div class="list-group">
