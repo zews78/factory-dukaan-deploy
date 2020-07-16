@@ -8,10 +8,10 @@ exports.getLogin2 = (req, res) => {
 	res.render('../views/auth/login2.hbs');
 };
 
-exports.getHome = (req, res) =>{
+exports.getHome = (req, res) => {
 	res.render('../views/main/home.hbs');
 };
-exports.getProducts = (req, res) =>{
+exports.getProducts = (req, res) => {
 	res.render('../views/main/products.hbs');
 };
 
@@ -19,6 +19,9 @@ exports.getUserProfile = (req, res) => {
 	res.render('../views/user/profile.hbs');
 };
 
+exports.getContacts = (req, res) => {
+	res.render('../views/main/contact.hbs');
+};
 // Signup is not needed
 // exports.getSignUp = (req, res) => {
 // 	res.render('../views/signup.hbs');
