@@ -1,8 +1,6 @@
-const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const ejs = require('ejs');
 
 const app = express();
 
