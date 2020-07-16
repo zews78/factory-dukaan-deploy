@@ -1,4 +1,5 @@
 const firebase = require('../firebase');
+const keywordGenerator = require('../utils/keywordGenerator');
 
 exports.getDashboard = async(req, res) => {
 	res.redirect('/admin/products');
@@ -7,12 +8,24 @@ exports.getDashboard = async(req, res) => {
 
 exports.getProducts = async(req, res) => {
 	try {
-		const limit = 1;
+		const limit = +req.query.limit || 10;
 
 		// Creating a reference to products
 		let productsRef = firebase.firestore()
-			.collection('products')
-			.orderBy('price', 'desc');
+			.collection('products');
+
+		// Filtering
+		if (req.query.search) {
+			productsRef = productsRef.where('keywords', 'array-contains-any', keywordGenerator(req.query.search));
+		}
+
+		// Sorting
+		if (req.query.sortBy) {
+			productsRef = productsRef.orderBy(req.query.sortBy, req.query.order || 'asc');
+		}
+		if (req.query.sortBy !== 'createdOn') {
+			productsRef = productsRef.orderBy('createdOn', 'desc');
+		}
 
 		// If there is a query param after/before
 		if (req.query.after) {
