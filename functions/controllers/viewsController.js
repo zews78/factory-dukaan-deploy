@@ -19,6 +19,9 @@ exports.getUserProfile = (req, res) => {
 	res.render('user/profile.ejs');
 };
 
+exports.getContacts = (req, res) => {
+	res.render('../views/main/contact.hbs');
+};
 // Signup is not needed
 // exports.getSignUp = (req, res) => {
 // 	res.render('signup.ejs');
