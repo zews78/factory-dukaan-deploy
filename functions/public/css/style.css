@@ -367,6 +367,20 @@ form.form-group button:hover {
 	color: #fff;
 }
 
+.btnAuth {
+	border: none;
+	border-radius: 20px;
+	color: #fff;
+	width: 60px;
+	padding: 5px;
+	background: #2196f3;
+	cursor: pointer;
+}
+
+.btnAuth:hover {
+	background: #0062cc;
+}
+
 .btnEditProfile {
 	border: none;
 	color: #fff;
