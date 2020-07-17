@@ -110,8 +110,8 @@ body {
 		height: 30vw;
 	}
 	#trade-area .trade-img-mob img{
-		height: 32vw;
-		margin:19px -19px 0 0 ;
+		height: 33vw;
+		margin:19px -13px 0 0 ;
 		
 	}
 	#trade-area .text-area #head-img {
@@ -126,7 +126,7 @@ body {
 		font-size: 3.5vw;
 	}
 	#trade-area {
-		width: 88%;
+		width: 93%;
 		margin: -9px 5px 5px 5px;
 		font-size: smaller;
 	}

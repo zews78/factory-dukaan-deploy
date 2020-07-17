@@ -7,6 +7,10 @@ exports.getUserProfile = (req, res) => {
 	res.render('../views/user/profile.hbs', {auth: true});
 };
 
+exports.getUserPayment = (req, res) => {
+	res.render('../views/user/payment.hbs', {auth: true});
+};
+
 exports.postUpdateUser = async(req, res) => {
 	try {
 		await firebase

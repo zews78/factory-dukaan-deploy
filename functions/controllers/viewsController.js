@@ -18,6 +18,9 @@ exports.getProducts = (req, res) =>{
 exports.getUserProfile = (req, res) => {
 	res.render('../views/user/profile.hbs');
 };
+exports.getUserPayment = (req, res) => {
+	res.render('../views/user/payment.hbs');
+};
 
 // Signup is not needed
 // exports.getSignUp = (req, res) => {
