@@ -30,6 +30,10 @@ exports.getProducts = async(req, res) => {
 	});
 };
 
+exports.getOneProduct = async(req, res)=>{
+	res.render('main/productDetails.ejs');
+};
+
 exports.postProduct = async(req, res) => {
 	try {
 		await firebase.firestore()
