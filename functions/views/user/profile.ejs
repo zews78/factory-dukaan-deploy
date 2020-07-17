@@ -1,18 +1,22 @@
 
 
 
-{{>start}}
-{{>headBody}}
-{{>header}}
+<%- include("../partials/start") %>
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
     <div class="wrapper">
-        {{>sidenav}}
+        <%- include("../partials/sidenav") %>
         <div class="main_content">
             
             <div class="profile-container">
                 <div class="edit-profile">
-                    {{!-- <h2>User Profile</h2> --}}
+                    <!-- {{!-- <h2>User Profile</h2> --}} -->
                     <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm1">Edit</button><br>
-                    <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm2">Verify Account</button>
+                    <% if (gstVerification) {%>
+                        <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm2" style="background-color: #21c256;" disabled> GST Verified ✔</button>
+                        <%}else{%>
+                            <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm2">Verify Account</button>
+                            <%} %>
 
                 </div>
                 <div class="row">
@@ -22,7 +26,7 @@
                     <div class="column col-right">
                         <h1>Sam Kolder</h1>
                         <p>
-                            <i class="fas fa-building"></i>Company Name &nbsp; {{#if true}} <i class="fas fa-check-circle"></i> {{/if}} <br>
+                            <i class="fas fa-building"></i>Company Name &nbsp; <i class="fas fa-check-circle"></i> <br>
                             <i class="fas fa-envelope"></i>email@example.com <br> 
                             <i class="fas fa-money-check-alt"></i>GST TIN 75758658147574 <br>
                             <i class="far fa-calendar-alt"></i>Date Joined <br>
@@ -48,36 +52,36 @@
                 </div>
 
                 <div id="my-products" class="tabcontent">
-                    {{!-- <div class="container-fluid"> --}}
+                    <!-- {{!-- <div class="container-fluid"> --}} -->
                         <div class="row">
-                            {{!-- <div class="col-sm-4"> --}}
+                            <!-- {{!-- <div class="col-sm-4"> --}} -->
                             <div class="card">
                                 <img src="/images/product1.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
                             </div>
-                            {{!-- </div> --}}
+                            <!-- {{!-- </div> --}} -->
 
-                            {{!-- <div class="col-sm-4"> --}}
+                            <!-- {{!-- <div class="col-sm-4"> --}} -->
                             <div class="card">
                                 <img src="/images/product1.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
                             </div>
-                            {{!-- </div> --}}
+                            <!-- {{!-- </div> --}} -->
 
-                            {{!-- <div class="col-sm-4"> --}}
+                            <!-- {{!-- <div class="col-sm-4"> --}} -->
                             <div class="card">
                                 <img src="/images/product1.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
                             </div>
-                            {{!-- </div> --}}
+                            <!-- {{!-- </div> --}} -->
                         </div>
-                    {{!-- </div> --}}
+                    <!-- {{!-- </div> --}} -->
                 </div>
 
                 <div id="my-wishlist" class="tabcontent">
@@ -96,8 +100,8 @@
             </div>
         </div>
     </div>
-{{>footer}}
-{{>end}}
+<%- include("../partials/footer") %>
+<%- include("../partials/end") %>
 
 <div id="ModalEditForm1" class="modal fade">
     <div class="modal-dialog" role="document">
@@ -137,7 +141,7 @@
                     <div class="form-group">
                         <label class="control-label">Company Description</label>
                         <div>
-                            {{!-- <input type="textarea" class="form-control input-lg" name="description"> --}}
+                            <!-- {{!-- <input type="textarea" class="form-control input-lg" name="description"> --}} -->
                             <textarea class="form-control" name="" id="" rows="4"></textarea>
                         </div>
                     </div>
@@ -166,35 +170,35 @@
             <div class="modal-header">
                 <h4 class="modal-title">Verify Account</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-				{{!-- <button style="padding: 27px 13px 0 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button> --}}
+				<!-- {{!-- <button style="padding: 27px 13px 0 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button> --}} -->
             </div>
             <div class="modal-body">
-                <form role="form" method="POST" action="">
-                    <input type="hidden" name="_token" value="">
+                <form role="form">
+                    <!-- <input type="hidden" name="_token" value="">
                     <div class="form-group">
                         <label class="control-label">Company Name</label>
                         <div>
                             <input type="text" class="form-control input-lg" name="company-name">
                         </div>
                     </div>
-                    <input type="hidden" name="_token" value="">
+                    <input type="hidden" name="_token" value=""> -->
                     <div class="form-group">
                         <label class="control-label">GST Number</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="gst-number" value="">
+                            <input type="text" class="form-control input-lg" name="gst-number" value="" id="gst-number">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">PAN Number</label>
+                        <label class="control-label">Last 4 Digits OF PAN Number</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="contact-number" value="">
+                            <input type="text" class="form-control input-lg" name="pan-number" value="" id="pan-number">
                         </div>
                     </div>
-                    <div class="file-upload-wrapper">
+                    <!-- <div class="file-upload-wrapper">
                         <input type="file" id="input-file-now" class="file-upload" />
-                    </div><br>
-                    
-                    <div class="form-group">
+                    </div><br> -->
+
+                    <!-- <div class="form-group">
                         <label class="control-label">Aadhar Number</label>
                         <div>
                             <input type="text" class="form-control input-lg" name="contact-number" value="">
@@ -202,17 +206,18 @@
                     </div>
                     <div class="file-upload-wrapper">
                         <input type="file" id="input-file-now" class="file-upload" />
-                    </div><br>
+                    </div><br> -->
                     <div class="form-group">
                         <div>
-                            <button type="submit" class="btn btn-success">Confirm</button>
+                            <button type="button" class="btn btn-success submit-gstNo"
+                                onclick="userVerification()">Confirm</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            
+
                         </div>
                     </div>
                     <div class="form-group">
                         <div>
-                            
+
                         </div>
                     </div>
                 </form>
@@ -220,3 +225,34 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+<script>
+
+    const userVerificationForm = document.querySelector(".modal-body");
+
+    const userVerification = async () => {
+        const gstNo = document.getElementById('gst-number').value;
+        const panNo = document.getElementById('pan-number').value;
+        try {
+            const res = await axios({
+                method: "POST",
+                url: "/user/verify-gst",
+                data: {
+                    gstNo,
+                    panNo,
+                },
+            });
+            if(res.data.status==='verified'){
+                window.setTimeout(() => {
+                    location.assign('/user/profile');
+                }, 1500);
+            }
+        } catch (err) {
+            console.log('ERROR')
+            console.log(err);
+        }
+    }
+
+</script>

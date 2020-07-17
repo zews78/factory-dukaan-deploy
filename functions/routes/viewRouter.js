@@ -16,6 +16,6 @@ router.get('/payment', viewsController.getUserPayment);
 // mainRoutes
 router.get('/', viewsController.getHome);
 router.get('/products', viewsController.getProducts);
-
+router.get('/contact-us', viewsController.getContacts);
 
 module.exports = router;

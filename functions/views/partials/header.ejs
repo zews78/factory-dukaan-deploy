@@ -1,0 +1,23 @@
+<!-- Image and text -->
+<header>
+  <nav class="navbar navbar-light fixed-top bg-light">
+    <a class="navbar-brand" href="/">
+      <img
+        src="/images/logo.png"
+        height="30"
+        class="d-inline-block align-top"
+        alt="logo"
+      />
+    </a>
+    <%let auth = false;%>
+    <% if(auth) { %>
+      <form action="/logout" method="POST">
+        <button type="submit" class="btnAuth">Logout</button>
+      </form>
+    <% } else { %>
+      <form action="/login" method="GET">
+        <button type="submit" class="btnAuth">Login</button>
+      </form>
+    <% } %>
+  </nav>
+</header>

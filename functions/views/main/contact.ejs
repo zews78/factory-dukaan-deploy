@@ -1,0 +1,51 @@
+
+<%- include("../partials/start") %>
+<%- include("../partials/headBody") %> 
+<%- include("../partials/header") %>
+
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+        <div class="" id="accordion">
+            <div class="faqHeader">FAQs</div>
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-header">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Some Random Question goes here?</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="card-block">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo turpis, pretium in aliquet ac, molestie sed odio. Nullam sit amet tellus convallis, ornare tortor vitae, feugiat dui.
+                    </div>
+                </div>
+            </div>
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-header">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Some Random Question goes here?</a>
+                    </h4>
+                </div>
+                <div id="collapseTen" class="panel-collapse collapse">
+                    <div class="card-block">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo turpis, pretium in aliquet ac, molestie sed odio. Nullam sit amet tellus convallis, ornare tortor vitae, feugiat dui.
+                    </div>
+                </div>
+            </div>
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-header">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">Some Random Question goes here?</a>
+                    </h4>
+                </div>
+                <div id="collapseEleven" class="panel-collapse collapse">
+                    <div class="card-block">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo turpis, pretium in aliquet ac, molestie sed odio. Nullam sit amet tellus convallis, ornare tortor vitae, feugiat dui.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>
+<% include('../partials/end.ejs') %> 

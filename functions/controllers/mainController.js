@@ -4,7 +4,7 @@ const isAuth = require('../utils/isAuth');
 
 exports.getHome = async(req, res) => {
 	const auth = (await isAuth(req))[0];
-	res.render('../views/main/home.hbs', {auth});
+	res.render('main/home', {auth});
 };
 
 exports.getProducts = async(req, res) => {
@@ -24,7 +24,7 @@ exports.getProducts = async(req, res) => {
 		queriedProduct = await products.get();
 	}
 
-	res.render('../views/main/products.hbs', {
+	res.render('main/products.ejs', {
 		auth,
 		products: queriedProduct
 	});
@@ -52,4 +52,9 @@ exports.postUpdateProduct = async(req, res) => {
 	} catch (err) {
 		console.log(err);
 	}
+};
+
+exports.getContacts = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('main/contact.ejs', {auth});
 };
