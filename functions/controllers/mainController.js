@@ -31,7 +31,8 @@ exports.getProducts = async(req, res) => {
 };
 
 exports.getOneProduct = async(req, res)=>{
-	res.render('main/productDetails.ejs');
+	const auth = (await isAuth(req))[0];
+	res.render('main/productDetails.ejs', {auth});
 };
 
 exports.postProduct = async(req, res) => {
