@@ -108,10 +108,9 @@ body {
 		/* height: 10vw; */
 		height: 30vw;
 	}
-	#trade-area .trade-img-mob img{
+	#trade-area .trade-img-mob img {
 		height: 33vw;
-		margin:19px -13px 0 0 ;
-		
+		margin: 19px -13px 0 0;
 	}
 	#trade-area .text-area #head-img {
 		display: flex;
@@ -376,6 +375,8 @@ form.form-group button:hover {
 	padding: 5px;
 	background: #2196f3;
 	cursor: pointer;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .btnAuth:hover {
