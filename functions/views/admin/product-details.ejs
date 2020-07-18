@@ -14,13 +14,13 @@
     
     <div class="details-container">
         <div class="columns">
-            <div class="row">
+            <!-- <div class="row"> -->
                 <h6>Product Name</h6>
                 <input type="text" class="form-control" name="product-name">
                 <span class="warning">* Please don't add any description in the product name</span>
-            </div>
+            <!-- </div> -->
 
-            <div class="row">
+            <!-- <div class="row"> -->
                 <div class="row-control">
                     <h6>Specifications</h6>
                     <button type="submit" class="btnAddSpecs">Add Specs</button>
@@ -49,15 +49,15 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="row">
+            <!-- </div> -->
+            <!-- <div class="row"> -->
                 <h6>Description</h6>
                 <textarea class="form-control" rows="4"></textarea>
-            </div>
+            <!-- </div> -->
             <button type="submit" class="btnSaveProduct">Save Product</button>
         </div>
         <div class="columns">
-            <div class="row">
+            <!-- <div class="row"> -->
                 <h6>Product Image</h6>
                 <form>
                     <div class="custom-file">
@@ -66,9 +66,10 @@
                       <span class="warning">* Please don't add any description in the product name</span>
                     </div>
                   </form>
-            </div>
+            <!-- </div> -->
             
-            <div class="row">
+            <!-- <div class="row"> -->
+            <div class="product-image-display">
                 <div class="card-deck">
                     <div class="card" style="width: 10rem; position: relative;">
                         <span class="close">&times;</span>
@@ -78,7 +79,32 @@
                         <span class="close">&times;</span>
                         <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
                     </div>
+                    <div class="card" style="width: 10rem; position: relative;">
+                        <span class="close">&times;</span>
+                        <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
+                    </div>
                 </div>
+
+                <div class="card-deck">
+                    <div class="card" style="width: 10rem; position: relative;">
+                        <span class="close">&times;</span>
+                        <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card" style="width: 10rem; position: relative;">
+                        <span class="close">&times;</span>
+                        <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card" style="width: 10rem; position: relative;">
+                        <span class="close">&times;</span>
+                        <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+            <div class="tags-section">
+                <h6>Tags</h6>
+                <input type="text" class="form-control" name="product-name" placeholder="Enter a tag">  
             </div>
         </div>
     </div>
