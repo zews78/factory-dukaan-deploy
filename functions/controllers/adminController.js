@@ -1,6 +1,7 @@
 const firebase = require('../firebase');
 const keywordGenerator = require('../utils/keywordGenerator');
 
+
 exports.getDashboard = async(req, res) => {
 	res.redirect('/admin/products');
 	// res.render('admin/dashboard');
@@ -229,4 +230,12 @@ exports.getUsers = async(req, res) => {
 	} catch (err) {
 		console.log(err);
 	}
+};
+
+exports.getPrdouctDetails = async(req, res)=>{
+	res.render('admin/product-details.ejs');
+};
+
+exports.getUserDetails = async(req, res)=>{
+	res.render('admin/user-details.ejs');
 };
