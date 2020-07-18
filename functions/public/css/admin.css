@@ -1,24 +1,24 @@
 /*************** general *************/
 
 .page-heading {
-  font-size: 30px;
+	font-size: 30px;
 	font-weight: bold;
 	float: left;
 }
 
 .horizontal-scroll-wrapper {
-  overflow-x: auto;
+	overflow-x: auto;
 }
 
 .horizontal-scroll-container {
-  min-width: 1200px;
+	min-width: 1200px;
 }
 
 /*************** header **************/
 
 .navbar {
-  box-shadow: 0 0 5px -2px;
-  margin-bottom: 30px;
+	box-shadow: 0 0 5px -2px;
+	margin-bottom: 30px;
 }
 
 /** page heading seach/sort/filter ***/
@@ -42,3 +42,30 @@
 #sort_dropdown {
 	float: right;
 }
+
+/*********** Product Details - Start ***********/
+
+div.details-container {
+	display: flex;
+	font-size: 15px;
+}
+
+div.columns {
+	flex: 1;
+	padding: 10px;
+}
+
+div.columns:nth-of-type(odd) {
+	flex: 2;
+}
+
+div.columns:nth-of-type(odd) {
+	background: #85929e;
+	color: white;
+}
+div.columns:nth-of-type(even) {
+	background: #a5ddef;
+	color: green;
+}
+
+/*********** Product Details - End ***********/
