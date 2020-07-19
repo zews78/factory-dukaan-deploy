@@ -194,9 +194,9 @@
                             <input type="text" class="form-control input-lg" name="pan-number" value="" id="pan-number">
                         </div>
                     </div>
-                    <!-- <div class="file-upload-wrapper">
-                        <input type="file" id="input-file-now" class="file-upload" />
-                    </div><br> -->
+                     <div class="file-upload-wrapper">
+                        <input type="file" accept="image/*" id="photo" name="photo" class="file-upload" />
+                    </div><br>
 
                     <!-- <div class="form-group">
                         <label class="control-label">Aadhar Number</label>
@@ -226,15 +226,30 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
-<script>
 
+
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+        authDomain: "factory-dukaan.firebaseapp.com",
+        databaseURL: "https://factory-dukaan.firebaseio.com",
+        projectId: "factory-dukaan",
+        storageBucket: "factory-dukaan.appspot.com",
+        messagingSenderId: "901783648307",
+        appId: "1:901783648307:web:41d71e94413adcbdb74b46",
+        measurementId: "G-LH7XKNLQE5",
+    };
+    firebase.initializeApp(firebaseConfig);
     const userVerificationForm = document.querySelector(".modal-body");
 
     const userVerification = async () => {
+        
         const gstNo = document.getElementById('gst-number').value;
         const panNo = document.getElementById('pan-number').value;
+        const PANPhoto = await document.getElementById('photo').files[0];
+        
+        
         try {
             const res = await axios({
                 method: "POST",
@@ -248,10 +263,23 @@
                 window.setTimeout(() => {
                     location.assign('/user/profile');
                 }, 1500);
+            }else{
+                console.log(res);
             }
         } catch (err) {
             console.log('ERROR')
             console.log(err);
+        }
+
+        if(PANPhoto){
+            const filename=PANPhoto.name;
+            const storageRef=firebase.storage().ref('/PAN-Card-images/'+filename);
+            const uploadTask=storageRef.put(PANPhoto);
+
+            uploadTask.on('state_changed',async (snapshot)=>{
+                console.log('UPLOADING...')
+            })
+            console.log('IMAGE UPLOADED');
         }
     }
 

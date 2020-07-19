@@ -1,6 +1,7 @@
 const firebase = require('../firebase');
 const axios = require('axios');
 const config = require('../../config');
+
 // const validator = require('validator');
 
 exports.getUserProfile = (req, res) => {
