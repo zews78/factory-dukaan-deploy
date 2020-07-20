@@ -9,6 +9,6 @@ router.get('/contact-us', mainController.getContacts);
 router.get('/products', mainController.getProducts);
 router.get('/product/:productId', mainController.getOneProduct);
 router.post('/products', isAuth, mainController.postProduct);
-router.post('/products/:productId/update', isAuth, mainController.postUpdateProduct);
+router.post('/product/:productId/update', isAuth, mainController.postUpdateProduct);
 
 module.exports = router;
