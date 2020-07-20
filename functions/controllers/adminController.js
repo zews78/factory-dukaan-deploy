@@ -241,3 +241,7 @@ exports.getPrdouctDetails = async(req, res)=>{
 exports.getUserDetails = async(req, res)=>{
 	res.render('admin/user-details.ejs', {pageTitle: 'User Details - Admin'});
 };
+
+exports.getPendingGstVerification = (req, res) => {
+	res.render('admin/pending-gst-verification', {pageTitle: 'GST Verification - Admin'});
+};
