@@ -4,7 +4,7 @@ const keywordGenerator = require('../utils/keywordGenerator');
 
 exports.getDashboard = async(req, res) => {
 	res.redirect('/admin/products');
-	// res.render('admin/dashboard');
+	// res.render('admin/dashboard', {pageTitle: 'Dashboard - Admin'});
 };
 
 exports.getProducts = async(req, res) => {
@@ -106,6 +106,7 @@ exports.getProducts = async(req, res) => {
 		}
 
 		res.render('admin/products', {
+			pageTitle: 'Products - Admin',
 			products,
 			links: {
 				prev: first,
@@ -219,6 +220,7 @@ exports.getUsers = async(req, res) => {
 		}
 
 		res.render('admin/users', {
+			pageTitle: 'Users - Admin',
 			users,
 			links: {
 				prev: first,
@@ -233,9 +235,9 @@ exports.getUsers = async(req, res) => {
 };
 
 exports.getPrdouctDetails = async(req, res)=>{
-	res.render('admin/product-details.ejs');
+	res.render('admin/product-details.ejs', {pageTitle: 'Product Details - Admin'});
 };
 
 exports.getUserDetails = async(req, res)=>{
-	res.render('admin/user-details.ejs');
+	res.render('admin/user-details.ejs', {pageTitle: 'User Details - Admin'});
 };

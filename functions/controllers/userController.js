@@ -6,13 +6,17 @@ const config = require('../../config');
 
 exports.getUserProfile = (req, res) => {
 	res.render('user/profile.ejs', {
+		pageTitle: 'Profile',
 		auth: true,
 		gstVerification: req.gstVerification
 	});
 };
 
 exports.getUserPayment = (req, res) => {
-	res.render('../views/user/payment.ejs', {auth: true});
+	res.render('../views/user/payment.ejs', {
+		pageTitle: 'Payment',
+		auth: true
+	});
 };
 
 exports.postUpdateUser = async(req, res) => {
