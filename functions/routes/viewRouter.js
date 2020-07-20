@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/login', viewsController.getLogin);
 router.get('/login2', viewsController.getLogin2);
 router.get('/user/profile', viewsController.getUserProfile);
-router.get('/payment', viewsController.getUserPayment);
+router.get('/payment/:id', viewsController.getUserPayment);
 
 
 

@@ -1,0 +1,182 @@
+<%- include('../partials/start.ejs') %>
+<%- include("../partials/header") %>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Optimal Internet Explorer compatibility -->
+</head>
+
+<body>
+  <script src="https://www.paypal.com/sdk/js?client-id=Aft2XyTxyGyVWhwzw-zUpmTVoGzrfhtbiT-C0Dwfj-3CxvPO4ADDymWIWBOndnVr3rjb3Pmw6rN3mqoK&currency=INR&commit=false">
+    // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+       //commit(false) is the when payer can change the amount captured.(continue button instead of pay)
+       // vault is transaction sets up billing agreement
+  </script>
+  <style>
+    .radio{
+      margin-left: 1em;
+      text-align: left;
+    }
+    .radio .custom-control .custum-radio{
+      cursor: pointer;
+    }
+
+  </style>
+  <br>
+  <div>
+    <div class="pricing-container">
+      <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow" id="silver" style="display:none">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Silver</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title pricing-card-title">₹800 <small class="text-muted">/ month</small></h2>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><strong> Upto 30 Products</strong></li>
+              <hr>
+              <div class="radio">
+                <div class="custom-control custom-radio" onclick="price('2200')">
+                  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio1">3 Months - ₹2200</label>
+                </div>
+                <div class="custom-control custom-radio" onclick="price('4000')">
+                  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio2">6 Months - ₹4000</label>
+                </div>
+                <div class="custom-control custom-radio" onclick="price('7500')">
+                  <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio3">12 Months - ₹7500</label>
+                </div>
+
+              </div>
+            </ul>
+            </>
+          </div>
+        </div>
+
+        <div class="card mb-4 box-shadow" id="gold" style="display:none">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Gold</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title pricing-card-title">₹900 <small class="text-muted">/ month</small></h2>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><strong> Upto 50 Products</strong></li>
+              <hr>
+              <div class="radio">
+                <div class="custom-control custom-radio" onclick="price('2500')">
+                  <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio4">3 Months - ₹2500</label>
+                </div>
+                <div class="custom-control custom-radio" onclick="price('4500')">
+                  <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio5">6 Months - ₹4500</label>
+                </div>
+                <div class="custom-control custom-radio" onclick="price('8000')">
+                  <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio6">12 Months - ₹8000</label>
+                </div>
+
+              </div>
+            </ul>
+            </>
+          </div>
+        </div>
+
+        <div class="card mb-4 box-shadow" id="platinum" style="display:none">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Platinum</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title pricing-card-title">₹1000 <small class="text-muted">/ month</small></h2>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><strong> Unlimited Products</strong></li>
+              <hr>
+              <div class="radio">
+                <div class="custom-control custom-radio" onclick="price('2700')">
+                  <input type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio7">3 Months - ₹2700</label>
+                </div>
+                <div class="custom-control custom-radio" onclick="price('5000')">
+                  <input type="radio" id="customRadio8" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio8">6 Months - ₹5000</label>
+                </div>
+                <div class="custom-control custom-radio" onclick="price('9000')">
+                  <input type="radio" id="customRadio9" name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio9">12 Months - ₹9000</label>
+                </div>
+
+              </div>
+            </ul>
+            </>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <diV style="text-align:center"><h4>Proceed <b>Secure</b> payment Here:</h4></div><br>
+  <div style="width: 20%; margin: auto;" id="paypal-button-container"></div>
+
+  <script>
+    function price(x){
+      console.log(x);
+      return x;
+    }
+    var priceValue = price();
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: priceValue
+          }
+        }],
+        redirect_urls: {
+          return_url: 'https://localhost:3000/payment/success',
+          cancel_url: 'https://localhost:3000/payment'
+        }
+      });
+    },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+      return actions.order.capture().then(function(details) {
+        // This function shows a transaction success message to your buyer.
+        alert('Transaction completed by ' + details.payer.name.given_name + 'and transaction id is:' + details.id );
+        console.log(details);
+      });
+    },
+    onCancel: function (data, actions) {
+      // Show a cancel page or return to cart
+      alert('Last transaction cancelled');
+    },
+    onError: function (err) {
+      // Show an error page here, when an error occurs
+      alert(err);
+    }
+  }).render('#paypal-button-container');
+  //This function displays Smart Payment Buttons on your web page.
+  </script>
+  <script>
+    var href = location.href;
+    var params= href.match(/([^\/]*)\/*$/)[1];
+    console.log(params);
+    document.getElementById(params).style.display ="block";
+    // function price(x){
+    //   console.log(x);
+    // }
+    // function price(x){
+    //   var val = x;
+    //   // console.log(typeof(x));
+    //   return val;
+    // }
+
+    // var priceValue = price();
+    // console.log(priceValue + typeof(priceValue)+ "hello");
+    // alert(priceValue);
+    
+    // var putValue = toString(priceValue);
+  </script>
+</body>
+<%- include('../partials/footer.ejs') %>
+<%- include('../partials/end.ejs') %>
