@@ -589,6 +589,7 @@ form.form-group button:hover {
 	color: #363636;
 	text-decoration: none;
 	transition: 0.3s;
+	font-size: 20px;
 }
 
 .product-details h4 a:hover {

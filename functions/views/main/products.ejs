@@ -1,78 +1,81 @@
-
 <%- include("../partials/start") %>
 <link type="text/css" rel="stylesheet" href="/css/products.css" />
+
 <body class="d-flex flex-column min-vh-100">
 
-<%- include("../partials/header") %>
-    
+    <%- include("../partials/header") %>
+
     <div class="wrapper">
         <%- include("../partials/sidenav") %>
         <div class="main_content">
             <%- include("../partials/search") %>
 
-            <div class="product-data">
-                <h6 id="recomended">Recommended</h6>
-                <div class="item-lists">
-            	<div class="product-card">
-                    <div class="product-image">
-                        <img src="https://lh3.googleusercontent.com/proxy/U8NgDhvENP0bSA2GF9Hv672Raa0gmqBU8pEgRVZ3EMFkCNm21fWP8868KQsZ5SjrenXHK8-Kl6M4ZgD_yg" alt="">
-                    </div>
-                    <div class="product-details">
-                        <h4><a href="">Product Name</a></h4>
-                        <span class="product-seller">Sellers Name</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
-                        <div class="product-bottom-details">
-                            <div class="product-price">₹1200.00</div>
-                            <div class="product-links">
-                                <a href=""><i class="fa fa-heart"></i></a>
-                                <a href=""><i class="fa fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://lh3.googleusercontent.com/proxy/U8NgDhvENP0bSA2GF9Hv672Raa0gmqBU8pEgRVZ3EMFkCNm21fWP8868KQsZ5SjrenXHK8-Kl6M4ZgD_yg" alt="">
-                    </div>
-                    <div class="product-details">
-                        <h4><a href="">Product Name</a></h4>
-                        <span class="product-seller">Sellers Name</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
-                        <div class="product-bottom-details">
-                            <div class="product-price">₹1200.00</div>
-                            <div class="product-links">
-                                <a href=""><i class="fa fa-heart"></i></a>
-                                <a href=""><i class="fa fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://lh3.googleusercontent.com/proxy/U8NgDhvENP0bSA2GF9Hv672Raa0gmqBU8pEgRVZ3EMFkCNm21fWP8868KQsZ5SjrenXHK8-Kl6M4ZgD_yg" alt="">
-                    </div>
-                    <div class="product-details">
-                        <h4><a href="">Product Name</a></h4>
-                        <span class="product-seller">Sellers Name</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
-                        <div class="product-bottom-details">
-                            <div class="product-price">₹1200.00</div>
-                            <div class="product-links">
-                                <a href=""><i class="fa fa-heart"></i></a>
-                                <a href=""><i class="fa fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+            <h6 class="page-heading">Recommended</h6>
+            <div class="dropleft mx-3 sort-dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item"
+                        href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=createdOn&order=desc">Newest</a>
+                    <a class="dropdown-item"
+                        href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=createdOn&order=asc">Oldest</a>
+                    <a class="dropdown-item"
+                        href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=price&order=asc">Price
+                        - (Low
+                        to
+                        High)</a>
+                    <a class="dropdown-item"
+                        href="?<%= queryParams.search && 'search=' + queryParams.search + '&' %>sortBy=price&order=desc">Price
+                        -
+                        (High
+                        to
+                        Low)</a>
                 </div>
             </div>
+            <div class="product-data">
+                <div class="clearfix my-5"></div>
+                <div class="item-lists">
+                    <% for (let product of products) { %>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src={product.images[0]} alt="">
+                        </div>
+                        <div class="product-details">
+                            <h4><a href=""><%= product.title %></a></h4>
+                            <span class="product-seller"><%= 'by ' + product.sellerName %></span>
+                            <p><%= product.desc %></p>
+                            <div class="product-bottom-details">
+                                <div class="product-price"><%= '₹ ' + product.price %></div>
+                                <div class="product-links">
+                                    <a href="#!"><i class="fa fa-heart"></i></a>
+                                    <a href="#!"><i class="fa fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <nav class="my-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item <%= !links.prev && 'disabled' %>">
+                        <a class="page-link" href="<%= queryString + 'before=' + links.prev %>">
+                            <span class="fa fa-arrow-left"></span>
+                        </a>
+                    </li>
+                    <li class="page-item <%= !links.next && 'disabled' %>">
+                        <a class="page-link" href="<%= queryString + 'after=' + links.next %>">
+                            <span class="fa fa-arrow-right"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 
 
 
-<%- include("../partials/footer") %>
-<%- include("../partials/end") %>
+    <%- include("../partials/footer") %>
+    <%- include("../partials/end") %>

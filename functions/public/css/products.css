@@ -1,9 +1,13 @@
 .product-data {
 	margin: 10px;
 }
-#recomended {
+.page-heading {
 	margin-left: 11px;
 	font-weight: bold;
+	float: left;
+}
+.sort-dropdown {
+	float: right;
 }
 .indItem {
 	/* display: flex;
@@ -410,7 +414,7 @@ label {
 	margin-top: 10px;
 }
 
-@charset "utf-8";
+/* @charset "utf-8"; */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
 
 * {

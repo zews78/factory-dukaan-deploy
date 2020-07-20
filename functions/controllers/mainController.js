@@ -1,38 +1,138 @@
 const firebase = require('../firebase');
 
 const isAuth = require('../utils/isAuth');
+const keywordGenerator = require('../utils/keywordGenerator');
 
 exports.getHome = async(req, res) => {
 	const auth = (await isAuth(req))[0];
-	res.render('main/home', {auth});
+	res.render('main/home', {
+		pageTitle: 'Home',
+		auth
+	});
 };
 
 exports.getProducts = async(req, res) => {
-	// Search - search in keywords
-	// Filter - Price(asc, desc), new
-	const auth = (await isAuth(req))[0];
-	const products = await firebase.firestore()
-		.collection('products')
-		.orderBy('price');
-	let queriedProduct = null;
+	try {
+		const limit = +req.query.limit || 12;
 
-	if (req.query['tags']) {
-		queriedProduct = await products
-			.where('tags', 'array-contains-any', req.query['tags'].split(' '))
+		// Creating a reference to products
+		let productsRef = firebase.firestore()
+			.collection('products');
+
+		// Filtering
+		if (req.query.search) {
+			productsRef = productsRef.where('keywords', 'array-contains-any', keywordGenerator(req.query.search));
+		}
+
+		// Sorting
+		if (req.query.sortBy) {
+			productsRef = productsRef.orderBy(req.query.sortBy, req.query.order || 'asc');
+		} else {
+			productsRef = productsRef.orderBy('createdOn', 'desc');
+		}
+
+		const paginationValidationRef = productsRef;
+
+		// If there is a query param after/before
+		if (req.query.after) {
+			let lastSnapshot = await firebase.firestore()
+				.collection('products')
+				.doc(req.query.after)
+				.get();
+			productsRef = productsRef.startAfter(lastSnapshot)
+				.limit(limit);
+		} else if (req.query.before) {
+			let firstSnapshot = await firebase.firestore()
+				.collection('products')
+				.doc(req.query.before)
+				.get();
+			productsRef = productsRef.endBefore(firstSnapshot)
+				.limitToLast(limit);
+		} else {
+			productsRef = productsRef.limit(limit);
+		}
+
+		// Fetching the productsSnapshot
+		const productsSnapshot = await productsRef.get();
+
+
+		// Making products ready for passing to templating engine for rendering
+		const products = [];
+		productsSnapshot.forEach((product) => {
+			products.push({
+				id: product.id,
+				...product.data(),
+				createdOn: product.data().createdOn.toDate()
+					.toLocaleString()
+			});
+		});
+
+		if (products.length === 0) {
+			res.render('/products', {
+				pageTitle: 'Products',
+				products: [],
+				queryParams: req.query
+			});
+			return;
+		}
+
+		// Pagination buttons after/before links
+		let last = productsSnapshot.docs[productsSnapshot.docs.length - 1];
+		let first = productsSnapshot.docs[0];
+
+		const queryParams = {...req.query};
+
+		// Checking that there is a prev page available
+		const prevSnapshot = await paginationValidationRef.endBefore(first)
+			.limitToLast(1)
 			.get();
-	} else {
-		queriedProduct = await products.get();
-	}
+		if (prevSnapshot.docs.length === 0) {
+			first = false;
+		} else {
+			first = first.id;
+		}
 
-	res.render('main/products.ejs', {
-		auth,
-		products: queriedProduct
-	});
+		// Checking that there is a next page available
+		const nextSnapshot = await paginationValidationRef.startAfter(last)
+			.limit(1)
+			.get();
+		if (nextSnapshot.docs.length === 0) {
+			last = false;
+		} else {
+			last = last.id;
+		}
+
+		// Generating query string
+		let queryString = '?';
+		for (let query in queryParams) {
+			if (!(query === 'before' || query === 'after')) {
+				queryString += query + '=' + queryParams[query] + '&';
+			}
+		}
+
+		const [auth] = await isAuth(req);
+		res.render('main/products', {
+			pageTitle: 'Products',
+			auth,
+			products,
+			links: {
+				prev: first,
+				next: last
+			},
+			queryParams: req.query,
+			queryString
+		});
+	} catch (err) {
+		console.log(err);
+	}
 };
 
 exports.getOneProduct = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
-	res.render('main/productDetails.ejs', {auth});
+	res.render('main/productDetails.ejs', {
+		pageTitle: 'Product Details',
+		auth
+	});
 };
 
 exports.postProduct = async(req, res) => {
@@ -61,5 +161,8 @@ exports.postUpdateProduct = async(req, res) => {
 
 exports.getContacts = async(req, res) => {
 	const auth = (await isAuth(req))[0];
-	res.render('main/contact.ejs', {auth});
+	res.render('main/contact.ejs', {
+		pageTitle: 'Contacts',
+		auth
+	});
 };
