@@ -268,7 +268,6 @@ exports.postUpdateSubscription = async(req, res) => {
 		}
 		res.json({message: 'success'});
 	} catch(err) {
-		console.log(err);
 		res.status(500)
 			.json({message: 'failed'});
 	}
@@ -282,7 +281,19 @@ exports.deleteUser = async(req, res) => {
 		await userRef.delete();
 		res.json({message: 'success'});
 	} catch(err) {
-		console.log(err);
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
+
+exports.postBlockUser = async(req, res) => {
+	try {
+		const userRef = firebase.firestore()
+			.collection('users')
+			.doc(req.body.uid);
+		await userRef.update({blocked: req.body.block});
+		res.json({message: 'success'});
+	} catch(err) {
 		res.status(500)
 			.json({message: 'failed'});
 	}
