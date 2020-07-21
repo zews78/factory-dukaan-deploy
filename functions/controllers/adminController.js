@@ -273,3 +273,17 @@ exports.postUpdateSubscription = async(req, res) => {
 			.json({message: 'failed'});
 	}
 };
+
+exports.deleteUser = async(req, res) => {
+	try {
+		const userRef = firebase.firestore()
+			.collection('users')
+			.doc(req.body.uid);
+		await userRef.delete();
+		res.json({message: 'success'});
+	} catch(err) {
+		console.log(err);
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};

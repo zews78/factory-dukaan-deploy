@@ -144,7 +144,7 @@ include('../partials/admin/header.ejs') %>
 		}));
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == XMLHttpRequest.DONE) {
-				if (xhr.status !== 200) {
+				if (xhr.status === 200) {
 					console.log('here we are');
 					const userListItem = document.getElementById('user_' + userId);
 					userListItem.classList += " d-none";
