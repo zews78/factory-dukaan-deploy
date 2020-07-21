@@ -241,3 +241,60 @@ exports.getPrdouctDetails = async(req, res)=>{
 exports.getUserDetails = async(req, res)=>{
 	res.render('admin/user-details.ejs', {pageTitle: 'User Details - Admin'});
 };
+
+exports.getPendingGstVerification = (req, res) => {
+	res.render('admin/pending-gst-verification', {pageTitle: 'GST Verification - Admin'});
+};
+
+exports.postUpdateSubscription = async(req, res) => {
+	try {
+		const userRef = firebase.firestore()
+			.collection('users')
+			.doc(req.body.uid);
+		if (req.body.subscription) {
+			await userRef
+				.update({
+					subscriptions: firebase.firestore.FieldValue.arrayUnion({
+						start: firebase.firestore.Timestamp.now(),
+						end: firebase.firestore.Timestamp.fromMillis(firebase.firestore.Timestamp.now()
+							.toMillis() + +req.body.subscriptionValidity * 24 * 60 * 60 * 1000)
+					})
+				});
+		} else {
+			const userSnapshot = await userRef.get();
+			const subscriptions = userSnapshot.data().subscriptions;
+			subscriptions[subscriptions.length - 1].end = firebase.firestore.Timestamp.now();
+			await userRef.update({subscriptions});
+		}
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
+
+exports.deleteUser = async(req, res) => {
+	try {
+		const userRef = firebase.firestore()
+			.collection('users')
+			.doc(req.body.uid);
+		await userRef.delete();
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
+
+exports.postBlockUser = async(req, res) => {
+	try {
+		const userRef = firebase.firestore()
+			.collection('users')
+			.doc(req.body.uid);
+		await userRef.update({blocked: req.body.block});
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
