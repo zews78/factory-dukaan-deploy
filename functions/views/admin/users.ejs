@@ -6,8 +6,8 @@ include('../partials/admin/header.ejs') %>
 	<h1 class="page-heading">Users</h1>
 	<form action="/admin/users">
 		<div class="input-group" id="search_group">
-			<input class="form-control" id="search_input" name="search" type="search"
-				placeholder="Search by Name" aria-label="Search" />
+			<input class="form-control" id="search_input" name="search" type="search" placeholder="Search by Name"
+				aria-label="Search" />
 			<% for (let query in queryParams) { %>
 			<% if(!(query === 'search' || query === 'after' || query === 'before')) { %>
 			<input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
@@ -45,12 +45,11 @@ include('../partials/admin/header.ejs') %>
 						<div class="col-1">Mobile Number</div>
 						<div class="col-2">Email</div>
 						<div class="col-1">GST Number</div>
-						<div class="col-1">Subscribed</div>
-						<div class="col-1 text-right">Edit</div>
+						<div class="col-1">Subscription</div>
 					</div>
 				</div>
 				<% for (let user of users) { %>
-				<div href="#" class="list-group-item list-group-item-action">
+				<div href="#!" class="list-group-item list-group-item-action" id="user_<%= user.id %>">
 					<div class="row">
 						<div class="col-2"><%= user.createdOn %></div>
 						<div class="col-2"><%= user.name %></div>
@@ -63,14 +62,19 @@ include('../partials/admin/header.ejs') %>
 							</span>
 						</div>
 						<div class="col-1">
-							<span class="badge badge-<%= user.gstNo ? 'success' : 'danger' %>">
-								<%= user.gstNo ? 'YES' : 'NO' %>
-							</span>
+							<label class="switch">
+								<input type="checkbox" id="subscription_toggle_<%= user.id %>"
+									onchange="updateSubscription('<%= user.id %>')" />
+								<span class="slider"></span>
+							</label>
 						</div>
 						<div class="col-1 text-right">
-							<a href="/admin/user/<%= user.id %>">
-								<span class="fa fa-pencil-square-o"></span>
-							</a>
+							<button class="btn btn-sm btn-warning">
+								<span class="fa fa-ban"></span>
+							</button>
+							<button class="btn btn-sm btn-danger" onclick="deleteUser('<%= user.id %>')">
+								<span class="fa fa-trash"></span>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -99,5 +103,55 @@ include('../partials/admin/header.ejs') %>
 	</div>
 	<% } %>
 </div>
+
+<script>
+	const updateSubscription = (userId) => {
+		const toggle = document.getElementById('subscription_toggle_' + userId);
+		let subscriptionValidity = 0;
+		if (toggle.checked === true) {
+			subscriptionValidity = window.prompt('Enter the number of days for which you want to offer this subscription');
+		} else {
+			const confirmed = window.confirm('Are you sure you want to unsubscribe the user?');
+			if (!confirmed) {
+				toggle.checked = !toggle.checked;
+			}
+		}
+		const xhr = new XMLHttpRequest();
+		const url = '/admin/user/' + userId + '/update-subscription';
+		xhr.open("POST", url);
+		xhr.setRequestHeader("Content-Type", "application/json");
+		xhr.send(JSON.stringify({
+			uid: userId,
+			subscription: toggle.checked,
+			subscriptionValidity
+		}));
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if (xhr.status !== 200) {
+					toggle.checked = !toggle.checked;
+				}
+			}
+		}
+	}
+
+	const deleteUser = (userId) => {
+		const xhr = new XMLHttpRequest();
+		const url = '/admin/user/' + userId;
+		xhr.open("DELETE", url);
+		xhr.setRequestHeader("Content-Type", "application/json");
+		xhr.send(JSON.stringify({
+			uid: userId
+		}));
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if (xhr.status !== 200) {
+					console.log('here we are');
+					const userListItem = document.getElementById('user_' + userId);
+					userListItem.classList += " d-none";
+				}
+			}
+		}
+	}
+</script>
 
 <%- include('../partials/end.ejs') %>
