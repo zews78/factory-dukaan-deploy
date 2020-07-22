@@ -79,7 +79,7 @@ body {
 	width: 12vw !important;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
 	.sidebar {
 		display: none;
 	}
@@ -145,9 +145,13 @@ body {
 		font-size: 26px;
 		width: 55%;
 	}
+	#search_group{
+		display: none;
+	}
+
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
 	.wrapper .main_content {
 		margin-left: 120px;
 	}
@@ -157,7 +161,72 @@ body {
 	#trade-area .trade-img-mob {
 		display: none;
 	}
+	#menu-bar{
+		display: none;
+	}
 }
+
+
+/************ The side navigation menu starts here **************/
+#menu-bar{
+	cursor: pointer;
+}
+.sidenav {
+	height: 100%; /* 100% Full-height */
+	width: 0; /* 0 width - change this with JavaScript */
+	position: fixed; /* Stay in place */
+	z-index: 5; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: 0;
+	background-image: linear-gradient(
+		-45deg,
+		#cadae2,
+		#22333B
+	);
+	background-color: #22333B;
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 60px; /* Place content 60px from the top */
+	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #fff;
+	display: block;
+	transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+	color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+	transition: margin-left .5s;
+	padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-width: 600px) {
+	.sidenav {padding-top: 60px;}
+	.sidenav a {font-size: 18px; margin: 6px;}
+  }
+
+
+/* *****sidenav menu ends here******* */
 
 .wrapper .sidebar {
 	position: fixed;
@@ -166,6 +235,7 @@ body {
 	background-color: #fff;
 	padding: 30px 0;
 	font-size: 15px;
+	/* display: none; */
 }
 
 .wrapper .sidebar ul li {
@@ -246,7 +316,9 @@ body a:hover {
 		max-width: 40%;
 	}
 } */
-
+header .fixed-top{
+	z-index: 2;
+}
 .header {
 	display: flex;
 	/* flex: wrap; */

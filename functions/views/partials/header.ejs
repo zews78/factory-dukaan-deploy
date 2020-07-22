@@ -1,6 +1,11 @@
 <!-- Image and text -->
 <header>
   <nav class="navbar navbar-light fixed-top bg-light">
+    <span id="menu-bar">
+      <i onclick="openNav()" class="fas fa-bars fa-lg"></i>
+      
+    </span>
+
     <a class="navbar-brand" href="/">
       <img
         src="/images/logo.png"
@@ -32,3 +37,9 @@
     <% } %>
   </nav>
 </header>
+<script>
+      /* Set the width of the side navigation to 250px */
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+</script>
