@@ -1,28 +1,29 @@
 <%- include('../partials/admin/start.ejs') %>
+<link type="text/css" rel="stylesheet" href="/css/admin-prod-det.css" />
 <%- include('../partials/headBody.ejs') %>
 <%- include('../partials/admin/header.ejs') %>
-
+<div id="main-body">
     <div class="panel-header">
-        <h2>Admin Panel</h2>
+        <h2 style="color: #14213d;">Admin Panel</h2>
     </div>
 
     <div class="panel-header edit">
-        <h3>Edit Product</h3>
+        <h3 style="color: #fc814a;">Edit Product</h3>
     </div>
 
-    <div class="d-flex bd-highlight flex-wrap">
-        <div class="p-2 flex-grow-1 bd-highlight">
+    <div>
+        <div>
             <div class="container">                
-                    <h6>Product Name</h6>
+                    <h5>Product Name</h5>
                     <input type="text" class="form-control" name="product-name" id="">
-                    <p>* Please don't add any description in the product name</p>
+                    <p style="font-size: small;">* Please don't add any description in the product name</p><br>
                     <div class="row-control">
-                        <h6>Specifications</h6>
+                        <h5>Specifications</h5>
                         <button type="submit" class="btnAddSpecs">Add Specs</button>
                     </div>   
                     
                     <div class="table-container" style="overflow-x:auto;">
-                        <table class="specs-table">
+                        <table class="specs-table" id="pc-view">
                             <thead>
                                 <tr>
                                     <th scope="col">Size</th>
@@ -46,11 +47,44 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <table class="specs-table" id="mobile-view" style="width: 80%; margin: auto;">
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Size</th>
+                                    <td data-label="Size">Medium</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Actual Price</th>
+                                    <td data-label="Actual Price">1800.00</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Offer Price</th>
+                                    <td data-label="Offer Price">1650.00</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Warranty</th>
+                                    <td data-label="Warranty">6 Months</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Batch No</th>
+                                    <td data-label="Batch No">ABCD123456</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">MFG Date</th>
+                                    <td data-label="MFG Date">20/07/2020</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Barcode</th>
+                                    <td data-label="Barcode">QWERTY123</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
                     
-                    <h6>Description</h6>
+                    <h5>Description</h5>
                     <textarea class="form-control" rows="4"></textarea>
-                    <button type="submit" class="btnSaveProduct">Save Product</button>                
+                    <button type="submit" class="btnSaveProduct">Save Product</button>         
                           
                <!-- <div class="overflow-auto" style="overflow-x:auto;">
                     <table class="table">
@@ -77,11 +111,11 @@
                     </table>
                 </div> -->
             </div>
-        </div>
+        </div><br> 
 
         <div class="p-2 bd-highlight">
             <div class="container">
-                <h6>Product Image</h6>
+                <h5>Product Image</h5>
                 <form>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile">
@@ -90,29 +124,39 @@
                     </div>
                     </form>
                 <div class="product-image-display">
-                    <div class="card-deck">
-                        <div class="card" style="width: 8rem; position: relative;">
+                    <div class="card-deck1">
+                        <div class="card" style="position: relative;">
                             <span class="close">&times;</span>
                             <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
                         </div>
-                        <div class="card" style="width: 8rem; position: relative;">
+                        <div class="card" style="position: relative;">
                             <span class="close">&times;</span>
                             <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
                         </div>
-                        <div class="card" style="width: 8rem; position: relative;">
+                        <div class="card" style="position: relative;">
+                            <span class="close">&times;</span>
+                            <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card" style="position: relative;">
+                            <span class="close">&times;</span>
+                            <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card" style="position: relative;">
                             <span class="close">&times;</span>
                             <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
                         </div>
                     </div>
-                </div>
+                </div><br>
 
                 <div class="tags-section">
-                    <h6>Tags</h6>
+                    <h5>Tags</h5>
                     <input type="text" class="form-control" name="product-name" placeholder="Enter a tag">  
                 </div>
             </div>
         </div>
     </div>
+</div><br>
+
 
 <%- include('../partials/footer.ejs') %>
 <%- include('../partials/end.ejs') %>

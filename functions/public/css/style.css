@@ -259,6 +259,7 @@ body a:hover {
 	border: 1px solid #fdfdfd;
 	border-left: none;
 	box-shadow: none;
+	border-radius: 20px;
 }
 .input-group>.input-group-append>.btn:hover{
 	color: #ff922b;
@@ -266,13 +267,14 @@ body a:hover {
 #search_group{
 	width: 23%;
 	margin-left: 56%;
-	/* border-radius: 5px; */
+	border-radius: 23px;
 	/* background-color: #ff922b; */
 }
 .input-group .form-control{
 	/* border: 1px solid #dfdfdf; */
 	border: none;
 	box-shadow: none;
+	border-radius: 20px;
 }
 #search_input{
 	box-shadow: none;

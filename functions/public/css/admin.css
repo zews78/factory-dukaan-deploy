@@ -62,7 +62,7 @@ div.details-container {
 	flex-wrap: wrap;
 } */
 
-.card-deck {
+.card-deck1 {
 	margin-top: 10px;
 }
 
@@ -150,28 +150,6 @@ div.columns:nth-of-type(even) {
 
 /*********** Product Details - End ***********/
 
-.table-container {
-	max-width: 640px;
-	margin-bottom: 20px;
-}
-
-table {
-	width: 100%;
-	table-layout: fixed;
-	margin-bottom: 3px;
-}
-
-th {
-	background: #2196f3;
-	color: white;
-	font-weight: bold;
-}
-
-td,
-th {
-	padding: 15px !important;
-	border: 1px solid #ccc;
-}
 
 footer {
 	position: relative;

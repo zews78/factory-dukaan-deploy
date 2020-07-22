@@ -1,0 +1,57 @@
+body{
+    /* background-color: blueviolet; */
+}
+#main-body{
+    margin: auto;
+}
+.table-container {
+	/* max-width: 640px; */
+	margin-bottom: 20px;
+}
+
+table {
+	width: 100%;
+	table-layout: fixed;
+	margin-bottom: 3px;
+}
+
+th {
+	background: #14213d;
+	color: white;
+	font-weight: bold;
+}
+
+td,
+th {
+	padding: 15px !important;
+	border: 1px solid #ccc;
+}
+@media screen and (max-width: 660px) {
+    #pc-view{
+        display: none;
+    }
+    .card{
+        width: 8rem;
+    }
+
+}
+@media screen and (min-width: 660px) {
+    #mobile-view{
+        display: none;
+    }
+    .card{
+        width: 15rem;
+    }
+
+}
+.card-deck1{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+.product-image-display{
+    margin: auto;
+}
+.card{
+    margin: 5px;
+}
