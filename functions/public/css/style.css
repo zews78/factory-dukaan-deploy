@@ -74,12 +74,17 @@ body {
 	position: relative;
 	/* position: sticky; */
 }
+
+.city-select {
+	width: 12vw !important;
+}
+
 @media screen and (max-width: 500px) {
 	.sidebar {
 		display: none;
 	}
 	.form-group .city-select {
-		width: 16vw;
+		width: 18vw;
 	}
 	.carousel-inner {
 		height: 60vw;
@@ -326,14 +331,7 @@ body a:hover {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	/* margin-left: auto;
-	margin-right: auto; */
 	margin: auto;
-	/* width: 80vw; */
-	/* height: 400px; */
-	/* margin-top: 20px; */
-	/* padding-top: 20px; */
-	/* background-image: url("/images/landingBack.jpg"); */
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-radius: 10px;
