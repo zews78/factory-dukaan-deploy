@@ -118,11 +118,20 @@
   <div style="width: 20%; margin: auto;" id="paypal-button-container"></div>
 
   <script>
-    function price(x){
-      console.log(x);
+    async function pricev(x){
+      // console.log(x);
       return x;
     }
-    var priceValue = price();
+    //this is called onclick
+    async function price(x){
+      pricev(x).then((value)=>{
+      console.log(value);
+    });
+    }
+    // price(x).then((value)=>{
+    //   console.log(value);
+    // });
+    // console.log(priceValue);
   paypal.Buttons({
     createOrder: function(data, actions) {
       // This function sets up the details of the transaction, including the amount and line item details.

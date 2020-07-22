@@ -7,7 +7,7 @@ router.get('/profile', userController.getUserProfile);
 router.post('/profile/update', userController.postUpdateUser);
 router.post('/verify-gst', userController.postVerifyGst);
 
-router.get('/payment', userController.getUserPayment);
+router.get('/payment/:id', userController.getUserPayment);
 
 
 module.exports = router;

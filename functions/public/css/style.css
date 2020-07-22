@@ -14,7 +14,7 @@ body {
 #trade-area {
 	display: flex;
 	/* flex-wrap: wrap; */
-	margin: 12px 0 94px 30px;
+	margin: 12px 0 94px 4px;
 	padding: 10px;
 }
 .lang-select {
@@ -85,7 +85,7 @@ body {
 		height: 60vw;
 	}
 	.pricing-header .display-4 {
-		font-size: 22px;
+		font-size: 25px;
 	}
 	.pricing-header .lead {
 		font-size: small;
@@ -160,6 +160,7 @@ body {
 	height: 100%;
 	background-color: #fff;
 	padding: 30px 0;
+	font-size: 15px;
 }
 
 .wrapper .sidebar ul li {
@@ -243,10 +244,50 @@ body a:hover {
 
 .header {
 	display: flex;
-	flex: wrap;
-	justify-content: space-between;
+	/* flex: wrap; */
+	justify-content: center;
 	padding: 5px;
 }
+.input-group>.input-group-append>.btn{
+	border-radius: 1px 4px 4px 1px;
+	background-color: #fff;
+	border: 1px solid #fdfdfd;
+	border-left: none;
+	box-shadow: none;
+}
+.input-group>.input-group-append>.btn:hover{
+	color: #ff922b;
+}
+#search_group{
+	width: 23%;
+	margin-left: 56%;
+	/* border-radius: 5px; */
+	/* background-color: #ff922b; */
+}
+.input-group .form-control{
+	/* border: 1px solid #dfdfdf; */
+	border: none;
+	box-shadow: none;
+}
+#search_input{
+	box-shadow: none;
+}
+.input-group{
+	border: 1px solid #a6a2a2;
+	border-radius: 5px;
+}
+.input-group:hover{
+	border: 1px solid #ff922b;	
+}
+
+
+/* #searchbar-H .form-control {
+	font-size: 15px;
+}
+#searchbar-H{
+	/* float: right; */
+	/* margin-left: 63%; */
+/* } */
 
 .navbar-brand img {
 	transform: scale(1.4);
