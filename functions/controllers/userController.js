@@ -1,14 +1,38 @@
 const firebase = require('../firebase');
 const axios = require('axios');
 const config = require('../../config');
+const {user} = require('firebase-functions/lib/providers/auth');
 
 // const validator = require('validator');
 
-exports.getUserProfile = (req, res) => {
+exports.getUserProfile = async(req, res) => {
+	const userId = req.params.userId || req.uid;
+	const userSnapshot = await firebase.firestore()
+		.collection('users')
+		.doc(userId)
+		.get();
+	if (!userSnapshot.exists) {
+		throw new Error('user not found');
+	}
+
+	const productsSnapshot = await firebase.firestore()
+		.collection('products')
+		.where('uid', '==', userId)
+		.get();
+	let products = [];
+	if (!productsSnapshot.empty) {
+		products = productsSnapshot.forEach(product => product.data());
+	}
+
 	res.render('user/profile.ejs', {
 		pageTitle: 'Profile',
 		auth: true,
-		gstVerification: req.gstVerification
+		authorized: userId === req.uid,
+		user: {
+			...userSnapshot.data(),
+			id: userId
+		},
+		products
 	});
 };
 

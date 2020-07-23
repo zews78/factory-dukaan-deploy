@@ -1,105 +1,120 @@
-
-
-
 <%- include("../partials/start") %>
 <%- include("../partials/headBody") %>
 <%- include("../partials/header") %>
-    <div class="wrapper">
-        <%- include("../partials/sidenav") %>
-        <div class="main_content">
-            
-            <div class="profile-container">
-                <div class="edit-profile">
-                    <!-- {{!-- <h2>User Profile</h2> --}} -->
-                    <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm1">Edit</button><br>
-                    <% if (gstVerification) {%>
-                        <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm2" style="background-color: #21c256;" disabled> GST Verified ✔</button>
-                        <%}else{%>
-                            <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm2">Verify Account</button>
-                            <%} %>
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
 
-                </div>
-                <div class="row">
-                    <div class="column col-left">
-                        <img class="profile-img" src="/images/user.png" alt="">
-                    </div>
-                    <div class="column col-right">
-                        <h1>Sam Kolder</h1>
-                        <p>
-                            <i class="fas fa-building"></i>Company Name &nbsp; <i class="fas fa-check-circle"></i> <br>
-                            <i class="fas fa-envelope"></i>email@example.com <br> 
-                            <i class="fas fa-money-check-alt"></i>GST TIN 75758658147574 <br>
-                            <i class="far fa-calendar-alt"></i>Date Joined <br>
-                            <i class="fas fa-phone-square-alt"></i>9876543210 
-                            <hr style="width: 20vw; margin: 0">
-                        </p>
-                        <div class="company-desc">
-                            <strong>Company Description</strong>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet vehicula magna, eu feugiat dui. 
-                               Pellentesque condimentum lorem at arcu ultrices feugiat. Sed blandit sapien maximus lobortis auctor. 
-                               Morbi ac risus ac metus mollis pretium at vel enim. Vivamus dictum dictum porttitor.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <div class="profile-container">
+            <% if (authorized) { %>
+            <div class="edit-profile">
+                <!-- {{!-- <h2>User Profile</h2> --}} -->
+                <button type="button" class="btnEditProfile" data-toggle="modal"
+                    data-target="#ModalEditForm1">Edit</button><br>
+                <% if (user.gstNo) {%>
+                <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm2"
+                    style="background-color: #21c256;" disabled> GST Verified ✔</button>
+                <%}else{%>
+                <button type="button" class="btnEditProfile" data-toggle="modal" data-target="#ModalEditForm2">Verify
+                    Account
+                </button>
+                <% } %>
             </div>
-
-            <div class="products-section">
-                <div class="tab">
-                    <button class="tablinks" onclick="openTab(event, 'my-products')" id="defaultOpen">My Products</button>
-                    <button class="tablinks" onclick="openTab(event, 'my-wishlist')">Wishlist</button>
-                    <button class="tablinks" onclick="openTab(event, 'my-requirements')">My Requirements</button>
+            <% }%>
+            <div class="row">
+                <div class="column col-left">
+                    <img class="profile-img" src="/images/user.png" alt="">
                 </div>
-
-                <div id="my-products" class="tabcontent">
-                    <!-- {{!-- <div class="container-fluid"> --}} -->
-                        <div class="row">
-                            <!-- {{!-- <div class="col-sm-4"> --}} -->
-                            <div class="card">
-                                <img src="/images/product1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <!-- {{!-- </div> --}} -->
-
-                            <!-- {{!-- <div class="col-sm-4"> --}} -->
-                            <div class="card">
-                                <img src="/images/product1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <!-- {{!-- </div> --}} -->
-
-                            <!-- {{!-- <div class="col-sm-4"> --}} -->
-                            <div class="card">
-                                <img src="/images/product1.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <!-- {{!-- </div> --}} -->
-                        </div>
-                    <!-- {{!-- </div> --}} -->
-                </div>
-
-                <div id="my-wishlist" class="tabcontent">
-                    <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                </div>
-
-                <div id="my-requirements" class="tabcontent">
-                    <h2>My requirements goes here...</h2>
+                <div class="column col-right">
+                    <h1><%= user.name %></h1>
+                    <p>
+                        <i class="fas fa-building"></i><%= user.company.name %> &nbsp;
+                        <i class="fas fa-check-circle"></i> <br>
+                        <i class="fas fa-envelope"></i><%= user.email %> <br>
+                        <% if (user.gstNo) { %>
+                        <i class="fas fa-money-check-alt"></i>GSTIN <%= user.gstNo %> <br>
+                        <% } %>
+                        <i class="fas fa-phone-square-alt"></i><%= user.mobile %><br>
+                        <i class="far fa-calendar-alt"></i>Joined on
+                        <%= user.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %>
+                        <hr style="width: 20vw; margin: 0">
+                    </p>
+                    <div class="company-desc">
+                        <strong>Company Description</strong>
+                        <p> <%= user.company.desc %>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="products-section">
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'my-products')"
+                    id="defaultOpen"><%= authorized ? 'My Products' : 'User\'s Products' %></button>
+                <button class="tablinks" onclick="openTab(event, 'my-wishlist')">Wishlist</button>
+                <button class="tablinks"
+                    onclick="openTab(event, 'my-requirements')"><%= authorized ? 'My Requirements' : 'User\'s Requirements' %></button>
+            </div>
+
+            <div id="my-products" class="tabcontent">
+                <% if(products.length > 0) { %>
+                <div class="row">
+                    <% for (let product in products) { %>
+                    <div class="card">
+                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <% } else { %>
+                <div class="text-center">
+                    <h3>No products for sale</h3>
+                </div>
+                <% } %>
+            </div>
+
+            <div id="my-wishlist" class="tabcontent">
+                <% if(user.wishlist.length > 0) { %>
+                <div class="row">
+                    <div class="card">
+                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                <div class="text-center">
+                    <h3>No products in wishlist</h3>
+                </div>
+                <% } %>
+            </div>
+
+            <div id="my-requirements" class="tabcontent">
+                <h2>My requirements goes here...</h2>
+            </div>
+        </div>
     </div>
+</div>
 <%- include("../partials/footer") %>
 <%- include("../partials/end") %>
 
@@ -108,7 +123,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit Profile</h1>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form role="form" method="POST" action="">
@@ -139,7 +154,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Company Description <span style="color: crimson;">(max: 60 words)</span> </label>
+                        <label class="control-label">Company Description <span style="color: crimson;">(max: 60
+                                words)</span> </label>
                         <div>
                             <!-- {{!-- <input type="textarea" class="form-control input-lg" name="description"> --}} -->
                             <textarea class="form-control" name="" id="" rows="4"></textarea>
@@ -149,12 +165,12 @@
                         <div>
                             <button type="submit" class="btn btn-success">Save</button>
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            
+
                         </div>
                     </div>
                     <div class="form-group">
                         <div>
-                            
+
                         </div>
                     </div>
                 </form>
@@ -170,7 +186,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Verify Account</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-				<!-- {{!-- <button style="padding: 27px 13px 0 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button> --}} -->
+                <!-- {{!-- <button style="padding: 27px 13px 0 0;" type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button> --}} -->
             </div>
             <div class="modal-body">
                 <form role="form">
@@ -194,7 +210,7 @@
                             <input type="text" class="form-control input-lg" name="pan-number" value="" id="pan-number">
                         </div>
                     </div>
-                     <div class="file-upload-wrapper">
+                    <div class="file-upload-wrapper">
                         <input type="file" accept="image/*" id="photo" name="photo" class="file-upload" />
                     </div><br>
 
@@ -244,12 +260,12 @@
     const userVerificationForm = document.querySelector(".modal-body");
 
     const userVerification = async () => {
-        
+
         const gstNo = document.getElementById('gst-number').value;
         const panNo = document.getElementById('pan-number').value;
         const PANPhoto = await document.getElementById('photo').files[0];
-        
-        
+
+
         try {
             const res = await axios({
                 method: "POST",
@@ -259,11 +275,11 @@
                     panNo,
                 },
             });
-            if(res.data.status==='verified'){
+            if (res.data.status === 'verified') {
                 window.setTimeout(() => {
                     location.assign('/user/profile');
                 }, 1500);
-            }else{
+            } else {
                 console.log(res);
             }
         } catch (err) {
@@ -271,12 +287,12 @@
             console.log(err);
         }
 
-        if(PANPhoto){
-            const filename=PANPhoto.name;
-            const storageRef=firebase.storage().ref('/PAN-Card-images/'+filename);
-            const uploadTask=storageRef.put(PANPhoto);
+        if (PANPhoto) {
+            const filename = PANPhoto.name;
+            const storageRef = firebase.storage().ref('/PAN-Card-images/' + filename);
+            const uploadTask = storageRef.put(PANPhoto);
 
-            uploadTask.on('state_changed',async (snapshot)=>{
+            uploadTask.on('state_changed', async (snapshot) => {
                 console.log('UPLOADING...')
             })
             console.log('IMAGE UPLOADED');
