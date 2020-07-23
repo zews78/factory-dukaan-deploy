@@ -13,6 +13,7 @@ router.post('/user/:userId/block', adminController.postBlockUser);
 router.delete('/user/:userId', adminController.deleteUser);
 router.post('/user/:userId/update-subscription', adminController.postUpdateSubscription);
 router.get('/pending-gst-verifications', adminController.getPendingGstVerifications);
-router.get('/pending-gst-verification/:userId', adminController.getPendingGstVerification);
+router.get('/pending-gst-verification/:requestId', adminController.getPendingGstVerification);
+router.post('/pending-gst-verification/:requestId/verify', adminController.postVerifyPendingGstVerification);
 
 module.exports = router;

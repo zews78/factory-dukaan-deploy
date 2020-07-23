@@ -259,8 +259,33 @@ exports.getPendingGstVerifications = async(req, res) => {
 	});
 };
 
-exports.getPendingGstVerification = (req, res) => {
-	res.render('admin/pending-gst-verification', {pageTitle: 'GST Verification - Admin'});
+exports.getPendingGstVerification = async(req, res) => {
+	const requestId = req.params.requestId;
+
+	const requestSnapshot = await firebase.firestore()
+		.collection('pending-gst-verifications')
+		.doc(requestId)
+		.get();
+
+	const userSnapshot = await firebase.firestore()
+		.collection('users')
+		.doc(requestSnapshot.data().user.uid)
+		.get();
+
+	res.render('admin/pending-gst-verification', {
+		pageTitle: 'GST Verification - Admin',
+		user: userSnapshot.data(),
+		request: {
+			...requestSnapshot.data(),
+			id: requestSnapshot.id
+		}
+	});
+};
+
+exports.postVerifyPendingGstVerification = (req, res) => {
+	// const verified = req.body.verified;
+	// verify login goes here
+	res.redirect('/admin/pending-gst-verifications');
 };
 
 exports.postUpdateSubscription = async(req, res) => {
