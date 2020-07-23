@@ -242,6 +242,23 @@ exports.getUserDetails = async(req, res)=>{
 	res.render('admin/user-details.ejs', {pageTitle: 'User Details - Admin'});
 };
 
+exports.getPendingGstVerifications = async(req, res) => {
+	const requestsSnapshot = await firebase.firestore()
+		.collection('pending-gst-verifications')
+		.get();
+	const requests = requestsSnapshot.docs.map(request => ({
+		...request.data(),
+		id: request.id,
+		createdOn: request.data().createdOn.toDate()
+			.toLocaleString()
+	}));
+
+	res.render('admin/pending-gst-verifications', {
+		pageTitle: 'GST Verification - Admin',
+		requests
+	});
+};
+
 exports.getPendingGstVerification = (req, res) => {
 	res.render('admin/pending-gst-verification', {pageTitle: 'GST Verification - Admin'});
 };

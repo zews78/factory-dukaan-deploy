@@ -21,6 +21,10 @@
 	margin-bottom: 30px;
 }
 
+.nav-item {
+	margin: 0 5px;
+}
+
 /** page heading seach/sort/filter ***/
 
 #search_input,

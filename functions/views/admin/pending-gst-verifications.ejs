@@ -1,0 +1,47 @@
+<%- include('../partials/admin/start.ejs') %> <%-
+include('../partials/headBody.ejs') %> <%-
+include('../partials/admin/header.ejs') %>
+
+<div class="container-fluid">
+	<h1 class="page-heading">Pending GST Verifications</h1>
+	<div class="clearfix my-3"></div>
+	<% if (requests.length > 0) { %>
+	<div class="horizontal-scroll-wrapper">
+		<div class="horizontal-scroll-container">
+			<div class="list-group">
+				<div href="#" class="list-group-item list-group-item-action bg-dark text-light">
+					<div class="row">
+						<div class="col-2">Requesting Date</div>
+						<div class="col-2">Name</div>
+						<div class="col-2">GST Number</div>
+					</div>
+				</div>
+				<% for (let request of requests) { %>
+				<div href="#!" class="list-group-item list-group-item-action">
+					<div class="row">
+						<div class="col-2"><%= request.createdOn %></div>
+						<div class="col-2"><%= request.user.name %></div>
+						<div class="col-2"><%= request.gstin %></div>
+						<div class="col-5"></div>
+						<div class="col-1 text-right">
+							<a href="<%= '/admin/pending-gst-verification/' + request.user.uid %>">
+								<button class="btn btn-primary btn-sm">
+									View
+								</button>
+							</a>
+						</div>
+					</div>
+				</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<% } else { %>
+	<div class="text-center">
+		<h1>No pending verifications!</h1>
+		<span class="fa fa-frown-o fa-5x"></span>
+	</div>
+	<% } %>
+</div>
+
+<%- include('../partials/end.ejs') %>
