@@ -1,6 +1,7 @@
 const firebase = require('../firebase');
 const axios = require('axios');
 const config = require('../../config');
+const razorpay = require('razorpay');
 const {user} = require('firebase-functions/lib/providers/auth');
 
 // const validator = require('validator');
@@ -37,10 +38,53 @@ exports.getUserProfile = async(req, res) => {
 };
 
 exports.getUserPayment = (req, res) => {
-	res.render('../views/user/payment.ejs', {
-		pageTitle: 'Payment',
-		auth: true
+	const instance = new razorpay({
+		key_id: config.razorpay.key_id,
+		key_secret: config.razorpay.key_secret
 	});
+	let amount = {};
+	if(req.query.package === 'silver') {
+		amount = {amount: config.razorpay.silverPackage};
+	}
+	if(req.query.package === 'gold') {
+		amount = {amount: config.razorpay.goldPackage};
+	}
+	if(req.query.package === 'platinum') {
+		amount = {amount: config.razorpay.platinumPackage};
+	}
+	instance.orders.create(amount)
+		.then((data)=>{
+			res.render('user/checkout.ejs', {
+				orderData: data,
+				amount: amount,
+				key_id: config.razorpay.key_id
+			});
+
+		})
+		.catch((error)=>{
+			res.json({error});
+		});
+
+
+};
+
+exports.paymentVerification = async(req, res)=>{
+	const body = req.body.response.razorpay_order_id + '|' + req.body.response.razorpay_payment_id;
+	const crypto = require('crypto');
+	var expectedSignature = crypto.createHmac('sha256', config.razorpay.key_secret)
+		.update(body.toString())
+		.digest('hex');
+
+	if(expectedSignature === req.body.response.razorpay_signature) {
+		res.json({status: 'success'});
+	}else{
+		res.json({status: 'failure'});
+	}
+
+};
+
+exports.getSuccessfulPayment = async(req, res)=>{
+	res.render('user/paymentSuccess.ejs');
 };
 
 exports.postUpdateUser = async(req, res) => {
