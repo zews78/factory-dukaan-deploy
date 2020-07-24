@@ -57,7 +57,9 @@ exports.getUserPayment = (req, res) => {
 			res.render('user/checkout.ejs', {
 				orderData: data,
 				amount: amount,
-				key_id: config.razorpay.key_id
+				key_id: config.razorpay.key_id,
+				packageName: req.query.package.charAt(0)
+					.toUpperCase() + req.query.package.slice(1)
 			});
 
 		})
