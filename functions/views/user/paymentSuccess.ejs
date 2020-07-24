@@ -1,12 +1,12 @@
-<%- include("../partials/start") %>
-<%- include('../partials/start.ejs') %> 
+<%- include("../partials/start") %> 
+<%- include("../partials/headBody") %> 
 <%- include("../partials/header") %>
 <body>
-  <center>
-    <h1>HURRAY PAYMENT SUCCESSFUL !!! 🎉🎉🤩🤩</h1>
-    <a href="http://localhost:3000/"><button >Continue Shopping</button></a>
-  </center>
+  <div class='pay-success-container'>
+    <h2 style="color: #32CD32;">Payment Successful !</h2>
+    <p style="color: rgb(150, 146, 146);">Thank You For Choosing Factory-Dukaan </p>
+    <a href="/"><button>Continue Shopping</button></a>
+  </div>
 </body>
-
 <%- include('../partials/footer.ejs') %> 
 <%- include('../partials/end.ejs') %>

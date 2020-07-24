@@ -831,3 +831,28 @@ footer p {
   color: rgb(179, 179, 179);
   font-size: 10px;
 }
+
+/* Payment Successful PAge styling */
+
+.pay-success-container{
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.pay-success-container button{
+	border:none;
+	height:50px;
+	background-color: #018ae6;
+	color:white;
+	width: 165px;
+	border-radius: 15px;
+}
+
+.pay-success-container button:hover:after{
+	content: '>>';
+}
