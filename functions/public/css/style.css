@@ -145,10 +145,9 @@ body {
 		font-size: 26px;
 		width: 55%;
 	}
-	#search_group{
+	#search_group {
 		display: none;
 	}
-
 }
 
 @media screen and (min-width: 600px) {
@@ -161,14 +160,13 @@ body {
 	#trade-area .trade-img-mob {
 		display: none;
 	}
-	#menu-bar{
+	#menu-bar {
 		display: none;
 	}
 }
 
-
 /************ The side navigation menu starts here **************/
-#menu-bar{
+#menu-bar {
 	cursor: pointer;
 }
 .sidenav {
@@ -178,56 +176,45 @@ body {
 	z-index: 5; /* Stay on top */
 	top: 0; /* Stay at the top */
 	left: 0;
-	background-image: linear-gradient(
-		-45deg,
-		#cadae2,
-		#22333B
-	);
-	background-color: #22333B;
+	background-image: linear-gradient(-45deg, #cadae2, #22333b);
+	background-color: #22333b;
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 60px; /* Place content 60px from the top */
 	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  }
-  
-  /* The navigation menu links */
-  .sidenav a {
+} /* The navigation menu links */
+.sidenav a {
 	padding: 8px 8px 8px 32px;
 	text-decoration: none;
 	font-size: 25px;
 	color: #fff;
 	display: block;
 	transition: 0.3s;
-  }
-  
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
+} /* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
 	color: #f1f1f1;
-  }
-  
-  /* Position and style the close button (top right corner) */
-  .sidenav .closebtn {
+}
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
 	position: absolute;
 	top: 0;
 	right: 25px;
 	font-size: 36px;
 	margin-left: 50px;
-  }
-  
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #main {
+} /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
 	transition: margin-left .5s;
 	padding: 20px;
-  }
-  
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-width: 600px) {
-	.sidenav {padding-top: 60px;}
-	.sidenav a {font-size: 18px; margin: 6px;}
-  }
-
-
+} /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-width: 600px) {
+	.sidenav {
+		padding-top: 60px;
+	}
+	.sidenav a {
+		font-size: 18px;
+		margin: 6px;
+	}
+}
 /* *****sidenav menu ends here******* */
-
 .wrapper .sidebar {
 	position: fixed;
 	width: 124px;
@@ -237,10 +224,10 @@ body {
 	font-size: 15px;
 	/* display: none; */
 }
-
 .wrapper .sidebar ul li {
 	padding: 15px;
 }
+
 .wrapper .sidebar ul li a {
 	color: #000;
 }
@@ -253,7 +240,6 @@ body {
 	transform: translateX(5px);
 	transition: ease 0.3s;
 }
-
 .wrapper .main_content {
 	width: 100%;
 }
@@ -262,7 +248,6 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 } */
-
 .box {
 	/* height: 50vh; */
 	margin-left: 30px;
@@ -280,9 +265,9 @@ body {
 	margin-bottom: 10px;
 	/* cursor: pointer; */
 }
-
 .card .card-header {
 	background-color: #2196f3;
+
 	font-weight: bold;
 }
 .card:hover {
@@ -290,17 +275,13 @@ body {
 	z-index: 1;
 	transition: ease 0.2s;
 }
-
 .pricing-header .lead {
-	color: #32292f;
-	/* font-size: small; */
+	color: #32292f; /* font-size: small; */
 }
-
 body a:hover {
 	text-decoration: none;
 	cursor: pointer;
 }
-
 /* .form-control,
 .btn,
 .d-flex {
@@ -316,7 +297,7 @@ body a:hover {
 		max-width: 40%;
 	}
 } */
-header .fixed-top{
+header .fixed-top {
 	z-index: 2;
 }
 .header {
@@ -325,7 +306,7 @@ header .fixed-top{
 	justify-content: center;
 	padding: 5px;
 }
-.input-group>.input-group-append>.btn{
+.input-group > .input-group-append > .btn {
 	border-radius: 1px 4px 4px 1px;
 	background-color: #fff;
 	border: 1px solid #fdfdfd;
@@ -333,53 +314,40 @@ header .fixed-top{
 	box-shadow: none;
 	border-radius: 20px;
 }
-.input-group>.input-group-append>.btn:hover{
+.input-group > .input-group-append > .btn:hover {
 	color: #ff922b;
 }
-#search_group{
+#search_group {
 	width: 23%;
 	margin-left: 56%;
-	border-radius: 23px;
-	/* background-color: #ff922b; */
+	border-radius: 23px; /* background-color: #ff922b; */
 }
-.input-group .form-control{
+.input-group .form-control {
 	/* border: 1px solid #dfdfdf; */
 	border: none;
 	box-shadow: none;
 	border-radius: 20px;
 }
-#search_input{
+#search_input {
 	box-shadow: none;
 }
-.input-group{
+.input-group {
 	border: 1px solid #a6a2a2;
 	border-radius: 5px;
 }
-.input-group:hover{
-	border: 1px solid #ff922b;	
+.input-group:hover {
+	border: 1px solid #ff922b;
 }
-
-
-/* #searchbar-H .form-control {
-	font-size: 15px;
-}
-#searchbar-H{
-	/* float: right; */
-	/* margin-left: 63%; */
-/* } */
-
-.navbar-brand img {
+#sea .navbar-brand img {
 	transform: scale(1.4);
 	margin-left: 1rem;
 }
-
 .advertisement {
 	width: 80vw;
 	margin-top: 40px;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .pricing-container {
 	width: 60vw;
 	display: flex;
@@ -388,7 +356,6 @@ header .fixed-top{
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .carousel .carousel-item {
 	height: 500px;
 }
@@ -396,11 +363,9 @@ header .fixed-top{
 .carousel-item img {
 	position: absolute;
 	top: 0;
-	left: 0;
-	/* min-height: 300px; */
+	left: 0; /* min-height: 300px; */
 	object-fit: cover !important;
 }
-
 .search-container {
 	display: flex;
 	align-items: center;
@@ -410,7 +375,6 @@ header .fixed-top{
 	background-size: cover;
 	border-radius: 10px;
 }
-
 .form-group select {
 	width: 5vw;
 	height: 45px;
@@ -418,7 +382,6 @@ header .fixed-top{
 	text-align: right;
 	padding-left: 10px;
 }
-
 form.form-group input[type=text] {
 	margin-left: -5px;
 	padding-left: 5px;
@@ -427,7 +390,6 @@ form.form-group input[type=text] {
 	font-size: 16px;
 	border: 1px solid grey;
 }
-
 form.form-group button {
 	background: #2196f3;
 	margin-left: -4.2px;
@@ -441,7 +403,6 @@ form.form-group button {
 	border-radius: 0 20px 20px 0;
 	padding: 0 0 0 8px;
 }
-
 form.form-group button:hover {
 	background: #1b77c2;
 }
@@ -454,14 +415,12 @@ form.form-group button:hover {
 	font-weight: bold;
 	line-height: 80px;
 }
-
 .register-form {
 	width: 80vw;
 	margin-top: 40px;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .form-content {
 	padding: 5%;
 	border: 1px solid #ced4da;
@@ -479,7 +438,6 @@ form.form-group button:hover {
 	background: #0062cc;
 	color: #fff;
 }
-
 .btnAuth {
 	border: none;
 	border-radius: 20px;
@@ -491,7 +449,6 @@ form.form-group button:hover {
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .btnAuth:hover {
 	background: #0062cc;
 }
@@ -505,7 +462,6 @@ form.form-group button:hover {
 	border-radius: 20px;
 	margin: 5px;
 }
-
 .edit-profile button:hover {
 	background: #0062cc;
 }
@@ -513,13 +469,10 @@ form.form-group button:hover {
 .edit-profile {
 	display: flex;
 	flex-direction: row-reverse;
-	margin-right: 20px;
-	/* justify-content: space-between; */
+	margin-right: 20px; /* justify-content: space-between; */
 }
-
 .profile-container {
-	/* width: 100%; */
-	/* margin-top: 20px; */
+	/* width: 100%; */ /* margin-top: 20px; */
 	/* margin-left: auto;
 	margin-right: auto; */
 	background: #e6e6e6;
@@ -528,13 +481,11 @@ form.form-group button:hover {
 	padding-bottom: 20px;
 	border-radius: 5px;
 }
-
 @media screen and (min-width: 1000px) {
 	.main_content {
 		margin-left: 10vw !important;
 	}
 }
-
 .profile-container h2 {
 	text-align: center;
 }
@@ -543,18 +494,15 @@ form.form-group button:hover {
 .far {
 	margin-right: 10px;
 }
-
 .row {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
-	/* width: 100%; */
+	flex-wrap: wrap; /* width: 100%; */
 	justify-content: center;
 	align-items: center;
 	margin-left: 0 !important;
 	margin-right: 0 !important;
 }
-
 .column {
 	display: flex;
 	flex-direction: column;
@@ -564,19 +512,15 @@ form.form-group button:hover {
 	justify-content: center;
 	align-items: center; */
 }
-
 .col-left {
 	flex: 1;
 	justify-content: center;
 	align-items: center;
 }
-
 .col-right {
-	flex: 2;
-	/* justify-content: center;
+	flex: 2; /* justify-content: center;
 	align-items: center; */
 }
-
 .fa-check-circle {
 	color: #0062cc;
 }
@@ -593,12 +537,10 @@ form.form-group button:hover {
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .profile-img {
 	border-radius: 50%;
 	width: 250px;
 }
-
 @media screen and (max-width: 750px) {
 	.row {
 		flex-direction: column;
@@ -607,24 +549,20 @@ form.form-group button:hover {
 		width: 150px;
 	}
 }
-
 .products-section {
 	/* width: 90vw; */
 	margin-top: 5px;
-	margin-bottom: 20px;
-	/* margin-left: auto;
+	margin-bottom: 20px; /* margin-left: auto;
 	margin-right: auto; */
 	/* padding-top: 20px; */
 	padding-bottom: 20px;
 	border-radius: 5px;
 }
-
 .tab {
 	overflow: hidden;
 	border: 1px solid #ccc;
 	background-color: #f1f1f1;
 }
-
 /* Style the buttons inside the tab */
 .tab button {
 	background-color: inherit;
@@ -636,17 +574,14 @@ form.form-group button:hover {
 	transition: 0.3s;
 	font-size: 17px;
 }
-
 /* Change background color of buttons on hover */
 .tab button:hover {
 	background-color: #ddd;
 }
-
 /* Create an active/current tablink class */
 .tab button.active {
 	background-color: #ccc;
 }
-
 /* Style the tab content */
 .tabcontent {
 	display: none;
@@ -654,7 +589,6 @@ form.form-group button:hover {
 	border: 1px solid #ccc;
 	border-top: none;
 }
-
 .list-group {
 	width: 30vw;
 }
@@ -666,7 +600,6 @@ form.form-group button:hover {
 	margin: 20px auto;
 	background: #fafafa;
 }
-
 .product-image {
 	display: flex;
 	align-items: center;
@@ -675,12 +608,10 @@ form.form-group button:hover {
 	padding: 30px;
 	background: #f0f0f0;
 }
-
 .product-image img {
 	max-width: 100%;
 	max-height: 100%;
 }
-
 .product-details {
 	padding: 20px;
 }
@@ -693,7 +624,6 @@ form.form-group button:hover {
 	color: #ccc;
 	margin-bottom: 10px;
 }
-
 .product-details h4 a {
 	font-weight: 500;
 	display: block;
@@ -704,7 +634,6 @@ form.form-group button:hover {
 	transition: 0.3s;
 	font-size: 20px;
 }
-
 .product-details h4 a:hover {
 	color: #ff922b;
 }
@@ -714,24 +643,20 @@ form.form-group button:hover {
 	line-height: 22px;
 	color: #999;
 }
-
 .product-bottom-details {
 	overflow: hidden;
 	border-top: 1px solid #eee;
 	padding-top: 10px;
 }
-
 .product-bottom-details div {
 	float: left;
 	width: 50%;
 }
-
 .product-price {
 	font-size: 18px;
 	color: #ff922b;
 	font-weight: 600;
 }
-
 .product-price small {
 	font-size: 80%;
 	font-weight: 400;
@@ -739,19 +664,18 @@ form.form-group button:hover {
 	display: inline-block;
 	margin-right: 5px;
 }
-
 .product-links {
 	text-align: right;
 }
 
 .product-links a {
 	display: inline-block;
+
 	margin-left: 5px;
 	color: #e1e1e1;
 	transition: 0.3s;
 	font-size: 17px;
 }
-
 .product-links a:hover {
 	color: #ff922b;
 }
@@ -760,7 +684,6 @@ footer {
 	position: relative;
 	bottom: 0;
 }
-
 footer p {
 	margin-block-end: 0;
 	padding-top: 0.5rem;
@@ -768,7 +691,6 @@ footer p {
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
-
 .footer {
 	width: 100%;
 	background: #e6e6e6;
