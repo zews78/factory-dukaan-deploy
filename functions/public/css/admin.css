@@ -154,7 +154,6 @@ div.columns:nth-of-type(even) {
 
 /*********** Product Details - End ***********/
 
-
 footer {
 	position: relative;
 	bottom: 0;
@@ -342,4 +341,6 @@ p {
 	}
 }
 
-/************* Image Viewer - Start *************/
+.mr-25 {
+	margin-right: 25px;
+}
