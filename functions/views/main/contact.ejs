@@ -1,11 +1,13 @@
 
 <%- include("../partials/start") %>
+<link type="text/css" rel="stylesheet" href="/css/faq.css" />
 <%- include("../partials/headBody") %> 
 <%- include("../partials/header") %>
 
 <div class="wrapper">
     <%- include("../partials/sidenav") %>
     <div class="main_content">
+      <div class="back-img"><i class="fas fa-headset fa-5x"></i></div>
         <!-- <div class="" id="accordion">
             <div class="faqHeader">FAQs</div>
             <div class="card ">
@@ -45,48 +47,93 @@
                 </div>
             </div>
         </div> -->
+        <div class="main-div">
+          <div class="container">
+              <h3 style="color: #231f1a;">Frequently Asked Questions</h3><hr>
+              <div class="panel-group q-a" id="accordion">
+                <% for(let i=0; i<=50; i++){ %>
+                  <% if(FAQ.ques[i]){ %>
+                    <% var str = "collapse" + i %>
+                    <% var str1 = "#collapse" + i %>
+                    <div class="panel panel-default q-a_stats">
+                      <div class="panel-heading">
+                        <h5 class="panel-title ques">
+                          <a data-toggle="collapse" data-parent="#accordion" href= <%=str1%> ><%=FAQ.ques[i]%>?</a>
+                        </h5>
+                      </div>
+                      <div id=<%=str%> class="panel-collapse collapse in ans">
+                        <div class="panel-body"><%=FAQ.ans[i]%>.</div>
+                      </div>
+                    </div>
+                  <% } %>
+                <% } %>
+<br><br><br>
 
-        <div class="container">
-            <h2>FAQs</h2>
-            <div class="panel-group" id="accordion">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                  <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                </div>
+              </div> 
+            </div>
+            <div class="query">
+              <div class="query-head">
+                <h3><span style="color: #ff922b;">Factory Dukaan</span> Query and Complaint</h3>
+                <p>We will be glad to hear your query and complaints. You can raise your question here. We will surely respond.😊</p>
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
-                  </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                  <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                </div>
+              <div class="overall-quety">
+                <form>
+                  <fieldset class="form-group">
+                      <h4 class="col-form-label">Please select type of query/complaint:</h4>
+                      <div class="col-sm-10">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                          <label class="form-check-label" for="gridRadios1">
+                            Buyer Issue
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                          <label class="form-check-label" for="gridRadios2">
+                            Seller Issue
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                          <label class="form-check-label" for="gridRadios3">
+                            Profile Updation
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4">
+                          <label class="form-check-label" for="gridRadios4">
+                            Raise Qustion
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
+                          <label class="form-check-label" for="gridRadios5">
+                            Technical issue
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios6" value="option6">
+                          <label class="form-check-label" for="gridRadios6">
+                            Other
+                          </label>
+                        </div>
+                        
+                      </div>
+                  </fieldset>
+
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Title:</label>
+                    <input class="form-control text-des" id="exampleFormControlInput1" placeholder="Provide a Short Title to your Complaint..." required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descripton:</label>
+                    <textarea class="form-control text-des" id="exampleFormControlTextarea1" rows="3" placeholder="Type your Descripton here..." required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
-                  </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                  <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                </div>
-              </div>
-            </div> 
-          </div>
+            </div>
+        </div>
 
     </div>
 </div>

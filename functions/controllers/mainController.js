@@ -173,11 +173,22 @@ exports.postUpdateProduct = async(req, res) => {
 };
 
 exports.getContacts = async(req, res) => {
-	const auth = (await isAuth(req))[0];
-	res.render('main/contact.ejs', {
-		pageTitle: 'Contacts',
-		auth
-	});
+	try{
+		const FAQRef = firebase.firestore()
+			.collection('config')
+			.doc('FAQ');
+		const doc = await FAQRef.get();
+		const FAQ = doc.data();
+		console.log(FAQ);
+		const auth = (await isAuth(req))[0];
+		res.render('main/contact.ejs', {
+			pageTitle: 'Contacts',
+			FAQ,
+			auth
+		});
+	} catch(err) {
+		console.log(err);
+	}
 };
 
 exports.getPlanDetails = async(req, res)=>{
