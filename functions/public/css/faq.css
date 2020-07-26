@@ -1,0 +1,46 @@
+.main-div{
+    /* width: 60%; */
+    margin: 25px 89px 10px 48px;
+}
+.q-a{
+    color: #44363b;
+    /* background-color:#f0f2ef; */
+
+}
+.q-a_stats{
+    /* border: 1px solid #f4a261; */
+    /* background-color: #f4a261; */
+    /* filter: blur(8px); */
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+.ques{
+    font-weight: bold;
+
+}
+.ques a{
+    color: #5b494f;
+    text-decoration: none;
+}
+.ans{
+    /* font-weight: lighter; */
+    font-size: 1em;
+}
+.text-des{
+    font-size: small;
+}
+.query{
+    /* margin: auto; */
+    /* text-align: center; */
+}
+.back-img{
+    color: #ff922b;
+    z-index: -1;
+    font-size: 7em;
+    position: absolute;
+    opacity: 0.4;
+    margin-left: 44vw;
+
+
+}
