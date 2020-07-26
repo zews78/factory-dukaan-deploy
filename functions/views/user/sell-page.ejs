@@ -1,1 +1,59 @@
-<h1>LIST OF ITEMS ON SALE via USER</h1>
+<%- include("../partials/start") %>
+<link type="text/css" rel="stylesheet" href="/css/products.css" />
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+        <div class="header">
+            <h2>My Products</h2>
+        </div>
+        <div class="add-product">
+            <button type="button" class="btn btn-primary">Add Product</button>
+        </div>
+        <div class="products-wrapper">
+            <div class="card mb-3 w-75">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Title</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus ultricies tristique nulla aliquet enim tortor. Pharetra et ultrices neque ornare. </p>
+                            <p class="card-text"><small class="text-muted">Added on 26/07/2020</small></p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-info">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3 w-75">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Title</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus ultricies tristique nulla aliquet enim tortor. Pharetra et ultrices neque ornare. </p>
+                            <p class="card-text"><small class="text-muted">Added on 26/07/2020</small></p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-info">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<%- include("../partials/footer") %>
+<%- include("../partials/end") %>
