@@ -129,9 +129,22 @@ exports.getProducts = async(req, res) => {
 
 exports.getOneProduct = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
+	const product = await firebase.firestore()
+		.collection('products')
+		.doc(req.params.productId)
+		.get();
+	const user = await firebase.firestore()
+		.collection('users')
+		.doc(req.uid)
+		.get();
+
+	if(user.data().expiresOn._seconds * 1000 < Date.now()) {
+		console.log('PLEASE PURCHASE A PLAN');
+	}
 	res.render('main/productDetails.ejs', {
 		pageTitle: 'Product Details',
-		auth
+		auth,
+		productData: product.data()
 	});
 };
 
@@ -163,6 +176,14 @@ exports.getContacts = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/contact.ejs', {
 		pageTitle: 'Contacts',
+		auth
+	});
+};
+
+exports.getPlanDetails = async(req, res)=>{
+	const auth = (await isAuth(req))[0];
+	res.render('main/plan-details.ejs', {
+		pageTitle: 'Factory-Dukaan | Plans',
 		auth
 	});
 };
