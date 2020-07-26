@@ -7,7 +7,7 @@
 <div class="wrapper">
     <%- include("../partials/sidenav") %>
     <div class="main_content">
-      <div class="back-img"><i class="fas fa-assistive-listening-systems fa-5x"></i></div>
+      <div class="back-img"><i class="fas fa-headset fa-5x"></i></div>
         <!-- <div class="" id="accordion">
             <div class="faqHeader">FAQs</div>
             <div class="card ">
@@ -51,18 +51,23 @@
           <div class="container">
               <h3 style="color: #231f1a;">Frequently Asked Questions</h3><hr>
               <div class="panel-group q-a" id="accordion">
-                <div class="panel panel-default q-a_stats">
-                  <div class="panel-heading">
-                    <h5 class="panel-title ques">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">How are you?</a>
-                    </h5>
-                  </div>
-                  <div id="collapse1" class="panel-collapse collapse in ans">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                  </div>
-                </div><br><br><br>
+                <% for(let i=0; i<=50; i++){ %>
+                  <% if(FAQ.ques[i]){ %>
+                    <% var str = "collapse" + i %>
+                    <% var str1 = "#collapse" + i %>
+                    <div class="panel panel-default q-a_stats">
+                      <div class="panel-heading">
+                        <h5 class="panel-title ques">
+                          <a data-toggle="collapse" data-parent="#accordion" href= <%=str1%> ><%=FAQ.ques[i]%>?</a>
+                        </h5>
+                      </div>
+                      <div id=<%=str%> class="panel-collapse collapse in ans">
+                        <div class="panel-body"><%=FAQ.ans[i]%>.</div>
+                      </div>
+                    </div>
+                  <% } %>
+                <% } %>
+<br><br><br>
 
               </div> 
             </div>
