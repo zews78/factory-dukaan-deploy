@@ -162,3 +162,8 @@ exports.postVerifyGst = async(req, res) => {
 			.json(err);
 	}
 };
+
+exports.getSellingPage = async(req, res)=>{
+	const auth = (await isAuth(req))[0];
+	res.render('user/sell-page.ejs', {auth});
+};
