@@ -27,7 +27,14 @@
                 </div>
                 <div class="column col-right">
                     <h1><%= user.name %></h1>
-                    <p>
+                    <p> 
+                        <% if (user.packPurchased  && Date.now() < user.expiresOn._seconds*1000) {%>
+                            <i class="fas fa-usd" aria-hidden="true"></i> Active Plan:  <%= user.packPurchased %>  <br>
+                            <i class="fas fa-calendar" aria-hidden="true"></i> Plan Expires On: <%= new Date(user.expiresOn._seconds*1000).toDateString() %> <br>
+                            <%}else{%>
+                                <i class="fas fa-usd" aria-hidden="true"></i> No Active Plan <a href="/plan-details">Check Plan Pricings</a> <br>
+                            <% } %>
+                        
                         <i class="fas fa-building"></i><%= user.company.name %> &nbsp; 
                         <!-- <i class="fas fa-check-circle"></i> --> <br> 
                         <i class="fas fa-envelope"></i><%= user.email %> <br>

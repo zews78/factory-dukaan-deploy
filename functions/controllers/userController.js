@@ -3,11 +3,12 @@ const axios = require('axios');
 const config = require('../../config');
 const razorpay = require('razorpay');
 const isAuth = require('../utils/isAuth');
-const {user} = require('firebase-functions/lib/providers/auth');
+
 
 // const validator = require('validator');
 
 exports.getUserProfile = async(req, res) => {
+
 	const userId = req.params.userId || req.uid;
 	const userSnapshot = await firebase.firestore()
 		.collection('users')
@@ -25,7 +26,7 @@ exports.getUserProfile = async(req, res) => {
 	if (!productsSnapshot.empty) {
 		products = productsSnapshot.forEach(product => product.data());
 	}
-
+	// console.log((userSnapshot.data().expiresOn._seconds.to * 1000));
 	res.render('user/profile.ejs', {
 		pageTitle: 'Profile',
 		auth: true,
@@ -40,37 +41,50 @@ exports.getUserProfile = async(req, res) => {
 
 exports.getUserPayment = async(req, res) => {
 	const auth = (await isAuth(req))[0];
-	const instance = new razorpay({
-		key_id: config.razorpay.key_id,
-		key_secret: config.razorpay.key_secret
-	});
-	let amount = {};
 
-	if(req.query.package === 'silver') {
-		amount = {amount: config.razorpay.silverPackage};
-	}
-	if(req.query.package === 'gold') {
-		amount = {amount: config.razorpay.goldPackage};
-	}
-	if(req.query.package === 'platinum') {
-		amount = {amount: config.razorpay.platinumPackage};
-	}
-	instance.orders.create(amount)
-		.then((data)=>{
-			res.render('user/checkout.ejs', {
-				orderData: data,
-				auth,
-				amount: amount,
-				key_id: config.razorpay.key_id,
-				packageName: req.query.package.charAt(0)
-					.toUpperCase() + req.query.package.slice(1)
-			});
+	const user = await firebase.firestore()
+		.collection('users')
+		.doc(req.uid)
+		.get();
 
-		})
-		.catch((error)=>{
-			res.json({error});
+	if(user.data().packPurchased && user.data().expiresOn._seconds * 1000 < Date.now()) {
+		const instance = new razorpay({
+			key_id: config.razorpay.key_id,
+			key_secret: config.razorpay.key_secret
 		});
+		let amount = {};
 
+		if(req.query.package === 'silver') {
+			amount = {amount: config.razorpay.silverPackage};
+		}
+		if(req.query.package === 'gold') {
+			amount = {amount: config.razorpay.goldPackage};
+		}
+		if(req.query.package === 'platinum') {
+			amount = {amount: config.razorpay.platinumPackage};
+		}
+		instance.orders.create(amount)
+			.then((data)=>{
+				res.render('user/checkout.ejs', {
+					orderData: data,
+					auth,
+					amount: amount,
+					key_id: config.razorpay.key_id,
+					packageName: req.query.package.charAt(0)
+						.toUpperCase() + req.query.package.slice(1)
+				});
+
+			})
+			.catch((error)=>{
+				res.json({error});
+			});
+	}else{
+		res.render('user/checkout.ejs', {
+			alreadyActivePlan: true,
+			auth,
+			user: user.data()
+		});
+	}
 
 };
 
@@ -102,6 +116,18 @@ exports.paymentVerification = async(req, res)=>{
 			.update({
 				packPurchased: package,
 				expiresOn: expiresOn
+			});
+
+		await firebase
+			.firestore()
+			.collection('users')
+			.doc(req.uid)
+			.update({
+				subscriptions: firebase.firestore.FieldValue.arrayUnion({
+					start: Date(Date.now()),
+					end: expiresOn,
+					nameOfPack: package
+				})
 			});
 		}catch(error) {
 			console.log(error);
@@ -165,5 +191,18 @@ exports.postVerifyGst = async(req, res) => {
 
 exports.getSellingPage = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
-	res.render('user/sell-page.ejs', {auth});
+	console.log(req.uid);
+	const productsSnapshot = await firebase.firestore()
+		.collection('products')
+		.where('uid', '==', req.uid)
+		.get();
+	let products = [];
+	productsSnapshot.forEach(doc=>{
+		products.push(doc.data());
+	});
+	console.log(products);
+	res.render('user/sell-page.ejs', {
+		auth,
+		products
+	});
 };
