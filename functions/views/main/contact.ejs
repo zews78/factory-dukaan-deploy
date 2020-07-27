@@ -51,8 +51,8 @@
           <div class="container">
               <h3 style="color: #231f1a;">Frequently Asked Questions</h3><hr>
               <div class="panel-group q-a" id="accordion">
-                <% for(let i=0; i<=50; i++){ %>
-                  <% if(FAQ.ques[i]){ %>
+                <% var i =0 %>
+                <% while(FAQ.ques[i]){ %>
                     <% var str = "collapse" + i %>
                     <% var str1 = "#collapse" + i %>
                     <div class="panel panel-default q-a_stats">
@@ -65,7 +65,7 @@
                         <div class="panel-body"><%=FAQ.ans[i]%>.</div>
                       </div>
                     </div>
-                  <% } %>
+                <% i++ %>
                 <% } %>
 <br><br><br>
 
@@ -77,42 +77,42 @@
                 <p>We will be glad to hear your query and complaints. You can raise your question here. We will surely respond.😊</p>
               </div>
               <div class="overall-quety">
-                <form>
-                  <fieldset class="form-group">
+                <form action="/querySubmit" method="POST">
+                  <fieldset class="form-group" name="Type">
                       <h4 class="col-form-label">Please select type of query/complaint:</h4>
                       <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                          <input class="form-check-input" type="radio" name="Type" id="gridRadios1" value="Buyer Issue" checked>
                           <label class="form-check-label" for="gridRadios1">
                             Buyer Issue
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                          <input class="form-check-input" type="radio" name="Type" id="gridRadios2" value="Seller Issue">
                           <label class="form-check-label" for="gridRadios2">
                             Seller Issue
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                          <input class="form-check-input" type="radio" name="Type" id="gridRadios3" value="Profile Updation">
                           <label class="form-check-label" for="gridRadios3">
                             Profile Updation
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4">
+                          <input class="form-check-input" type="radio" name="Type" id="gridRadios4" value="Raise Question">
                           <label class="form-check-label" for="gridRadios4">
                             Raise Qustion
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
+                          <input class="form-check-input" type="radio" name="Type" id="gridRadios5" value="Technical Issue">
                           <label class="form-check-label" for="gridRadios5">
                             Technical issue
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios6" value="option6">
+                          <input class="form-check-input" type="radio" name="Type" id="gridRadios6" value="Other">
                           <label class="form-check-label" for="gridRadios6">
                             Other
                           </label>
@@ -123,13 +123,13 @@
 
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Title:</label>
-                    <input class="form-control text-des" id="exampleFormControlInput1" placeholder="Provide a Short Title to your Complaint..." required>
+                    <input class="form-control text-des" id="exampleFormControlInput1" placeholder="Provide a Short Title to your Complaint..." name="Title" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Descripton:</label>
-                    <textarea class="form-control text-des" id="exampleFormControlTextarea1" rows="3" placeholder="Type your Descripton here..." required></textarea>
+                    <textarea class="form-control text-des" id="exampleFormControlTextarea1" rows="3" placeholder="Type your Descripton here..." name="Description" required></textarea>
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary cmpSub">Submit</button>
                 </form>
               </div>
             </div>
