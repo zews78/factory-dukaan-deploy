@@ -1,4 +1,5 @@
 const firebase = require('../firebase');
+const url = require('url');
 
 const loginPageNumber = require('../utils/loginPageNumber');
 
@@ -15,7 +16,22 @@ exports.getLogin = async(req, res) => {
 			auth: true
 		});
 	} else {
-		res.redirect('/');
+
+		const user = await firebase.firestore()
+			.collection('users')
+			.doc(req.query.uid)
+			.get();
+		if(user.data().packPurchased) {
+			if(user.data().expiresOn._seconds * 1000 > Date.now()) {
+				res.redirect('/');
+			}else{
+				res.redirect('/plan-details');
+			}
+
+		}else{
+			res.redirect('/plan-details');
+		}
+
 	}
 };
 
@@ -41,7 +57,13 @@ exports.postLogin = async(req, res) => {
 			// secure: true
 		};
 		res.cookie('session', sessionCookie, cookieOptions);
-		res.redirect('/login');
+		req.query.uid = req.body.user.uid;
+
+		res.redirect(url.format({
+			pathname: '/login',
+			query: req.query
+		})
+		);
 	} catch (err) {
 		console.log(err);
 		res.status(500)

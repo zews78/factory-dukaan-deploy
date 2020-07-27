@@ -8,8 +8,12 @@ router.get('/:userId/profile', userController.getUserProfile);
 router.post('/profile/update', userController.postUpdateUser);
 router.post('/verify-gst', userController.postVerifyGst);
 
+
+// SELL PAGE
+router.get('/sell', userController.getSellingPage);
+
 // PAYMENT ROUTES
-router.get('/payment/:id', userController.getUserPayment);
+router.get('/payment', userController.getUserPayment);
 router.post('/payment/verify', userController.paymentVerification);
 router.get('/paymentSuccess', userController.getSuccessfulPayment);
 

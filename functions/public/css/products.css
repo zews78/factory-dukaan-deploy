@@ -616,3 +616,28 @@ ul {
 	justify-content: flex-start;
 	border-bottom-right-radius: 5px;
 }
+
+.add-product {
+	display: flex;
+	margin-bottom: 15px;
+	justify-content: flex-end;
+	margin-right: 25px;
+}
+
+.col-md-2 {
+	text-align: center;
+}
+
+.col-md-2 button {
+	margin-top: 10px;
+	margin-right: 10px;
+	left: auto;
+	right: auto;
+}
+
+@media screen and (max-width: 700px) {
+	.col-md-2 {
+		margin-bottom: 20px;
+		text-align: center;
+	}
+}

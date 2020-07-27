@@ -2,6 +2,7 @@ const firebase = require('../firebase');
 const axios = require('axios');
 const config = require('../../config');
 const razorpay = require('razorpay');
+const isAuth = require('../utils/isAuth');
 const {user} = require('firebase-functions/lib/providers/auth');
 
 // const validator = require('validator');
@@ -37,12 +38,14 @@ exports.getUserProfile = async(req, res) => {
 	});
 };
 
-exports.getUserPayment = (req, res) => {
+exports.getUserPayment = async(req, res) => {
+	const auth = (await isAuth(req))[0];
 	const instance = new razorpay({
 		key_id: config.razorpay.key_id,
 		key_secret: config.razorpay.key_secret
 	});
 	let amount = {};
+
 	if(req.query.package === 'silver') {
 		amount = {amount: config.razorpay.silverPackage};
 	}
@@ -56,6 +59,7 @@ exports.getUserPayment = (req, res) => {
 		.then((data)=>{
 			res.render('user/checkout.ejs', {
 				orderData: data,
+				auth,
 				amount: amount,
 				key_id: config.razorpay.key_id,
 				packageName: req.query.package.charAt(0)
@@ -76,8 +80,32 @@ exports.paymentVerification = async(req, res)=>{
 	var expectedSignature = crypto.createHmac('sha256', config.razorpay.key_secret)
 		.update(body.toString())
 		.digest('hex');
+	let package = null;
 
+	if(req.body.amount === config.razorpay.silverPackage) {
+		package = 'Silver';
+	}
+	if(req.body.amount === config.razorpay.goldPackage) {
+		package = 'Gold';
+	}
+	if(req.body.amount === config.razorpay.platinumPackage) {
+		package = 'Platinum';
+	}
+	const expiresOn = new Date();
 	if(expectedSignature === req.body.response.razorpay_signature) {
+		expiresOn.setDate(new Date()
+			.getDate() + 30);
+		try{ await firebase
+			.firestore()
+			.collection('users')
+			.doc(req.uid)
+			.update({
+				packPurchased: package,
+				expiresOn: expiresOn
+			});
+		}catch(error) {
+			console.log(error);
+		}
 		res.json({status: 'success'});
 	}else{
 		res.json({status: 'failure'});
@@ -86,7 +114,8 @@ exports.paymentVerification = async(req, res)=>{
 };
 
 exports.getSuccessfulPayment = async(req, res)=>{
-	res.render('user/paymentSuccess.ejs');
+	const auth = (await isAuth(req))[0];
+	res.render('user/paymentSuccess.ejs', {auth});
 };
 
 exports.postUpdateUser = async(req, res) => {
@@ -132,4 +161,9 @@ exports.postVerifyGst = async(req, res) => {
 		res.status(500)
 			.json(err);
 	}
+};
+
+exports.getSellingPage = async(req, res)=>{
+	const auth = (await isAuth(req))[0];
+	res.render('user/sell-page.ejs', {auth});
 };

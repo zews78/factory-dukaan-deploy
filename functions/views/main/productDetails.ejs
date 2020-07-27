@@ -48,11 +48,11 @@
                             </div>
                             <div class="col-md-7 col-sm-12 col-xs-12">
                                 <h2 class="name">
-                                    Product Name Here                                    
+                                    <%= productData.title %>                                    
                                 </h2>
                                 <hr />
                                 <h3 class="price-container">
-                                    ₹1200.00
+                                    ₹<%= productData.price %>
                                     <small>*includes tax</small>
                                 </h3>
                                 <div class="certified">
@@ -112,54 +112,16 @@
                                 <div class="col-md-12">
                                     <table class="col-md-12">
                                         <tbody>
-                                            <tr class="row mt-10">
-                                                <td class="col-md-4"><span class="p_specification">Sales Package :</span> </td>
-                                                <td class="col-md-8">
-                                                    <ul>
-                                                        <li>2 in 1 Laptop, Power Adaptor, Active Stylus Pen, User Guide, Warranty Documents</li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="row mt-10">
-                                                <td class="col-md-4"><span class="p_specification">Model Number :</span> </td>
-                                                <td class="col-md-8">
-                                                    <ul>
-                                                        <li> 14-dh0107TU </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="row mt-10">
-                                                <td class="col-md-4"><span class="p_specification">Part Number :</span> </td>
-                                                <td class="col-md-8">
-                                                    <ul>
-                                                        <li>7AL87PA</li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="row mt-10">
-                                                <td class="col-md-4"><span class="p_specification">Color :</span> </td>
-                                                <td class="col-md-8">
-                                                    <ul>
-                                                        <li>Black</li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="row mt-10">
-                                                <td class="col-md-4"><span class="p_specification">Suitable for :</span> </td>
-                                                <td class="col-md-8">
-                                                    <ul>
-                                                        <li>Processing & Multitasking</li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="row mt-10">
-                                                <td class="col-md-4"><span class="p_specification">Processor Brand :</span> </td>
-                                                <td class="col-md-8">
-                                                    <ul>
-                                                        <li>Intel</li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
+                                            <% for (var spec in productData.specs ) { %>
+                                                <tr class="row mt-10">
+                                                    <td class="col-md-4"><span class="p_specification"><%= spec %></span> </td>
+                                                    <td class="col-md-8">
+                                                        <ul>
+                                                            <li><%- productData.specs[spec] %></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                              <% } %>
                                         </tbody>
                                     </table>
                                 </div>

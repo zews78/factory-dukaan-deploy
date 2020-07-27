@@ -23,7 +23,7 @@ include("../partials/header") %>
     </div>
     <input type="hidden" id="key_id" value="<%= key_id  %>" />
     <input type="hidden" id="order_id" value="<%= orderData.id  %>" />
-    <input type="hidden" id="amount" value="<%= amount  %>" />
+    <input type="hidden" id="amount" value="<%= amount.amount  %>" />
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
@@ -43,9 +43,10 @@ include("../partials/header") %>
           url: "/user/payment/verify",
           data: {
             response,
+            amount:document.getElementById("amount").value
           },
         });
-
+        
         if (res.data.status === "success") {
           window.setTimeout(() => {
             location.assign("/user/paymentSuccess");
