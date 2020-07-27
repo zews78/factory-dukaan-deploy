@@ -641,3 +641,18 @@ ul {
 		text-align: center;
 	}
 }
+
+.products-wrapper {
+	margin-bottom: 40px;
+}
+
+.products-wrapper {
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
