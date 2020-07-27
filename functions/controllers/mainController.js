@@ -172,14 +172,14 @@ exports.postUpdateProduct = async(req, res) => {
 	}
 };
 
-exports.getContacts = async(req, res) => {
+exports.getHelp = async(req, res) => {
 	try{
 		const FAQRef = firebase.firestore()
 			.collection('config')
 			.doc('FAQ');
 		const doc = await FAQRef.get();
 		const FAQ = doc.data();
-		console.log(FAQ);
+		// console.log(FAQ);
 		const auth = (await isAuth(req))[0];
 		res.render('main/contact.ejs', {
 			pageTitle: 'Contacts',
@@ -190,7 +190,26 @@ exports.getContacts = async(req, res) => {
 		console.log(err);
 	}
 };
-
+exports.postQuery = async(req, res) => {
+	try {
+		var type = req.body.Type;
+		var title = req.body.Title;
+		var description = req.body.Description;
+		var submitValue = {
+			type: type,
+			title: title,
+			description: description
+		};
+		await firebase.firestore()
+			.collection('query')
+			.add(submitValue);
+		// console.log(submitValue);
+		console.log('Succesfully Submitted your Query/Complaint');
+		res.redirect('/help');
+	} catch (err) {
+		console.log(err);
+	}
+};
 exports.getPlanDetails = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
 	res.render('main/plan-details.ejs', {

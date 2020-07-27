@@ -5,9 +5,13 @@
   list-style: none;
   text-decoration: none;
 }
+*{
+  font-family: 'Recursive', sans-serif;
+
+}
 
 body {
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
   padding-top: 70px;
   /* background-color: rgb(56, 245, 71); */
 }
@@ -181,6 +185,7 @@ body {
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  font-family: 'Recursive', sans-serif;
 }
 
 /* The navigation menu links */
@@ -238,6 +243,8 @@ body {
 
 .wrapper .sidebar ul li {
   padding: 15px;
+  font-family: 'Recursive', sans-serif;
+
 }
 .wrapper .sidebar ul li a {
   color: #000;
