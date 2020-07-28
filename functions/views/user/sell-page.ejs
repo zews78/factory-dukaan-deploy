@@ -25,9 +25,10 @@
                                 <p class="card-text"><small class="text-muted">Added on <%= new Date( products[i].createdOn._seconds*1000).toDateString() %></small></p>
                             </div>
                         </div>
+                        <input type="hidden" name="product-id" value='<%= productsId[i] %>' class='productId'/>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditForm1">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-danger deleteButton" id='<%= productsId[i] %>' >Delete</button>
                             <button type="button" class="btn btn-info">View Details</button>
                         </div>
                     </div>
@@ -140,6 +141,32 @@
         var nextSibling = e.target.nextElementSibling
         nextSibling.innerText = fileName
     })
+
+    var buttons = document.getElementsByClassName("btn btn-danger deleteButton");
+    var buttonsCount = buttons.length;
+    for (var i = 0; i <= buttonsCount; i += 1) {
+    buttons[i].onclick = async function(e) {    
+        try{
+            const res=await axios({
+                method:"POST",
+                url:"/user/deleteProduct",
+                data:{
+                    productId:this.id
+                }
+            })
+            if(res.data.status==='success'){
+                console.log('working')
+                location.reload();
+            }
+            if(res.data.status==='unauthorised'){
+                console.log("You are not authorised to perform this action");
+            }
+        }catch(err){
+            console.log(err)
+        }
+    };
+}
+    
 </script>
 
 <%- include("../partials/footer") %>

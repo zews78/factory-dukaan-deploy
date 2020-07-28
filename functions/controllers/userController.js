@@ -191,18 +191,40 @@ exports.postVerifyGst = async(req, res) => {
 
 exports.getSellingPage = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
-	console.log(req.uid);
+
 	const productsSnapshot = await firebase.firestore()
 		.collection('products')
 		.where('uid', '==', req.uid)
 		.get();
 	let products = [];
+	let productsId = [];
 	productsSnapshot.forEach(doc=>{
 		products.push(doc.data());
 	});
-	console.log(products);
+
+	productsSnapshot.forEach(doc=>{
+		productsId.push(doc.id);
+	});
+
 	res.render('user/sell-page.ejs', {
 		auth,
-		products
+		products,
+		productsId
 	});
+};
+
+exports.deleteProduct = async(req, res)=>{
+	const productRef = await firebase.firestore()
+		.collection('products')
+		.doc(req.body.productId);
+	const productSnapshot = await productRef.get();
+	if(productSnapshot.data().uid === req.uid) {
+		await productRef.delete();
+
+		res.json({status: 'success'});
+	}else{
+		res.json({status: 'unauthorised'});
+	}
+
+
 };
