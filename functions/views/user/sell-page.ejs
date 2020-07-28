@@ -21,64 +21,24 @@
                         <div class="col-md-6">
                             <div class="card-body">
                                 <h5 class="card-title"><%= products[i].title %></h5>
+                                <h6><b>Price:</b> ₹<%= products[i].price %></h6>
                                 <p class="card-text"><%= products[i].desc %></p>
                                 <p class="card-text"><small class="text-muted">Added on <%= new Date( products[i].createdOn._seconds*1000).toDateString() %></small></p>
                             </div>
                         </div>
-                        <input type="hidden" name="product-id" value='<%= productsId[i] %>' class='productId'/>
+                        <input type="hidden" name="product-id" value='<%= productsId[i] %>' id='<%= productsId[i] %> productId'/>
+                        <input type="hidden" name="product-id" value='<%= products[i].title %>' id='<%= productsId[i] %> title'/>
+                        <input type="hidden" name="product-id" value='<%= products[i].price %>' id='<%= productsId[i] %> price'/>
+                        <input type="hidden" name="product-id" value='<%= products[i].desc %>' id='<%= productsId[i] %> desc'/>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditForm1">Edit</button>
+                            <button type="button" class="btn btn-primary editButton" data-toggle="modal" data-target="#ModalEditForm1" id='<%= productsId[i] %>'>Edit</button>
                             <button type="button" class="btn btn-danger deleteButton" id='<%= productsId[i] %>' >Delete</button>
                             <button type="button" class="btn btn-info">View Details</button>
                         </div>
                     </div>
                 </div>
             <% } %>
-        <div class="products-wrapper">
-            <div class="card mb-3 w-75">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <h5 class="card-title">Product Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus ultricies tristique nulla aliquet enim tortor. Pharetra et ultrices neque ornare. </p>
-                            <p class="card-text"><small class="text-muted">Added on 26/07/2020</small></p>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                        <button type="button" class="btn btn-info">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-3 w-75">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <h5 class="card-title">Product Title</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus ultricies tristique nulla aliquet enim tortor. Pharetra et ultrices neque ornare. </p>
-                            <p class="card-text"><small class="text-muted">Added on 26/07/2020</small></p>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                        <button type="button" class="btn btn-info">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
+        
 <div id="ModalEditForm1" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -92,20 +52,20 @@
                     <div class="form-group">
                         <label class="control-label">Product Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="user-name" value="">
+                            <input type="text" class="form-control input-lg" name="user-name" value="" id="titleInput">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Price</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="company-name">
+                            <input type="text" class="form-control input-lg" name="company-name" id="priceInput">
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label class="control-label">Product Description</label>
                         <div>
-                            <textarea class="form-control" name="" id="" rows="4"></textarea>
+                            <textarea class="form-control"  rows="4" id="descInput"></textarea>
                         </div>
                     </div>
 
@@ -119,7 +79,7 @@
 
                     <div class="form-group">
                         <div>
-                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-success" onclick="editHandler()">Save</button>
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
                         </div>
@@ -158,11 +118,33 @@
         nextSibling.innerText = fileName
     })
 
-    var buttons = document.getElementsByClassName("btn btn-danger deleteButton");
-    var buttonsCount = buttons.length;
-    for (var i = 0; i <= buttonsCount; i += 1) {
-    buttons[i].onclick = async function(e) {    
-        try{
+    var editButtons=document.getElementsByClassName("btn btn-primary editButton");
+    var editButtonsCount=editButtons.length;
+    for(var i=0; i<editButtonsCount;i+=1){
+        editButtons[i].onclick=async function(e){
+            
+            document.getElementById('titleInput').value=document.getElementById(this.id+" title").value;
+            document.getElementById('priceInput').value=document.getElementById(this.id+" price").value;
+            document.getElementById('descInput').innerText=document.getElementById(this.id+" desc").value;
+        }
+    }
+
+    const editHandler=async()=>{
+        console.log(document.getElementById('titleInput').value);
+        console.log(document.getElementById('priceInput').value);
+        console.log(document.getElementById('descInput').innerText);
+    }
+
+
+    var deleteButtons = document.getElementsByClassName("btn btn-danger deleteButton");
+    var deleteButtonsCount = deleteButtons.length;
+    for (var i = 0; i < deleteButtonsCount; i += 1) {
+        deleteButtons[i].onclick = async function(e) {    
+
+        var deleteConfirmation=prompt(`Are you sure you want to delete this product ?     Type ${this.id} this below to confirm `);
+        console.log(deleteConfirmation)
+        if(deleteConfirmation===this.id){
+            try{
             const res=await axios({
                 method:"POST",
                 url:"/user/deleteProduct",
@@ -179,7 +161,11 @@
             }
         }catch(err){
             console.log(err)
+         }
+        }if(!deleteConfirmation || deleteConfirmation!=this.id){
+            console.log("Deletion Cancelled");
         }
+        
     };
 }
     
