@@ -43,9 +43,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Product</h1>
+                <h4 class="modal-title">Edit Product</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
             </div>
+            <p id="productID" style="color:gray"></p>
             <div class="modal-body">
                 <form role="form" method="POST" action="">
                     <input type="hidden" name="_token" value="">
@@ -118,21 +120,44 @@
         nextSibling.innerText = fileName
     })
 
+    var productId
     var editButtons=document.getElementsByClassName("btn btn-primary editButton");
     var editButtonsCount=editButtons.length;
     for(var i=0; i<editButtonsCount;i+=1){
         editButtons[i].onclick=async function(e){
-            
+            productId=this.id;
             document.getElementById('titleInput').value=document.getElementById(this.id+" title").value;
             document.getElementById('priceInput').value=document.getElementById(this.id+" price").value;
             document.getElementById('descInput').innerText=document.getElementById(this.id+" desc").value;
+            document.getElementById('productID').innerText="Product ID: "+" " + this.id;
         }
     }
 
     const editHandler=async()=>{
-        console.log(document.getElementById('titleInput').value);
-        console.log(document.getElementById('priceInput').value);
-        console.log(document.getElementById('descInput').innerText);
+      
+       try{const response=await axios({
+            method:"POST",
+            url:"/user/updateProduct",
+            data:{
+                productId: productId,
+                productUpdatedInfo:{
+                    price:document.getElementById('priceInput').value,
+                    title:document.getElementById('titleInput').value,
+                    desc:document.getElementById('descInput').value
+                }
+                
+            }
+        })
+
+        console.log('wait...')
+        if(response.data.status==='success'){
+            location.reload();
+        }else{
+            console.log('You Are Not authorised to perform this action')
+        }}catch(error){
+            console.log(error);
+        }
+        
     }
 
 

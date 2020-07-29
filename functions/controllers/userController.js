@@ -226,5 +226,18 @@ exports.deleteProduct = async(req, res)=>{
 		res.json({status: 'unauthorised'});
 	}
 
+};
 
+exports.updateProduct = async(req, res)=>{
+
+	const productRef = await firebase.firestore()
+		.collection('products')
+		.doc(req.body.productId);
+	const productSnapshot = await productRef.get();
+	if(productSnapshot.data().uid === req.uid) {
+		await productRef.update(req.body.productUpdatedInfo);
+		res.json({status: 'success'});
+	}else{
+		res.json({status: 'unauthorised'});
+	}
 };
