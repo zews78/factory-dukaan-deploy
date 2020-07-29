@@ -9,7 +9,7 @@
             <h2>My Products</h2>
         </div>
         <div class="add-product">
-            <button type="button" class="btn btn-primary">Add Product</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddProduct">Add Product</button>
         </div>
         <% for (var i = 0; i < products.length; i++) { %>
             <div class="products-wrapper">
@@ -38,6 +38,7 @@
                     </div>
                 </div>
             <% } %>
+            
         
 <div id="ModalEditForm1" class="modal fade">
     <div class="modal-dialog" role="document">
@@ -112,6 +113,77 @@
       </div>
     </div>
   </div>
+
+<!-- Modal - Add Product -->
+<div id="ModalAddProduct" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Product</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="POST" action="">
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">Product Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="user-name" value="" id="titleInput">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Price</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="company-name" id="priceInput">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label">Product Description</label>
+                        <div>
+                            <textarea class="form-control"  rows="4" id="descInput"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Keywords <small>(seperated by comma)</small> </label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="company-name" id="priceInput">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">Specifications</span>
+                            </div>
+                            <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title">
+                            <input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button>
+
+                    <div class="form-group">
+                        <label class="control-label">Product Images</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <button type="button" class="btn btn-success" onclick="editHandler()">Save</button>
+                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     document.querySelector('.custom-file-input').addEventListener('change',function(e) {
