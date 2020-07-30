@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', mainController.getHome);
 router.get('/help', mainController.getHelp);
 // router.get('/contact-us', mainController.getContacts);
-router.get('/plan-details', mainController.getPlanDetails);
+router.get('/pricing', mainController.getPlanDetails);
 router.get('/products', mainController.getProducts);
 router.get('/product/:productId', isAuth, mainController.getOneProduct);
 router.post('/products', isAuth, mainController.postProduct);

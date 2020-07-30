@@ -10,6 +10,7 @@
         <div class="main_content">
             <%- include("../partials/search") %>
 
+            <% if (products.length > 0) { %>
             <h6 class="page-heading">Recommended</h6>
             <div class="dropleft mx-3 sort-dropdown">
                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -72,6 +73,9 @@
                     </li>
                 </ul>
             </nav>
+            <% } else  { %>
+                <h2 class="text-center">No Products found!</h2>
+            <% } %>
         </div>
     </div>
 
