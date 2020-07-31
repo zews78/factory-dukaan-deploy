@@ -67,9 +67,11 @@ exports.getProducts = async(req, res) => {
 			});
 		});
 
+		const [auth] = await isAuth(req);
 		if (products.length === 0) {
-			res.render('/products', {
+			res.render('main/products', {
 				pageTitle: 'Products',
+				auth,
 				products: [],
 				queryParams: req.query
 			});
@@ -110,7 +112,6 @@ exports.getProducts = async(req, res) => {
 			}
 		}
 
-		const [auth] = await isAuth(req);
 		res.render('main/products', {
 			pageTitle: 'Products',
 			auth,
@@ -181,7 +182,7 @@ exports.getHelp = async(req, res) => {
 		const FAQ = doc.data();
 		// console.log(FAQ);
 		const auth = (await isAuth(req))[0];
-		res.render('main/contact.ejs', {
+		res.render('main/help.ejs', {
 			pageTitle: 'Contacts',
 			FAQ,
 			auth

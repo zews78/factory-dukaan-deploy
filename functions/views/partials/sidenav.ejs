@@ -1,62 +1,71 @@
-
-    <div class="sidebar">
-        <ul>
-            <li id="l1"><a href="/"><i class="fas fa-home"></i>Home</a></li>
-            <li id="l2"><a href="/user/profile"><i class="fas fa-user"></i>Profile</a></li>
-            <li id="l3"><a href="#"><i class="fas fa-address-card"></i>About</a></li>
-            <li id="l4"><a href="/help"><i class="fas fa-project-diagram"></i>Help</a></li>
-            <li id="l5"><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
-            <li id="l6"><a href="/contact-us"><i class="fas fa-address-book"></i>Contact</a></li>
-
-        </ul> 
-    </div>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="/"><i class="fas fa-home"></i>Home</a>
-        <a href="/user/profile"><i class="fas fa-user"></i>Profile</a>
-        <a href="#"><i class="fas fa-address-card"></i>About</a>
-        <a href="/help"><i class="fas fa-project-diagram"></i>Help</a>
-        <a href="#"><i class="fas fa-blog"></i>Blogs</a>
-        <a href="/contact-us"><i class="fas fa-book"></i>Contact</a>
-    </div>
-      
-      
+<div class="sidebar">
+  <ul>
+    <li id="l1">
+      <a href="/"><i class="fas fa-home"></i>Home</a>
+    </li>
+    <li id="l2">
+      <a href="/user/profile"><i class="fas fa-user"></i>Profile</a>
+    </li>
+    <li id="l3">
+      <a href="/about"><i class="fas fa-address-card"></i>About</a>
+    </li>
+    <li id="l4">
+      <a href="/pricing"><i class="fas fa-rupee-sign"></i>Pricing</a>
+    </li>
+    <li id="l5">
+      <a href="/help"><i class="fas fa-project-diagram"></i>Help</a>
+    </li>
+    <li id="l6">
+      <a href="/contact-us"><i class="fas fa-address-book"></i>Contact</a>
+    </li>
+  </ul>
+</div>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/"><i class="fas fa-home"></i>Home</a>
+  <a href="/user/profile"><i class="fas fa-user"></i>Profile</a>
+  <a href="#"><i class="fas fa-address-card"></i>About</a>
+  <a href="/pricing"><i class="fas fa-rupee-sign"></i>Pricing</a>
+  <a href="/help"><i class="fas fa-project-diagram"></i>Help</a>
+  <a href="/contact-us"><i class="fas fa-book"></i>Contact</a>
+</div>
 
 <script>
-    /* Set the width of the side navigation to 0 */
-    function closeNav() {
+  /* Set the width of the side navigation to 0 */
+  function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    }
+  }
 
-    var href = location.href;
-    var params= href.match(/([^\/]*)\/*$/)[1];
-    console.log(params);
-    if(params == 'contact-us'){
-        var sylbtn = document.getElementById("l6");
-        sylbtn.style.transform = "scale(1.08)";
-        sylbtn.style.fontWeight = "bold";
-    }
-    else if(params == 'profile'){
-        var sylbtn = document.getElementById("l2");
-        sylbtn.style.transform = "scale(1.08)";
-        sylbtn.style.fontWeight = "bold";
-    }
-    else if(params == 'localhost:3000'){
-        var sylbtn = document.getElementById("l1");
-        sylbtn.style.transform = "scale(1.08)";
-        sylbtn.style.fontWeight = "bold";
-    }
-    else if(params == 'profile'){
-        var sylbtn = document.getElementById("l2");
-        sylbtn.style.transform = "scale(1.08)";
-        sylbtn.style.fontWeight = "bold";
-    }
-    else if(params == 'help'){
-        var sylbtn = document.getElementById("l4");
-        sylbtn.style.transform = "scale(1.08)";
-        sylbtn.style.fontWeight = "bold";
-    }
-    
+  var url = location.href;
+  var params = url.split("/")[3];
+  console.log(params);
+  console.log(url);
+
+  if (params == "") {
+    var sylbtn = document.getElementById("l1");
+    sylbtn.style.transform = "scale(1.08)";
+    sylbtn.style.fontWeight = "bold";
+  } else if (params == "profile") {
+    var sylbtn = document.getElementById("l2");
+    sylbtn.style.transform = "scale(1.08)";
+    sylbtn.style.fontWeight = "bold";
+  } else if (params == "about") {
+    var sylbtn = document.getElementById("l3");
+    sylbtn.style.transform = "scale(1.08)";
+    sylbtn.style.fontWeight = "bold";
+  } else if (params == "pricing") {
+    var sylbtn = document.getElementById("l4");
+    sylbtn.style.transform = "scale(1.08)";
+    sylbtn.style.fontWeight = "bold";
+  } else if (params == "help") {
+    var sylbtn = document.getElementById("l5");
+    sylbtn.style.transform = "scale(1.08)";
+    sylbtn.style.fontWeight = "bold";
+  } else if (params == "contact-us") {
+    var sylbtn = document.getElementById("l6");
+    sylbtn.style.transform = "scale(1.08)";
+    sylbtn.style.fontWeight = "bold";
+  }
 </script>
 
 <!-- <script>

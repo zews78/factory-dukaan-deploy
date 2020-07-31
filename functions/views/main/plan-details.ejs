@@ -1,8 +1,12 @@
-<%- include("../partials/start") %> <%- include("../partials/headBody") %> <%-
-include("../partials/header") %>
-<body>
-    <div class="content" style="text-align: center;">
-        <%- include('../partials/plan.ejs') %>
+<%- include("../partials/start") %>
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+        <div class="content" style="text-align: center;">
+            <%- include('../partials/plan.ejs') %>
+        </div>
     </div>
-</body>
+</div>
 <%- include('../partials/footer.ejs') %> <%- include('../partials/end.ejs') %>
