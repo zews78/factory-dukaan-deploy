@@ -392,6 +392,25 @@ header .fixed-top {
   margin-left: auto;
   margin-right: auto;
 }
+.pricing-container .card-header{
+  background-color: #000;
+  color: wheat;
+}
+.pricing-container .pricing-card-title{
+  font-size: 1.88rem;
+  color: #e63946;
+}
+.pricing-container .pricing-card-title .text-mute{
+  color: tomato;
+}
+.pricing-container .card-body a .btn-primary{
+  background-color: #000;
+  border-color: #000;
+}
+.pricing-container .card-body a .btn-primary:hover, .pricing-container .card-body a .btn-primary:link{
+  background-color: #242423;
+  border-color: #242423;
+}
 
 .carousel .carousel-item {
   height: 500px;
