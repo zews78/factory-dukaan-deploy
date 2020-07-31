@@ -13,6 +13,7 @@ router.post('/verify-gst', userController.postVerifyGst);
 router.get('/sell', userController.getSellingPage);
 router.post('/deleteProduct', userController.deleteProduct);
 router.post('/updateProduct', userController.updateProduct);
+router.post('/sellProduct', userController.sellProduct);
 
 // PAYMENT ROUTES
 router.get('/payment', userController.getUserPayment);

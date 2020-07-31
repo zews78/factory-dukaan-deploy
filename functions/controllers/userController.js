@@ -24,9 +24,9 @@ exports.getUserProfile = async(req, res) => {
 		.get();
 	let products = [];
 	if (!productsSnapshot.empty) {
-		products = productsSnapshot.forEach(product => product.data());
+		productsSnapshot.forEach(product => products.push(product.data()));
 	}
-	// console.log((userSnapshot.data().expiresOn._seconds.to * 1000));
+
 	res.render('user/profile.ejs', {
 		pageTitle: 'Profile',
 		auth: true,
@@ -48,6 +48,12 @@ exports.getUserPayment = async(req, res) => {
 		.get();
 
 	if(user.data().packPurchased && user.data().expiresOn._seconds * 1000 < Date.now()) {
+		res.render('user/checkout.ejs', {
+			alreadyActivePlan: true,
+			auth,
+			user: user.data()
+		});
+	}else{
 		const instance = new razorpay({
 			key_id: config.razorpay.key_id,
 			key_secret: config.razorpay.key_secret
@@ -67,6 +73,7 @@ exports.getUserPayment = async(req, res) => {
 			.then((data)=>{
 				res.render('user/checkout.ejs', {
 					orderData: data,
+					alreadyActivePlan: false,
 					auth,
 					amount: amount,
 					key_id: config.razorpay.key_id,
@@ -78,13 +85,8 @@ exports.getUserPayment = async(req, res) => {
 			.catch((error)=>{
 				res.json({error});
 			});
-	}else{
-		res.render('user/checkout.ejs', {
-			alreadyActivePlan: true,
-			auth,
-			user: user.data()
-		});
 	}
+
 
 };
 
@@ -95,34 +97,32 @@ exports.paymentVerification = async(req, res)=>{
 		.update(body.toString())
 		.digest('hex');
 	let package = null;
-
+	let productLimit = null;
 	if(req.body.amount === config.razorpay.silverPackage) {
 		package = 'Silver';
+		productLimit = config.razorpay.silverSellLimit;
 	}
 	if(req.body.amount === config.razorpay.goldPackage) {
 		package = 'Gold';
+		productLimit = config.razorpay.goldSellLimit;
 	}
 	if(req.body.amount === config.razorpay.platinumPackage) {
 		package = 'Platinum';
+		productLimit = config.razorpay.platinumSellLimit;
 	}
 	const expiresOn = new Date();
 	if(expectedSignature === req.body.response.razorpay_signature) {
+		const userRef = await firebase
+			.firestore()
+			.collection('users')
+			.doc(req.uid);
 		expiresOn.setDate(new Date()
 			.getDate() + 30);
-		try{ await firebase
-			.firestore()
-			.collection('users')
-			.doc(req.uid)
+		try{ userRef
 			.update({
 				packPurchased: package,
-				expiresOn: expiresOn
-			});
-
-		await firebase
-			.firestore()
-			.collection('users')
-			.doc(req.uid)
-			.update({
+				expiresOn: expiresOn,
+				productLimit,
 				subscriptions: firebase.firestore.FieldValue.arrayUnion({
 					start: Date(Date.now()),
 					end: expiresOn,
@@ -192,6 +192,10 @@ exports.postVerifyGst = async(req, res) => {
 exports.getSellingPage = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
 
+	const user =	await firebase.firestore()
+		.collection('users')
+		.doc(req.uid)
+		.get();
 	const productsSnapshot = await firebase.firestore()
 		.collection('products')
 		.where('uid', '==', req.uid)
@@ -208,6 +212,7 @@ exports.getSellingPage = async(req, res)=>{
 
 	res.render('user/sell-page.ejs', {
 		auth,
+		user: user.data(),
 		products,
 		productsId
 	});
@@ -240,4 +245,38 @@ exports.updateProduct = async(req, res)=>{
 	}else{
 		res.json({status: 'unauthorised'});
 	}
+};
+
+exports.sellProduct = async(req, res)=>{
+
+
+
+	req.body.createdOn = new Date();
+	req.body.uid = req.uid;
+	const user =	await firebase.firestore()
+		.collection('users')
+		.doc(req.uid)
+		.get();
+
+	const productsCount = await firebase.firestore()
+		.collection('products')
+		.where('uid', '==', req.uid)
+		.get();
+	let count = 0;
+	productsCount.forEach(()=>{ count = count + 1; });
+
+	if(user.data().productLimit > count) {
+		try{
+			await firebase.firestore()
+				.collection('products')
+				.add(req.body);
+			console.log('product added');
+			res.json({status: 'success'});
+		}catch(error) {
+			console.log(error);
+		}
+	}else{
+		res.json({status: 'fail'});
+	}
+
 };
