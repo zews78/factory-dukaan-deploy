@@ -15,6 +15,9 @@
         /* font-weight: lighter; */
         font-size: 0.9em;
     }
+    .back-img{
+        display: none;
+    }
     
 }
 .q-a{

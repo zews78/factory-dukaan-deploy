@@ -182,7 +182,7 @@ exports.getHelp = async(req, res) => {
 		const FAQ = doc.data();
 		// console.log(FAQ);
 		const auth = (await isAuth(req))[0];
-		res.render('main/contact.ejs', {
+		res.render('main/help.ejs', {
 			pageTitle: 'Contacts',
 			FAQ,
 			auth
