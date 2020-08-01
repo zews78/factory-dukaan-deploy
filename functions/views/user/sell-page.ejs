@@ -142,32 +142,32 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form role="form" method="POST" action="">
+                <form >
                     <input type="hidden" name="_token" value="">
                     <div class="form-group">
-                        <label class="control-label">Product Name</label>
+                        <label class="control-label" id="product-name">Product Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="user-name" value="" id="addTitleInput">
+                            <input type="text" required class="form-control input-lg" name="user-name" value="" id="addTitleInput">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Price</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="company-name" id="addPriceInput">
+                            <input type="text" required class="form-control input-lg" name="company-name" id="addPriceInput">
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label class="control-label">Product Description</label>
                         <div>
-                            <textarea class="form-control"  rows="4" id="addDescInput"></textarea>
+                            <textarea class="form-control"  required rows="4" id="addDescInput"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Keywords <small>(seperated by comma)</small> </label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="company-name" id="addKeywordsInput">
+                            <input type="text" required class="form-control input-lg" name="company-name" id="addKeywordsInput">
                         </div>
                     </div>
 
@@ -176,8 +176,8 @@
                             <div class="input-group-prepend">
                             <span class="input-group-text">Specifications</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0">
-                            <input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0">
+                            <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0" required>
+                            <input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
                         </div>
                     </div>
 
@@ -211,33 +211,43 @@
         nextSibling.innerText = fileName
     })
     
-
+    var c=1;
     const specsHandler=()=>{
-        var c=1;
-        document.getElementById('specs-form').innerHTML=document.getElementById('specs-form').innerHTML+ `<div class="input-group"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle${c}"><input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" id="specsDesc${c}" style="border-radius: 0;"></div>`
         
+        $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle${c}"><input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" id="specsDesc${c}" style="border-radius: 0;"></div>`)
+        
+        c=c+1;
     }
     const addProductHandler=async()=>{
 
-        // var specFields=document.getElementsByClassName("form-control border border-primary");
-        // var specTitles=document.getElementById("specsTitle");
-        // var specDescs=document.getElementById("specsdesc");
-        
-        // for(var i=0;i<specFields.length/2;i+=1){
-        //     console.log(`${document.getElementById(`specsTitle${i}`).value}: ${document.getElementById(`specsDesc${i}`).value}`);
-        // }
-        // var specs={};
-        // for(var i=0;i<specFields.length/2;i+=1){
-        //     specs[`${document.getElementById(`specsTitle${i}`).value}`]=`${document.getElementById(`specsDesc${i}`).value}`
-        // }
-        const response=await axios({ 
+        var specFields=document.getElementsByClassName("form-control border border-primary");
+        var specs={};
+        for(var i=0;i<specFields.length/2;i+=1){
+            if(document.getElementById(`specsTitle${i}`).value===null || document.getElementById(`specsTitle${i}`).value==="" || document.getElementById(`specsDesc${i}`).value===null || document.getElementById(`specsDesc${i}`).value===""){
+                continue;
+            }else{specs[`${document.getElementById(`specsTitle${i}`).value}`]=`${document.getElementById(`specsDesc${i}`).value}`}
+            
+        }
+        if(document.getElementById('addTitleInput').value===null || document.getElementById('addTitleInput').value===""){
+            document.getElementById('addTitleInput').style.borderColor="red";
+        }if(document.getElementById('addPriceInput').value===null || document.getElementById('addPriceInput').value===""){
+            document.getElementById('addPriceInput').style.borderColor="red";
+        }if(document.getElementById('addDescInput').value===null || document.getElementById('addDescInput').value===""){
+            document.getElementById('addDescInput').style.borderColor="red";
+        }if(document.getElementById('addKeywordsInput').value===null || document.getElementById('addKeywordsInput').value===""){
+            document.getElementById('addKeywordsInput').style.borderColor="red";
+        }if(document.getElementById(`specsTitle0`).value===null || document.getElementById(`specsTitle0`).value==="" || document.getElementById(`specsDesc0`).value===null || document.getElementById(`specsDesc0`).value===""){
+            $('#specs-form').append('<p style="color:red">At Least One spec is required</p>')
+        }else{
+            const response=await axios({ 
             method:"POST",
             url:"/user/sellProduct",
             data:{
                 title:document.getElementById('addTitleInput').value,
                 price:document.getElementById('addPriceInput').value,
                 desc:document.getElementById('addDescInput').value,
-                keywords:document.getElementById('addKeywordsInput').value.split(',')
+                keywords:document.getElementById('addKeywordsInput').value.split(','),
+                specs
             }
         });
 
@@ -245,7 +255,8 @@
             location.reload();
         }else{
             console.log('Sorry Pack Limit Reached');
-        }
+        }}
+        
        
     }
 
