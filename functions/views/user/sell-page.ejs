@@ -16,19 +16,19 @@
             <p></p>
             <% } %>
 
-            <% if(products.length < user.productLimit || user.productLimit==="unlimited") { %>
+        <% if(products.length < user.productLimit || user.productLimit==="unlimited") { %>
+            <div class="add-product">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddProduct">Add Product</button>
+            </div>
+            <% } else { %>
                 <div class="add-product">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddProduct">Add Product</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddProduct" disabled style="background-color: #70aff3; color:rgb(54, 54, 54)">Add Product</button>
                 </div>
-                <% } else { %>
-                    <div class="add-product">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddProduct" disabled style="background-color: #70aff3; color:rgb(54, 54, 54)">Add Product</button>
-                    </div>
-                    <div class="add-product">
-                        <pre style="color:red">Product Selling Limit Exceeded </pre>
-                    </div>
-                    
-                <% } %>
+                <div class="add-product">
+                    <pre style="color:red">Product Selling Limit Exceeded </pre>
+                </div>
+                
+            <% } %>
 
         <% for (var i = 0; i < products.length; i++) { %>
             <div class="products-wrapper">
@@ -57,7 +57,8 @@
                     </div>
                 </div>
             <% } %>
-            
+
+<%- include("../partials/footer") %>            
         
 <div id="ModalEditForm1" class="modal fade">
     <div class="modal-dialog" role="document">
@@ -339,5 +340,5 @@
     
 </script>
 
-<%- include("../partials/footer") %>
+
 <%- include("../partials/end") %>
