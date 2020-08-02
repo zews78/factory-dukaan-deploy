@@ -218,3 +218,11 @@ exports.getPlanDetails = async(req, res)=>{
 		auth
 	});
 };
+
+exports.getContacts = async(req, res)=>{
+	const auth = (await isAuth(req))[0];
+	res.render('main/contact.ejs', {
+		pageTitle: 'Contact Us',
+		auth
+	});
+};
