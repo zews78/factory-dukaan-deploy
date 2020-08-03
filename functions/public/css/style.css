@@ -641,6 +641,9 @@ form.form-group button:hover {
 	padding-bottom: 20px;
 	border-radius: 5px;
 }
+.main_content .products-wrapper{
+	min-height: auto;
+}
 
 .tab {
 	overflow: hidden;
