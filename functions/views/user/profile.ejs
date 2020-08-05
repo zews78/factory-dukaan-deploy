@@ -34,10 +34,13 @@
                             <%}else{%>
                                 <i class="fas fa-usd" aria-hidden="true"></i> No Active Plan <a href="/plan-details">Check Plan Pricings</a> <br>
                             <% } %>
-                        
-                        <i class="fas fa-building"></i><%= user.company.name %> &nbsp; 
-                        <!-- <i class="fas fa-check-circle"></i> --> <br> 
-                        <i class="fas fa-envelope"></i><%= user.email %> <br>
+                        <% if (user.company.name) {%>
+                            <i class="fas fa-building"></i><%= user.company.name %> <br>
+                        <%} %>
+                        <% if (user.email) {%>
+                            <i class="fas fa-envelope"></i><%= user.email %> <br>
+                        <%} %>
+                        <!-- <i class="fas fa-check-circle"></i> --> <br>  
                         <% if (user.gstNo) { %>
                         <i class="fas fa-money-check-alt"></i>GSTIN <%= user.gstNo %> <br>
                         <% } %>
@@ -46,11 +49,13 @@
                         <%= user.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %>
                         <hr style="width: 20vw; margin: 0">
                     </p>
-                    <div class="company-desc">
-                        <strong>Company Description</strong>
-                        <p> <%= user.company.desc %>
-                        </p>
-                    </div>
+                    <% if ( user.company.desc) {%>
+                        <div class="company-desc">
+                            <strong>Company Description</strong>
+                            <p> <%= user.company.desc %>
+                            </p>
+                        </div>
+                    <%} %>
                 </div>
             </div>
         </div>
@@ -138,39 +143,43 @@
                     <div class="form-group">
                         <label class="control-label">Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="user-name" value="">
+                            <input type="text" class="form-control input-lg" name="user-name" value='<%= user.name %>' id='update-name'>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Company Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="company-name">
+                            <input type="text" class="form-control input-lg" name="company-name" value='<%= user.company.name %>' id='update-company-name'>
                         </div>
                     </div>
                     <input type="hidden" name="_token" value="">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="control-label">GST Number</label>
                         <div>
                             <input type="text" class="form-control input-lg" name="gst-number" value="">
                         </div>
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <!-- <div class="form-group">
                         <label class="control-label">Contact Number</label>
                         <div>
                             <input type="text" class="form-control input-lg" name="contact-number" value="">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label class="control-label">Company Description <span style="color: crimson;">(max: 60
                                 words)</span> </label>
                         <div>
                             <!-- {{!-- <input type="textarea" class="form-control input-lg" name="description"> --}} -->
-                            <textarea class="form-control" name="" id="" rows="4"></textarea>
+                            <!-- <% if ( user.company.desc) {%>
+                                <textarea class="form-control" name="" rows="4" id="update-company-desc" value='<%= user.company.desc %>'></textarea>
+                            <%} else{%><textarea class="form-control" name=""  rows="4" id="update-company-desc" value=''></textarea><%} %> -->
+                            <textarea class="form-control" name="" rows="4" id="update-company-desc" value=''><%= user.company.desc %></textarea>
+                            
                         </div>
                     </div>
                     <div class="form-group">
                         <div>
-                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-success" onclick="editProfile()">Save</button>
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
                         </div>
@@ -253,6 +262,29 @@
 
 
 <script>
+
+    const editProfile=async ()=>{
+        
+            try{const res=await axios({
+                method: "POST",
+                url: "/user/profile/update",
+                data:{
+                    name:document.getElementById('update-name').value,
+                    company:{
+                        name:document.getElementById('update-company-name').value,
+                        desc:document.getElementById('update-company-desc').value
+                    }
+                }
+            })
+
+            if(res.data.status==='updated'){
+                location.reload();
+            }
+        }catch(error){
+            console.log(error);
+        }
+        
+    }
     const firebaseConfig = {
         apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
         authDomain: "factory-dukaan.firebaseapp.com",

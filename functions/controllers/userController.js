@@ -47,7 +47,8 @@ exports.getUserPayment = async(req, res) => {
 		.doc(req.uid)
 		.get();
 
-	if(user.data().packPurchased && user.data().expiresOn._seconds * 1000 < Date.now()) {
+	if(user.data().packPurchased && user.data().expiresOn._seconds * 1000 > Date.now()) {
+		console.log('already active');
 		res.render('user/checkout.ejs', {
 			alreadyActivePlan: true,
 			auth,
@@ -146,12 +147,13 @@ exports.getSuccessfulPayment = async(req, res)=>{
 
 exports.postUpdateUser = async(req, res) => {
 	try {
+
 		await firebase
 			.firestore()
 			.collection('users')
 			.doc(req.uid)
 			.update(req.body);
-		res.redirect('/login');
+		res.json({status: 'updated'});
 	} catch (err) {
 		console.log(err);
 	}

@@ -130,6 +130,7 @@ exports.getProducts = async(req, res) => {
 
 exports.getOneProduct = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
+
 	const product = await firebase.firestore()
 		.collection('products')
 		.doc(req.params.productId)
@@ -139,13 +140,26 @@ exports.getOneProduct = async(req, res)=>{
 		.doc(req.uid)
 		.get();
 
+	const productReviews = product.data().reviews;
+	let reviews = [];
+	for(var i = 0; i < productReviews.length; i++) {
+		const review = {};
+		await productReviews[i].userInfo.get()
+			.then(res=>review.name = res.data().name);
+		review.rating = productReviews[i].rating;
+		review.review = productReviews[i].review;
+		review.postedOn = productReviews[i].postedOn;
+		reviews.push(review);
+	}
+
 	if(user.data().expiresOn._seconds * 1000 < Date.now()) {
 		console.log('PLEASE PURCHASE A PLAN');
 	}
 	res.render('main/productDetails.ejs', {
 		pageTitle: 'Product Details',
 		auth,
-		productData: product.data()
+		productData: product.data(),
+		reviews
 	});
 };
 

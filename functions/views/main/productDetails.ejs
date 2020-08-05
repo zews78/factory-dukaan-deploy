@@ -151,58 +151,40 @@
                             </form>
                             <br> <br>
                             <div class="chat-body no-padding profile-message">
+                                
                                 <ul>
-                                    <li class="message">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
-                                        <span class="message-text">
-                                            <a href="javascript:void(0);" class="username">
-                                                Sharique
-                                                <span class="badge">Purchase Verified</span>
-                                                <span class="pull-right">
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-muted"></i>
+                                    <% if (reviews.length>0) {%>
+                                        <% for (var i = 0; i < reviews.length; i++) { %>
+                                            <li class="message">
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                                                <span class="message-text">
+                                                    <a href="javascript:void(0);" class="username">
+                                                        <%= reviews[i].name %>
+                                                        <span class="badge">Purchase Verified</span>
+                                                        <span class="pull-right">
+                                                            <% for (var j = 1; j <= 5; j++) { %>
+                                                                <% if (reviews[i].rating>=j) {%>
+                                                                    <i class="fa fa-star text-primary"></i>
+                                                                    <%}else{%>
+                                                                        <i class="fa fa-star text-muted"></i>
+                                                                    <% } %>
+                                                            <%} %>
+                                                        </span>
+                                                    </a>
+                                                    <%= reviews[i].review %>
                                                 </span>
-                                            </a>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet vehicula magna, eu feugiat dui.                                
-                                        </span>
-                                        <ul class="list-inline font-xs">
-                                            <li>
-                                                <a href="javascript:void(0);" class="text-info"><i class="fa fa-thumbs-up"></i> This was helpful (22)</a>
+                                                <ul class="list-inline font-xs">
+                                                    <li class="pull-right">
+                                                        <small class="text-muted pull-right ultra-light"> Posted on : <%= new Date(reviews[i].postedOn._seconds*1000).toDateString() %> </small>
+                                                    </li>
+                                                </ul>
                                             </li>
-                                            <li class="pull-right">
-                                                <small class="text-muted pull-right ultra-light"> Posted 1 year ago </small>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <br><br>
-                                    <li class="message">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="online" />
-                                        <span class="message-text">
-                                            <a href="javascript:void(0);" class="username">
-                                                Mangesh
-                                                <span class="badge">Purchase Verified</span>
-                                                <span class="pull-right">
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-primary"></i>
-                                                    <i class="fa fa-star text-primary"></i>
-                                                </span>
-                                            </a>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet vehicula magna, eu feugiat dui. 
-                                        </span>
-                                        <ul class="list-inline font-xs">
-                                            <li>
-                                                <a href="javascript:void(0);" class="text-info"><i class="fa fa-thumbs-up"></i> This was helpful (22)</a>
-                                            </li>
-                                            <li class="pull-right">
-                                                <small class="text-muted pull-right ultra-light"> Posted 1 year ago </small>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                            <br><br>
+                                            <% } %>
+                                        <%}else{%>
+                                        <p>No Reviews Available <br/> Be the first one to post a review </p>
+                                        <% } %>
+                                    
                                 </ul>
                             </div>
                         </div>
