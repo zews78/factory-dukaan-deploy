@@ -151,8 +151,7 @@ exports.getOneProduct = async(req, res)=>{
 				.then(res=>{
 					review.name = res.data().name;
 					if(res.data().mobile === user.data().mobile) {
-						// reviewed = true;
-						console.log('ALREADY REVIEWED');
+						reviewed = i;
 					}
 				}
 				);

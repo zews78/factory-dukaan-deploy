@@ -281,24 +281,25 @@ exports.sellProduct = async(req, res)=>{
 
 };
 
+
 exports.postReview = async(req, res)=>{
 	const productRef = await firebase.firestore()
 		.collection('products')
 		.doc(req.params.productId);
 	let reviewed = false;
-	productRef.get()
-		.then(doc=>{
+	await productRef.get()
+		.then(async doc=>{
 			let reviewsArray = doc.data().reviews;
-			for(var i = 0; i < reviewsArray.length; i++) {
-
+			for (var i = 0; i < reviewsArray.length; i++) {
 				if(reviewsArray[i].userInfo._path.segments[1] === req.uid) {
 					console.log('Not allowed to post another review');
-					res.json({status: 'Already reviewed'});
 					reviewed = true;
+					console.log(reviewed);
 					break;
 				}
 			}
 		});
+	console.log('HERE', reviewed);
 	if(!reviewed) {
 		try{
 			productRef.update({
@@ -314,6 +315,8 @@ exports.postReview = async(req, res)=>{
 		}catch(error) {
 			console.log(error);
 		}
+	}else{
+		res.json({status: 'Already reviewed'});
 	}
 
 };
