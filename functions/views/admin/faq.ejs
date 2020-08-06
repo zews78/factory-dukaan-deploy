@@ -1,0 +1,167 @@
+<%- include('../partials/admin/start.ejs') %> 
+<%-include('../partials/headBody.ejs') %> 
+<%-include('../partials/admin/header.ejs') %>
+
+<div class="container-fluid">
+
+
+
+
+
+
+	<div class="container">
+		<div class="heads">
+			<h3 style="color: #231f1a;">Frequently Asked Questions</h3>
+			<button data-toggle="modal" data-target="#ModalEditForm2">Question +</button>
+		</div>
+		<hr>
+		<div class="panel-group q-a" id="accordion">
+		  <% var i =0 %>
+          <% while(FAQr[i]){ %>
+              <% var ques = "ques" + FAQr[i].id %>
+              <% var ans = "ans" + FAQr[i].id %>
+			  <% var str = "collapse" + i %>
+              <% var str1 = "#collapse" + i %>
+			  <div class="panel panel-default q-a_stats">
+				<div class="panel-heading ques-head">
+				  <h5 class="panel-title ques">
+					<a data-toggle="collapse" data-parent="#accordion" id="<%=ques%>" href= <%=str1%> ><%=FAQr[i].ques%>?</a>
+				  </h5>
+				  <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ModalEditForm1" onclick="editFaq('<%=FAQr[i].id%>')"  title="Edit">
+					<span class="fa fa-pencil"></span>
+				  </button>
+				  <button class="btn btn-sm btn-danger" onclick=""  title="Delete">
+					<span class="fa fa-trash fill"></span>
+				  </button>
+				</div>
+				<div id=<%=str%> >
+				  <div class="panel-body" id="<%=ans%>"><%=FAQr[i].ans%></div>
+				</div>
+			  </div>
+		  <% i++ %>
+		  <% } %>
+
+
+		</div>
+	</div>	 
+</div>
+
+
+<!-- this is edit modal -->
+<div id="ModalEditForm1" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit FAQ</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
+            </div>
+            <p id="productID" style="color:gray"></p>
+            <div class="modal-body">
+                <form role="form" method="POST"  action="/admin/editfaq/">
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">Question</label>
+                        <div>
+                            <input type="text" class="form-control input-lg"  value="" name="ques" id="titleInput">
+                        </div>
+
+                        <label class="control-label">Answer</label>
+                        <div>
+                            <textarea class="form-control"  rows="4" value="" name="ans" id="descInput"></textarea>
+                        </div>
+                        <div>
+                            <input style="display: none;" type="text" value="" id="idpass" name="uid">
+                        </div>
+                        <div>
+
+                        </div><br>
+                        <div>
+                            <button type="submit" class="btn btn-success" onclick="">Save</button>
+                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- this is add faq -->
+<div id="ModalEditForm2" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New FAQ</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
+            </div>
+            <p id="productID" style="color:gray"></p>
+            <div class="modal-body">
+                <form role="form" method="POST" action="/admin/addfaq">
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">Question</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="ques" value="" id="">
+                        </div>
+
+                        <label class="control-label">Answer</label>
+                        <div>
+                            <textarea class="form-control"  rows="4" id="" name="ans"></textarea>
+                        </div>
+                        <div>
+
+                        </div><br>
+                        <div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function editFaq(x){
+        document.getElementById('idpass').value = x;
+
+        var quesVal = document.getElementById('ques' + x).innerText;
+        document.getElementById('titleInput').value = quesVal;
+
+        var ansVal = document.getElementById("ans" + x).innerText;
+        document.getElementById('descInput').value = ansVal;
+        console.log(quesVal, x);
+    }
+
+	// const deleteUser = (userId) => {
+	// 	const xhr = new XMLHttpRequest();
+	// 	const url = '/admin/user/' + userId;
+	// 	xhr.open("DELETE", url);
+	// 	xhr.setRequestHeader("Content-Type", "application/json");
+	// 	xhr.send(JSON.stringify({
+	// 		uid: userId
+	// 	}));
+	// 	xhr.onreadystatechange = function () {
+	// 		if (xhr.readyState == XMLHttpRequest.DONE) {
+	// 			if (xhr.status === 200) {
+	// 				const userListItem = document.getElementById('user_' + userId);
+	// 				userListItem.classList += " d-none";
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+
+</script>
+<%- include('../partials/end.ejs') %>

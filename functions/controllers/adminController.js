@@ -1,6 +1,7 @@
 const firebase = require('../firebase');
 const keywordGenerator = require('../utils/keywordGenerator');
-
+const {italics} = require('../utils/punctuationMarks');
+const admin = require('firebase-admin');
 
 exports.getDashboard = async(req, res) => {
 	res.redirect('/admin/products');
@@ -339,4 +340,114 @@ exports.postBlockUser = async(req, res) => {
 		res.status(500)
 			.json({message: 'failed'});
 	}
+};
+
+exports.getFaq = async(req, res) => {
+	try{
+		var FAQr = [];
+		const FAQRef = firebase.firestore()
+			.collection('config')
+			.doc('FAQ')
+			.collection('q-a');
+		const snapshot = await FAQRef.get();
+		snapshot.forEach(doc => {
+			// console.log(doc.id, '=>', doc.data());
+			// const FAQ = doc.data();
+			FAQr.push({
+				id: doc.id,
+				...doc.data()
+			});
+		});
+
+		// console.log(doc.docs);
+		// console.log(FAQr);
+		// const auth = (await isAuth(req))[0];
+		res.render('admin/faq.ejs', {
+			pageTitle: 'faq - Admin',
+			FAQr
+		});
+	} catch(err) {
+		console.log(err);
+	}
+};
+exports.createFaq = async(req, res) => {
+	try {
+		// var type = req.body.Type;
+		// var ques = "checking it";
+		// var ans = "worked";
+		var ques = req.body.ques;
+		var ans = req.body.ans;
+
+
+		await firebase.firestore()
+			.collection('config')
+			.doc('FAQ')
+			.collection('q-a')
+			// .doc(doc.id)
+			.add({
+				ques: ques,
+				ans: ans
+			});
+		// console.log(submitValue);
+		console.log('Succesfully Submitted your Query/Complaint');
+		res.redirect('/admin/faq');
+	} catch (err) {
+		console.log(err);
+	}
+};
+exports.deleteFaq = async(req, res) => {
+	// try {
+	// 	const userRef = firebase.firestore()
+	// 		.collection('users')
+	// 		.doc(req.body.uid);
+	// 	await userRef.delete();
+	// 	res.json({message: 'success'});
+	// } catch(err) {
+	// 	res.status(500)
+	// 		.json({message: 'failed'});
+	// }
+};
+exports.editFaq = async(req, res) => {
+	try {
+		var ques = req.body.ques;
+		var ans = req.body.ans;
+		var uid = req.body.uid;
+		const FAQref = await firebase.firestore()
+			.collection('config')
+			.doc('FAQ')
+			.collection('q-a')
+			.doc(uid);
+		FAQref.update({
+			ques: ques,
+			ans: ans
+		});
+		// res.json({message: 'success'});
+		console.log(uid, ques, ans);
+		res.redirect('/admin/faq');
+	} catch(err) {
+		console.log(err);
+		// res.status(500)
+		// 	.json({message: 'failed'});
+	}
+	// console.log('succesfully working');
+};
+
+
+
+exports.getQuery = async(req, res) => {
+	// try{
+	// 	const FAQRef = firebase.firestore()
+	// 		.collection('query')
+	// 		.doc('req.body');
+	// 	const doc = await FAQRef.get();
+	// 	const FAQ = doc.data();
+	// 	// console.log(FAQ);
+	// 	// const auth = (await isAuth(req))[0];
+	// 	res.render('admin/faq.ejs', {
+	// 		pageTitle: 'faq - Admin',
+	// 		FAQ
+	// 	});
+	// } catch(err) {
+	// 	console.log(err);
+	// }
 };

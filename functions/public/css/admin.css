@@ -313,3 +313,22 @@ p {
 .product-control {
 	text-align: center;
 }
+
+
+/************* faq page - Start *************/
+
+.heads{
+	display: flex;
+	justify-content: space-between;
+}
+.ques-head{
+	display: flex;
+	
+}
+.ques-head .btn{
+	margin: 0 5px 0 18px;
+}
+
+
+/************* faq page - End *************/
+

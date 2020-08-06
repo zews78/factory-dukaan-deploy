@@ -6,6 +6,13 @@ const router = express.Router();
 
 router.get('/', adminController.getDashboard);
 router.get('/products', adminController.getProducts);
+router.get('/faq', adminController.getFaq);
+router.post('/addfaq', adminController.createFaq);
+router.post('/editfaq', adminController.editFaq);
+
+
+router.get('/query', adminController.getQuery);
+
 router.get('/users', adminController.getUsers);
 router.get('/product/:productId', adminController.getPrdouctDetails);
 router.get('/user/:userId', adminController.getUserDetails);
