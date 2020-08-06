@@ -15,6 +15,9 @@ router.post('/deleteProduct', userController.deleteProduct);
 router.post('/updateProduct', userController.updateProduct);
 router.post('/sellProduct', userController.sellProduct);
 
+// REVIEW HANDLER
+router.post('/review/:productId', userController.postReview);
+
 // PAYMENT ROUTES
 router.get('/payment', userController.getUserPayment);
 router.post('/payment/verify', userController.paymentVerification);

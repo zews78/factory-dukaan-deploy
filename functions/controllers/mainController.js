@@ -3,6 +3,7 @@ const firebase = require('../firebase');
 const isAuth = require('../utils/isAuth');
 const keywordGenerator = require('../utils/keywordGenerator');
 
+
 exports.getHome = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/home', {
@@ -142,15 +143,26 @@ exports.getOneProduct = async(req, res)=>{
 
 	const productReviews = product.data().reviews;
 	let reviews = [];
-	for(var i = 0; i < productReviews.length; i++) {
-		const review = {};
-		await productReviews[i].userInfo.get()
-			.then(res=>review.name = res.data().name);
-		review.rating = productReviews[i].rating;
-		review.review = productReviews[i].review;
-		review.postedOn = productReviews[i].postedOn;
-		reviews.push(review);
+	let reviewed;
+	if(productReviews) {
+		for(var i = 0; i < productReviews.length; i++) {
+			const review = {};
+			await productReviews[i].userInfo.get()
+				.then(res=>{
+					review.name = res.data().name;
+					if(res.data().mobile === user.data().mobile) {
+						// reviewed = true;
+						console.log('ALREADY REVIEWED');
+					}
+				}
+				);
+			review.rating = productReviews[i].rating;
+			review.review = productReviews[i].review;
+			review.postedOn = productReviews[i].postedOn;
+			reviews.push(review);
+		}
 	}
+
 
 	if(user.data().expiresOn._seconds * 1000 < Date.now()) {
 		console.log('PLEASE PURCHASE A PLAN');
@@ -158,8 +170,10 @@ exports.getOneProduct = async(req, res)=>{
 	res.render('main/productDetails.ejs', {
 		pageTitle: 'Product Details',
 		auth,
+		productId: req.params.productId,
 		productData: product.data(),
-		reviews
+		reviews,
+		reviewed
 	});
 };
 

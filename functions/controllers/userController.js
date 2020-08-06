@@ -251,8 +251,6 @@ exports.updateProduct = async(req, res)=>{
 
 exports.sellProduct = async(req, res)=>{
 
-
-
 	req.body.createdOn = new Date();
 	req.body.uid = req.uid;
 	const user =	await firebase.firestore()
@@ -279,6 +277,43 @@ exports.sellProduct = async(req, res)=>{
 		}
 	}else{
 		res.json({status: 'fail'});
+	}
+
+};
+
+exports.postReview = async(req, res)=>{
+	const productRef = await firebase.firestore()
+		.collection('products')
+		.doc(req.params.productId);
+	let reviewed = false;
+	productRef.get()
+		.then(doc=>{
+			let reviewsArray = doc.data().reviews;
+			for(var i = 0; i < reviewsArray.length; i++) {
+
+				if(reviewsArray[i].userInfo._path.segments[1] === req.uid) {
+					console.log('Not allowed to post another review');
+					res.json({status: 'Already reviewed'});
+					reviewed = true;
+					break;
+				}
+			}
+		});
+	if(!reviewed) {
+		try{
+			productRef.update({
+				reviews: firebase.firestore.FieldValue.arrayUnion({
+					rating: req.body.rating,
+					review: req.body.review,
+					userInfo: firebase.firestore()
+						.doc(`/users/${req.uid}`),
+					postedOn: new Date()
+				})
+			});
+			res.json({status: 'success'});
+		}catch(error) {
+			console.log(error);
+		}
 	}
 
 };
