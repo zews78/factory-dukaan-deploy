@@ -396,16 +396,18 @@ exports.createFaq = async(req, res) => {
 	}
 };
 exports.deleteFaq = async(req, res) => {
-	// try {
-	// 	const userRef = firebase.firestore()
-	// 		.collection('users')
-	// 		.doc(req.body.uid);
-	// 	await userRef.delete();
-	// 	res.json({message: 'success'});
-	// } catch(err) {
-	// 	res.status(500)
-	// 		.json({message: 'failed'});
-	// }
+	try {
+		const userRef = firebase.firestore()
+			.collection('config')
+			.doc('FAQ')
+			.collection('q-a')
+			.doc(req.body.uid);
+		await userRef.delete();
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
 };
 exports.editFaq = async(req, res) => {
 	try {

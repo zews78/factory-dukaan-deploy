@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="heads">
 			<h3 style="color: #231f1a;">Frequently Asked Questions</h3>
-			<button data-toggle="modal" data-target="#ModalEditForm2">Question +</button>
+			<button data-toggle="modal" data-target="#ModalEditForm2" id="add-btn">Add +</button>
 		</div>
 		<hr>
 		<div class="panel-group q-a" id="accordion">
@@ -22,7 +22,7 @@
               <% var ans = "ans" + FAQr[i].id %>
 			  <% var str = "collapse" + i %>
               <% var str1 = "#collapse" + i %>
-			  <div class="panel panel-default q-a_stats">
+              <div class="panel panel-default q-a_stats" id="faq_<%=FAQr[i].id%>">
 				<div class="panel-heading ques-head">
 				  <h5 class="panel-title ques">
 					<a data-toggle="collapse" data-parent="#accordion" id="<%=ques%>" href= <%=str1%> ><%=FAQr[i].ques%>?</a>
@@ -30,7 +30,7 @@
 				  <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ModalEditForm1" onclick="editFaq('<%=FAQr[i].id%>')"  title="Edit">
 					<span class="fa fa-pencil"></span>
 				  </button>
-				  <button class="btn btn-sm btn-danger" onclick=""  title="Delete">
+				  <button class="btn btn-sm btn-danger" onclick="deleteFaq('<%=FAQr[i].id%>')"  title="Delete">
 					<span class="fa fa-trash fill"></span>
 				  </button>
 				</div>
@@ -142,25 +142,27 @@
         var ansVal = document.getElementById("ans" + x).innerText;
         document.getElementById('descInput').value = ansVal;
         console.log(quesVal, x);
+
     }
 
-	// const deleteUser = (userId) => {
-	// 	const xhr = new XMLHttpRequest();
-	// 	const url = '/admin/user/' + userId;
-	// 	xhr.open("DELETE", url);
-	// 	xhr.setRequestHeader("Content-Type", "application/json");
-	// 	xhr.send(JSON.stringify({
-	// 		uid: userId
-	// 	}));
-	// 	xhr.onreadystatechange = function () {
-	// 		if (xhr.readyState == XMLHttpRequest.DONE) {
-	// 			if (xhr.status === 200) {
-	// 				const userListItem = document.getElementById('user_' + userId);
-	// 				userListItem.classList += " d-none";
-	// 			}
-	// 		}
-	// 	}
-	// }
+	const deleteFaq = (faqId) => {
+		const xhr = new XMLHttpRequest();
+		const url = '/admin/faq/';
+		xhr.open("DELETE", url);
+		xhr.setRequestHeader("Content-Type", "application/json");
+		xhr.send(JSON.stringify({
+			uid: faqId
+		}));
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					const userListItem = document.getElementById('faq_' + faqId);
+                    userListItem.classList += " d-none";
+                    console.log(faqId + "->delted");
+				}
+			}
+		}
+	}
 
 
 </script>
