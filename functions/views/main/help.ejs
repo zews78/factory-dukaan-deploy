@@ -52,17 +52,17 @@
               <h3 style="color: #231f1a;">Frequently Asked Questions</h3><hr>
               <div class="panel-group q-a" id="accordion">
                 <% var i =0 %>
-                <% while(FAQ.ques[i]){ %>
+                <% while(FAQr[i]){ %>
                     <% var str = "collapse" + i %>
                     <% var str1 = "#collapse" + i %>
                     <div class="panel panel-default q-a_stats">
                       <div class="panel-heading">
                         <h5 class="panel-title ques">
-                          <a data-toggle="collapse" data-parent="#accordion" href= <%=str1%> ><%=FAQ.ques[i]%>?</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href= <%=str1%> ><%=FAQr[i].ques%>?</a>
                         </h5>
                       </div>
                       <div id=<%=str%> class="panel-collapse collapse in ans">
-                        <div class="panel-body"><%=FAQ.ans[i]%>.</div>
+                        <div class="panel-body"><%=FAQr[i].ans%>.</div>
                       </div>
                     </div>
                 <% i++ %>

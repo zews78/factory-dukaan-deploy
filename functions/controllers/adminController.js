@@ -437,19 +437,28 @@ exports.editFaq = async(req, res) => {
 
 
 exports.getQuery = async(req, res) => {
-	// try{
-	// 	const FAQRef = firebase.firestore()
-	// 		.collection('query')
-	// 		.doc('req.body');
-	// 	const doc = await FAQRef.get();
-	// 	const FAQ = doc.data();
-	// 	// console.log(FAQ);
-	// 	// const auth = (await isAuth(req))[0];
-	// 	res.render('admin/faq.ejs', {
-	// 		pageTitle: 'faq - Admin',
-	// 		FAQ
-	// 	});
-	// } catch(err) {
-	// 	console.log(err);
-	// }
+	try{
+		var queryR = [];
+		const QueryRef = firebase.firestore()
+			.collection('query');
+		// const doc = await QueryRef.get();
+		// const Query = doc.data();
+
+		const snapshot = await QueryRef.get();
+		snapshot.forEach(doc => {
+			// console.log(doc.id, '=>', doc.data());
+			// const FAQ = doc.data();
+			queryR.push({
+				id: doc.id,
+				...doc.data()
+			});
+		});
+		// console.log(queryR);
+		res.render('admin/query.ejs', {
+			pageTitle: 'query - Admin',
+			queryR
+		});
+	} catch(err) {
+		console.log(err);
+	}
 };

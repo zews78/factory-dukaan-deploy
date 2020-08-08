@@ -202,17 +202,26 @@ exports.postUpdateProduct = async(req, res) => {
 
 exports.getHelp = async(req, res) => {
 	try{
+		const auth = (await isAuth(req))[0];
+
+		var FAQr = [];
 		const FAQRef = firebase.firestore()
 			.collection('config')
-			.doc('FAQ');
-		const doc = await FAQRef.get();
-		const FAQ = doc.data();
-		// console.log(FAQ);
-		const auth = (await isAuth(req))[0];
+			.doc('FAQ')
+			.collection('q-a');
+		const snapshot = await FAQRef.get();
+		snapshot.forEach(doc => {
+			// console.log(doc.id, '=>', doc.data());
+			// const FAQ = doc.data();
+			FAQr.push({
+				id: doc.id,
+				...doc.data()
+			});
+		});
 		res.render('main/help.ejs', {
-			pageTitle: 'Contacts',
-			FAQ,
-			auth
+			auth,
+			pageTitle: 'faq/query',
+			FAQr
 		});
 	} catch(err) {
 		console.log(err);

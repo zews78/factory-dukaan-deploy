@@ -2,7 +2,60 @@
 <%-include('../partials/headBody.ejs') %> 
 <%-include('../partials/admin/header.ejs') %>
 
-<div>
-    this is query page
-</div>
+<div class="container-fluid">
+    <h1 class="page-heading">Queries</h1>
+    <!-- search bar here-->
+
+
+    
+
+    <!-- sortBy here-->
+
+
+
+	<div class="clearfix my-3"></div>
+	<% if (queryR.length > 0) { %>
+	<div class="horizontal-scroll-wrapper">
+		<div class="horizontal-scroll-container">
+			<div class="list-group">
+				<div href="#" class="list-group-item list-group-item-action bg-dark text-light">
+					<div class="row">
+						<div class="col-1">Posted On</div>
+						<div class="col-2">User Info</div>
+						<div class="col-2">Title</div>
+						<div class="col-2">Type</div>
+						<div class="col-2">Description</div>
+                        <div class="col-2">Solved/pending</div>
+                        <div class="col-1">Delete</div>
+					</div>
+				</div>
+				<% for (let query of queryR) { %>
+				<div href="#!" class="list-group-item list-group-item-action"
+					id="query_<%= query.id %>">
+					<div class="row">
+						<div class="col-1"><%= "some_date" %></div>
+						<div class="col-2"><%= "that_username" %></div>
+						<div class="col-2"><%= query.title %></div>
+						<div class="col-2"><%= query.type %></div>
+						<div class="col-2"><%= query.description %></div>
+						<div class="col-2">hello
+							<!-- <label class="switch">
+								<input type="checkbox" id="status_toggle_<%= query.id %>"
+									onchange="updateStatus('<%= query.id %>')" />
+								<span class="slider"></span>
+							</label> -->
+						</div>
+						<div class="col-1 text-right">
+							<button class="btn btn-sm btn-danger" onclick="deletequery('<%= query.id %>')">
+								<span class="fa fa-trash"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<% } %>
+			</div>
+		</div>
+    </div>
+    <% } %>
+</div>    
 <%- include('../partials/end.ejs') %>
