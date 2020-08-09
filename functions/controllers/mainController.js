@@ -229,13 +229,20 @@ exports.getHelp = async(req, res) => {
 };
 exports.postQuery = async(req, res) => {
 	try {
-		var type = req.body.Type;
-		var title = req.body.Title;
-		var description = req.body.Description;
+		const user = await firebase.firestore()
+			.collection('users')
+			.doc(req.uid)
+			.get();
+
+		// console.log(user.name);
 		var submitValue = {
-			type: type,
-			title: title,
-			description: description
+			type: req.body.Type,
+			title: req.body.Title,
+			description: req.body.Description,
+			postedOn: new Date(),
+			UserName: user.data().name,
+			UserEmail: user.data().email,
+			status: false
 		};
 		await firebase.firestore()
 			.collection('query')

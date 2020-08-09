@@ -12,7 +12,7 @@ router.get('/products', mainController.getProducts);
 router.get('/product/:productId', isAuth, mainController.getOneProduct);
 router.post('/products', isAuth, mainController.postProduct);
 router.post('/product/:productId/update', isAuth, mainController.postUpdateProduct);
-router.post('/querySubmit', mainController.postQuery);
+router.post('/querySubmit', isAuth, mainController.postQuery);
 
 
 module.exports = router;

@@ -424,7 +424,7 @@ exports.editFaq = async(req, res) => {
 			ans: ans
 		});
 		// res.json({message: 'success'});
-		console.log(uid, ques, ans);
+		// console.log(uid, ques, ans);
 		res.redirect('/admin/faq');
 	} catch(err) {
 		console.log(err);
@@ -450,10 +450,12 @@ exports.getQuery = async(req, res) => {
 			// const FAQ = doc.data();
 			queryR.push({
 				id: doc.id,
-				...doc.data()
+				...doc.data(),
+				postedOn: doc.data().postedOn.toDate()
+					.toLocaleString()
 			});
 		});
-		// console.log(queryR);
+		console.log(queryR);
 		res.render('admin/query.ejs', {
 			pageTitle: 'query - Admin',
 			queryR
@@ -461,4 +463,31 @@ exports.getQuery = async(req, res) => {
 	} catch(err) {
 		console.log(err);
 	}
+};
+exports.deleteQuery = async(req, res) => {
+	try {
+		const queryRef = firebase.firestore()
+			.collection('query')
+			.doc(req.body.uid);
+		await queryRef.delete();
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
+
+exports.postUpdateStatus = async(req, res) => {
+	try {
+		var status = req.body.status;
+		const queryRef = firebase.firestore()
+			.collection('query')
+			.doc(req.body.uid);
+		await queryRef.update({status});
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500);
+		res.json({message: 'failed'});
+	}
+	// console.log(req.body.status);
 };

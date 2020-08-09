@@ -12,6 +12,10 @@ router.post('/editfaq', adminController.editFaq);
 router.delete('/faq', adminController.deleteFaq);
 
 router.get('/query', adminController.getQuery);
+router.delete('/query', adminController.deleteQuery);
+router.post('/query/update-status', adminController.postUpdateStatus);
+
+
 
 router.get('/users', adminController.getUsers);
 router.get('/product/:productId', adminController.getPrdouctDetails);
