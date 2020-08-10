@@ -22,8 +22,8 @@
 					<div class="row">
 						<div class="col-1">Posted On</div>
 						<div class="col-2">User Info</div>
-						<div class="col-2">Title</div>
 						<div class="col-2">Type</div>
+						<div class="col-2">Title</div>
 						<div class="col-2">Description</div>
                         <div class="col-2">Solved/pending</div>
                         <div class="col-1">Delete</div>
@@ -35,13 +35,13 @@
 					<div class="row">
 						<div class="col-1"><%= query.postedOn %></div>
 						<div class="col-2"><%= query.UserName %>,<br><%= query.UserEmail %></div>
-						<div class="col-2"><%= query.title %></div>
 						<div class="col-2"><%= query.type %></div>
+						<div class="col-2"><%= query.title %></div>
 						<div class="col-2"><%= query.description %></div>
 						<div class="col-2">
 							<label class="switch">
-
-								<input type="checkbox" id="status_toggle_<%= query.id %>" 
+								
+								<input type="checkbox" id="status_toggle_<%= query.id %>" <%- query.status% ? checked : !checked %>
 									onchange="updateStatus('<%= query.id %>')" />
 								<span class="slider"></span>
 							</label>
@@ -60,6 +60,7 @@
     <% } %>
 </div>
 <script>
+
 		const deleteQuery = (queryId) => {
 		const xhr = new XMLHttpRequest();
 		const url = '/admin/query/';
