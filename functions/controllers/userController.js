@@ -287,6 +287,7 @@ exports.postReview = async(req, res)=>{
 		.collection('products')
 		.doc(req.params.productId);
 	let reviewed = false;
+
 	await productRef.get()
 		.then(async doc=>{
 			let reviewsArray = doc.data().reviews;
@@ -294,12 +295,12 @@ exports.postReview = async(req, res)=>{
 				if(reviewsArray[i].userInfo._path.segments[1] === req.uid) {
 					console.log('Not allowed to post another review');
 					reviewed = true;
+
 					console.log(reviewed);
 					break;
 				}
 			}
 		});
-	console.log('HERE', reviewed);
 	if(!reviewed) {
 		try{
 			productRef.update({
@@ -316,7 +317,7 @@ exports.postReview = async(req, res)=>{
 			console.log(error);
 		}
 	}else{
-		res.json({status: 'Already reviewed'});
+		res.json({status: 'Alreayd Reviewed Please delete that review to create a new review'});
 	}
 
 };

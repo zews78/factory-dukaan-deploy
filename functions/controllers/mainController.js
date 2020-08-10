@@ -141,8 +141,14 @@ exports.getOneProduct = async(req, res)=>{
 		.doc(req.uid)
 		.get();
 
+
 	const productReviews = product.data().reviews;
+	const Seller = await firebase.firestore()
+		.collection('users')
+		.doc(product.data().uid)
+		.get();
 	let reviews = [];
+	let myReview;
 	let reviewed;
 	if(productReviews) {
 		for(var i = 0; i < productReviews.length; i++) {
@@ -152,6 +158,7 @@ exports.getOneProduct = async(req, res)=>{
 					review.name = res.data().name;
 					if(res.data().mobile === user.data().mobile) {
 						reviewed = i;
+						myReview = true;
 					}
 				}
 				);
@@ -172,7 +179,9 @@ exports.getOneProduct = async(req, res)=>{
 		productId: req.params.productId,
 		productData: product.data(),
 		reviews,
-		reviewed
+		reviewed,
+		myReview,
+		sellerDetails: Seller.data()
 	});
 };
 

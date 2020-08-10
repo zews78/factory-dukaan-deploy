@@ -59,28 +59,23 @@
                                 <div class="certified">
                                     <ul>
                                         <li>
-                                            <a href="javascript:void(0);">Number of Sellers<span>7</span></a>
-                                        </li>
-                                        <li>
                                             <a href="javascript:void(0);">Certified<span>Quality Assured</span></a>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div class="seller">
-                                    <p>Sold by: <a href="javascript:void(0);">Name</a></p>
+                                    <p>Sold by: <a href="javascript:void(0);"><%= sellerDetails.name %></a></p>
                                 </div>
                                 
                                 <hr />
 
                                 <div class="price-quote">
                                     
-                                        <h5>Enter Product Quantity</h5>
                                     
-                                        <label for="product-quantity"><strong> Quantity&nbsp; </strong></label>
-                                        <input type="text" name="quantity" id="product-quantity" class="form-control" placeholder="10">
-                                    
-                                        <button type="submit" class="btnPrice">Get Latest Price</button>
+                                        <button type="submit" class="btnPrice">Get Seller Details</button>
+                                        <br/>
+                                        <p>Only For Users Having Any Active Plan</p>
                                     
                                 </div>
                                 
@@ -100,7 +95,6 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-white btn-default"><i class="fa fa-star"></i> Add to wishlist</button>
-                                        <button class="btn btn-white btn-default"><i class="fa fa-envelope"></i> Contact Seller</button>
                                     </div>
                                 </div>
                             </div>
@@ -142,8 +136,66 @@
                         </div>
 
                         <div id="product-review" class="tabcontent">
-                            <% if (reviewed==='') {%>
-                                <form method="post" class="well padding-bottom-10" onsubmit="return false;">
+
+                            <% if (myReview) {%>
+                                
+                                    <p class="your-review">Your Review</p>
+                                    <form method="post" class="well padding-bottom-10" onsubmit="return false;">
+                                    <section class='rating-widget'>
+                                        <!-- Rating Stars Box -->
+                                        <div class='rating-stars text-center'>
+                                          <ul id='stars'>
+                                            <li class='star' title='Poor' data-value='1'>
+                                              <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' title='Fair' data-value='2'>
+                                              <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' title='Good' data-value='3'>
+                                              <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' title='Excellent' data-value='4'>
+                                              <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' title='WOW!!!' data-value='5'>
+                                              <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                          </ul>
+                                          <p id="rating-warning" style="color: red;"></p>
+                                        </div>
+                                      </section>
+                                      
+                                      <input type="hidden" id="rating" value='<%= reviews[reviewed].rating %>' />
+                                      <li class="message">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                                        <span class="message-text">
+                                            <a href="javascript:void(0);" class="username">
+                                                <%= reviews[reviewed].name %>
+                                                <span class="badge">Purchase Verified</span>
+                                                <span class="pull-right">
+                                                    <% for (var j = 1; j <= 5; j++) { %>
+                                                        <% if (reviews[reviewed].rating>=j) {%>
+                                                            <i class="fa fa-star text-primary"></i>
+                                                            <%}else{%>
+                                                                <i class="fa fa-star text-muted"></i>
+                                                            <% } %>
+                                                    <%} %>
+                                                </span>
+                                            </a>
+                                            <%= reviews[reviewed].review %>
+                                        </span>
+                                        <ul class="list-inline font-xs">
+                                            <li class="pull-right">
+                                                <small class="text-muted pull-right ultra-light"> Posted on : <%= new Date(reviews[reviewed].postedOn._seconds*1000).toDateString() %> </small>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <br><br>
+                                   
+                                </form>
+                                
+                                
+                                <%}else{%><form method="post" class="well padding-bottom-10" onsubmit="return false;">
                                     <section class='rating-widget'>
                                         <!-- Rating Stars Box -->
                                         <div class='rating-stars text-center'>
@@ -173,39 +225,6 @@
                                     <div class="margin-top-10">
                                         <button type="button" class="btn btn-sm btn-primary pull-right" onclick="submitReviewHandler()">
                                             Submit Review
-                                        </button>
-                                    </div>
-                                </form>
-                                <%}else{%><form method="post" class="well padding-bottom-10" onsubmit="return false;">
-                                    <section class='rating-widget'>
-                                        <!-- Rating Stars Box -->
-                                        <div class='rating-stars text-center'>
-                                          <ul id='stars'>
-                                            <li class='star' title='Poor' data-value='1'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Fair' data-value='2'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Good' data-value='3'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Excellent' data-value='4'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='WOW!!!' data-value='5'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                          </ul>
-                                          <p id="rating-warning" style="color: red;"></p>
-                                        </div>
-                                      </section>
-                                      
-                                      <input type="hidden" id="rating" value='' />
-                                    <textarea rows="2" class="form-control" placeholder="Write a review" id="review" onchange="reviewBox()"><%= reviews[reviewed].review %></textarea>
-                                    <div class="margin-top-10">
-                                        <button type="button" class="btn btn-sm btn-primary pull-right" onclick="submitReviewHandler()">
-                                            Edit Review
                                         </button>
                                     </div>
                                 </form><% } %>
@@ -260,9 +279,25 @@
 
 <script>
 
+if(document.getElementsByClassName('your-review')){
+    
+    
+    var stars = $('#stars li').parent().children('li.star');
+    
+
+    for (i = 0; i < +document.getElementById('rating').value; i++) {
+      $(stars[i]).addClass('selected');
+    }
+    
+    var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+    document.getElementById('rating').value=ratingValue;
+    document.getElementById('rating-warning').innerHTML='';
+ 
+}
 
  $(document).ready(function(){
-  $('#stars li').on('mouseover', function(){
+     if(!document.getElementsByClassName('your-review')){
+    $('#stars li').on('mouseover', function(){
     var onStar = parseInt($(this).data('value'), 10);  $(this).parent().children('li.star').each(function(e){
       if (e < onStar) {
         $(this).addClass('hover');
@@ -296,6 +331,7 @@
     document.getElementById('rating').value=ratingValue;
     document.getElementById('rating-warning').innerHTML='';
   });
+  }
   
   
 });
@@ -318,6 +354,35 @@ const submitReviewHandler=async ()=>{
         method:'POST',
         url:`/user/review/${productId}`,
         data:{
+            rating: +document.getElementById('rating').value,
+            review: document.getElementById('review').value
+        }
+    })
+
+    if(res.data.status==='success'){
+        location.reload();
+    }else{
+        console.log(res.data);
+    }
+    }
+
+    
+}
+const editReviewHandler=async ()=>{
+    var productId= document.getElementById('productId').value ;
+    
+    if(document.getElementById('rating').value===''){
+        console.log('lease add star')
+        document.getElementById('rating-warning').innerHTML='Please Give A Rating';
+    }
+    if(!document.getElementById('review').value){
+        document.getElementById('review').style.borderColor='red';
+    }else{
+        const res=await axios({
+        method:'POST',
+        url:`/user/review/${productId}`,
+        data:{
+            
             rating: +document.getElementById('rating').value,
             review: document.getElementById('review').value
         }
