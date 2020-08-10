@@ -326,8 +326,20 @@ p {
 	
 }
 .ques-head .btn{
-	margin: 0 5px 0 18px;
+	margin: 0 5px 0 10px;
+	border-radius: 15px;
+	height: 30px;
 }
+#add-btn{
+	border-radius: 19px;
+	background-color: #fff;
+	font-weight: bold;
+}
+#add-btn:hover{
+	background-color: #343a40;
+	color: #fff;
+}
+
 
 
 /************* faq page - End *************/

@@ -211,17 +211,26 @@ exports.postUpdateProduct = async(req, res) => {
 
 exports.getHelp = async(req, res) => {
 	try{
+		const auth = (await isAuth(req))[0];
+
+		var FAQr = [];
 		const FAQRef = firebase.firestore()
 			.collection('config')
-			.doc('FAQ');
-		const doc = await FAQRef.get();
-		const FAQ = doc.data();
-		// console.log(FAQ);
-		const auth = (await isAuth(req))[0];
+			.doc('FAQ')
+			.collection('q-a');
+		const snapshot = await FAQRef.get();
+		snapshot.forEach(doc => {
+			// console.log(doc.id, '=>', doc.data());
+			// const FAQ = doc.data();
+			FAQr.push({
+				id: doc.id,
+				...doc.data()
+			});
+		});
 		res.render('main/help.ejs', {
-			pageTitle: 'Contacts',
-			FAQ,
-			auth
+			auth,
+			pageTitle: 'faq/query',
+			FAQr
 		});
 	} catch(err) {
 		console.log(err);
@@ -229,13 +238,20 @@ exports.getHelp = async(req, res) => {
 };
 exports.postQuery = async(req, res) => {
 	try {
-		var type = req.body.Type;
-		var title = req.body.Title;
-		var description = req.body.Description;
+		const user = await firebase.firestore()
+			.collection('users')
+			.doc(req.uid)
+			.get();
+
+		// console.log(user.name);
 		var submitValue = {
-			type: type,
-			title: title,
-			description: description
+			type: req.body.Type,
+			title: req.body.Title,
+			description: req.body.Description,
+			postedOn: new Date(),
+			UserName: user.data().name,
+			UserEmail: user.data().email,
+			status: false
 		};
 		await firebase.firestore()
 			.collection('query')
