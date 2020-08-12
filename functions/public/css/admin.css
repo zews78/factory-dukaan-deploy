@@ -344,3 +344,12 @@ p {
 
 /************* faq page - End *************/
 
+/* **********query-page starts********** */
+.row .col-1{
+	text-align: center;
+}
+.row .col-2{
+	text-align: center;
+}
+
+/* **********query-page ends********** */

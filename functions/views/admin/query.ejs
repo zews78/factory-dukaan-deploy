@@ -40,8 +40,8 @@
 						<div class="col-2"><%= query.description %></div>
 						<div class="col-2">
 							<label class="switch">
-								
-								<input type="checkbox" id="status_toggle_<%= query.id %>" <%- query.status% ? checked : !checked %>
+								<%if(query.status){var x = "checked"} else{ var x = "!checked"}%>
+								<input type="checkbox" id="status_toggle_<%= query.id %>" <%= x %>
 									onchange="updateStatus('<%= query.id %>')" />
 								<span class="slider"></span>
 							</label>
