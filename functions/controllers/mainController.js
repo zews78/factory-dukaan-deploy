@@ -278,3 +278,11 @@ exports.getContacts = async(req, res)=>{
 		auth
 	});
 };
+
+exports.getRequirement = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('main/requirement.ejs', {
+		pageTitle: 'Requirements',
+		auth
+	});
+};

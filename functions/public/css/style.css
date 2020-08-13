@@ -432,15 +432,7 @@ header .fixed-top {
 	background-size: cover;
 	border-radius: 10px;
 }
-
-.form-group select {
-	width: 5vw;
-	height: 45px;
-	border-radius: 20px 0 0 20px;
-	text-align: right;
-	padding-left: 10px;
-}
-
+/* 
 form.form-group input[type="text"] {
 	margin-left: -5px;
 	padding-left: 5px;
@@ -457,7 +449,6 @@ form.form-group button {
 	font-size: 1em;
 	width: 4vw;
 	height: 46px;
-	/* border: 1px solid grey; */
 	border-left: none;
 	cursor: pointer;
 	border-radius: 0 20px 20px 0;
@@ -466,7 +457,7 @@ form.form-group button {
 
 form.form-group button:hover {
 	background: #1b77c2;
-}
+} */
 
 .note {
 	text-align: center;
@@ -641,7 +632,7 @@ form.form-group button:hover {
 	padding-bottom: 20px;
 	border-radius: 5px;
 }
-.main_content .products-wrapper{
+.main_content .products-wrapper {
 	min-height: auto;
 }
 
@@ -896,55 +887,59 @@ footer p {
 	content: '>>';
 }
 
-
-
 /* ///////////////  STAR RATING  /////////////*/
 
 .rating-widget {
-	font-family:"Open Sans", Helvetica, Arial, sans-serif;
-	color:#555;
-	max-width:680px;
-	margin:0 auto;
-	padding:0 20px;
-  }
-  
-  * {
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-  }
-  
-  *:before, *:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  }  
-  /* Rating Star Widgets Style */
-  .rating-stars ul {
-	list-style-type:none;
-	padding:0;
-	
-	-moz-user-select:none;
-	-webkit-user-select:none;
-  }
-  .rating-stars ul > li.star {
-	display:inline-block;
-	
-  }
-  
-  /* Idle State of the stars */
-  .rating-stars ul > li.star > i.fa {
-	font-size:2.5em; /* Change the size of the stars */
-	color:#ccc; /* Color on idle state */
-  }
-  
-  /* Hover state of the stars */
-  .rating-stars ul > li.star.hover > i.fa {
-	color:#FFCC36;
-  }
-  
-  /* Selected state of the stars */
-  .rating-stars ul > li.star.selected > i.fa {
-	color:#FF912C;
-  }
-  
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	color: #555;
+	max-width: 680px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/* Rating Star Widgets Style */
+.rating-stars ul {
+	list-style-type: none;
+	padding: 0;
+
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+.rating-stars ul > li.star {
+	display: inline-block;
+}
+
+/* Idle State of the stars */
+.rating-stars ul > li.star > i.fa {
+	font-size: 2.5em; /* Change the size of the stars */
+	color: #ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.rating-stars ul > li.star.hover > i.fa {
+	color: #ffcc36;
+}
+
+/* Selected state of the stars */
+.rating-stars ul > li.star.selected > i.fa {
+	color: #ff912c;
+}
+
+.add-specification {
+	display: flex;
+	margin-bottom: 15px;
+	justify-content: flex-end;
+	margin-right: 25px;
+}

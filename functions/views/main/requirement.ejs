@@ -1,0 +1,182 @@
+<%- include("../partials/start") %>
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+        <div class="header">
+            <h2>Requirements</h2>
+        </div>
+
+        <div class="add-specification">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddSpecification">Add Requirement</button>
+        </div>
+
+        <div class="products-wrapper">
+            <div class="card mb-3 w-75">
+                <div class="row no-gutters">
+                    <div class="col-md-5">
+                        <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name</h5>
+                            <p class="card-text">Product Specifications</p>
+                            <p class="card-text">Product category</p>
+                            <p class="card-text">Material Used</p>
+                            <p class="card-text">Price</p>
+                            <!-- <h6><b>Price:</b> ₹1200</h6> -->
+                            <p class="card-text">Product Description</p>
+                            <p class="card-text">Product Qauntity</p>
+                            <p class="card-text"><small class="text-muted">Added on Date</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal - Add Specifications -->
+<div id="ModalAddSpecification" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Specifications</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form >
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label" id="addSpecsProductName">Product Name</label>
+                        <div>
+                            <input type="text" required class="form-control input-lg" name="user-name" value="" id="addTitleInput">
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="specs-form">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Specifications</span>
+                            </div>
+                            <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0" required>
+                            <input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button>
+
+                    <div class="form-group">
+                        <li>
+                            <label for="categoryChooser-form">Product Category</label>
+                            <select name="categoryChooser" class="form-control" id="categoryChooser-form" type="singleselect">
+                                <option value="">Choose category...</option>
+                                <option value="1">Appliances</option>
+                                <option value="2">Apps &amp; Games</option>
+                                <option value="3">Arts, Crafts, & Sewing</option>
+                                <option value="4">Automotive Parts & Accessories</option>
+                                <option value="5">Baby</option>
+                                <option value="6">Beauty & Personal Care</option>
+                                <option value="7">Books</option>
+                                <option value="8">CDs & Vinyl</option>
+                                <option value="9">Cell Phones & Accessories</option>
+                                <option value="10">Clothing, Shoes and Jewelry</option>
+                                <option value="11">Collectibles & Fine Art</option>
+                                <option value="12">Computers</option>
+                                <option value="13">Electronics</option>
+                                <option value="14">Garden & Outdoor</option>
+                                <option value="15">Grocery & Gourmet Food</option>
+                                <option value="16">Health, Household & Baby Care</option>
+                                <option value="17">Home & Kitchen</option>
+                                <option value="18">Industrial & Scientific</option>
+                                <option value="19">Luggage & Travel Gear</option>
+                                <option value="20">Movies & TV</option>
+                                <option value="21">Musical Instruments</option>
+                                <option value="22">Office Products</option>
+                                <option value="23">Sports & Outdoors</option>
+                                <option value="24">Tools & Home Improvement</option>
+                                <option value="25">Toys & Games</option>
+                            </select>
+                         </li>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Material Used</label>
+                        <div>
+                            <input type="text" required class="form-control input-lg" name="company-name" id="addSpecsMaterialUsed">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Price</label>
+                        <div>
+                            <input type="text" required class="form-control input-lg" name="company-name" id="addSpecsPrice">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Product Images</label>
+                        <div class="custom-file">
+                            <input type="file" class="addcustom-file-input" id="addCustomFile" accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label">Product Description</label>
+                        <div>
+                            <textarea class="form-control"  required rows="4" id="addSpecsDescription"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Quantity</small> </label>
+                        <div>
+                            <input type="text" required class="form-control input-lg" name="company-name" id="addSpecsquantity">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <p><span style="color: crimson;">Or just send us a recorded audio file</span></p>
+
+                    <div class="form-group">
+                        <!-- <label class="control-label">Send Us Audio</label> -->
+                        <div class="custom-file">
+                            <input type="file" class="addcustom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple data-show-upload="true" data-show-caption="true">
+                            <label class="custom-file-label" for="customFile">Upload Audio</label>
+                        </div>
+                    </div>                    
+
+                    <div class="form-group">
+                        <div>
+                            <button type="button" class="btn btn-success" onclick="addSpecificationHandler()">Save</button>
+                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>  
+
+<%- include('../partials/footer.ejs') %> 
+
+<script>
+    document.querySelector('.custom-file-input').addEventListener('change',function(e) {
+        var fileName = document.getElementById("customFile").files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+    })
+
+    var c=1;
+    const specsHandler=()=>{
+        
+        $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle${c}"><input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" id="specsDesc${c}" style="border-radius: 0;"></div>`)
+        
+        c=c+1;
+    }
+</script>
+
+<%- include('../partials/end.ejs') %>

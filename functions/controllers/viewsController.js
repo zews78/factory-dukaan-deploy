@@ -25,6 +25,7 @@ exports.getUserPayment = (req, res) => {
 exports.getContacts = (req, res) => {
 	res.render('../views/main/contact.ejs');
 };
+
 // Signup is not needed
 // exports.getSignUp = (req, res) => {
 // 	res.render('signup.ejs');
