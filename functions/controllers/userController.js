@@ -39,6 +39,39 @@ exports.getUserProfile = async(req, res) => {
 	});
 };
 
+exports.getSellerProfile = async(req, res) => {
+
+	const userId = req.params.userId || req.uid;
+	const userSnapshot = await firebase.firestore()
+		.collection('users')
+		.doc(userId)
+		.get();
+	if (!userSnapshot.exists) {
+		throw new Error('seller not found');
+	}
+
+	// const productsSnapshot = await firebase.firestore()
+	// 	.collection('products')
+	// 	.where('uid', '==', userId)
+	// 	.get();
+	// let products = [];
+	// if (!productsSnapshot.empty) {
+	// 	productsSnapshot.forEach(product => products.push(product.data()));
+	// }
+
+	res.render('user/seller-profile.ejs', {
+		pageTitle: 'Seller-profile',
+		auth: true,
+		authorized: userId === req.uid,
+		user: {
+			...userSnapshot.data(),
+			id: userId
+		}
+	});
+};
+
+
+
 exports.getUserPayment = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 

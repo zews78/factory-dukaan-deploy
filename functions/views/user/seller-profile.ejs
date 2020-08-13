@@ -1,0 +1,77 @@
+<%- include("../partials/start") %>
+<link type="text/css" rel="stylesheet" href="/css/seller.css" />
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+
+        <div class="profile-container">
+            <% if (authorized) { %>
+            <% }%>
+            <div class="row">
+                <div class="column col-left">
+                    <img class="profile-img" src="/images/seller.png" alt="">
+                    <h2><%= user.name %></h2>
+                    <% if (user.email) {%>
+                        <span class="eml"><%= user.email %></span>
+                    <%} %> 
+                </div>
+                <div class="column col-right"><br>
+                    <p>
+                        <% if (user.company.name) {%>
+                            <i class="fas fa-building"></i><%= user.company.name %> <br>
+                        <%} %>
+
+                        <!-- <i class="fas fa-check-circle"></i> --> <br>  
+                        <% if (user.gstNo) { %>
+                        <i class="fas fa-money-check-alt"></i>GSTIN <%= user.gstNo %> <br>
+                        <% } %>
+                        <i class="fas fa-phone-square-alt"></i><%= user.mobile %><br>
+                        <i class="far fa-calendar-alt"></i>Joined on
+                        <%= user.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %>
+                        <hr style="width: 20vw; margin: 0">
+                    </p>
+                    <% if ( user.company.desc) {%>
+                        <div class="company-desc">
+                            <strong>Company Description</strong>
+                            <p> <%= user.company.desc %>
+                            </p>
+                        </div>
+                    <%} %>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<%- include("../partials/footer") %>
+<%- include("../partials/end") %>
+
+
+
+
+
+
+
+
+
+<script>
+
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+    //     authDomain: "factory-dukaan.firebaseapp.com",
+    //     databaseURL: "https://factory-dukaan.firebaseio.com",
+    //     projectId: "factory-dukaan",
+    //     storageBucket: "factory-dukaan.appspot.com",
+    //     messagingSenderId: "901783648307",
+    //     appId: "1:901783648307:web:41d71e94413adcbdb74b46",
+    //     measurementId: "G-LH7XKNLQE5",
+    // };
+    // firebase.initializeApp(firebaseConfig);
+
+
+
+
+</script>

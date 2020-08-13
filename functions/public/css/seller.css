@@ -1,0 +1,108 @@
+.profile-container {
+	/* width: 100%; */
+	/* margin-top: 20px; */
+	/* margin-left: auto;
+	margin-right: auto; */
+	background: #fff;
+	color: black;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-radius: 5px;
+}
+
+@media screen and (min-width: 1000px) {
+	.main_content {
+		margin-left: 10vw !important;
+	}
+	.col-left {
+		margin: 0 0 0 59px;
+	}
+	.col-right{
+		margin: 0 0 0 179px;
+	}
+	.column{
+		margin: 43px 0 0 99px;
+	}
+
+}
+
+.profile-container h2 {
+	text-align: center;
+}
+
+.fas,
+.far {
+	margin-right: 10px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	/* width: 100%; */
+	justify-content: center;
+	align-items: center;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	/* display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	justify-content: center;
+	align-items: center; */
+}
+
+.col-left {
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.col-right {
+	flex: 2;
+	/* justify-content: center;
+	align-items: center; */
+}
+
+.fa-check-circle {
+	color: #0062cc;
+}
+
+.company-desc {
+	width: 50vw;
+}
+
+.column h1 {
+	font-size: 2.2rem;
+}
+
+.column img {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.profile-img {
+	border-radius: 50%;
+	width: 145px;
+}
+.profile-container h2 {
+	color: #212529;
+}
+.eml{
+	color: #343a40;
+	font-size: small;
+}
+
+@media screen and (max-width: 750px) {
+	.row {
+		flex-direction: column;
+	}
+	.profile-img {
+		width: 150px;
+	}
+}

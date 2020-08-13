@@ -8,6 +8,9 @@ router.get('/:userId/profile', userController.getUserProfile);
 router.post('/profile/update', userController.postUpdateUser);
 router.post('/verify-gst', userController.postVerifyGst);
 
+// Seller profile
+router.get('/seller-profile', userController.getSellerProfile);
+
 
 // SELL PAGE
 router.get('/sell', userController.getSellingPage);

@@ -444,7 +444,9 @@ exports.getQuery = async(req, res) => {
 		// const doc = await QueryRef.get();
 		// const Query = doc.data();
 
-		const snapshot = await QueryRef.get();
+		const snapshot = await QueryRef
+			.orderBy('postedOn', 'desc')
+			.get();
 		snapshot.forEach(doc => {
 			// console.log(doc.id, '=>', doc.data());
 			// const FAQ = doc.data();
