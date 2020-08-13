@@ -50,8 +50,8 @@ include('../partials/admin/header.ejs') %>
 						<div class="col-2">Creation Date</div>
 						<div class="col-2">Product Name</div>
 						<div class="col-2">Seller's Name</div>
-						<div class="col-1">Product Price</div>
-						<div class="col-3">Tags</div>
+						<div class="col-2">Product Price</div>
+						<div class="col-2">Tags</div>
 						<div class="col-1 text-right">Edit</div>
 					</div>
 				</div>
@@ -66,8 +66,8 @@ include('../partials/admin/header.ejs') %>
 						<div class="col-2"><%= product.createdOn %></div>
 						<div class="col-2"><%= product.title %></div>
 						<div class="col-2"><%= product.sellerName %></div>
-						<div class="col-1"><%= product.price %></div>
-						<div class="col-3"><%= product.tags %></div>
+						<div class="col-2">Rs.<%= product.price %></div>
+						<div class="col-2"><%= product.tags %></div>
 						<div class="col-1 text-right">
 							<a href="/admin/product/<%= product.id %>">
 								<span class="fa fa-pencil-square-o"></span>
