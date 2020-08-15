@@ -280,9 +280,58 @@ exports.getContacts = async(req, res)=>{
 };
 
 exports.getRequirement = async(req, res) => {
-	const auth = (await isAuth(req))[0];
-	res.render('main/requirement.ejs', {
-		pageTitle: 'Requirements',
-		auth
-	});
+	// const auth = (await isAuth(req))[0];
+	try{
+		const auth = (await isAuth(req))[0];
+		var Reqr = [];
+		const ReqRef = firebase.firestore()
+			.collection('requirements');
+
+		const snapshot = await ReqRef.get();
+		snapshot.forEach(doc => {
+			// console.log(doc.id, '=>', doc.data());
+			// const FAQ = doc.data();
+			Reqr.push({
+				id: doc.id,
+				...doc.data()
+			});
+		});
+		console.log(Reqr);
+		res.render('main/requirement.ejs', {
+			pageTitle: 'Requirements',
+			auth,
+			Reqr
+		});
+	} catch(err) {
+		console.log(err);
+	}
+};
+
+exports.postAddRequirement = async(req, res) => {
+	try {
+		// var type = req.body.Type;
+		// var ques = "checking it";
+		// var ans = "worked";
+		// var ques = req.body.ques;
+		// var ans = req.body.ans;
+
+
+		await firebase.firestore()
+			.collection('requirements')
+			.add({
+				product_name: req.body.product_name,
+				// specifications: req.body.specifications,
+				category: req.body.category,
+				material_used: req.body.material_used,
+				price: req.body.price,
+				desc: req.body.desc,
+				quantity: req.body.quantity,
+				createdOn: new Date()
+			});
+		// console.log(submitValue);
+		console.log('Succesfully created a req');
+		res.redirect('/requirement');
+	} catch (err) {
+		console.log(err);
+	}
 };

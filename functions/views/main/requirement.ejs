@@ -47,30 +47,31 @@
             </div>
 
             <div class="modal-body">
-                <form >
+                <form action="/addreq" method="POST">
                     <input type="hidden" name="_token" value="">
                     <div class="form-group">
                         <label class="control-label" id="addSpecsProductName">Product Name</label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="user-name" value="" id="addTitleInput">
+                            <input type="text" required class="form-control input-lg" name="product_name" value="" id="addTitleInput">
                         </div>
                     </div>
 
                     <div class="form-group" id="specs-form">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Specifications</span>
+                            <span class="input-group-text">Specifications</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0" required>
-                            <input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
+                            <input type="text" name="title0" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0" required>
+                            <input type="text" name="value0" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
                         </div>
                     </div>
+
                     <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button>
 
                     <div class="form-group">
                         <li>
                             <label for="categoryChooser-form">Product Category</label>
-                            <select name="categoryChooser" class="form-control" id="categoryChooser-form" type="singleselect">
+                            <select name="category" class="form-control" id="categoryChooser-form" type="singleselect">
                                 <option value="">Choose category...</option>
                                 <option value="1">Appliances</option>
                                 <option value="2">Apps &amp; Games</option>
@@ -104,14 +105,14 @@
                     <div class="form-group">
                         <label class="control-label">Material Used</label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="company-name" id="addSpecsMaterialUsed">
+                            <input type="text" required class="form-control input-lg" name="material_used" id="addSpecsMaterialUsed">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Price</label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="company-name" id="addSpecsPrice">
+                            <input type="text" required class="form-control input-lg" name="price" id="addSpecsPrice">
                         </div>
                     </div>
 
@@ -126,14 +127,14 @@
                     <div class="form-group">
                         <label class="control-label">Product Description</label>
                         <div>
-                            <textarea class="form-control"  required rows="4" id="addSpecsDescription"></textarea>
+                            <textarea class="form-control" name="desc"  required rows="4" id="addSpecsDescription"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Quantity</small> </label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="company-name" id="addSpecsquantity">
+                            <input type="text" required class="form-control input-lg" name="quantity" id="addSpecsquantity">
                         </div>
                     </div>
 
@@ -150,7 +151,7 @@
 
                     <div class="form-group">
                         <div>
-                            <button type="button" class="btn btn-success" onclick="addSpecificationHandler()">Save</button>
+                            <button type="submit" class="btn btn-success" onclick="addSpecificationHandler()">Save</button>
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -171,9 +172,9 @@
     })
 
     var c=1;
-    const specsHandler=()=>{
-        
-        $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle${c}"><input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" id="specsDesc${c}" style="border-radius: 0;"></div>`)
+    function specsHandler() {
+        console.log("specs handler clicked")
+        $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" name="title ${c}" aria-label="First name" class="form-control border border-primary" placeholder="Title${c}" id="specsTitle${c}"><input type="text" name="value${c}" aria-label="Last name" class="form-control border border-primary" placeholder="Description${c}" id="specsDesc${c}" style="border-radius: 0;"></div>`)
         
         c=c+1;
     }
