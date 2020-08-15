@@ -970,3 +970,8 @@ footer p {
 	border-radius: 4px;
 	cursor: zoom-in;
 }
+
+.message img.online {
+	width: 40px;
+	height: 40px;
+}

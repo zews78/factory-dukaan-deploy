@@ -62,15 +62,77 @@
                                     <dd>some specs goes here</dd>
                                 </dl>
                             <hr>
-                            <a href="#" class="btn btn-lg btn-primary text-uppercase">Make a Bid</a>
+                            <button onclick="makeYourBid()" class="btn btn-lg btn-primary text-uppercase">Make a Bid</button>
                             <a href="/requirement" class="btn btn-lg btn-outline-primary text-uppercase">Go Back</a>
                         </article>
                     </aside>
                 </div>
             <!-- </div> -->
         </div>
+
+        <hr>
+        <div class="container text-center" id="bidSection">
+            <form method="post" class="well padding-bottom-10" onsubmit="return false;">
+                <input type="number" name="bid" id="userBidInput" placeholder="Make your bid" class="p-1">
+                <button type="submit" class="btn btn-sm btn-primary">
+                    Submit Bid
+                </button>
+            </form>
+        </div>
+
+        <div class="container m-4">
+            <h3 class="text-center">All Bids</h3>
+            <div class="chat-body no-padding profile-message">
+                <ul>
+                    <li class="message">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                        <span class="message-text">
+                            <a href="javascript:void(0);" class="username">
+                                M S Dhoni
+                            </a>
+                            <p>Bid Value: ₹1350</p>
+                            <small class="text-muted pull-right ultra-light"> Posted 15/08/2020 </small>
+                        </span>   
+                    </li>
+                    <hr>
+
+                    <li class="message">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                        <span class="message-text">
+                            <a href="javascript:void(0);" class="username">
+                                Virat Kohli
+                            </a>
+                            <p>Bid Value: ₹1380</p>
+                            <small class="text-muted pull-right ultra-light"> Posted 15/08/2020 </small>
+                        </span>   
+                    </li>
+                    <hr>
+
+                    <li class="message">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                        <span class="message-text">
+                            <a href="javascript:void(0);" class="username">
+                                Rohit Sharma
+                            </a>
+                            <p>Bid Value: ₹1340</p>
+                            <small class="text-muted pull-right ultra-light"> Posted 15/08/2020 </small>
+                        </span>   
+                    </li>
+                    <hr>                    
+                    
+                </ul>
+            </div>
+        </div>
+
     </div>
 </div> 
 
 <%- include('../partials/footer.ejs') %> 
+
+<script>
+    const makeYourBid = () => {
+        document.getElementById("userBidInput").focus(); 
+    }
+</script>
+
 <%- include('../partials/end.ejs') %>
