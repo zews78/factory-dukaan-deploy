@@ -1,0 +1,76 @@
+<%- include("../partials/start") %>
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+        <div class="header">
+            <h2 class="text-center">Requirement by Username</h2>
+        </div>
+        
+        <div class="container">
+            <!-- <div class="card"> -->
+                <div class="row">
+                    <aside class="col-sm-4 border-right">
+                        <article class="gallery-wrap"> 
+                            <div class="img-big-wrap">
+                                <div>
+                                    <a href="#"><img src="/images/product1.jpg"></a>
+                                </div>
+                            </div>
+                            <div class="img-small-wrap">
+                                <div class="item-gallery"><img src="/images/slide1.jpg"></div>
+                                <div class="item-gallery"><img src="/images/slide2.jpg"></div>
+                                <div class="item-gallery"><img src="/images/slide3.jpg"></div>
+                            </div>
+                        </article>
+                    </aside>
+
+                    <aside class="col-sm-7">
+                        <article class="card-body p-5">
+                            <h3 class="title mb-3">Product name</h3>
+                            <p class="price-detail-wrap"> 
+                                <span class="price h3 text-warning"> 
+                                    <span class="currency">₹</span><span class="price">1299</span>
+                                </span> 
+                            </p>
+                            <dl class="item-property">
+                                <dt>Description</dt>
+                                <dd><p>Here goes description consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco </p></dd>
+                            </dl>
+                            <dl class="param param-feature">
+                                <dt>Material Used</dt>
+                                <dd>material</dd>
+                            </dl>
+                            <dl class="param param-feature">
+                                <dt>Quantity</dt>
+                                <dd>45</dd>
+                            </dl>
+                            <dl class="param param-feature">
+                                <dt>Any Other Info</dt>
+                                <dd>some more description</dd>
+                            </dl>
+                            
+                            <hr>
+                                <dl class="param param-feature">
+                                    <dt>Specifications</dt>
+                                    <dd>some specs goes here</dd>
+                                    <dd>some specs goes here</dd>
+                                    <dd>some specs goes here</dd>
+                                    <dd>some specs goes here</dd>
+                                </dl>
+                            <hr>
+                            <a href="#" class="btn btn-lg btn-primary text-uppercase">Make a Bid</a>
+                            <a href="/requirement" class="btn btn-lg btn-outline-primary text-uppercase">Go Back</a>
+                        </article>
+                    </aside>
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</div> 
+
+<%- include('../partials/footer.ejs') %> 
+<%- include('../partials/end.ejs') %>
