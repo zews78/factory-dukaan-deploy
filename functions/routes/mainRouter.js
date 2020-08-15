@@ -15,6 +15,7 @@ router.post('/product/:productId/update', isAuth, mainController.postUpdateProdu
 router.post('/querySubmit', isAuth, mainController.postQuery);
 router.get('/requirement', mainController.getRequirement);
 router.post('/addreq', mainController.postAddRequirement);
+router.get('/requirement/:reqID', mainController.getOneRequirement);
 
 
 module.exports = router;

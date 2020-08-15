@@ -335,3 +335,11 @@ exports.postAddRequirement = async(req, res) => {
 		console.log(err);
 	}
 };
+
+exports.getOneRequirement = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('main/OneRequirement.ejs', {
+		pageTitle: 'Requirements',
+		auth
+	});
+};
