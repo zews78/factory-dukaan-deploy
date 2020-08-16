@@ -975,3 +975,12 @@ footer p {
 	width: 40px;
 	height: 40px;
 }
+
+.message {
+	padding-left: 5px;
+}
+
+.container {
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
