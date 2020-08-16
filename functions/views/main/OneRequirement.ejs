@@ -28,38 +28,38 @@
 
                     <aside class="col-sm-7">
                         <article class="card-body p-5">
-                            <h3 class="title mb-3">Product name</h3>
+                            <h3 class="title mb-3"><%= reqData.product_name %></h3>
                             <p class="price-detail-wrap"> 
                                 <span class="price h3 text-warning"> 
-                                    <span class="currency">₹</span><span class="price">1299</span>
+                                    <span class="currency">₹</span><span class="price"> <%= reqData.price %></span>
                                 </span> 
                             </p>
                             <dl class="item-property">
                                 <dt>Description</dt>
-                                <dd><p>Here goes description consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco </p></dd>
+                                <dd><p><%= reqData.desc %> </p></dd>
                             </dl>
                             <dl class="param param-feature">
                                 <dt>Material Used</dt>
-                                <dd>material</dd>
+                                <dd><%= reqData.material_used%></dd>
                             </dl>
                             <dl class="param param-feature">
                                 <dt>Quantity</dt>
-                                <dd>45</dd>
+                                <dd><%= reqData.quantity %></dd>
                             </dl>
                             <dl class="param param-feature">
-                                <dt>Any Other Info</dt>
-                                <dd>some more description</dd>
+                                <dt>Requirement created On</dt>
+                                <dd>this date</dd>
                             </dl>
                             
                             <hr>
                                 <dl class="param param-feature">
                                     <dt>Specifications</dt>
-                                    <dd>some specs goes here</dd>
-                                    <dd>some specs goes here</dd>
-                                    <dd>some specs goes here</dd>
-                                    <dd>some specs goes here</dd>
+                                    <% var i =0; %>
+                                    <% while(Object.keys(reqData.specifications)[i]){ %>
+                                        <span style="color: #adb5bd;"><%= Object.keys(reqData.specifications)[i] %></span>: <span><%= Object.values(reqData.specifications)[i]%></span> <br>
+                                    <% i++ %>
+                                    <% } %>
+
                                 </dl>
                             <hr>
                             <button onclick="makeYourBid()" class="btn btn-lg btn-primary text-uppercase">Make a Bid</button>

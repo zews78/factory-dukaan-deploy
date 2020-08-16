@@ -13,6 +13,8 @@
         </div>
 
         <div class="products-wrapper">
+            <% var i =0 %>
+            <% while(Reqr[i]){ %>
             <div class="card mb-3 w-75">
                 <div class="row no-gutters">
                     <div class="col-md-5">
@@ -20,20 +22,22 @@
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
-                            <h5 class="card-title">Product Name</h5>
+                            <h5 class="card-title"><%= Reqr[i].product_name %></h5>
                             <!-- <p class="card-text">Product Specifications</p> -->
-                            <p class="card-text">Product category</p>
+                            <p class="card-text"><%= Reqr[i].category %></p>
                             <!-- <p class="card-text">Material Used</p> -->
-                            <p class="card-text">Price</p>
+                            <p class="card-text">Rs.<%= Reqr[i].price %></p>
                             <!-- <h6><b>Price:</b> ₹1200</h6> -->
-                            <p class="card-text">Product Description</p>
-                            <p class="card-text">Product Quantity</p>
-                            <!-- <p class="card-text"><small class="text-muted">Added on Date</small></p> -->
+                            <p class="card-text"><small><%= Reqr[i].desc %></small></p>
+                            <p class="card-text">Quantity: <%= Reqr[i].quantity %></p>
+                            <p class="card-text"><small class="text-muted">Added On: <%= Reqr[i].createdOn %></small></p>
                         </div>
-                        <a href="/requirement/anyID" class="btn btn-md btn-primary pull-right">View More</a>
+                        <a href="/requirement/<%= Reqr[i].id %>" class="btn btn-md btn-primary pull-right">View More</a>
                     </div>
                 </div>
             </div>
+            <% i++ %>
+            <% } %>
         </div>
     </div>
 </div>
@@ -74,31 +78,31 @@
                             <label for="categoryChooser-form">Product Category</label>
                             <select name="category" class="form-control" id="categoryChooser-form" type="singleselect">
                                 <option value="">Choose category...</option>
-                                <option value="1">Appliances</option>
-                                <option value="2">Apps &amp; Games</option>
-                                <option value="3">Arts, Crafts, & Sewing</option>
-                                <option value="4">Automotive Parts & Accessories</option>
-                                <option value="5">Baby</option>
-                                <option value="6">Beauty & Personal Care</option>
-                                <option value="7">Books</option>
-                                <option value="8">CDs & Vinyl</option>
-                                <option value="9">Cell Phones & Accessories</option>
-                                <option value="10">Clothing, Shoes and Jewelry</option>
-                                <option value="11">Collectibles & Fine Art</option>
-                                <option value="12">Computers</option>
-                                <option value="13">Electronics</option>
-                                <option value="14">Garden & Outdoor</option>
-                                <option value="15">Grocery & Gourmet Food</option>
-                                <option value="16">Health, Household & Baby Care</option>
-                                <option value="17">Home & Kitchen</option>
-                                <option value="18">Industrial & Scientific</option>
-                                <option value="19">Luggage & Travel Gear</option>
-                                <option value="20">Movies & TV</option>
-                                <option value="21">Musical Instruments</option>
-                                <option value="22">Office Products</option>
-                                <option value="23">Sports & Outdoors</option>
-                                <option value="24">Tools & Home Improvement</option>
-                                <option value="25">Toys & Games</option>
+                                <option value="Appliances">Appliances</option>
+                                <option value="Apps &amp; Games">Apps &amp; Games</option>
+                                <option value="Arts, Crafts, & Sewing">Arts, Crafts, & Sewing</option>
+                                <option value="Automotive Parts & Accessories">Automotive Parts & Accessories</option>
+                                <option value="Baby">Baby</option>
+                                <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+                                <option value="Books">Books</option>
+                                <option value="CDs & Vinyl">CDs & Vinyl</option>
+                                <option value="Cell Phones & Accessories">Cell Phones & Accessories</option>
+                                <option value="Clothing, Shoes and Jewelry">Clothing, Shoes and Jewelry</option>
+                                <option value="Collectibles & Fine Art">Collectibles & Fine Art</option>
+                                <option value="Computers">Computers</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Garden & Outdoor">Garden & Outdoor</option>
+                                <option value="Grocery & Gourmet Food">Grocery & Gourmet Food</option>
+                                <option value="Health, Household & Baby Care">Health, Household & Baby Care</option>
+                                <option value="Home & Kitchen">Home & Kitchen</option>
+                                <option value="Industrial & Scientific">Industrial & Scientific</option>
+                                <option value="Luggage & Travel Gear">Luggage & Travel Gear</option>
+                                <option value="Movies & TV">Movies & TV</option>
+                                <option value="Musical Instruments">Musical Instruments</option>
+                                <option value="Office Products">Office Products</option>
+                                <option value="Sports & Outdoors">Sports & Outdoors</option>
+                                <option value="Tools & Home Improvement">Tools & Home Improvement</option>
+                                <option value="Toys & Games">Toys & Games</option>
                             </select>
                          </li>
                     </div>
@@ -152,7 +156,7 @@
 
                     <div class="form-group">
                         <div>
-                            <button type="submit" class="btn btn-success" onclick="addSpecificationHandler()">Save</button>
+                            <button type="submit" class="btn btn-success">Save</button>
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -169,7 +173,7 @@
     var c=1;
     function specsHandler() {
         console.log("specs handler clicked")
-        $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" name="title ${c}" aria-label="First name" class="form-control border border-primary" placeholder="Title${c}" id="specsTitle${c}"><input type="text" name="value${c}" aria-label="Last name" class="form-control border border-primary" placeholder="Description${c}" id="specsDesc${c}" style="border-radius: 0;"></div>`)
+        $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" name="title${c}" aria-label="First name" class="form-control border border-primary" placeholder="Title${c}" id="specsTitle${c}"><input type="text" name="value${c}" aria-label="Last name" class="form-control border border-primary" placeholder="Description${c}" id="specsDesc${c}" style="border-radius: 0;"></div>`)
         
         c=c+1;
     }

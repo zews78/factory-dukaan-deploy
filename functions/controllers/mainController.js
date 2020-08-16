@@ -309,18 +309,27 @@ exports.getRequirement = async(req, res) => {
 
 exports.postAddRequirement = async(req, res) => {
 	try {
-		// var type = req.body.Type;
-		// var ques = "checking it";
-		// var ans = "worked";
-		// var ques = req.body.ques;
-		// var ans = req.body.ans;
+		// var i = 0;
+		// var tit = eval('title' + i);
+		// req.body = JSON.parse(JSON.stringify(req.body));
+		// var title = req.body
+		// 	.eval('title' + i);
+		// var bval = req.body.value0;
+
+		var objx = new Object();
+		objx[req.body.title0] = req.body.value0;
+		// while(req.body.title + i) {
+		// 	objx[req.body.title + i] = req.body.value + i;
+		// 	i++;
+		// }
 
 
 		await firebase.firestore()
 			.collection('requirements')
 			.add({
+				uid: req.uid,
 				product_name: req.body.product_name,
-				// specifications: req.body.specifications,
+				specifications: objx,
 				category: req.body.category,
 				material_used: req.body.material_used,
 				price: req.body.price,
@@ -328,7 +337,7 @@ exports.postAddRequirement = async(req, res) => {
 				quantity: req.body.quantity,
 				createdOn: new Date()
 			});
-		// console.log(submitValue);
+		// console.log(tit);
 		console.log('Succesfully created a req');
 		res.redirect('/requirement');
 	} catch (err) {
@@ -336,10 +345,58 @@ exports.postAddRequirement = async(req, res) => {
 	}
 };
 
-exports.getOneRequirement = async(req, res) => {
+
+exports.getOneRequirement = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
+
+	const requirement = await firebase.firestore()
+		.collection('requirements')
+		.doc(req.params.reqId)
+		.get();
+	// const user = await firebase.firestore()
+	// 	.collection('users')
+	// 	.doc(req.uid)
+	// 	.get();
+
+
+	// const productReviews = requirement.data().reviews;
+	// const Seller = await firebase.firestore()
+	// 	.collection('users')
+	// 	.doc(requirement.data().uid)
+	// 	.get();
+	// let reviews = [];
+	// let myReview;
+	// let reviewed;
+	// if(productReviews) {
+	// 	for(var i = 0; i < productReviews.length; i++) {
+	// 		const review = {};
+	// 		await productReviews[i].userInfo.get()
+	// 			.then(res=>{
+	// 				review.name = res.data().name;
+	// 				if(res.data().mobile === user.data().mobile) {
+	// 					reviewed = i;
+	// 					myReview = true;
+	// 				}
+	// 			}
+	// 			);
+	// 		review.rating = productReviews[i].rating;
+	// 		review.review = productReviews[i].review;
+	// 		review.postedOn = productReviews[i].postedOn;
+	// 		reviews.push(review);
+	// 	}
+	// }
+
+
+	// if(user.data().expiresOn._seconds * 1000 < Date.now()) {
+	// 	console.log('PLEASE PURCHASE A PLAN');
+	// }
+	console.log(requirement.data());
+	// console.log(req.params.reqId);
 	res.render('main/OneRequirement.ejs', {
-		pageTitle: 'Requirements',
-		auth
+		pageTitle: 'Requirement Details',
+		auth,
+		reqId: req.params.reqId,
+		reqData: requirement.data()
+		// sellerDetails: Seller.data()
 	});
 };
