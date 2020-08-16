@@ -18,7 +18,7 @@
             <div class="card mb-3 w-75">
                 <div class="row no-gutters">
                     <div class="col-md-5">
-                        <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
+                        <img class="card-img-top ml-2" src="/images/product1.jpg" alt="Card image cap">
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
@@ -30,13 +30,9 @@
                             <!-- <h6><b>Price:</b> ₹1200</h6> -->
                             <p class="card-text"><small><%= Reqr[i].desc %></small></p>
                             <p class="card-text">Quantity: <%= Reqr[i].quantity %></p>
-                            <p class="card-text"><small class="text-muted">Added On: <%= Reqr[i].createdOn %></small></p>
+                            <p class="card-text"><small class="text-muted">Added On: <%= Reqr[i].createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %></small></p>
                         </div>
-<<<<<<< HEAD
-                        <a href="/requirement/<%= Reqr[i].id %>" class="btn btn-md btn-primary pull-right">View More</a>
-=======
-                        <a href="/requirement/anyID" class="btn btn-md btn-primary pull-right m-1">View More</a>
->>>>>>> 408661b333f80a82594bcf8c7e9aa57c57b54af1
+                        <a href="/requirement/<%= Reqr[i].id %>" class="btn btn-md btn-primary m-1 pull-right">View More</a>
                     </div>
                 </div>
             </div>
