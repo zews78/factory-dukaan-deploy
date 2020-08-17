@@ -124,9 +124,9 @@ body {
 		display: flex;
 	}
 
-	#trade-area .text-area .trade-btns {
+	/* #trade-area .text-area .trade-btns {
 		width: 45vw;
-	}
+	} */
 	#trade-area .text-area .trade-btns button {
 		/* width: 100%; */
 		font-size: 3.5vw;
@@ -258,7 +258,7 @@ body {
 }
 
 .wrapper .main_content {
-	width: 100%;
+	width: 100vw;
 }
 
 /* .main_content {
