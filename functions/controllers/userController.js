@@ -41,7 +41,7 @@ exports.getUserProfile = async(req, res) => {
 
 exports.getSellerProfile = async(req, res) => {
 
-	const userId = req.params.userId || req.uid;
+	const userId = req.params.userId;
 	const userSnapshot = await firebase.firestore()
 		.collection('users')
 		.doc(userId)

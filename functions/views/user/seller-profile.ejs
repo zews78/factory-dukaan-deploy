@@ -19,7 +19,7 @@
                 </div>
                 <div class="column col-right"><br>
                     <p>
-                        <% if (user.company.name) {%>
+                        <% if (user.company) {%>
                             <i class="fas fa-building"></i><%= user.company.name %> <br>
                         <%} %>
 
@@ -32,7 +32,7 @@
                         <%= user.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %>
                         <hr style="width: 20vw; margin: 0">
                     </p>
-                    <% if ( user.company.desc) {%>
+                    <% if ( user.company) {%>
                         <div class="company-desc">
                             <strong>Company Description</strong>
                             <p> <%= user.company.desc %>

@@ -72,10 +72,14 @@
 
                                 <div class="price-quote">
                                     
-                                    
-                                        <button type="submit" class="btnPrice">Get Seller Details</button>
+                                        <%if(subscriber){%>
+                                            <a href="/user/seller-profile/<%= productData.uid %>"><button type="button" class="btnPrice">Get Seller Details</button></a>
+                                        <%} else{%>
+                                            <p>You are not subscriber.</p>
+                                            <a href="/pricing"><button type="button" class="btnPrice">Purchase Plans</button></a>
+                                        <%}%>
                                         <br/>
-                                        <p>Only For Users Having Any Active Plan</p>
+                                        <p>This is only For the Users Having Any Active Plan</p>
                                     
                                 </div>
                                 

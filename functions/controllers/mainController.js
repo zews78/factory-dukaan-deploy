@@ -181,7 +181,8 @@ exports.getOneProduct = async(req, res)=>{
 		reviews,
 		reviewed,
 		myReview,
-		sellerDetails: Seller.data()
+		sellerDetails: Seller.data(),
+		subscriber: false
 	});
 };
 
