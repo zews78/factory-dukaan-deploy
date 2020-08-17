@@ -359,11 +359,13 @@ exports.getOneRequirement = async(req, res)=>{
 	// 	.get();
 
 
+
+
 	// const productReviews = requirement.data().reviews;
-	// const Seller = await firebase.firestore()
-	// 	.collection('users')
-	// 	.doc(requirement.data().uid)
-	// 	.get();
+	const reqUser = await firebase.firestore()
+		.collection('users')
+		.doc(requirement.data().uid)
+		.get();
 	// let reviews = [];
 	// let myReview;
 	// let reviewed;
@@ -390,13 +392,14 @@ exports.getOneRequirement = async(req, res)=>{
 	// if(user.data().expiresOn._seconds * 1000 < Date.now()) {
 	// 	console.log('PLEASE PURCHASE A PLAN');
 	// }
-	console.log(requirement.data());
+	// console.log(requirement.data());
+	console.log(reqUser.data().name);
 	// console.log(req.params.reqId);
 	res.render('main/OneRequirement.ejs', {
 		pageTitle: 'Requirement Details',
 		auth,
 		reqId: req.params.reqId,
-		reqData: requirement.data()
-		// sellerDetails: Seller.data()
+		reqData: requirement.data(),
+		reqName: reqUser.data().name
 	});
 };

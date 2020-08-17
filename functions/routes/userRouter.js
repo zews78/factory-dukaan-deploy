@@ -9,7 +9,7 @@ router.post('/profile/update', userController.postUpdateUser);
 router.post('/verify-gst', userController.postVerifyGst);
 
 // Seller profile
-router.get('/seller-profile', userController.getSellerProfile);
+router.get('/seller-profile/:userId', userController.getSellerProfile);
 
 
 // SELL PAGE

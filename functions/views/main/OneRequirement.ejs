@@ -5,7 +5,7 @@
     <%- include("../partials/sidenav") %>
     <div class="main_content">
         <div class="header">
-            <h2 class="text-center">Requirement by Username</h2>
+            <h2 class="text-center">Requirement by <a href="/user/seller-profile/<%= reqData.uid %>"><%= reqName%></a></h2>
         </div>
         
         <div class="container">
@@ -47,7 +47,7 @@
                             </dl>
                             <dl class="param param-feature">
                                 <dt>Requirement created On</dt>
-                                <dd>this date</dd>
+                                <dd style="color: #adb5bd;"><%= reqData.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %></dd>
                             </dl>
                             
                             <hr>
@@ -55,7 +55,7 @@
                                     <dt>Specifications</dt>
                                     <% var i =0; %>
                                     <% while(Object.keys(reqData.specifications)[i]){ %>
-                                        <span style="color: #adb5bd;"><%= Object.keys(reqData.specifications)[i] %></span>: <span><%= Object.values(reqData.specifications)[i]%></span> <br>
+                                        <span style="color: #495057;"><%= Object.keys(reqData.specifications)[i] %></span> : <span><%= Object.values(reqData.specifications)[i]%></span> <br>
                                     <% i++ %>
                                     <% } %>
 
