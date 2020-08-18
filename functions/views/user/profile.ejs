@@ -23,7 +23,11 @@
             <% }%>
             <div class="row">
                 <div class="column col-left">
-                    <img class="profile-img" src="/images/user.png" alt="">
+                    <img class="profile-img" src="/images/user.png" alt="" id="profile-src">
+                    <div class="p-image">
+                        <i class="fa fa-camera upload-button"> Change Avatar</i>
+                        <input class="file-upload" type="file" accept="image/*"/>
+                    </div>            
                 </div>
                 <div class="column col-right">
                     <h1><%= user.name %></h1>
@@ -370,5 +374,26 @@
             console.log('IMAGE UPLOADED');
         }
     }
+
+
+$(document).ready(function() {
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.profile-img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".file-upload").on('change', function(){
+        readURL(this);
+    });
+
+    $(".upload-button").on('click', function() {
+        $(".file-upload").click();
+    });
+});
 
 </script>
