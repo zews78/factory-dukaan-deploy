@@ -281,7 +281,7 @@ exports.getContacts = async(req, res)=>{
 };
 
 exports.getRequirement = async(req, res) => {
-	// const auth = (await isAuth(req))[0];
+
 	try{
 		const auth = (await isAuth(req))[0];
 		var Reqr = [];
@@ -290,14 +290,13 @@ exports.getRequirement = async(req, res) => {
 
 		const snapshot = await ReqRef.get();
 		snapshot.forEach(doc => {
-			// console.log(doc.id, '=>', doc.data());
-			// const FAQ = doc.data();
+
 			Reqr.push({
 				id: doc.id,
 				...doc.data()
 			});
 		});
-		console.log(Reqr);
+
 		res.render('main/requirement.ejs', {
 			pageTitle: 'Requirements',
 			auth,
@@ -310,19 +309,10 @@ exports.getRequirement = async(req, res) => {
 
 exports.postAddRequirement = async(req, res) => {
 	try {
-		// var i = 0;
-		// var tit = eval('title' + i);
-		// req.body = JSON.parse(JSON.stringify(req.body));
-		// var title = req.body
-		// 	.eval('title' + i);
-		// var bval = req.body.value0;
+
 
 		var objx = new Object();
 		objx[req.body.title0] = req.body.value0;
-		// while(req.body.title + i) {
-		// 	objx[req.body.title + i] = req.body.value + i;
-		// 	i++;
-		// }
 
 
 		await firebase.firestore()
@@ -338,7 +328,7 @@ exports.postAddRequirement = async(req, res) => {
 				quantity: req.body.quantity,
 				createdOn: new Date()
 			});
-		// console.log(tit);
+
 		console.log('Succesfully created a req');
 		res.redirect('/requirement');
 	} catch (err) {
@@ -354,53 +344,64 @@ exports.getOneRequirement = async(req, res)=>{
 		.collection('requirements')
 		.doc(req.params.reqId)
 		.get();
-	// const user = await firebase.firestore()
-	// 	.collection('users')
-	// 	.doc(req.uid)
-	// 	.get();
 
-
-
-
-	// const productReviews = requirement.data().reviews;
 	const reqUser = await firebase.firestore()
 		.collection('users')
 		.doc(requirement.data().uid)
 		.get();
-	// let reviews = [];
-	// let myReview;
-	// let reviewed;
-	// if(productReviews) {
-	// 	for(var i = 0; i < productReviews.length; i++) {
-	// 		const review = {};
-	// 		await productReviews[i].userInfo.get()
-	// 			.then(res=>{
-	// 				review.name = res.data().name;
-	// 				if(res.data().mobile === user.data().mobile) {
-	// 					reviewed = i;
-	// 					myReview = true;
-	// 				}
-	// 			}
-	// 			);
-	// 		review.rating = productReviews[i].rating;
-	// 		review.review = productReviews[i].review;
-	// 		review.postedOn = productReviews[i].postedOn;
-	// 		reviews.push(review);
-	// 	}
-	// }
 
+	const bids = await firebase.firestore()
+		.collection(`requirements/${req.params.reqId}/bids`)
+		.get();
+	let bidsDetails = [];
+	let gettingBidData;
+	if(bids.docs.length > 0) {
 
-	// if(user.data().expiresOn._seconds * 1000 < Date.now()) {
-	// 	console.log('PLEASE PURCHASE A PLAN');
-	// }
-	// console.log(requirement.data());
-	console.log(reqUser.data().name);
-	// console.log(req.params.reqId);
-	res.render('main/OneRequirement.ejs', {
-		pageTitle: 'Requirement Details',
-		auth,
-		reqId: req.params.reqId,
-		reqData: requirement.data(),
-		reqName: reqUser.data().name
+		gettingBidData = new Promise((resolve)=>{
+			bids.docs.map(async bid=>{
+				let bidDetails = {};
+				bidDetails.amount = bid.data().bid;
+				bidDetails.postedOn = bid.data().postedOn;
+				let biderInfo = await bid.data().user.get();
+				bidDetails.bidderInfo = biderInfo.data();
+				bidsDetails.push(bidDetails);
+				if(bidsDetails.length === bids.docs.length) resolve();
+			});
+		}
+		);
+	}else{
+		gettingBidData = new Promise((resolve)=>{ resolve(); });
+	}
+	gettingBidData.then(()=>{
+		res.render('main/OneRequirement.ejs', {
+			pageTitle: 'Requirement Details',
+			auth,
+			reqId: req.params.reqId,
+			reqData: requirement.data(),
+			reqName: reqUser.data().name,
+			bidsDetails
+		});
 	});
+};
+
+exports.postBid = async(req, res)=>{
+
+	try {
+
+		await firebase.firestore()
+			.collection(`/requirements/${req.params.reqId}/bids`)
+			.add({
+				user: firebase.firestore()
+					.doc(`/users/${req.uid}`),
+				bid: req.body.bidAmount,
+				postedOn: new Date()
+			});
+
+		res.json({status: 'success'});
+
+	} catch (error) {
+		console.log(error);
+		res.json({status: error});
+	}
+
 };

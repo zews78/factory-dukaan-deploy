@@ -303,7 +303,6 @@ exports.sellProduct = async(req, res)=>{
 			await firebase.firestore()
 				.collection('products')
 				.add(req.body);
-			console.log('product added');
 			res.json({status: 'success'});
 		}catch(error) {
 			console.log(error);
