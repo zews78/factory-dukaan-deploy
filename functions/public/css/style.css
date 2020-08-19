@@ -984,3 +984,25 @@ footer p {
 	padding-right: 0px !important;
 	padding-left: 0px !important;
 }
+
+.p-image .upload-button {
+	color: #0398fc;
+}
+
+.p-image:hover {
+	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+	font-size: 1.2em;
+}
+
+.upload-button:hover {
+	transform: scale(1.03);
+	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+	color: #999;
+	cursor: pointer;
+}
+
+.p-image .file-upload {
+	display: none;
+}
