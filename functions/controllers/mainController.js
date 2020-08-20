@@ -360,6 +360,7 @@ exports.getOneRequirement = async(req, res)=>{
 		gettingBidData = new Promise((resolve)=>{
 			bids.docs.map(async bid=>{
 				let bidDetails = {};
+				bidDetails.bidderId = bid.data().user._path.segments[1];
 				bidDetails.amount = bid.data().bid;
 				bidDetails.postedOn = bid.data().postedOn;
 				let biderInfo = await bid.data().user.get();

@@ -14,29 +14,33 @@ exports.getUserProfile = async(req, res) => {
 		.collection('users')
 		.doc(userId)
 		.get();
-	if (!userSnapshot.exists) {
-		throw new Error('user not found');
-	}
+	if(!userSnapshot.data().name) {
+		res.redirect('/login');
+	}else{
+		if (!userSnapshot.exists) {
+			throw new Error('user not found');
+		}
 
-	const productsSnapshot = await firebase.firestore()
-		.collection('products')
-		.where('uid', '==', userId)
-		.get();
-	let products = [];
-	if (!productsSnapshot.empty) {
-		productsSnapshot.forEach(product => products.push(product.data()));
-	}
+		const productsSnapshot = await firebase.firestore()
+			.collection('products')
+			.where('uid', '==', userId)
+			.get();
+		let products = [];
+		if (!productsSnapshot.empty) {
+			productsSnapshot.forEach(product => products.push(product.data()));
+		}
 
-	res.render('user/profile.ejs', {
-		pageTitle: 'Profile',
-		auth: true,
-		authorized: userId === req.uid,
-		user: {
-			...userSnapshot.data(),
-			id: userId
-		},
-		products
-	});
+		res.render('user/profile.ejs', {
+			pageTitle: 'Profile',
+			auth: true,
+			authorized: userId === req.uid,
+			user: {
+				...userSnapshot.data(),
+				id: userId
+			},
+			products
+		}); }
+
 };
 
 exports.getSellerProfile = async(req, res) => {
@@ -49,15 +53,6 @@ exports.getSellerProfile = async(req, res) => {
 	if (!userSnapshot.exists) {
 		throw new Error('seller not found');
 	}
-
-	// const productsSnapshot = await firebase.firestore()
-	// 	.collection('products')
-	// 	.where('uid', '==', userId)
-	// 	.get();
-	// let products = [];
-	// if (!productsSnapshot.empty) {
-	// 	productsSnapshot.forEach(product => products.push(product.data()));
-	// }
 
 	res.render('user/seller-profile.ejs', {
 		pageTitle: 'Seller-profile',

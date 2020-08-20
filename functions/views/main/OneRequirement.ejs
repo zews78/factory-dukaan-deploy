@@ -89,7 +89,7 @@
                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
                                 <span class="message-text">
                                     <small class="text-muted pull-right ultra-light"> <%= bidsDetails[i].postedOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %> </small>
-                                    <a href="javascript:void(0);" class="username">
+                                    <a href="/user/seller-profile/<%= bidsDetails[i].bidderId %>" class="username">
                                         <%= bidsDetails[i].bidderInfo.name %>
                                     </a>
                                     <p>Bid Value: <%= bidsDetails[i].amount %></p>

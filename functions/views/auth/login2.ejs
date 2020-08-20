@@ -9,26 +9,28 @@
 		</div>
 		<form action="/user/profile/update" method="POST">
 			<div class="form-content">
+				<p>&nbsp &nbsp<span style="color: red;">*</span> indicates a required field</p>
 				<div class="row">
+					
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" name="name" placeholder="Your Name" value="" required />
+							<input type="text" class="form-control" name="name" placeholder="Your Name*" value="" required />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="email" class="form-control" name="email" placeholder="Email" value="" required />
+							<input type="email" class="form-control" name="email" placeholder="Email*" value="" required />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" name="company.name" placeholder="Company' Name" value=""
+							<input type="text" class="form-control" name="company.name" placeholder="Company' Name*" value=""
 								required />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" name="company.address" placeholder="Company's Address" value=""
+							<input type="text" class="form-control" name="company.address" placeholder="Company's Address*" value=""
 								required />
 						</div>
 					</div>
