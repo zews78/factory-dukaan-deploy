@@ -1,5 +1,4 @@
 const firebase = require('../firebase');
-const storage = require('@google-cloud/storage');
 const isAuth = require('../utils/isAuth');
 const keywordGenerator = require('../utils/keywordGenerator');
 

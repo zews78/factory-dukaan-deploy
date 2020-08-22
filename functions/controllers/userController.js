@@ -5,6 +5,7 @@ const razorpay = require('razorpay');
 const isAuth = require('../utils/isAuth');
 
 
+
 // const validator = require('validator');
 
 exports.getUserProfile = async(req, res) => {
@@ -40,6 +41,60 @@ exports.getUserProfile = async(req, res) => {
 			},
 			products
 		}); }
+
+};
+
+exports.postUpdateUser = async(req, res) => {
+	function randomString(chars) {
+		var result = '';
+		for (var i = 8; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+		return result;
+	}
+	const user = await firebase
+		.firestore()
+		.collection('users')
+		.doc(req.uid);
+	const userSnapshot = await user.get();
+	if(req.body.referralCode && !userSnapshot.referralCode) {
+		const referredBy = await firebase.firestore()
+			.collection('users')
+			.where('referralCode', '==', req.body.referralCode)
+			.get();
+		if(referredBy.empty) {
+			res.json({status: 'invalid referral code'});
+		}else{
+			referredBy.forEach(async doc=>{
+
+				const referredByUser = await firebase.firestore()
+					.collection('users')
+					.doc(doc.id);
+				const referredByUserSnapshot = await referredByUser.get();
+				await referredByUser
+					.update({referredTo: referredByUserSnapshot.data().referredTo + 1});
+
+
+			});
+			try {
+				delete req.body.referralCode;
+				req.body.referralCode = randomString('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+				req.body.referredTo = 0;
+				req.body.createdOn = new Date();
+				req.body.wishlist = [];
+
+				await user.update(req.body);
+				res.redirect('/user/profile');
+			} catch (err) {
+				console.log(err);
+			}
+		}
+	}else{
+		res.json({
+			status: 'Failed',
+			message: 'You cannot use this route to update an set user . Please Go to profile and then edit account detials section'
+		});
+	}
+
+
 
 };
 
@@ -173,19 +228,7 @@ exports.getSuccessfulPayment = async(req, res)=>{
 	res.render('user/paymentSuccess.ejs', {auth});
 };
 
-exports.postUpdateUser = async(req, res) => {
-	try {
 
-		await firebase
-			.firestore()
-			.collection('users')
-			.doc(req.uid)
-			.update(req.body);
-		res.json({status: 'updated'});
-	} catch (err) {
-		console.log(err);
-	}
-};
 
 exports.postVerifyGst = async(req, res) => {
 	try {
