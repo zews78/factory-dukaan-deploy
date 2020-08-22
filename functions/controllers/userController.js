@@ -135,6 +135,7 @@ exports.getUserPayment = async(req, res) => {
 		res.render('user/checkout.ejs', {
 			alreadyActivePlan: true,
 			auth,
+			pageTitle: 'User Plan | Factory Dukaan',
 			user: user.data()
 		});
 	}else{
@@ -285,6 +286,7 @@ exports.getSellingPage = async(req, res)=>{
 
 	res.render('user/sell-page.ejs', {
 		auth,
+		pageTitle: 'Sell Page | Factory Dukaan',
 		user: user.data(),
 		products,
 		productsId
