@@ -1,7 +1,7 @@
 const firebase = require('../firebase');
 const url = require('url');
-
 const loginPageNumber = require('../utils/loginPageNumber');
+
 
 exports.getLogin = async(req, res) => {
 	const page = await loginPageNumber(req);
@@ -23,7 +23,7 @@ exports.getLogin = async(req, res) => {
 			.get();
 		if(user.data().packPurchased) {
 			if(user.data().expiresOn._seconds * 1000 > Date.now()) {
-				res.redirect('/');
+				res.redirect(global.redirectTo);
 			}else{
 				res.redirect('/pricing');
 			}
