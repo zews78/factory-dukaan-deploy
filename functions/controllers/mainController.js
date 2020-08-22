@@ -1,5 +1,5 @@
 const firebase = require('../firebase');
-
+const storage = require('@google-cloud/storage');
 const isAuth = require('../utils/isAuth');
 const keywordGenerator = require('../utils/keywordGenerator');
 
@@ -129,7 +129,7 @@ exports.getProducts = async(req, res) => {
 	}
 };
 
-exports.getOneProduct = async(req, res)=>{
+exports.getOneProduct = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 
 	const product = await firebase.firestore()
@@ -150,13 +150,13 @@ exports.getOneProduct = async(req, res)=>{
 	let reviews = [];
 	let myReview;
 	let reviewed;
-	if(productReviews) {
-		for(var i = 0; i < productReviews.length; i++) {
+	if (productReviews) {
+		for (var i = 0; i < productReviews.length; i++) {
 			const review = {};
 			await productReviews[i].userInfo.get()
-				.then(res=>{
+				.then(res => {
 					review.name = res.data().name;
-					if(res.data().mobile === user.data().mobile) {
+					if (res.data().mobile === user.data().mobile) {
 						reviewed = i;
 						myReview = true;
 					}
@@ -170,7 +170,7 @@ exports.getOneProduct = async(req, res)=>{
 	}
 
 
-	if(user.data().expiresOn._seconds * 1000 < Date.now()) {
+	if (user.data().expiresOn._seconds * 1000 < Date.now()) {
 		console.log('PLEASE PURCHASE A PLAN');
 	}
 	res.render('main/productDetails.ejs', {
@@ -211,7 +211,7 @@ exports.postUpdateProduct = async(req, res) => {
 };
 
 exports.getHelp = async(req, res) => {
-	try{
+	try {
 		const auth = (await isAuth(req))[0];
 
 		var FAQr = [];
@@ -233,7 +233,7 @@ exports.getHelp = async(req, res) => {
 			pageTitle: 'faq/query',
 			FAQr
 		});
-	} catch(err) {
+	} catch (err) {
 		console.log(err);
 	}
 };
@@ -264,7 +264,7 @@ exports.postQuery = async(req, res) => {
 		console.log(err);
 	}
 };
-exports.getPlanDetails = async(req, res)=>{
+exports.getPlanDetails = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/plan-details.ejs', {
 		pageTitle: 'Factory-Dukaan | Plans',
@@ -272,7 +272,7 @@ exports.getPlanDetails = async(req, res)=>{
 	});
 };
 
-exports.getContacts = async(req, res)=>{
+exports.getContacts = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/contact.ejs', {
 		pageTitle: 'Contact Us',
@@ -282,7 +282,7 @@ exports.getContacts = async(req, res)=>{
 
 exports.getRequirement = async(req, res) => {
 	// const auth = (await isAuth(req))[0];
-	try{
+	try {
 		const auth = (await isAuth(req))[0];
 		var Reqr = [];
 		const ReqRef = firebase.firestore()
@@ -297,13 +297,13 @@ exports.getRequirement = async(req, res) => {
 				...doc.data()
 			});
 		});
-		console.log(Reqr);
+		// console.log(Reqr);
 		res.render('main/requirement.ejs', {
 			pageTitle: 'Requirements',
 			auth,
 			Reqr
 		});
-	} catch(err) {
+	} catch (err) {
 		console.log(err);
 	}
 };
@@ -324,22 +324,44 @@ exports.postAddRequirement = async(req, res) => {
 		// 	i++;
 		// }
 
+		// var ref = storage()
+		// .ref();
+		// var file = event.target.files[0];
+		// var name = (+new Date()) + '-' + file.name;
+		// var metadata = {contentType: file.type};
+		// var task = ref.child(name)
+		// 	.put(file, metadata);
+		// task
+		// 	.then(snapshot => snapshot.ref.getDownloadURL())
+		// 	.then((url) => {
+		// 		console.log(url);
+		// 		// document.querySelector('#someImageTagID').src = url;
+		// 	})
+		// 	.catch(console.error);
 
-		await firebase.firestore()
-			.collection('requirements')
-			.add({
-				uid: req.uid,
-				product_name: req.body.product_name,
-				specifications: objx,
-				category: req.body.category,
-				material_used: req.body.material_used,
-				price: req.body.price,
-				desc: req.body.desc,
-				quantity: req.body.quantity,
-				createdOn: new Date()
-			});
+		// console.log(ref, file, name, metadata);
+
+
+		// await firebase.firestore()
+		// 	.collection('requirements')
+		// 	.add({
+		// 		uid: req.uid,
+		// 		product_name: req.body.product_name,
+		// 		specifications: objx,
+		// 		category: req.body.category,
+		// 		material_used: req.body.material_used,
+		// 		price: req.body.price,
+		// 		desc: req.body.desc,
+		// 		quantity: req.body.quantity,
+		// 		createdOn: new Date(),
+		// 		audio: req.body.audio_url,
+		// 		images: req.body.img_url
+		// 	});
 		// console.log(tit);
+		var c = req.body.audio_url;
 		console.log('Succesfully created a req');
+		console.log(req.body.img_url);
+		console.log(c);
 		res.redirect('/requirement');
 	} catch (err) {
 		console.log(err);
@@ -347,7 +369,7 @@ exports.postAddRequirement = async(req, res) => {
 };
 
 
-exports.getOneRequirement = async(req, res)=>{
+exports.getOneRequirement = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 
 	const requirement = await firebase.firestore()
