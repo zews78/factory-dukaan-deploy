@@ -9,7 +9,8 @@
         </div>
 
         <div class="add-specification">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddSpecification">Add Requirement</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddSpecification">Add
+                Requirement</button>
         </div>
 
         <div class="products-wrapper">
@@ -30,9 +31,11 @@
                             <!-- <h6><b>Price:</b> ₹1200</h6> -->
                             <p class="card-text"><small><%= Reqr[i].desc %></small></p>
                             <p class="card-text">Quantity: <%= Reqr[i].quantity %></p>
-                            <p class="card-text"><small class="text-muted">Added On: <%= Reqr[i].createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %></small></p>
+                            <p class="card-text"><small class="text-muted">Added On:
+                                    <%= Reqr[i].createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %></small></p>
                         </div>
-                        <a href="/requirement/<%= Reqr[i].id %>" class="btn btn-md btn-primary m-1 pull-right">View More</a>
+                        <a href="/requirement/<%= Reqr[i].id %>" class="btn btn-md btn-primary m-1 pull-right">View
+                            More</a>
                     </div>
                 </div>
             </div>
@@ -59,17 +62,22 @@
                     <div class="form-group">
                         <label class="control-label" id="addSpecsProductName">Product Name</label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="product_name" value="" id="addTitleInput">
+                            <input type="text" required class="form-control input-lg" name="product_name" value=""
+                                id="addTitleInput">
                         </div>
                     </div>
 
                     <div class="form-group" id="specs-form">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                            <span class="input-group-text">Specifications</span>
+                                <span class="input-group-text">Specifications</span>
                             </div>
-                            <input type="text" name="title0" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0" required>
-                            <input type="text" name="value0" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
+                            <input type="text" name="title0" aria-label="First name"
+                                class="form-control border border-primary" placeholder="Title" id="specsTitle0"
+                                required>
+                            <input type="text" name="value0" aria-label="Last name"
+                                class="form-control border border-primary" placeholder="Description"
+                                style="border-radius: 0;" id="specsDesc0" required>
                         </div>
                     </div>
 
@@ -106,13 +114,14 @@
                                 <option value="Tools & Home Improvement">Tools & Home Improvement</option>
                                 <option value="Toys & Games">Toys & Games</option>
                             </select>
-                         </li>
+                        </li>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Material Used</label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="material_used" id="addSpecsMaterialUsed">
+                            <input type="text" required class="form-control input-lg" name="material_used"
+                                id="addSpecsMaterialUsed">
                         </div>
                     </div>
 
@@ -126,22 +135,28 @@
                     <div class="form-group">
                         <label class="control-label">Product Images</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="addProductImages" accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
+                            <input type="file" class="custom-file-input" id="addProductImages"
+                                accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
                             <label class="custom-file-label" for="customFile">Choose file</label>
+                            <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="uploader">0%</progress><p id="prog_shot"></p></div>
+                            <input type="text" id="img_url" style="display: none;" value="" name="img_url">
+                            <!-- <input type="button" onclick="uploadImage()"> -->
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="control-label">Product Description</label>
                         <div>
-                            <textarea class="form-control" name="desc"  required rows="4" id="addSpecsDescription"></textarea>
+                            <textarea class="form-control" name="desc" required rows="4"
+                                id="addSpecsDescription"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Quantity</small> </label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="quantity" id="addSpecsquantity">
+                            <input type="text" required class="form-control input-lg" name="quantity"
+                                id="addSpecsquantity">
                         </div>
                     </div>
 
@@ -151,10 +166,14 @@
                     <div class="form-group">
                         <!-- <label class="control-label">Send Us Audio</label> -->
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple data-show-upload="true" data-show-caption="true">
+                            <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple
+                                data-show-upload="true" data-show-caption="true">
                             <label class="custom-file-label" for="customFile">Upload Audio</label>
+                            <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="audio_uploader">0%</progress><p id="audio_prog_shot"></p></div>
+                            <input type="text" id="audio_url" style="display: none;" value="" name="audio_url">
+
                         </div>
-                    </div>                    
+                    </div>
 
                     <div class="form-group">
                         <div>
@@ -162,25 +181,157 @@
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
     </div>
-</div>  
+</div>
+<div>
+    <!-- <input type="file" value="upload" id="fileButton" /> -->
+    <!-- <progress value="0" max="100" id="uploader">0%</progress> -->
+</div>
+<%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/footer.ejs') %> 
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
 
 <script>
-    var c=1;
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+        authDomain: "factory-dukaan.firebaseapp.com",
+        databaseURL: "https://factory-dukaan.firebaseio.com",
+        projectId: "factory-dukaan",
+        storageBucket: "factory-dukaan.appspot.com",
+        messagingSenderId: "901783648307",
+        appId: "1:901783648307:web:41d71e94413adcbdb74b46",
+        measurementId: "G-LH7XKNLQE5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+
+<script>
+    //listen for file selection
+    var fileButton = document.getElementById('addProductImages');
+    var uploader = document.getElementById('uploader');
+
+    fileButton.addEventListener('change', function (e) {
+        console.log("i was clicked");
+        var getId = document.getElementById('prog_shot');
+        getId.innerText = 'Uploading...';
+        getId.color = 'red';
+        uploader.style.display = 'block';
+        //get file 
+        var file = e.target.files[0];
+
+        // create a storage ref
+        var storageRef = firebase.storage().ref('images/' + file.name);
+
+        //upload files
+        var task = storageRef.put(file);
+
+        // console.log(file);
+        // console.log(task);
+        //update progress bar
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then((url) => {
+                console.log(url);
+                document.getElementById('img_url').value = url;
+                
+                // document.querySelector('#someImageTagID').src = url;
+            })
+            .catch(console.error);
+        task.on('state_changed',
+            function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                uploader.value = percentage;
+                if(percentage == 100){
+                    var getId = document.getElementById('prog_shot');
+                    getId.innerText = "Done";
+                    getId.style.color= 'green';
+                }
+                
+            },
+            function error(err) {
+                console.log(err);
+            },
+            function complete() {
+                console.log('completed successfully');
+            })
+    });
+    // document.getElementById('addProductImages').value ="hooola";
+
+    var audioButton = document.getElementById('addCustomFile');
+    var audio_uploader = document.getElementById('audio_uploader');
+
+    audioButton.addEventListener('change', function (e) {
+        console.log("i was clicked");
+        var getId = document.getElementById('audio_prog_shot');
+        getId.innerText = 'Uploading...';
+        getId.color = 'red';
+        audio_uploader.style.display = 'block';
+        //get file 
+        var file = e.target.files[0];
+
+        // create a storage ref
+        var storageRef = firebase.storage().ref('audio/' + file.name);
+
+        //upload files
+        var task = storageRef.put(file);
+
+        // console.log(file);
+        // console.log(task);
+        //update progress bar
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then((url) => {
+                console.log(url);
+                document.getElementById('audio_url').value = url;
+                
+                // document.querySelector('#someImageTagID').src = url;
+            })
+            .catch(console.error);
+        task.on('state_changed',
+            function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                audio_uploader.value = percentage;
+                if(percentage == 100){
+                    var getId = document.getElementById('audio_prog_shot');
+                    getId.innerText = "Done";
+                    getId.style.color= 'green';
+                }
+                
+            },
+            function error(err) {
+                console.log(err);
+            },
+            function complete() {
+                console.log('completed successfully');
+            })
+    });
+
+
+</script>
+<script>
+    var c = 1;
     function specsHandler() {
         console.log("specs handler clicked")
         $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specifications</span></div> <input type="text" name="title${c}" aria-label="First name" class="form-control border border-primary" placeholder="Title${c}" id="specsTitle${c}"><input type="text" name="value${c}" aria-label="Last name" class="form-control border border-primary" placeholder="Description${c}" id="specsDesc${c}" style="border-radius: 0;"></div>`)
-        
-        c=c+1;
+
+        c = c + 1;
     }
 
-    document.querySelector(".custom-file-input").addEventListener('change', function() {
+    document.querySelector(".custom-file-input").addEventListener('change', function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
