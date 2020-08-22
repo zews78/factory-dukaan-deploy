@@ -71,9 +71,9 @@
 
         <hr>
         <div class="container text-center" id="bidSection">
-            <form method="post" onsubmit="return false;">
+            <form method="post">
                 <input type="number" name="bid" id="userBidInput" placeholder="Make your bid" class="p-1">
-                <button type="submit" class="btn btn-sm btn-primary">
+                <button type="button" class="btn btn-sm btn-primary" onclick="submitYourBid()">
                     Submit Bid
                 </button>
             </form>
@@ -83,42 +83,24 @@
             <h3 class="text-center">All Bids</h3>
             <div class="chat-body no-padding profile-message">
                 <ul>
-                    <li class="message">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
-                        <span class="message-text">
-                            <a href="javascript:void(0);" class="username">
-                                M S Dhoni
-                            </a>
-                            <p>Bid Value: ₹1350</p>
-                            <small class="text-muted pull-right ultra-light"> Posted 15/08/2020 </small>
-                        </span>   
-                    </li>
-                    <hr>
-
-                    <li class="message">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
-                        <span class="message-text">
-                            <a href="javascript:void(0);" class="username">
-                                Virat Kohli
-                            </a>
-                            <p>Bid Value: ₹1380</p>
-                            <small class="text-muted pull-right ultra-light"> Posted 15/08/2020 </small>
-                        </span>   
-                    </li>
-                    <hr>
-
-                    <li class="message">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
-                        <span class="message-text">
-                            <a href="javascript:void(0);" class="username">
-                                Rohit Sharma
-                            </a>
-                            <p>Bid Value: ₹1340</p>
-                            <small class="text-muted pull-right ultra-light"> Posted 15/08/2020 </small>
-                        </span>   
-                    </li>
-                    <hr>                    
-                    
+                    <% if (bidsDetails.length>0) {%>
+                        <% for(var i=0; i < bidsDetails.length; i++) { %>
+                            <li class="message">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                                <span class="message-text">
+                                    <small class="text-muted pull-right ultra-light"> <%= bidsDetails[i].postedOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %> </small>
+                                    <a href="/user/seller-profile/<%= bidsDetails[i].bidderId %>" class="username">
+                                        <%= bidsDetails[i].bidderInfo.name %>
+                                    </a>
+                                    <p>Bid Value: <%= bidsDetails[i].amount %></p>
+                                </span>   
+                            </li>
+                            <hr>
+                         <% } %>
+                        
+                        <%}else{%>
+                        <p>No Bids Yet</p>
+                        <% } %>
                 </ul>
             </div>
         </div>
@@ -132,6 +114,23 @@
     const makeYourBid = () => {
         document.getElementById("userBidInput").focus(); 
     }
+
+    const submitYourBid=async ()=>{
+        const response=await axios({
+            url:`${window.location.href}/bid`,
+            method:"POST",
+            data:{
+                bidAmount: +document.getElementById("userBidInput").value
+            }
+        })
+        if(response.data.status==='success'){
+            console.log("reload");
+            location.reload();
+        }else{
+            console.log(response.data.status);
+        }
+    }
+    
 </script>
 
 <%- include('../partials/end.ejs') %>
