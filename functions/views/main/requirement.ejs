@@ -162,9 +162,11 @@
 
                     <hr>
                     <p><span style="color: crimson;">Or just send us a recorded audio file</span></p>
+                    <button type="submit" class="btn btn-success text-center mb-2" data-dismiss="modal" data-toggle="modal" data-target="#ModalAddSpecificationAudio">Send us Audio file</button>
+                    <!-- <p><span style="color: crimson;">Or just send us a recorded audio file</span></p>
 
                     <div class="form-group">
-                        <!-- <label class="control-label">Send Us Audio</label> -->
+                        <label class="control-label">Send Us Audio</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple
                                 data-show-upload="true" data-show-caption="true">
@@ -173,7 +175,7 @@
                             <input type="text" id="audio_url" style="display: none;" value="" name="audio_url">
 
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <div>
@@ -187,6 +189,38 @@
         </div>
     </div>
 </div>
+
+<div id="ModalAddSpecificationAudio" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Specifications</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Send us a recorded audio file, we'll add a requirement for you</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple
+                            data-show-upload="true" data-show-caption="true">
+                        <label class="custom-file-label" for="customFile">Upload Audio</label>
+                        <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="audio_uploader">0%</progress><p id="audio_prog_shot"></p></div>
+                        <input type="text" id="audio_url" style="display: none;" value="" name="audio_url">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div>
     <!-- <input type="file" value="upload" id="fileButton" /> -->
     <!-- <progress value="0" max="100" id="uploader">0%</progress> -->
