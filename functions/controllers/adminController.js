@@ -1,7 +1,6 @@
 const firebase = require('../firebase');
 const keywordGenerator = require('../utils/keywordGenerator');
-const {italics} = require('../utils/punctuationMarks');
-const admin = require('firebase-admin');
+
 
 exports.getDashboard = async(req, res) => {
 	res.redirect('/admin/products');

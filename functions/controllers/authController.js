@@ -25,11 +25,11 @@ exports.getLogin = async(req, res) => {
 			if(user.data().expiresOn._seconds * 1000 > Date.now()) {
 				res.redirect('/');
 			}else{
-				res.redirect('/plan-details');
+				res.redirect('/pricing');
 			}
 
 		}else{
-			res.redirect('/plan-details');
+			res.redirect('/pricing');
 		}
 
 	}
@@ -65,6 +65,7 @@ exports.postLogin = async(req, res) => {
 		})
 		);
 	} catch (err) {
+		console.log('Something went wrong ');
 		console.log(err);
 		res.status(500)
 			.json({message: 'Something went wrong!'});
