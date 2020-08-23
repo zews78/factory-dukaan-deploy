@@ -310,7 +310,13 @@ exports.postAddRequirement = async(req, res) => {
 
 
 		var objx = new Object();
+		// var i = 0;
+		// while(req.body.title + i) {
 		objx[req.body.title0] = req.body.value0;
+		// }
+
+
+		// console.log(req.body.title + i);
 
 		// var ref = storage()
 		// .ref();
@@ -346,10 +352,11 @@ exports.postAddRequirement = async(req, res) => {
 				images: req.body.img_url
 			});
 		// console.log(tit);
-		var c = req.body.audio_url;
-		console.log('Succesfully created a req');
-		console.log(req.body.img_url);
-		console.log(c);
+		// console.log(req.body.quantity);
+		// var c = req.body.audio_url;
+		// console.log('Succesfully created a req');
+		// console.log(req.body.img_url);
+		// console.log(c);
 		res.redirect('/requirement');
 	} catch (err) {
 		console.log(err);

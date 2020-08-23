@@ -80,6 +80,7 @@
                                 style="border-radius: 0;" id="specsDesc0" required>
                         </div>
                     </div>
+                    <!-- <button onclick="submit()">hello</button> -->
 
                     <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button>
 
@@ -138,7 +139,7 @@
                             <input type="file" class="custom-file-input" id="addProductImages"
                                 accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
                             <label class="custom-file-label" for="customFile">Choose file</label>
-                            <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="uploader">0%</progress><p id="prog_shot"></p></div>
+                            <div style="display: flex;"><progress style="display: none; margin: 3px;" value="0" max="100" id="uploader">0%</progress><p id="prog_shot"></p></div>
                             <input type="text" id="img_url" style="display: none;" value="" name="img_url">
                             <!-- <input type="button" onclick="uploadImage()"> -->
                         </div>
@@ -169,7 +170,7 @@
                             <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple
                                 data-show-upload="true" data-show-caption="true">
                             <label class="custom-file-label" for="customFile">Upload Audio</label>
-                            <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="audio_uploader">0%</progress><p id="audio_prog_shot"></p></div>
+                            <div style="display: flex;"><progress style="display: none; margin: 3px;" value="0" max="100" id="audio_uploader">0%</progress><p id="audio_prog_shot"></p></div>
                             <input type="text" id="audio_url" style="display: none;" value="" name="audio_url">
 
                         </div>
@@ -228,7 +229,7 @@
         console.log("i was clicked");
         var getId = document.getElementById('prog_shot');
         getId.innerText = 'Uploading...';
-        getId.color = 'red';
+        getId.style.color = '#e76f51';
         uploader.style.display = 'block';
         //get file 
         var file = e.target.files[0];
@@ -278,7 +279,7 @@
         console.log("i was clicked");
         var getId = document.getElementById('audio_prog_shot');
         getId.innerText = 'Uploading...';
-        getId.color = 'red';
+        getId.style.color = '#e76f51';
         audio_uploader.style.display = 'block';
         //get file 
         var file = e.target.files[0];
@@ -330,6 +331,18 @@
 
         c = c + 1;
     }
+    // function submit(){
+    //     var i =0;
+    //     var specs_obj = {};
+    //     while(`specsTitle${i}`){
+    //         var specsTitle = document.getElementById(`specsTitle${i}`);
+    //         var specsDesc = document.getElementById(`specsDesc${i}`);
+    //         specs_obj[specsTitle.value] = specsDesc.value;
+    //     }
+    //     console.log(specs_obj);
+
+
+    // }
 
     document.querySelector(".custom-file-input").addEventListener('change', function () {
         var fileName = $(this).val().split("\\").pop();
