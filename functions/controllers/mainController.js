@@ -1,5 +1,4 @@
 const firebase = require('../firebase');
-const storage = require('@google-cloud/storage');
 const isAuth = require('../utils/isAuth');
 const keywordGenerator = require('../utils/keywordGenerator');
 
@@ -230,7 +229,7 @@ exports.getHelp = async(req, res) => {
 		});
 		res.render('main/help.ejs', {
 			auth,
-			pageTitle: 'faq/query',
+			pageTitle: 'Help',
 			FAQr
 		});
 	} catch (err) {
@@ -267,7 +266,7 @@ exports.postQuery = async(req, res) => {
 exports.getPlanDetails = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/plan-details.ejs', {
-		pageTitle: 'Factory-Dukaan | Plans',
+		pageTitle: 'Plans | Factory-Dukaan',
 		auth
 	});
 };

@@ -1,7 +1,7 @@
 const firebase = require('../firebase');
 const url = require('url');
-
 const loginPageNumber = require('../utils/loginPageNumber');
+
 
 exports.getLogin = async(req, res) => {
 	const page = await loginPageNumber(req);
@@ -23,13 +23,13 @@ exports.getLogin = async(req, res) => {
 			.get();
 		if(user.data().packPurchased) {
 			if(user.data().expiresOn._seconds * 1000 > Date.now()) {
-				res.redirect('/');
+				res.redirect(global.redirectTo);
 			}else{
-				res.redirect('/plan-details');
+				res.redirect('/pricing');
 			}
 
 		}else{
-			res.redirect('/plan-details');
+			res.redirect('/pricing');
 		}
 
 	}
@@ -65,6 +65,7 @@ exports.postLogin = async(req, res) => {
 		})
 		);
 	} catch (err) {
+		console.log('Something went wrong ');
 		console.log(err);
 		res.status(500)
 			.json({message: 'Something went wrong!'});
