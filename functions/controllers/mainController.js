@@ -313,10 +313,10 @@ exports.postAddRequirement = async(req, res) => {
 		// while(req.body.title + i) {
 		// objx[req.body.title0] = req.body.value0;
 		// }
+		// console.log(JSON.parse(req.body.specs));
+
+
 		console.log(req.body);
-
-
-		// console.log(req.body.title + i);
 
 		// var ref = storage()
 		// .ref();
@@ -336,26 +336,26 @@ exports.postAddRequirement = async(req, res) => {
 		// console.log(ref, file, name, metadata);
 
 
-		// await firebase.firestore()
-		// 	.collection('requirements')
-		// 	.add({
-		// 		uid: req.uid,
-		// 		product_name: req.body.product_name,
-		// 		specifications: req.body.specs,
-		// 		category: req.body.category,
-		// 		material_used: req.body.material_used,
-		// 		price: req.body.price,
-		// 		desc: req.body.desc,
-		// 		quantity: req.body.quantity,
-		// 		createdOn: new Date(),
-		// 		// audio: req.body.audio_url,
-		// 		images: req.body.img_url
-		// 	});
+		await firebase.firestore()
+			.collection('requirements')
+			.add({
+				uid: req.uid,
+				product_name: req.body.product_name,
+				specifications: JSON.parse(req.body.specs),
+				category: req.body.category,
+				material_used: req.body.material_used,
+				price: req.body.price,
+				desc: req.body.desc,
+				quantity: req.body.quantity,
+				createdOn: new Date(),
+				// audio: req.body.audio_url,
+				images: JSON.parse(req.body.img_url)
+			});
 		// console.log(tit);
 		// console.log(req.body.quantity);
 		// var c = req.body.audio_url;
 		// console.log('Succesfully created a req');
-		// console.log(req.body.img_url);
+		console.log(req.body);
 		// console.log(JSON.stringify(req.body.specs));
 		res.redirect('/requirement');
 	} catch (err) {
