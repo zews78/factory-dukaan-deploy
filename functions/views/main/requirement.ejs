@@ -68,16 +68,15 @@
                     </div>
 
                     <div class="form-group" id="specs-form">
+                        <input type="text" id="specStore" name="specs" style="display:none">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Specifications</span>
                             </div>
-                            <input type="text" name="title0" aria-label="First name"
-                                class="form-control border border-primary" placeholder="Title" id="specsTitle0"
-                                required>
-                            <input type="text" name="value0" aria-label="Last name"
-                                class="form-control border border-primary" placeholder="Description"
-                                style="border-radius: 0;" id="specsDesc0" required>
+                            <input type="text" aria-label="First name" class="form-control border border-primary"
+                                placeholder="Title" id="specsTitle0" required>
+                            <input type="text" aria-label="Last name" class="form-control border border-primary"
+                                placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
                         </div>
                     </div>
 
@@ -86,7 +85,8 @@
                     <div class="form-group">
                         <li>
                             <label for="categoryChooser-form">Product Category</label>
-                            <select name="category" class="form-control" id="categoryChooser-form" type="singleselect">
+                            <select onclick="submitx()" name="category" class="form-control" id="categoryChooser-form"
+                                type="singleselect">
                                 <option value="">Choose category...</option>
                                 <option value="Appliances">Appliances</option>
                                 <option value="Apps &amp; Games">Apps &amp; Games</option>
@@ -132,17 +132,22 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="custom_file" style="margin-bottom: 0;">
                         <label class="control-label">Product Images</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="addProductImages"
                                 accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                            <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="uploader">0%</progress><p id="prog_shot"></p></div>
-                            <input type="text" id="img_url" style="display: none;" value="" name="img_url">
+                            <label class="custom-file-label" for="customFile"><i class="fas fa-upload"></i>Upload</label>
+                            <div style="display: flex;"><progress style="display: none; margin: 3px;" value="0"
+                                    max="100" id="uploader">0%</progress>
+                                <p id="prog_shot"></p>
+                            </div>
                             <!-- <input type="button" onclick="uploadImage()"> -->
                         </div>
                     </div>
+                    <!-- <button type="button" class="btn btn-primary" onclick="imgHandler()">Add more</button> -->
+                    <input type="text" id="img_url" style="display: none;" value="" name="img_url">
+                    <div id="img_name" style="border: 1px solid black;"></div><br>
 
                     <div class="form-group">
                         <label class="control-label">Product Description</label>
@@ -162,7 +167,8 @@
 
                     <hr>
                     <p><span style="color: crimson;">Or just send us a recorded audio file</span></p>
-                    <button type="submit" class="btn btn-success text-center mb-2" data-dismiss="modal" data-toggle="modal" data-target="#ModalAddSpecificationAudio">Send us Audio file</button>
+                    <button type="submit" class="btn btn-success text-center mb-2" data-dismiss="modal"
+                        data-toggle="modal" data-target="#ModalAddSpecificationAudio">Send us Audio file</button>
                     <!-- <p><span style="color: crimson;">Or just send us a recorded audio file</span></p>
 
                     <div class="form-group">
@@ -171,7 +177,7 @@
                             <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple
                                 data-show-upload="true" data-show-caption="true">
                             <label class="custom-file-label" for="customFile">Upload Audio</label>
-                            <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="audio_uploader">0%</progress><p id="audio_prog_shot"></p></div>
+                            <div style="display: flex;"><progress style="display: none; margin: 3px;" value="0" max="100" id="audio_uploader">0%</progress><p id="audio_prog_shot"></p></div>
                             <input type="text" id="audio_url" style="display: none;" value="" name="audio_url">
 
                         </div>
@@ -198,25 +204,32 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="control-label">Send us a recorded audio file, we'll add a requirement for you</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple
-                            data-show-upload="true" data-show-caption="true">
-                        <label class="custom-file-label" for="customFile">Upload Audio</label>
-                        <div style="display: flex;"><progress style="display: none;" value="0" max="100" id="audio_uploader">0%</progress><p id="audio_prog_shot"></p></div>
-                        <input type="text" id="audio_url" style="display: none;" value="" name="audio_url">
-                    </div>
-                </div>
+            <!-- <form action="/addreq" method="POST"> -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Send us a recorded audio file, we'll add a requirement for
+                            you</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="addCustomFile" accept=".mp3,.wav" multiple
+                                data-show-upload="true" data-show-caption="true">
+                            <label class="custom-file-label" for="customFile">Upload Audio</label>
+                            <div style="display: flex;"><progress style="display: none;" value="0" max="100"
+                                    id="audio_uploader">0%</progress>
+                                <p id="audio_prog_shot"></p>
+                            </div>
+                            <input type="text" id="audio_url" style="display: none;" value="" name="audio_url">
+                        </div>
 
-                <div class="form-group">
-                    <div>
-                        <button type="submit" class="btn btn-success">Save</button>
-                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <!-- </form> -->
         </div>
     </div>
 </div>
@@ -255,14 +268,19 @@
 
 <script>
     //listen for file selection
+    var img_arr = [];
+    // var i = 0;
     var fileButton = document.getElementById('addProductImages');
     var uploader = document.getElementById('uploader');
+    var getId = document.getElementById('prog_shot');
 
-    fileButton.addEventListener('change', function (e) {
-        console.log("i was clicked");
-        var getId = document.getElementById('prog_shot');
+
+    fileButton.addEventListener("change", function(e) {
+        // var i = 0;
+        console.log("i was detected");
+        // var getId = document.getElementById(`prog_shot${i}`);
         getId.innerText = 'Uploading...';
-        getId.color = 'red';
+        getId.style.color = '#e76f51';
         uploader.style.display = 'block';
         //get file 
         var file = e.target.files[0];
@@ -280,8 +298,13 @@
             .then(snapshot => snapshot.ref.getDownloadURL())
             .then((url) => {
                 console.log(url);
-                document.getElementById('img_url').value = url;
-                
+                img_arr.push(url);
+                $('#img_name').append(`<p>${file.name}</p>`);
+                console.log(img_arr);
+                document.getElementById('img_url').value = JSON.stringify(img_arr);
+                console.log(document.getElementById('img_url').value);
+
+
                 // document.querySelector('#someImageTagID').src = url;
             })
             .catch(console.error);
@@ -289,12 +312,12 @@
             function progress(snapshot) {
                 var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 uploader.value = percentage;
-                if(percentage == 100){
-                    var getId = document.getElementById('prog_shot');
+                if (percentage == 100) {
+                    // var getId = document.getElementById(`prog_shot${i}`);
                     getId.innerText = "Done";
-                    getId.style.color= 'green';
+                    getId.style.color = 'green';
                 }
-                
+
             },
             function error(err) {
                 console.log(err);
@@ -302,6 +325,7 @@
             function complete() {
                 console.log('completed successfully');
             })
+            // i++;
     });
     // document.getElementById('addProductImages').value ="hooola";
 
@@ -312,7 +336,7 @@
         console.log("i was clicked");
         var getId = document.getElementById('audio_prog_shot');
         getId.innerText = 'Uploading...';
-        getId.color = 'red';
+        getId.style.color = '#e76f51';
         audio_uploader.style.display = 'block';
         //get file 
         var file = e.target.files[0];
@@ -331,7 +355,7 @@
             .then((url) => {
                 console.log(url);
                 document.getElementById('audio_url').value = url;
-                
+
                 // document.querySelector('#someImageTagID').src = url;
             })
             .catch(console.error);
@@ -339,12 +363,12 @@
             function progress(snapshot) {
                 var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 audio_uploader.value = percentage;
-                if(percentage == 100){
+                if (percentage == 100) {
                     var getId = document.getElementById('audio_prog_shot');
                     getId.innerText = "Done";
-                    getId.style.color= 'green';
+                    getId.style.color = 'green';
                 }
-                
+
             },
             function error(err) {
                 console.log(err);
@@ -364,17 +388,41 @@
 
         c = c + 1;
     }
+    // function imgHandler() {
+    //     console.log(`"${c}th handler clicked"`)
+    //     $('#custom_file').append(`<div class="custom-file"><input type="file" class="custom-file-input" id="addProductImages${c}" onclick="createVar()" accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true"><label class="custom-file-label" for="customFile">Choose file</label><div style="display: flex;"><progress style="display: none; margin: 3px;" value="0" max="100" id="uploader${c}">0%</progress><p id="prog_shot${c}"></p></div></div>`)
+
+    //     c = c + 1;
+    // }
+
+    function submitx() {
+
+        var i = 0;
+        var specs_obj = {};
+        while (i < 15) {
+            var specsTitle = document.getElementById(`specsTitle${i}`);
+            var specsDesc = document.getElementById(`specsDesc${i}`);
+            specs_obj[specsTitle.value] = specsDesc.value;
+
+            if (document.getElementById(`specsTitle${i + 1}`) == null) {
+                break;
+            }
+
+            i++;
+        }
+        console.log(specs_obj);
+        document.getElementById('specStore').value = JSON.stringify(specs_obj);
+
+
+
+
+    }
 
     document.querySelector(".custom-file-input").addEventListener('change', function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 
-    // document.querySelector('.custom-file-input').addEventListener('change',function(e) {
-    //     var fileName = document.getElementById("customFile").files[0].name;
-    //     var nextSibling = e.target.nextElementSibling
-    //     nextSibling.innerText = fileName
-    // })
 </script>
 
 <%- include('../partials/end.ejs') %>
