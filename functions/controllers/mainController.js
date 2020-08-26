@@ -165,13 +165,11 @@ exports.getOneProduct = async(req, res) => {
 	let reviewed;
 	let inWishList;
 
-	console.log(user.data().wishlist);
-	console.log(product.id);
+
 
 	if(user.data().wishlist.length > 0) {
-		for(let i = 0; i < user.data().wishlist; i++) {
+		for(let i = 0; i < user.data().wishlist.length; i++) {
 			if(product.id === user.data().wishlist[i]) {
-				console.log('run');
 				inWishList = true;
 			}
 		}
@@ -199,7 +197,6 @@ exports.getOneProduct = async(req, res) => {
 	if (user.data().expiresOn._seconds * 1000 < Date.now()) {
 		console.log('PLEASE PURCHASE A PLAN');
 	}
-	console.log(inWishList);
 	res.render('main/productDetails.ejs', {
 		pageTitle: 'Product Details',
 		auth,
