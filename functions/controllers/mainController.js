@@ -58,8 +58,22 @@ exports.getProducts = async(req, res) => {
 
 		// Making products ready for passing to templating engine for rendering
 		const products = [];
-		productsSnapshot.forEach((product) => {
+		productsSnapshot.forEach(async(product) => {
+			let inWishList;
+			if(req.uid) {
+				const user = await firebase.firestore()
+					.collection('users')
+					.doc(req.uid)
+					.get();
+
+				for(let i = 0; i < user.data().wishlist.length; i++) {
+					if(product.id === user.data().wishlist[i]) {
+						inWishList = true;
+					}
+				}
+			}
 			products.push({
+				inWishList,
 				id: product.id,
 				...product.data(),
 				createdOn: product.data().createdOn.toDate()
@@ -149,8 +163,21 @@ exports.getOneProduct = async(req, res) => {
 	let reviews = [];
 	let myReview;
 	let reviewed;
+	let inWishList;
+
+	console.log(user.data().wishlist);
+	console.log(product.id);
+
+	if(user.data().wishlist.length > 0) {
+		for(let i = 0; i < user.data().wishlist; i++) {
+			if(product.id === user.data().wishlist[i]) {
+				console.log('run');
+				inWishList = true;
+			}
+		}
+	}
 	if (productReviews) {
-		for (var i = 0; i < productReviews.length; i++) {
+		for (let i = 0; i < productReviews.length; i++) {
 			const review = {};
 			await productReviews[i].userInfo.get()
 				.then(res => {
@@ -172,11 +199,13 @@ exports.getOneProduct = async(req, res) => {
 	if (user.data().expiresOn._seconds * 1000 < Date.now()) {
 		console.log('PLEASE PURCHASE A PLAN');
 	}
+	console.log(inWishList);
 	res.render('main/productDetails.ejs', {
 		pageTitle: 'Product Details',
 		auth,
 		productId: req.params.productId,
 		productData: product.data(),
+		inWishList,
 		reviews,
 		reviewed,
 		myReview,
@@ -424,4 +453,20 @@ exports.postBid = async(req, res)=>{
 		res.json({status: error});
 	}
 
+};
+
+exports.addToWishList = async(req, res)=>{
+	await firebase.firestore()
+		.collection('users')
+		.doc(req.uid)
+		.update({wishlist: firebase.firestore.FieldValue.arrayUnion(req.body.productId)});
+	res.json({status: 'added'});
+};
+
+exports.removeFromWishList = async(req, res)=>{
+	await firebase.firestore()
+		.collection('users')
+		.doc(req.uid)
+		.update({wishlist: firebase.firestore.FieldValue.arrayRemove(req.body.productId)});
+	res.json({status: 'removed'});
 };

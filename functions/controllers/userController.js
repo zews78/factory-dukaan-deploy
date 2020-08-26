@@ -6,6 +6,7 @@ const isAuth = require('../utils/isAuth');
 
 
 
+
 // const validator = require('validator');
 
 exports.getUserProfile = async(req, res) => {
@@ -27,13 +28,31 @@ exports.getUserProfile = async(req, res) => {
 			.where('uid', '==', userId)
 			.get();
 		let products = [];
+		let wishlist = [];
 		if (!productsSnapshot.empty) {
-			productsSnapshot.forEach(product => products.push(product.data()));
+			productsSnapshot.forEach(product => {
+				let productData = product.data();
+				productData.id = product.id;
+				products.push(productData);
+			});
+		}
+		if(userSnapshot.data().wishlist.length > 0) {
+			for(let i = 0; i < userSnapshot.data().wishlist.length > 0; i++) {
+				let item = await firebase.firestore()
+					.collection('products')
+					.doc(userSnapshot.data().wishlist[i])
+					.get();
+				let itemSnapshot;
+				itemSnapshot = item.data();
+				itemSnapshot.productId = item.id;
+				wishlist.push(itemSnapshot);
+			}
 		}
 
 		res.render('user/profile.ejs', {
 			pageTitle: 'Profile',
 			auth: true,
+			wishlist,
 			authorized: userId === req.uid,
 			user: {
 				...userSnapshot.data(),

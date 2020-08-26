@@ -9,12 +9,15 @@ router.get('/', mainController.getHome);
 router.get('/help', mainController.getHelp);
 router.get('/contact-us', mainController.getContacts);
 router.get('/pricing', mainController.getPlanDetails);
-router.get('/products', mainController.getProducts);
+router.get('/products', redirectTo, isAuth, mainController.getProducts);
 router.get('/product/:productId', redirectTo, isAuth, mainController.getOneProduct);
 router.post('/products', isAuth, mainController.postProduct);
 router.post('/product/:productId/update', isAuth, mainController.postUpdateProduct);
 router.post('/querySubmit', isAuth, mainController.postQuery);
 
+// WISHLIST HANDLER
+router.post('/addToWishList', isAuth, mainController.addToWishList);
+router.post('/removeFromWishList', isAuth, mainController.removeFromWishList);
 
 // REQUIREMENTS PAGE
 router.get('/requirement', mainController.getRequirement);
