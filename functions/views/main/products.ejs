@@ -47,8 +47,11 @@
                             <div class="product-bottom-details">
                                 <div class="product-price"><%= '₹ ' + product.price %></div>
                                 <div class="product-links">
-                                    <a href="#!"><i class="fa fa-heart"></i></a>
-                                    <a href="#!"><i class="fa fa-shopping-cart"></i></a>
+                                    <% if (product.inWishList) {%>
+                                        <a href="#!" id="<%= product.id %>-wishlist" class="addToWishList"><i class="fa fa-heart" id="<%= product.id %>-heart" style="color:red "></i></a>
+                                    <%}else{%>
+                                        <a href="#!" id="<%= product.id %>-wishlist" class="addToWishList"><i class="fa fa-heart" id="<%= product.id %>-heart"></i></a>
+                                    <%} %>
                                 </div>
                             </div>
                         </div>
@@ -75,6 +78,35 @@
             <% } %>
         </div>
     </div>
+
+    <script>
+        var buttons = document.getElementsByClassName("addToWishList");
+        var buttonsCount = buttons.length;
+        for (var i = 0; i <= buttonsCount; i += 1) {
+            buttons[i].onclick = async function(e) {
+                if(document.getElementById(`${this.id.split('-')[0]}-heart`).style.color==="red"){
+                    const res= await axios({
+                        url:"/removeFromWishList",
+                        method:"POST",
+                        data:{
+                            productId:this.id.split('-')[0]
+                        }
+                    })
+                    document.getElementById(`${this.id.split('-')[0]}-heart`).style.removeProperty('color');
+                }else{
+                    const res= await axios({
+                        url:"/addToWishList",
+                        method:"POST",
+                        data:{
+                            productId:this.id.split('-')[0]
+                        }
+                    })
+                    document.getElementById(`${this.id.split('-')[0]}-heart`).style.color="red";
+                }
+                
+            };
+        }
+    </script>
 
 
 

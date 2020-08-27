@@ -48,6 +48,9 @@
                         <% if (user.gstNo) { %>
                         <i class="fas fa-money-check-alt"></i>GSTIN <%= user.gstNo %> <br>
                         <% } %>
+                        <% if (user.referralCode) {%>
+                            <i class="fas fa-user-plus"></i>Referral Code : <%= user.referralCode %> (refer to your friends and get exciting benefits)<br>
+                        <%} %>
                         <i class="fas fa-phone-square-alt"></i><%= user.mobile %><br>
                         <i class="far fa-calendar-alt"></i>Joined on
                         <%= user.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %>
@@ -77,13 +80,13 @@
                 <% if(products.length > 0) { %>
                 <div class="row">
                     <% for (let product in products) { %>
-                    <div class="card">
-                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                        <div class="card">
+                            <a href="/product/<%= products[product].id %>"><img src="/images/product1.jpg" class="card-img-top" alt="..."></a>
+                            <div class="card-body">
+                                <strong><%= products[product].title %></strong>
+                                <p class="card-text"><%= products[product].desc %></p>
+                            </div>
                         </div>
-                    </div>
                     <% } %>
                 </div>
                 <% } else { %>
@@ -96,27 +99,15 @@
             <div id="my-wishlist" class="tabcontent">
                 <% if(user.wishlist.length > 0) { %>
                 <div class="row">
-                    <div class="card">
-                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                    <% for (let product in wishlist) { %>
+                        <div class="card">
+                            <a href="/product/<%= wishlist[product].productId %>"><img src="/images/product1.jpg" class="card-img-top" alt="..."></a>
+                            <div class="card-body">
+                                <strong><%= wishlist[product].title %></strong>
+                                <p class="card-text"><%= wishlist[product].desc %></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="/images/product1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
                 <% } else { %>
                 <div class="text-center">

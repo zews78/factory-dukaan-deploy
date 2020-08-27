@@ -23,7 +23,12 @@ exports.getLogin = async(req, res) => {
 			.get();
 		if(user.data().packPurchased) {
 			if(user.data().expiresOn._seconds * 1000 > Date.now()) {
-				res.redirect(global.redirectTo);
+				if(global.redirectTo) {
+					res.redirect(global.redirectTo);
+				}else{
+					res.redirect('/');
+				}
+
 			}else{
 				res.redirect('/pricing');
 			}
