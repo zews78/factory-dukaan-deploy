@@ -19,7 +19,12 @@
             <div class="card mb-3 w-75">
                 <div class="row no-gutters">
                     <div class="col-md-5">
-                        <img class="card-img-top ml-2" src="/images/product1.jpg" alt="Card image cap">
+                        <%if(Reqr[i].images){ %>
+                            <img class="card-img-top ml-2" src="<%= Reqr[i].images[0] %>" alt="Card image cap">
+                        <%}
+                        else{%>
+                            <img class="card-img-top ml-2" src="/images/product1.jpg" alt="Card image cap">
+                        <%}%>
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
@@ -68,7 +73,7 @@
                     </div>
 
                     <div class="form-group" id="specs-form">
-                        <input type="text" id="specStore" name="specs" style="display:none">
+                        <input type="text" id="specStore" value='' name="specs" style="display:none">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Specifications</span>
@@ -147,7 +152,7 @@
                     </div>
                     <!-- <button type="button" class="btn btn-primary" onclick="imgHandler()">Add more</button> -->
                     <input type="text" id="img_url" style="display: none;" value="" name="img_url">
-                    <div id="img_name" style="border: 1px solid black;"></div><br>
+                    <div id="img_name" style="border: 1px solid #04599F;border-radius: 4px;"></div><br>
 
                     <div class="form-group">
                         <label class="control-label">Product Description</label>
@@ -224,7 +229,7 @@
 
                     <div class="form-group">
                         <div>
-                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" onclick="submitAudio()" data-dismiss="modal" class="btn btn-success">Save</button>
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -268,6 +273,9 @@
 
 <script>
     //listen for file selection
+    JSON.stringify(document.getElementById('img_url').value);
+    JSON.stringify(document.getElementById('specStore').value);
+
     var img_arr = [];
     // var i = 0;
     var fileButton = document.getElementById('addProductImages');
@@ -299,7 +307,7 @@
             .then((url) => {
                 console.log(url);
                 img_arr.push(url);
-                $('#img_name').append(`<p>${file.name}</p>`);
+                $('#img_name').append(`<div style="border:1px solid #C3E3FD;color:#011627;margin:4px;padding:1px;border-radius:2px">${file.name}</div>`);
                 console.log(img_arr);
                 document.getElementById('img_url').value = JSON.stringify(img_arr);
                 console.log(document.getElementById('img_url').value);
@@ -356,6 +364,21 @@
                 console.log(url);
                 document.getElementById('audio_url').value = url;
 
+                const xhr = new XMLHttpRequest();
+                const urlx = '/addreq/';
+                xhr.open("POST", urlx);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify({
+                    audio_url: url
+                }));
+                // xhr.onreadystatechange = function () {
+                //     if (xhr.readyState == XMLHttpRequest.DONE) {
+                //         if (xhr.status === 200) {
+                //             console.log("submitted");
+                //             window.alert('Successfully Uploaded');
+                //         }
+                //     }
+                // }
                 // document.querySelector('#someImageTagID').src = url;
             })
             .catch(console.error);
@@ -394,7 +417,15 @@
 
     //     c = c + 1;
     // }
-
+    
+    function submitAudio(){
+        if (document.getElementById('audio_url').value == '') {
+            window.alert('Audio Has Not Uploaded or Either Uploading...');    
+        }
+        else{
+            window.alert('Audio Uploaded Successfully');    
+        }
+    }
     function submitx() {
 
         var i = 0;
@@ -412,6 +443,7 @@
         }
         console.log(specs_obj);
         document.getElementById('specStore').value = JSON.stringify(specs_obj);
+
 
 
 

@@ -93,14 +93,8 @@
                             <textarea class="form-control"  rows="4" id="descInput"></textarea>
                         </div>
                     </div>
+                    
 
-                    <div class="form-group">
-                        <label class="control-label">Product Images</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <div>
@@ -186,13 +180,22 @@
 
                     <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button>
 
-                    <div class="form-group">
+                    <div class="form-group" id="custom_file" style="margin-bottom: 0;">
                         <label class="control-label">Product Images</label>
                         <div class="custom-file">
-                            <input type="file" class="addcustom-file-input" id="addCustomFile" accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <input type="file" class="custom-file-input" id="addProductImages"
+                                accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
+                            <label class="custom-file-label" for="customFile"><i class="fas fa-upload"></i>Upload</label>
+                            <div style="display: flex;"><progress style="display: none; margin: 3px;" value="0"
+                                    max="100" id="uploader">0%</progress>
+                                <p id="prog_shot"></p>
+                            </div>
+                            <!-- <input type="button" onclick="uploadImage()"> -->
                         </div>
                     </div>
+                    <!-- <button type="button" class="btn btn-primary" onclick="imgHandler()">Add more</button> -->
+                    <!-- <input type="text" id="img_url" style="display: none;" value="" name="img_url"> -->
+                    <div id="img_name" style="border: 1px solid #04599F;border-radius: 4px;"></div><br>
 
                     <div class="form-group">
                         <div>
@@ -207,7 +210,99 @@
     </div>
 </div>          
 
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
 <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+        authDomain: "factory-dukaan.firebaseapp.com",
+        databaseURL: "https://factory-dukaan.firebaseio.com",
+        projectId: "factory-dukaan",
+        storageBucket: "factory-dukaan.appspot.com",
+        messagingSenderId: "901783648307",
+        appId: "1:901783648307:web:41d71e94413adcbdb74b46",
+        measurementId: "G-LH7XKNLQE5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+
+<script>
+
+    //listen for file selection
+    // JSON.stringify(document.getElementById('img_url').value);
+
+    var img_arr = [];
+    // var i = 0;
+    var fileButton = document.getElementById('addProductImages');
+    var uploader = document.getElementById('uploader');
+    var getId = document.getElementById('prog_shot');
+
+
+    fileButton.addEventListener("change", function(e) {
+        // var i = 0;
+        console.log("i was detected");
+        // var getId = document.getElementById(`prog_shot${i}`);
+        getId.innerText = 'Uploading...';
+        getId.style.color = '#e76f51';
+        uploader.style.display = 'block';
+        //get file 
+        var file = e.target.files[0];
+
+        // create a storage ref
+        var storageRef = firebase.storage().ref('images/' + file.name);
+
+        //upload files
+        var task = storageRef.put(file);
+
+        // console.log(file);
+        // console.log(task);
+        //update progress bar
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then((url) => {
+                console.log(url);
+                img_arr.push(url);
+                $('#img_name').append(`<div style="border:1px solid #C3E3FD;color:#011627;margin:4px;padding:1px;border-radius:2px">${file.name}</div>`);
+                console.log(img_arr);
+                // document.getElementById('img_url').value = JSON.stringify(img_arr);
+                // console.log(document.getElementById('img_url').value);
+
+
+                // document.querySelector('#someImageTagID').src = url;
+            })
+            .catch(console.error);
+        task.on('state_changed',
+            function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                uploader.value = percentage;
+                if (percentage == 100) {
+                    // var getId = document.getElementById(`prog_shot${i}`);
+                    getId.innerText = "Done";
+                    getId.style.color = 'green';
+                }
+
+            },
+            function error(err) {
+                console.log(err);
+            },
+            function complete() {
+                console.log('completed successfully');
+            })
+            // i++;
+    });
+
+
+
     document.querySelector('.custom-file-input').addEventListener('change',function(e) {
         var fileName = document.getElementById("customFile").files[0].name;
         var nextSibling = e.target.nextElementSibling
@@ -246,6 +341,7 @@
             method:"POST",
             url:"/user/sellProduct",
             data:{
+                images:img_arr,
                 title:document.getElementById('addTitleInput').value,
                 price:document.getElementById('addPriceInput').value,
                 desc:document.getElementById('addDescInput').value,
@@ -288,7 +384,8 @@
                 productUpdatedInfo:{
                     price:document.getElementById('priceInput').value,
                     title:document.getElementById('titleInput').value,
-                    desc:document.getElementById('descInput').value
+                    desc:document.getElementById('descInput').value,
+                    images: img_arr
                 }
                 
             }
@@ -339,7 +436,11 @@
         
     };
 }
-    
+
+
+
+
+
 </script>
 
 

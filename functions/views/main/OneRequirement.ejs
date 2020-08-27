@@ -5,68 +5,85 @@
     <%- include("../partials/sidenav") %>
     <div class="main_content">
         <div class="header">
-            <h2 class="text-center">Requirement by <a href="/user/seller-profile/<%= reqData.uid %>"><%= reqName%></a></h2>
+            <h2 class="text-center">Requirement by <a href="/user/seller-profile/<%= reqData.uid %>"><%= reqName%></a>
+            </h2>
         </div>
-        
+
         <div class="container">
-                <div class="row">
-                    <aside class="col-sm-4 border-right">
-                        <article class="gallery-wrap"> 
-                            <div class="img-big-wrap">
-                                <div>
-                                    <a href="#"><img src="/images/product1.jpg"></a>
-                                </div>
+            <div class="row">
+                <aside class="col-sm-4 border-right">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <div>
+                                <a href="#"><img src="<%= reqData.images[0] %>"> </a>
                             </div>
-                            <div class="img-small-wrap">
+                        </div>
+
+                        <div class="img-small-wrap">
+                            <%if(reqData.images){%>
+                                <%for(var i=1; i< (reqData.images.length); i++){%>
+                                    <div class="item-gallery"><img src="<%= reqData.images[i] %>"></div>
+                                <%}%>
+                            <%}
+                            else{%>
                                 <div class="item-gallery"><img src="/images/slide1.jpg"></div>
                                 <div class="item-gallery"><img src="/images/slide2.jpg"></div>
                                 <div class="item-gallery"><img src="/images/slide3.jpg"></div>
-                            </div>
-                        </article>
-                    </aside>
+                            <%}%>
+                        </div>
 
-                    <aside class="col-sm-7">
-                        <article class="card-body p-3">
-                            <h3 class="title mb-3"><%= reqData.product_name %></h3>
-                            <p class="price-detail-wrap"> 
-                                <span class="price h3 text-warning"> 
-                                    <span class="currency">₹</span><span class="price"> <%= reqData.price %></span>
-                                </span> 
-                            </p>
-                            <dl class="item-property">
-                                <dt>Description</dt>
-                                <dd><p><%= reqData.desc %> </p></dd>
-                            </dl>
-                            <dl class="param param-feature">
-                                <dt>Material Used</dt>
-                                <dd><%= reqData.material_used%></dd>
-                            </dl>
-                            <dl class="param param-feature">
-                                <dt>Quantity</dt>
-                                <dd><%= reqData.quantity %></dd>
-                            </dl>
-                            <dl class="param param-feature">
-                                <dt>Requirement created On</dt>
-                                <dd style="color: #adb5bd;"><%= reqData.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %></dd>
-                            </dl>
-                            
-                            <hr>
-                                <dl class="param param-feature">
-                                    <dt>Specifications</dt>
-                                    <% var i =0; %>
-                                    <% while(Object.keys(reqData.specifications)[i]){ %>
-                                        <span style="color: #495057;"><%= Object.keys(reqData.specifications)[i] %></span> : <span><%= Object.values(reqData.specifications)[i]%></span> <br>
-                                    <% i++ %>
-                                    <% } %>
 
-                                </dl>
-                            <hr>
-                            
-                            <button onclick="makeYourBid()" class="btn btn-md btn-primary btn-responsive text-uppercase">Make a Bid</button>
-                            <a href="/requirement" class="btn btn-md btn-outline-primary btn-responsive text-uppercase">Go Back</a>
-                        </article>
-                    </aside>
-                </div>
+                    </article>
+                </aside>
+
+                <aside class="col-sm-7">
+                    <article class="card-body p-3">
+                        <h3 class="title mb-3"><%= reqData.product_name %></h3>
+                        <p class="price-detail-wrap">
+                            <span class="price h3 text-warning">
+                                <span class="currency">₹</span><span class="price"> <%= reqData.price %></span>
+                            </span>
+                        </p>
+                        <dl class="item-property">
+                            <dt>Description</dt>
+                            <dd>
+                                <p><%= reqData.desc %> </p>
+                            </dd>
+                        </dl>
+                        <dl class="param param-feature">
+                            <dt>Material Used</dt>
+                            <dd><%= reqData.material_used%></dd>
+                        </dl>
+                        <dl class="param param-feature">
+                            <dt>Quantity</dt>
+                            <dd><%= reqData.quantity %></dd>
+                        </dl>
+                        <dl class="param param-feature">
+                            <dt>Requirement created On</dt>
+                            <dd style="color: #adb5bd;">
+                                <%= reqData.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %></dd>
+                        </dl>
+
+                        <hr>
+                        <dl class="param param-feature">
+                            <dt>Specifications</dt>
+                            <% var i =0; %>
+                            <% while(Object.keys(reqData.specifications)[i]){ %>
+                            <span style="color: #495057;"><%= Object.keys(reqData.specifications)[i] %></span> :
+                            <span><%= Object.values(reqData.specifications)[i]%></span> <br>
+                            <% i++ %>
+                            <% } %>
+
+                        </dl>
+                        <hr>
+
+                        <button onclick="makeYourBid()"
+                            class="btn btn-md btn-primary btn-responsive text-uppercase">Make a Bid</button>
+                        <a href="/requirement" class="btn btn-md btn-outline-primary btn-responsive text-uppercase">Go
+                            Back</a>
+                    </article>
+                </aside>
+            </div>
         </div>
 
         <hr>
@@ -84,53 +101,54 @@
             <div class="chat-body no-padding profile-message">
                 <ul>
                     <% if (bidsDetails.length>0) {%>
-                        <% for(var i=0; i < bidsDetails.length; i++) { %>
-                            <li class="message">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
-                                <span class="message-text">
-                                    <small class="text-muted pull-right ultra-light"> <%= bidsDetails[i].postedOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %> </small>
-                                    <a href="/user/seller-profile/<%= bidsDetails[i].bidderId %>" class="username">
-                                        <%= bidsDetails[i].bidderInfo.name %>
-                                    </a>
-                                    <p>Bid Value: <%= bidsDetails[i].amount %></p>
-                                </span>   
-                            </li>
-                            <hr>
-                         <% } %>
-                        
-                        <%}else{%>
-                        <p>No Bids Yet</p>
-                        <% } %>
+                    <% for(var i=0; i < bidsDetails.length; i++) { %>
+                    <li class="message">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="online" />
+                        <span class="message-text">
+                            <small class="text-muted pull-right ultra-light">
+                                <%= bidsDetails[i].postedOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %> </small>
+                            <a href="/user/seller-profile/<%= bidsDetails[i].bidderId %>" class="username">
+                                <%= bidsDetails[i].bidderInfo.name %>
+                            </a>
+                            <p>Bid Value: <%= bidsDetails[i].amount %></p>
+                        </span>
+                    </li>
+                    <hr>
+                    <% } %>
+
+                    <%}else{%>
+                    <p>No Bids Yet</p>
+                    <% } %>
                 </ul>
             </div>
         </div>
 
     </div>
-</div> 
+</div>
 
-<%- include('../partials/footer.ejs') %> 
+<%- include('../partials/footer.ejs') %>
 
 <script>
     const makeYourBid = () => {
-        document.getElementById("userBidInput").focus(); 
+        document.getElementById("userBidInput").focus();
     }
 
-    const submitYourBid=async ()=>{
-        const response=await axios({
-            url:`${window.location.href}/bid`,
-            method:"POST",
-            data:{
+    const submitYourBid = async () => {
+        const response = await axios({
+            url: `${window.location.href}/bid`,
+            method: "POST",
+            data: {
                 bidAmount: +document.getElementById("userBidInput").value
             }
         })
-        if(response.data.status==='success'){
+        if (response.data.status === 'success') {
             console.log("reload");
             location.reload();
-        }else{
+        } else {
             console.log(response.data.status);
         }
     }
-    
+
 </script>
 
 <%- include('../partials/end.ejs') %>
