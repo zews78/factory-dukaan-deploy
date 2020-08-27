@@ -35,7 +35,12 @@
                 <div class="card mb-3 w-75">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
+                            <%if(products[i].images){%>
+                                <img class="card-img-top" src="<%= products[i].images[0] %>" alt="Card image cap">
+                            <%}
+                            else{%>
+                                <img class="card-img-top" src="/images/product1.jpg" alt="Card image cap">
+                            <%}%>
                         </div>
                         <div class="col-md-6">
                             <div class="card-body">
