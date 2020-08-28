@@ -2,6 +2,9 @@
 <%- include("../partials/headBody") %>
 <%- include("../partials/header") %>
 
+<div class="loader">
+    <img src="/images/loading.gif" alt="loading" style="width: 50vw;">
+</div>
 <div>
   <h2 class="text-center my-5">Log in</h2>
   <div id="firebaseui-auth-container"></div>
@@ -28,6 +31,8 @@
       signInSuccessWithAuthResult: (authResult, redirectUrl) => {
         const xhr = new XMLHttpRequest();
         const url = "/login";
+        const loader = document.querySelector('.loader');
+        loader.className = 'loader'; // class "loader"
         xhr.open("POST", url);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(authResult));

@@ -3,8 +3,10 @@
 <%- include("../partials/header") %>
 <div class="wrapper">
     <%- include("../partials/sidenav") %>
+    <div class="loader">
+        <img src="/images/loading.gif" alt="loading" style="width: 50vw;">
+    </div>
     <div class="main_content">
-
         <div class="profile-container">
             <% if (authorized) { %>
             <div class="edit-profile">
@@ -83,7 +85,7 @@
                         <div class="card">
                             <a href="/product/<%= products[product].id %>"><img src="/images/product1.jpg" class="card-img-top" alt="..."></a>
                             <div class="card-body">
-                                <strong><%= products[product].title %></strong>
+                                <a href="/product/<%= products[product].id %>"><strong><%= products[product].title %></strong></a>
                                 <p class="card-text"><%= products[product].desc %></p>
                             </div>
                         </div>
@@ -293,7 +295,10 @@
 
     const editProfile=async ()=>{
         
-            try{const res=await axios({
+            try{
+                const loader = document.querySelector('.loader');
+                loader.className = 'loader'; // class "loader"
+                const res=await axios({
                 method: "POST",
                 url: "/user/profile/update",
                 data:{
@@ -303,8 +308,9 @@
                         desc:document.getElementById('update-company-desc').value
                     }
                 }
+                
             })
-
+            loader.className = 'loader hidden'; // class "loader hidden"
             if(res.data.status==='updated'){
                 location.reload();
             }
@@ -334,6 +340,8 @@
 
 
         try {
+            const loader = document.querySelector('.loader');
+            loader.className = 'loader'; // class "loader"
             const res = await axios({
                 method: "POST",
                 url: "/user/verify-gst",
@@ -342,6 +350,7 @@
                     panNo,
                 },
             });
+            loader.className = 'loader hidden'; // class "loader hidden"
             if (res.data.status === 'verified') {
                 window.setTimeout(() => {
                     location.assign('/user/profile');

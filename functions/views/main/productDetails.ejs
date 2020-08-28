@@ -7,6 +7,9 @@
 
 <%- include("../partials/header") %>    
     <div class="wrapper">
+        <div class="loader">
+            <img src="/images/loading.gif" alt="loading" style="width: 50vw;">
+        </div>
         <%- include("../partials/sidenav") %>
         <div class="main_content">
             <%- include("../partials/search") %>
@@ -154,19 +157,19 @@
                                         <!-- Rating Stars Box -->
                                         <div class='rating-stars text-center'>
                                           <ul id='stars'>
-                                            <li class='star' title='Poor' data-value='1'>
+                                            <li class='star' data-value='1'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='Fair' data-value='2'>
+                                            <li class='star' data-value='2'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='Good' data-value='3'>
+                                            <li class='star' data-value='3'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='Excellent' data-value='4'>
+                                            <li class='star' data-value='4'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='WOW!!!' data-value='5'>
+                                            <li class='star' data-value='5'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
                                           </ul>
@@ -209,19 +212,19 @@
                                         <!-- Rating Stars Box -->
                                         <div class='rating-stars text-center'>
                                           <ul id='stars'>
-                                            <li class='star' title='Poor' data-value='1'>
+                                            <li class='star'  data-value='1'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='Fair' data-value='2'>
+                                            <li class='star' data-value='2'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='Good' data-value='3'>
+                                            <li class='star' data-value='3'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='Excellent' data-value='4'>
+                                            <li class='star' data-value='4'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
-                                            <li class='star' title='WOW!!!' data-value='5'>
+                                            <li class='star' data-value='5'>
                                               <i class='fa fa-star fa-fw'></i>
                                             </li>
                                           </ul>
@@ -289,6 +292,9 @@
 <script>
 addToWishlist=async ()=>{
     if(document.getElementById("fas fa-heart").style.color==="grey"){
+        const loader = document.querySelector('.loader');
+        loader.className = 'loader'; // class "loader"
+        console.log(loader.className)
         const res= await axios({
                         url:"/addToWishList",
                         method:"POST",
@@ -296,8 +302,12 @@ addToWishlist=async ()=>{
                             productId: document.getElementById('productId').value
                         }
                     })
+        loader.className += ' hidden'; // class "loader hidden"
+        console.log(loader.className)
         document.getElementById("fas fa-heart").style.color="red";
     }else{
+        const loader = document.querySelector('.loader');
+        loader.className = 'loader'; // class "loader"
         const res= await axios({
                         url:"/removeFromWishList",
                         method:"POST",
@@ -305,6 +315,7 @@ addToWishlist=async ()=>{
                             productId: document.getElementById('productId').value
                         }
                     })
+        loader.className = 'loader hidden'; // class "loader"
         document.getElementById("fas fa-heart").style.color="grey";
     }
 }
@@ -313,22 +324,22 @@ if(document.getElementsByClassName('your-review')){
     
     
     var stars = $('#stars li').parent().children('li.star');
-    
-
     for (i = 0; i < +document.getElementById('rating').value; i++) {
       $(stars[i]).addClass('selected');
     }
     
     var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+    
     document.getElementById('rating').value=ratingValue;
     document.getElementById('rating-warning').innerHTML='';
  
 }
 
- $(document).ready(function(){
-     if(!document.getElementsByClassName('your-review')){
+ $(document).ready(function(){ 
+    if(document.getElementsByClassName('your-review').length===0){
     $('#stars li').on('mouseover', function(){
-    var onStar = parseInt($(this).data('value'), 10);  $(this).parent().children('li.star').each(function(e){
+    var onStar = parseInt($(this).data('value'), 10);  
+    $(this).parent().children('li.star').each(function(e){
       if (e < onStar) {
         $(this).addClass('hover');
       }
@@ -338,6 +349,7 @@ if(document.getElementsByClassName('your-review')){
     });
     
   }).on('mouseout', function(){
+    
     $(this).parent().children('li.star').each(function(e){
       $(this).removeClass('hover');
     });
@@ -346,6 +358,7 @@ if(document.getElementsByClassName('your-review')){
   
  
   $('#stars li').on('click', function(){
+
     var onStar = parseInt($(this).data('value'), 10); 
     var stars = $(this).parent().children('li.star');
     
@@ -380,6 +393,8 @@ const submitReviewHandler=async ()=>{
     if(!document.getElementById('review').value){
         document.getElementById('review').style.borderColor='red';
     }else{
+        const loader = document.querySelector('.loader');
+        loader.className = 'loader'; // class "loader"
         const res=await axios({
         method:'POST',
         url:`/user/review/${productId}`,
@@ -388,6 +403,7 @@ const submitReviewHandler=async ()=>{
             review: document.getElementById('review').value
         }
     })
+    loader.className = 'loader hidden'; // class "loader hidden"
 
     if(res.data.status==='success'){
         location.reload();
@@ -408,6 +424,8 @@ const editReviewHandler=async ()=>{
     if(!document.getElementById('review').value){
         document.getElementById('review').style.borderColor='red';
     }else{
+        const loader = document.querySelector('.loader');
+        loader.className = 'loader'; // class "loader"
         const res=await axios({
         method:'POST',
         url:`/user/review/${productId}`,
@@ -417,7 +435,7 @@ const editReviewHandler=async ()=>{
             review: document.getElementById('review').value
         }
     })
-
+    loader.className = 'loader hidden'; // class "loader hidden"
     if(res.data.status==='success'){
         location.reload();
     }else{

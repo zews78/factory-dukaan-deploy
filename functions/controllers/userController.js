@@ -381,7 +381,7 @@ exports.postReview = async(req, res)=>{
 
 	await productRef.get()
 		.then(async doc=>{
-			let reviewsArray = doc.data().reviews;
+			let reviewsArray = doc.data().reviews || 0;
 			for (var i = 0; i < reviewsArray.length; i++) {
 				if(reviewsArray[i].userInfo._path.segments[1] === req.uid) {
 					console.log('Not allowed to post another review');
