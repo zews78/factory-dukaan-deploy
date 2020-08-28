@@ -333,7 +333,7 @@ exports.getRequirement = async(req, res) => {
 exports.postAddRequirement = async(req, res) => {
 	try {
 
-
+		// firebase.firestore()
 		// var objx = new Object();
 		// var i = 0;
 		// while(req.body.title + i) {
@@ -342,7 +342,8 @@ exports.postAddRequirement = async(req, res) => {
 		// console.log(JSON.parse(req.body.specs));
 
 
-		console.log(req.body);
+		console.log(req.body.audio_url);
+		console.log(req.uid);
 
 		// var ref = storage()
 		// .ref();
@@ -361,6 +362,12 @@ exports.postAddRequirement = async(req, res) => {
 
 		// console.log(ref, file, name, metadata);
 
+		// if(req.body.img_url != '') {
+		// 	var imgx = JSON.parse(req.body.img_url);
+		// }
+		// else{
+		// 	var imgx = req.body.img_url;
+		// }
 
 		await firebase.firestore()
 			.collection('requirements')
@@ -375,9 +382,10 @@ exports.postAddRequirement = async(req, res) => {
 				quantity: req.body.quantity,
 				createdOn: new Date(),
 				// audio: req.body.audio_url,
-				images: JSON.parse(req.body.img_url)
+				images: req.body.img_url == '' ? req.body.img_url : JSON.parse(req.body.img_url)
 			});
 		// console.log(tit);
+
 		// console.log(req.body.quantity);
 		// var c = req.body.audio_url;
 		// console.log('Succesfully created a req');
@@ -397,7 +405,7 @@ exports.getOneRequirement = async(req, res) => {
 		.collection('requirements')
 		.doc(req.params.reqId)
 		.get();
-
+	console.log(requirement.data());
 	const reqUser = await firebase.firestore()
 		.collection('users')
 		.doc(requirement.data().uid)

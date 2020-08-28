@@ -42,10 +42,12 @@ exports.getUserProfile = async(req, res) => {
 					.collection('products')
 					.doc(userSnapshot.data().wishlist[i])
 					.get();
-				let itemSnapshot;
-				itemSnapshot = item.data();
-				itemSnapshot.productId = item.id;
-				wishlist.push(itemSnapshot);
+				if(item.data()) {
+					let itemSnapshot;
+					itemSnapshot = item.data();
+					itemSnapshot.productId = item.id;
+					wishlist.push(itemSnapshot);
+				}
 			}
 		}
 
