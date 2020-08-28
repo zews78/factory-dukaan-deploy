@@ -36,18 +36,20 @@ exports.getUserProfile = async(req, res) => {
 				products.push(productData);
 			});
 		}
-		// if(userSnapshot.data().wishlist.length > 0) {
-		// 	for(let i = 0; i < userSnapshot.data().wishlist.length > 0; i++) {
-		// 		let item = await firebase.firestore()
-		// 			.collection('products')
-		// 			.doc(userSnapshot.data().wishlist[i])
-		// 			.get();
-		// 		let itemSnapshot;
-		// 		itemSnapshot = item.data();
-		// 		itemSnapshot.productId = item.id;
-		// 		wishlist.push(itemSnapshot);
-		// 	}
-		// }
+		if(userSnapshot.data().wishlist.length > 0) {
+			for(let i = 0; i < userSnapshot.data().wishlist.length > 0; i++) {
+				let item = await firebase.firestore()
+					.collection('products')
+					.doc(userSnapshot.data().wishlist[i])
+					.get();
+				if(item.data()) {
+					let itemSnapshot;
+					itemSnapshot = item.data();
+					itemSnapshot.productId = item.id;
+					wishlist.push(itemSnapshot);
+				}
+			}
+		}
 
 		res.render('user/profile.ejs', {
 			pageTitle: 'Profile',
@@ -396,7 +398,7 @@ exports.postReview = async(req, res)=>{
 
 	await productRef.get()
 		.then(async doc=>{
-			let reviewsArray = doc.data().reviews;
+			let reviewsArray = doc.data().reviews || 0;
 			for (var i = 0; i < reviewsArray.length; i++) {
 				if(reviewsArray[i].userInfo._path.segments[1] === req.uid) {
 					console.log('Not allowed to post another review');

@@ -1,8 +1,12 @@
 <%- include("../partials/start") %>
 <link type="text/css" rel="stylesheet" href="/css/products.css" />
 <%- include("../partials/headBody") %>
-<%- include("../partials/header") %> 
+<%- include("../partials/header") %>
+
+   
     <div class="wrapper">
+        <div class="loader">
+        </div>
         <%- include("../partials/sidenav") %>
         <div class="main_content">
             <%- include("../partials/search") %>
@@ -90,6 +94,8 @@
         for (var i = 0; i <= buttonsCount; i += 1) {
             buttons[i].onclick = async function(e) {
                 if(document.getElementById(`${this.id.split('-')[0]}-heart`).style.color==="red"){
+                    const loader = document.querySelector('.loader');
+                    loader.className = 'loader'; // class "loader"
                     const res= await axios({
                         url:"/removeFromWishList",
                         method:"POST",
@@ -97,8 +103,11 @@
                             productId:this.id.split('-')[0]
                         }
                     })
+                    loader.className = 'loader hidden'; // class "loader hidden"
                     document.getElementById(`${this.id.split('-')[0]}-heart`).style.removeProperty('color');
                 }else{
+                    const loader = document.querySelector('.loader');
+                    loader.className = 'loader'; // class "loader"
                     const res= await axios({
                         url:"/addToWishList",
                         method:"POST",
@@ -106,6 +115,7 @@
                             productId:this.id.split('-')[0]
                         }
                     })
+                    loader.className = 'loader hidden'; // class "loader hidden"
                     document.getElementById(`${this.id.split('-')[0]}-heart`).style.color="red";
                 }
                 
