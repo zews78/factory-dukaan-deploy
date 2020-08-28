@@ -7,6 +7,7 @@ router.get('/profile', userController.getUserProfile);
 router.get('/:userId/profile', userController.getUserProfile);
 router.post('/profile/update', userController.postUpdateUser);
 router.post('/verify-gst', userController.postVerifyGst);
+router.post('/profile-pic', userController.postUpdateProfilePic);
 
 // Seller profile
 router.get('/seller-profile/:userId', userController.getSellerProfile);

@@ -36,18 +36,18 @@ exports.getUserProfile = async(req, res) => {
 				products.push(productData);
 			});
 		}
-		if(userSnapshot.data().wishlist.length > 0) {
-			for(let i = 0; i < userSnapshot.data().wishlist.length > 0; i++) {
-				let item = await firebase.firestore()
-					.collection('products')
-					.doc(userSnapshot.data().wishlist[i])
-					.get();
-				let itemSnapshot;
-				itemSnapshot = item.data();
-				itemSnapshot.productId = item.id;
-				wishlist.push(itemSnapshot);
-			}
-		}
+		// if(userSnapshot.data().wishlist.length > 0) {
+		// 	for(let i = 0; i < userSnapshot.data().wishlist.length > 0; i++) {
+		// 		let item = await firebase.firestore()
+		// 			.collection('products')
+		// 			.doc(userSnapshot.data().wishlist[i])
+		// 			.get();
+		// 		let itemSnapshot;
+		// 		itemSnapshot = item.data();
+		// 		itemSnapshot.productId = item.id;
+		// 		wishlist.push(itemSnapshot);
+		// 	}
+		// }
 
 		res.render('user/profile.ejs', {
 			pageTitle: 'Profile',
@@ -62,6 +62,21 @@ exports.getUserProfile = async(req, res) => {
 		}); }
 
 };
+exports.postUpdateProfilePic = async(req, res) => {
+	try {
+		const userRef = firebase.firestore()
+			.collection('users')
+			.doc(req.uid);
+
+		await userRef.update({profile_pic: req.body.profile_pic});
+		console.log(req.body);
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
+
 
 exports.postUpdateUser = async(req, res) => {
 	function randomString(chars) {
