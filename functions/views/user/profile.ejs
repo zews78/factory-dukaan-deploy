@@ -24,9 +24,14 @@
             <% }%>
             <div class="row">
                 <div class="column col-left">
-                    <img class="profile-img" src="/images/user.png" alt="" id="profile-src">
+                    <%if(user.profile_pic){%>
+                    <img class="profile-img" src='<%= user.profile_pic %>' alt="" id="profile-src">
+                    <%}
+                    else{%>
+                        <img class="profile-img" src="/images/user.png" alt="" id="profile-src">
+                    <%}%>
                     <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-                    <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+                    <p><label for="file" style="cursor: pointer;"><i class="fas fa-camera"></i>Change Avatar</label></p>
 
                     
                     <!-- <input class="btn-primary file-upload" type="file" id="profile_pic" accept="image/*" /> -->
@@ -338,7 +343,7 @@ var loadFile = function(event) {
 
     // var audio_uploader = document.getElementById('audio_uploader');
     
-    var picButton = document.getElementById('profile_pic');
+    var picButton = document.getElementById('file');
     picButton.addEventListener('change', function (e) {
         console.log("pic button was clicked");
         // var getId = document.getElementById('audio_prog_shot');
@@ -364,7 +369,7 @@ var loadFile = function(event) {
                 // document.getElementById('audio_url').value = url;
 
                 const xhr = new XMLHttpRequest();
-                const urlx = '/profile-pic/';
+                const urlx = '/user/profile-pic/';
                 xhr.open("POST", urlx);
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.send(JSON.stringify({
