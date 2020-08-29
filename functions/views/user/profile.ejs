@@ -25,10 +25,15 @@
             <div class="row">
                 <div class="column col-left">
                     <img class="profile-img" src="/images/user.png" alt="" id="profile-src">
-                    <div class="p-image">
+                    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+                    <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+
+                    
+                    <!-- <input class="btn-primary file-upload" type="file" id="profile_pic" accept="image/*" /> -->
+                    <!-- <div class="p-image">
                         <i class="fa fa-camera upload-button"> Change Avatar</i>
                         <input class="file-upload" type="file" id="profile_pic" accept="image/*" />
-                    </div>
+                    </div> -->
                 </div>
                 <div class="column col-right">
                     <h1><%= user.name %></h1>
@@ -325,6 +330,12 @@
 
 
 <script>
+
+var loadFile = function(event) {
+        var image = document.getElementById('profile-src');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+
     // var audio_uploader = document.getElementById('audio_uploader');
     
     var picButton = document.getElementById('profile_pic');
@@ -462,25 +473,24 @@
         }
     }
 
+    // $(document).ready(function () {
+    //     var readURL = function (input) {
+    //         if (input.files && input.files[0]) {
+    //             var reader = new FileReader();
+    //             reader.onload = function (e) {
+    //                 $('.profile-img').attr('src', e.target.result);
+    //             }
+    //             reader.readAsDataURL(input.files[0]);
+    //         }
+    //     }
 
-    $(document).ready(function () {
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.profile-img').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+    //     $(".file-upload").on('change', function () {      
+    //         readURL(this);
+    //     });
 
-        $(".file-upload").on('change', function () {
-            readURL(this);
-        });
-
-        $(".upload-button").on('click', function () {
-            $(".file-upload").click();
-        });
-    });
+    //     $(".upload-button").on('click', function () {
+    //         $(".file-upload").click();
+    //     });
+    // });
 
 </script>
