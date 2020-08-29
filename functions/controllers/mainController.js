@@ -342,9 +342,6 @@ exports.postAddRequirement = async(req, res) => {
 		// console.log(JSON.parse(req.body.specs));
 
 
-		console.log(req.body.audio_url);
-		console.log(req.uid);
-
 		// var ref = storage()
 		// .ref();
 		// var file = event.target.files[0];

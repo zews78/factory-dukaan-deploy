@@ -180,6 +180,7 @@ exports.getUserPayment = async(req, res) => {
 				res.render('user/checkout.ejs', {
 					orderData: data,
 					alreadyActivePlan: false,
+					pageTitle: 'User Plan | Factory Dukaan',
 					auth,
 					amount: amount,
 					key_id: config.razorpay.key_id,
@@ -247,7 +248,10 @@ exports.paymentVerification = async(req, res)=>{
 
 exports.getSuccessfulPayment = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
-	res.render('user/paymentSuccess.ejs', {auth});
+	res.render('user/paymentSuccess.ejs', {
+		auth,
+		pageTitle: 'User Plan | Factory Dukaan'
+	});
 };
 
 
