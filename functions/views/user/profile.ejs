@@ -82,7 +82,7 @@
 
             <div id="my-products" class="tabcontent">
                 <% if(products.length > 0) { %>
-                <div class="row">
+                <div class="row equal">
                     <% for (let product in products) { %>
                         <div class="card">
                             <a href="/product/<%= products[product].id %>"><img src="/images/product1.jpg" class="card-img-top" alt="..."></a>
@@ -91,9 +91,9 @@
                                 <p class="card-text"><%= products[product].desc %></p>
                             </div>
                         </div>
-                    </div>
-                    <% } %>
+                        <% } %>
                 </div>
+            </div>
                 <% } else { %>
                 <div class="text-center">
                     <h3>No products for sale</h3>
