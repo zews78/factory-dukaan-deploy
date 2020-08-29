@@ -27,30 +27,33 @@
                     <img class="profile-img" src="/images/user.png" alt="" id="profile-src">
                     <div class="p-image">
                         <i class="fa fa-camera upload-button"> Change Avatar</i>
-                        <input class="file-upload" type="file" accept="image/*"/>
-                    </div>            
+                        <input class="file-upload" type="file" id="profile_pic" accept="image/*" />
+                    </div>
                 </div>
                 <div class="column col-right">
                     <h1><%= user.name %></h1>
-                    <p> 
+                    <p>
                         <% if (user.packPurchased  && Date.now() < user.expiresOn._seconds*1000) {%>
-                            <i class="fas fa-usd" aria-hidden="true"></i> Active Plan:  <%= user.packPurchased %>  <br>
-                            <i class="fas fa-calendar" aria-hidden="true"></i> Plan Expires On: <%= new Date(user.expiresOn._seconds*1000).toDateString() %> <br>
-                            <%}else{%>
-                                <i class="fas fa-usd" aria-hidden="true"></i> No Active Plan <a href="/plan-details">Check Plan Pricings</a> <br>
-                            <% } %>
+                        <i class="fas fa-usd" aria-hidden="true"></i> Active Plan: <%= user.packPurchased %> <br>
+                        <i class="fas fa-calendar" aria-hidden="true"></i> Plan Expires On:
+                        <%= new Date(user.expiresOn._seconds*1000).toDateString() %> <br>
+                        <%}else{%>
+                        <i class="fas fa-usd" aria-hidden="true"></i> No Active Plan <a href="/plan-details">Check Plan
+                            Pricings</a> <br>
+                        <% } %>
                         <% if (user.company.name) {%>
-                            <i class="fas fa-building"></i><%= user.company.name %> <br>
+                        <i class="fas fa-building"></i><%= user.company.name %> <br>
                         <%} %>
                         <% if (user.email) {%>
-                            <i class="fas fa-envelope"></i><%= user.email %> <br>
+                        <i class="fas fa-envelope"></i><%= user.email %> <br>
                         <%} %>
-                        <!-- <i class="fas fa-check-circle"></i> --> <br>  
+                        <!-- <i class="fas fa-check-circle"></i> --> <br>
                         <% if (user.gstNo) { %>
                         <i class="fas fa-money-check-alt"></i>GSTIN <%= user.gstNo %> <br>
                         <% } %>
                         <% if (user.referralCode) {%>
-                            <i class="fas fa-user-plus"></i>Referral Code : <%= user.referralCode %> (refer to your friends and get exciting benefits)<br>
+                        <i class="fas fa-user-plus"></i>Referral Code : <%= user.referralCode %> (refer to your friends
+                        and get exciting benefits)<br>
                         <%} %>
                         <i class="fas fa-phone-square-alt"></i><%= user.mobile %><br>
                         <i class="far fa-calendar-alt"></i>Joined on
@@ -58,11 +61,11 @@
                         <hr style="width: 20vw; margin: 0">
                     </p>
                     <% if ( user.company.desc) {%>
-                        <div class="company-desc">
-                            <strong>Company Description</strong>
-                            <p> <%= user.company.desc %>
-                            </p>
-                        </div>
+                    <div class="company-desc">
+                        <strong>Company Description</strong>
+                        <p> <%= user.company.desc %>
+                        </p>
+                    </div>
                     <%} %>
                 </div>
             </div>
@@ -88,6 +91,7 @@
                                 <p class="card-text"><%= products[product].desc %></p>
                             </div>
                         </div>
+                    </div>
                     <% } %>
                 </div>
                 <% } else { %>
@@ -101,13 +105,14 @@
                 <% if(user.wishlist.length > 0) { %>
                 <div class="row">
                     <% for (let product in wishlist) { %>
-                        <div class="card">
-                            <a href="/product/<%= wishlist[product].productId %>"><img src="/images/product1.jpg" class="card-img-top" alt="..."></a>
-                            <div class="card-body">
-                                <strong><%= wishlist[product].title %></strong>
-                                <p class="card-text"><%= wishlist[product].desc %></p>
-                            </div>
+                    <div class="card">
+                        <a href="/product/<%= wishlist[product].productId %>"><img src="/images/product1.jpg"
+                                class="card-img-top" alt="..."></a>
+                        <div class="card-body">
+                            <strong><%= wishlist[product].title %></strong>
+                            <p class="card-text"><%= wishlist[product].desc %></p>
                         </div>
+                    </div>
                     <% } %>
                 </div>
                 <% } else { %>
@@ -172,13 +177,15 @@
                     <div class="form-group">
                         <label class="control-label">Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="user-name" value='<%= user.name %>' id='update-name'>
+                            <input type="text" class="form-control input-lg" name="user-name" value='<%= user.name %>'
+                                id='update-name'>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Company Name</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="company-name" value='<%= user.company.name %>' id='update-company-name'>
+                            <input type="text" class="form-control input-lg" name="company-name"
+                                value='<%= user.company.name %>' id='update-company-name'>
                         </div>
                     </div>
                     <input type="hidden" name="_token" value="">
@@ -202,8 +209,9 @@
                             <!-- <% if ( user.company.desc) {%>
                                 <textarea class="form-control" name="" rows="4" id="update-company-desc" value='<%= user.company.desc %>'></textarea>
                             <%} else{%><textarea class="form-control" name=""  rows="4" id="update-company-desc" value=''></textarea><%} %> -->
-                            <textarea class="form-control" name="" rows="4" id="update-company-desc" value=''><%= user.company.desc %></textarea>
-                            
+                            <textarea class="form-control" name="" rows="4" id="update-company-desc"
+                                value=''><%= user.company.desc %></textarea>
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -289,10 +297,100 @@
 
 
 
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
 
 <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
+        authDomain: "factory-dukaan.firebaseapp.com",
+        databaseURL: "https://factory-dukaan.firebaseio.com",
+        projectId: "factory-dukaan",
+        storageBucket: "factory-dukaan.appspot.com",
+        messagingSenderId: "901783648307",
+        appId: "1:901783648307:web:41d71e94413adcbdb74b46",
+        measurementId: "G-LH7XKNLQE5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
 
-    const editProfile=async ()=>{
+
+<script>
+    // var audio_uploader = document.getElementById('audio_uploader');
+    
+    var picButton = document.getElementById('profile_pic');
+    picButton.addEventListener('change', function (e) {
+        console.log("pic button was clicked");
+        // var getId = document.getElementById('audio_prog_shot');
+        // getId.innerText = 'Uploading...';
+        // getId.style.color = '#e76f51';
+        // audio_uploader.style.display = 'block';
+        //get file 
+        var file = e.target.files[0];
+
+        // create a storage ref
+        var storageRef = firebase.storage().ref('profile-pic/' + file.name);
+
+        //upload files
+        var task = storageRef.put(file);
+
+        // console.log(file);
+        // console.log(task);
+        //update progress bar
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then((url) => {
+                console.log(url);
+                // document.getElementById('audio_url').value = url;
+
+                const xhr = new XMLHttpRequest();
+                const urlx = '/profile-pic/';
+                xhr.open("POST", urlx);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify({
+                    profile_pic: url
+                }));
+                // xhr.onreadystatechange = function () {
+                //     if (xhr.readyState == XMLHttpRequest.DONE) {
+                //         if (xhr.status === 200) {
+                //             console.log("submitted");
+                //             window.alert('Successfully Uploaded');
+                //         }
+                //     }
+                // }
+                // document.querySelector('#someImageTagID').src = url;
+            })
+            .catch(console.error);
+        task.on('state_changed',
+            function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                // audio_uploader.value = percentage;
+                if (percentage == 100) {
+                    // var getId = document.getElementById('audio_prog_shot');
+                    // getId.innerText = "Done";
+                    // getId.style.color = 'green';
+                    $('.profile-img').attr('src', e.target.result);
+                }
+
+            },
+            function error(err) {
+                console.log(err);
+            },
+            function complete() {
+                console.log('completed successfully');
+            })
+    });
+
+    const editProfile = async () => {
         
             try{
                 const loader = document.querySelector('.loader');
@@ -300,11 +398,11 @@
                 const res=await axios({
                 method: "POST",
                 url: "/user/profile/update",
-                data:{
-                    name:document.getElementById('update-name').value,
-                    company:{
-                        name:document.getElementById('update-company-name').value,
-                        desc:document.getElementById('update-company-desc').value
+                data: {
+                    name: document.getElementById('update-name').value,
+                    company: {
+                        name: document.getElementById('update-company-name').value,
+                        desc: document.getElementById('update-company-desc').value
                     }
                 }
                 
@@ -313,22 +411,12 @@
             if(res.data.status==='updated'){
                 location.reload();
             }
-        }catch(error){
+        } catch (error) {
             console.log(error);
         }
-        
+
     }
-    const firebaseConfig = {
-        apiKey: "AIzaSyCQ2Zd5JZhjkQnpUrnq5FNWQnlN48awFdU",
-        authDomain: "factory-dukaan.firebaseapp.com",
-        databaseURL: "https://factory-dukaan.firebaseio.com",
-        projectId: "factory-dukaan",
-        storageBucket: "factory-dukaan.appspot.com",
-        messagingSenderId: "901783648307",
-        appId: "1:901783648307:web:41d71e94413adcbdb74b46",
-        measurementId: "G-LH7XKNLQE5",
-    };
-    firebase.initializeApp(firebaseConfig);
+
     const userVerificationForm = document.querySelector(".modal-body");
 
     const userVerification = async () => {
@@ -375,24 +463,24 @@
     }
 
 
-$(document).ready(function() {
-    var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.profile-img').attr('src', e.target.result);
+    $(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.profile-img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
 
-    $(".file-upload").on('change', function(){
-        readURL(this);
-    });
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
 
-    $(".upload-button").on('click', function() {
-        $(".file-upload").click();
+        $(".upload-button").on('click', function () {
+            $(".file-upload").click();
+        });
     });
-});
 
 </script>

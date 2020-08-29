@@ -64,6 +64,21 @@ exports.getUserProfile = async(req, res) => {
 		}); }
 
 };
+exports.postUpdateProfilePic = async(req, res) => {
+	try {
+		const userRef = firebase.firestore()
+			.collection('users')
+			.doc(req.uid);
+
+		await userRef.update({profile_pic: req.body.profile_pic});
+		console.log(req.body);
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
+
 
 exports.postUpdateUser = async(req, res) => {
 	function randomString(chars) {
