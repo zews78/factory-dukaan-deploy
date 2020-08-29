@@ -3,6 +3,8 @@
 <%- include("../partials/headBody") %>
 <%- include("../partials/header") %>
 <div class="wrapper">
+    <div class="loader">
+    </div>
     <%- include("../partials/sidenav") %>
     <div class="main_content">
 
@@ -37,13 +39,19 @@
                             <strong>Company Description</strong>
                             <p> <%= user.company.desc %>
                             </p>
+                            
                         </div>
                     <%} %>
+                    <div class="company-desc">
+                        <button class='btn'style="background-color:#4DC247; "><a href="https://api.whatsapp.com/send?phone=<%= user.mobile %>" style="color:white;">Whatsapp <i class='fab fa-whatsapp'></i></a></button>
+                        <button class='btn'style="background-color:#0062CC; "><a href="tel:<%= user.mobile %>" style="color:white;"> Call  <i class='fa fa-phone'></i></a></button>
+                        <% if ( user.email) {%>
+                            <button class='btn'style="background-color:#D07068; "><a href="tel:<%= user.email%>" style="color:white; "> Mail <i class='far fa-envelope'></i></a></button>
+                        <%} %>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 <%- include("../partials/footer") %>

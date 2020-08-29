@@ -101,9 +101,14 @@
                                 <hr />
 
                                 <div class="price-quote">
-                                    
-                                        <%if(subscriber){%>
-                                            <a href="/user/seller-profile/<%= productData.uid %>"><button type="button" class="btnPrice">Get Seller Details</button></a>
+                                        
+                                        <%if(sellerDetails.expiresOn){%>
+                                            <%if(sellerDetails.expiresOn._seconds*1000>new Date().getTime()){%>
+                                                <a href="/user/seller-profile/<%= productData.uid %>"><button type="button" class="btnPrice">Get Seller Details</button></a>
+                                            <%} else{%>
+                                                <p>You are not subscriber.</p>
+                                                <a href="/pricing"><button type="button" class="btnPrice">Purchase Plans</button></a>
+                                            <%}%>
                                         <%} else{%>
                                             <p>You are not subscriber.</p>
                                             <a href="/pricing"><button type="button" class="btnPrice">Purchase Plans</button></a>
@@ -135,6 +140,9 @@
                                             <button class="btn btn-white btn-default" onclick="addToWishlist()"><i class="fas fa-heart" id="fas fa-heart" style="color: grey;" ></i> Add to wishlist</button>
                                         <%}%>
                                     </div>
+                                    <button style="border: none;"><a id="whatsappShare"  data-action="share/whatsapp/share" class="btn" style="background-color: #4dc247; color:white; border:1px solid #4dc247;">Share on Whatsapp <i class='fa fa-whatsapp'></i></a></button>
+                                    <button  class="btn" style="background-color: rgb(124, 124, 124); color:white;" onclick="copyLink()" id="copyLinkButton">Copy Link <i class="fa fa-share-alt" ></i></button>
+                                    <input type="text" id='shareLink' readonly />
                                 </div>
                             </div>
                         </div>
@@ -317,6 +325,17 @@
 
 
 <script>
+document.getElementById('shareLink').value=window.location.href;
+document.getElementById('shareLink').style.display="none";
+function copyLink() {
+  var copyText = document.getElementById("shareLink");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); 
+  document.execCommand("copy");
+  alert("Link Copied");
+}
+
+document.getElementById('whatsappShare').setAttribute('href',`whatsapp://send?text= Check Out ${document.getElementsByClassName('name')[0].innerText} on Factory-Dukaan. Click here ${encodeURI(window.location.href)}`);
 addToWishlist=async ()=>{
     if(document.getElementById("fas fa-heart").style.color==="grey"){
         const loader = document.querySelector('.loader');
