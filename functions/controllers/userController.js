@@ -71,7 +71,7 @@ exports.postUpdateProfilePic = async(req, res) => {
 			.doc(req.uid);
 
 		await userRef.update({profile_pic: req.body.profile_pic});
-		console.log(req.body);
+		// console.log(req.body);
 		res.json({message: 'success'});
 	} catch(err) {
 		res.status(500)

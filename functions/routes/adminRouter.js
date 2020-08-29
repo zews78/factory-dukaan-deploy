@@ -5,7 +5,6 @@ const adminController = require('../controllers/adminController');
 const router = express.Router();
 
 router.get('/', adminController.getDashboard);
-router.get('/products', adminController.getProducts);
 router.get('/faq', adminController.getFaq);
 router.post('/addfaq', adminController.createFaq);
 router.post('/editfaq', adminController.editFaq);
@@ -16,9 +15,12 @@ router.delete('/query', adminController.deleteQuery);
 router.post('/query/update-status', adminController.postUpdateStatus);
 
 
+router.get('/products', adminController.getProducts);
+router.get('/product/:productId', adminController.getPrdouctDetails);
+
+
 
 router.get('/users', adminController.getUsers);
-router.get('/product/:productId', adminController.getPrdouctDetails);
 router.get('/user/:userId', adminController.getUserDetails);
 router.post('/user/:userId/block', adminController.postBlockUser);
 router.delete('/user/:userId', adminController.deleteUser);

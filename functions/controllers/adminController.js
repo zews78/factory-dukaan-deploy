@@ -234,9 +234,7 @@ exports.getUsers = async(req, res) => {
 	}
 };
 
-exports.getPrdouctDetails = async(req, res)=>{
-	res.render('admin/product-details.ejs', {pageTitle: 'Product Details - Admin'});
-};
+
 
 exports.getUserDetails = async(req, res)=>{
 	res.render('admin/user-details.ejs', {pageTitle: 'User Details - Admin'});
@@ -340,6 +338,22 @@ exports.postBlockUser = async(req, res) => {
 			.json({message: 'failed'});
 	}
 };
+
+exports.getPrdouctDetails = async(req, res)=>{
+
+	const prodDetails = await firebase.firestore()
+		.collection('products')
+		.doc(req.params.productId)
+		.get();
+	console.log(prodDetails.data());
+
+	res.render('admin/product-details.ejs', {
+		pageTitle: 'Product Details - Admin',
+		prodDetails: prodDetails.data(),
+		productId: req.params.productId
+	});
+};
+
 
 exports.getFaq = async(req, res) => {
 	try{
