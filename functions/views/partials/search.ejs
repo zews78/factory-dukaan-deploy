@@ -1,25 +1,18 @@
 
-<div class="search-container">
-    <div class="row">
-        <div class="column">
-            <form class="form-group" action="/products">
-                <!-- <select class="city-select">
-                    <option selected>Location</option>
-                    <option value="1">Allahabad</option>
-                    <option value="2">New Delhi</option>
-                    <option value="3">Kurukshetra</option>
-                    <option value="4">Mumbai</option>
-                </select> -->
-                <input class="search-area" type="text" placeholder="Search..." name="search">
-                <% if (pageTitle === 'Products') { %>
-                <% for (let query in queryParams) { %>
-                <% if(!(query === 'search' || query === 'after' || query === 'before')) { %>
-                <input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
-                <% } %>
-                <% } %>
-                <% } %>
-                <button type="submit"><i class="fas fa-search"></i></button>
-            </form>
-        </div>
-    </div>
+<div class="mobile-view-search">
+    <form class="form-group" action="/products">        
+        <div class="search">
+            <input class="search-area" type="text" placeholder="What are you looking for?" name="search">
+            <% if (pageTitle === 'Products') { %>
+            <% for (let query in queryParams) { %>
+            <% if(!(query === 'search' || query === 'after' || query === 'before')) { %>
+            <input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
+            <% } %>
+            <% } %>
+            <% } %>
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+            </div>
+    </form>
 </div>

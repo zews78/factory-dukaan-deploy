@@ -2,8 +2,7 @@
 <header>
   <nav class="navbar navbar-light fixed-top bg-light">
     <span id="menu-bar">
-      <i onclick="openNav()" class="fas fa-bars fa-lg"></i>
-      
+      <i onclick="openNav()" class="fas fa-bars fa-lg"></i>      
     </span>
 
     <a class="navbar-brand" href="/">
@@ -16,21 +15,21 @@
     </a>
 
     <div class="search-container">
-        <div class="row">
-            <div class="column">
-                <form class="form-group" action="/products">
-                    <input class="search-area" type="text" placeholder="Search..." name="search">
-                    <% if (pageTitle === 'Products') { %>
-                    <% for (let query in queryParams) { %>
-                    <% if(!(query === 'search' || query === 'after' || query === 'before')) { %>
-                    <input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
-                    <% } %>
-                    <% } %>
-                    <% } %>
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
+      <form class="form-group navbar-form" action="/products">
+        <div class="search">
+          <input class="search-area" type="text" placeholder="What are you looking for?" name="search">
+          <% if (pageTitle === 'Products') { %>
+          <% for (let query in queryParams) { %>
+          <% if(!(query === 'search' || query === 'after' || query === 'before')) { %>
+          <input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
+          <% } %>
+          <% } %>
+          <% } %>
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
+      </form>
     </div>
 
     <% if(auth) { %>
