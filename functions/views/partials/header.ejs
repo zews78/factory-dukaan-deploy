@@ -14,16 +14,24 @@
         alt="logo"
       />
     </a>
-    
-		<div class="input-group" id="search_group">
-      <input class="form-control" id="search_input" name="search" placeholder="Search" />
-      
-			<div class="input-group-append">
-				<button class="btn py-0 px-2 my-sm-0" id="search_btn" type="submit">
-					<span class="fa fa-search"></span>
-				</button>
-			</div>
-		</div>
+
+    <div class="search-container">
+        <div class="row">
+            <div class="column">
+                <form class="form-group" action="/products">
+                    <input class="search-area" type="text" placeholder="Search..." name="search">
+                    <% if (pageTitle === 'Products') { %>
+                    <% for (let query in queryParams) { %>
+                    <% if(!(query === 'search' || query === 'after' || query === 'before')) { %>
+                    <input name="<%= query %>" value="<%= queryParams[query] %>" hidden />
+                    <% } %>
+                    <% } %>
+                    <% } %>
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <% if(auth) { %>
       <form action="/logout" method="POST">

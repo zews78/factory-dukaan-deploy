@@ -10,79 +10,54 @@
     <div class="panel-header edit">
         <h3 style="color: #fc814a;">Edit Product</h3>
     </div>
+    <div style="text-align: center;">
+        <p><%= prodDetails.createdOn %></p>
+        <p><%= productId %></p>
+    </div>
 
-    <div>
+    <form action="#" method="POST">
         <div>
             <div class="container">                
                 <h5>Product Name</h5>
-                <input type="text" class="form-control" name="product-name" id="">
+                <input type="text" class="form-control" name="product-name" id="" value="<%= prodDetails.title %>">
                 <p style="font-size: small;">* Please don't add any description in the product name</p><br>
                 <div class="row-control">
                     <h5>Specifications</h5>
-                    <button type="submit" class="btnAddSpecs">Add Specs</button>
+                    <button type="button" class="btnAddSpecs">Add Specs</button>
                 </div>   
                 
                 <div class="table-container" style="overflow-x:auto;">
                     <table class="specs-table" id="pc-view">
                         <thead>
                             <tr>
-                                <th scope="col">Size</th>
-                                <th scope="col">Actual Price</th>
-                                <th scope="col">Offer Price</th>
-                                <th scope="col">Warranty</th>
-                                <th scope="col">Batch No</th>
-                                <th scope="col">MFG Date</th>
-                                <th scope="col">Barcode</th>
+                                <%Object.keys(prodDetails.specs).forEach((it)=>{%>
+                                    <th scope="col"><%=it%></th>
+                                <%})%>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="Size">Medium</td>
-                                <td data-label="Actual Price">1800.00</td>
-                                <td data-label="Offer Price">1650.00</td>
-                                <td data-label="Warranty">6 Months</td>
-                                <td data-label="Batch No">ABCD123456</td>
-                                <td data-label="MFG Date">20/07/2020</td>
-                                <td data-label="Barcode">QWERTY123</td>
+                                <%Object.values(prodDetails.specs).forEach((it)=>{%>
+                                    <td scope="col"><%=it%></td>
+                                <%})%>
                             </tr>
                         </tbody>
                     </table>
                     <table class="specs-table" id="mobile-view" style="width: 80%; margin: auto;">
                         <tbody>
-                            <tr>
-                                <th scope="col">Size</th>
-                                <td data-label="Size">Medium</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Actual Price</th>
-                                <td data-label="Actual Price">1800.00</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Offer Price</th>
-                                <td data-label="Offer Price">1650.00</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Warranty</th>
-                                <td data-label="Warranty">6 Months</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Batch No</th>
-                                <td data-label="Batch No">ABCD123456</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">MFG Date</th>
-                                <td data-label="MFG Date">20/07/2020</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Barcode</th>
-                                <td data-label="Barcode">QWERTY123</td>
-                            </tr>
+                            <%Object.entries(prodDetails.specs).forEach((it)=>{%>
+                                <tr>
+                                    <th scope="col"><%=it[0]%></th>
+                                    <td data-label="Size"><%=it[1]%></td>
+                                </tr>
+                            <%})%>
+
                         </tbody>
                     </table>
                 </div>
                 
                 <h5>Description</h5>
-                <textarea class="form-control" rows="4"></textarea>                   
+                <textarea class="form-control" rows="4"><%= prodDetails.desc %></textarea>                   
             </div>
         </div><br> 
 
@@ -93,44 +68,32 @@
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose file</label>
-                        <span class="warning">* Please don't add any description in the product name</span>
+                        <!-- <span class="warning">* Please don't add any description in the product name</span> -->
                     </div>
                     </form>
                 <div class="product-image-display">
                     <div class="card-deck1">
-                        <div class="card" style="position: relative;">
-                            <span class="close">&times;</span>
-                            <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
-                        </div>
-                        <div class="card" style="position: relative;">
-                            <span class="close">&times;</span>
-                            <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
-                        </div>
-                        <div class="card" style="position: relative;">
-                            <span class="close">&times;</span>
-                            <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
-                        </div>
-                        <div class="card" style="position: relative;">
-                            <span class="close">&times;</span>
-                            <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
-                        </div>
-                        <div class="card" style="position: relative;">
-                            <span class="close">&times;</span>
-                            <img class="card-img-top" src="/images/slide1.jpg" alt="Card image cap">
-                        </div>
+                        <%prodDetails.images.forEach((it)=>{%>
+                            <div class="card" style="position: relative;">
+                                <span class="close">&times;</span>
+                                <img class="card-img-top" src="<%=it%>" alt="Card image cap">
+                            </div>
+                            <!-- <th scope="col"></th> -->
+                        <%})%>
+
                     </div>
                 </div><br>
 
                 <div class="tags-section">
                     <h5>Tags</h5>
-                    <input type="text" class="form-control" name="product-name" placeholder="Enter a tag">  
+                    <input type="text" class="form-control" name="product-name" placeholder="Enter a tag" value="<%= prodDetails.keywords %>">  
                 </div>
             </div>
         </div>
-        <div class="product-control">
+        <div class="form-group">
             <button type="submit" class="btnSaveProduct" style="margin-left: auto; margin-right: auto;">Save Product</button>         
         </div>
-    </div>
+    </form>
 </div><br>
 
 

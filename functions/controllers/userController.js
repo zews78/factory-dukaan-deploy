@@ -2,6 +2,7 @@ const firebase = require('../firebase');
 const axios = require('axios');
 const config = require('../../config');
 const razorpay = require('razorpay');
+const keywordGenerator = require('../utils/keywordGenerator');
 const isAuth = require('../utils/isAuth');
 
 
@@ -71,7 +72,7 @@ exports.postUpdateProfilePic = async(req, res) => {
 			.doc(req.uid);
 
 		await userRef.update({profile_pic: req.body.profile_pic});
-		console.log(req.body);
+		// console.log(req.body);
 		res.json({message: 'success'});
 	} catch(err) {
 		res.status(500)
@@ -380,6 +381,8 @@ exports.sellProduct = async(req, res)=>{
 
 	if(user.data().productLimit > count) {
 		try{
+			keywordGenerator(req.body.title + ' ' + req.body.desc)
+				.forEach(keyword=>{ req.body.keywords.push(keyword); });
 			await firebase.firestore()
 				.collection('products')
 				.add(req.body);
