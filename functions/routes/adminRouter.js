@@ -17,6 +17,7 @@ router.post('/query/update-status', adminController.postUpdateStatus);
 
 router.get('/products', adminController.getProducts);
 router.get('/product/:productId', adminController.getPrdouctDetails);
+router.post('/editProduct', adminController.editProductDetails);
 
 
 
