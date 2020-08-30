@@ -2,6 +2,7 @@ const firebase = require('../firebase');
 const axios = require('axios');
 const config = require('../../config');
 const razorpay = require('razorpay');
+const keywordGenerator = require('../utils/keywordGenerator');
 const isAuth = require('../utils/isAuth');
 
 
@@ -380,6 +381,8 @@ exports.sellProduct = async(req, res)=>{
 
 	if(user.data().productLimit > count) {
 		try{
+			keywordGenerator(req.body.title + ' ' + req.body.desc)
+				.forEach(keyword=>{ req.body.keywords.push(keyword); });
 			await firebase.firestore()
 				.collection('products')
 				.add(req.body);
