@@ -1,8 +1,4 @@
 .profile-container {
-	/* width: 100%; */
-	/* margin-top: 20px; */
-	/* margin-left: auto;
-	margin-right: auto; */
 	background: #fff;
 	color: black;
 	padding-top: 20px;
@@ -17,13 +13,12 @@
 	.col-left {
 		margin: 0 0 0 59px;
 	}
-	.col-right{
+	.col-right {
 		margin: 0 0 0 179px;
 	}
-	.column{
+	.column {
 		margin: 43px 0 0 99px;
 	}
-
 }
 
 .profile-container h2 {
@@ -39,7 +34,6 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	/* width: 100%; */
 	justify-content: center;
 	align-items: center;
 	margin-left: 0 !important;
@@ -49,24 +43,16 @@
 .column {
 	display: flex;
 	flex-direction: column;
-	/* display: flex;
-	flex-direction: column;
-	flex-basis: 100%;
-	justify-content: center;
-	align-items: center; */
 }
 
 .col-left {
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	
 }
 
 .col-right {
 	flex: 2;
-	/* justify-content: center;
-	align-items: center; */
 }
 
 .fa-check-circle {
@@ -93,7 +79,7 @@
 .profile-container h2 {
 	color: #212529;
 }
-.eml{
+.eml {
 	color: #343a40;
 	font-size: small;
 }

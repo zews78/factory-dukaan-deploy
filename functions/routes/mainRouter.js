@@ -25,5 +25,7 @@ router.post('/addreq', isAuth, mainController.postAddRequirement);
 router.get('/requirement/:reqId', redirectTo, isAuth, mainController.getOneRequirement);
 router.post('/requirement/:reqId/bid/', isAuth, mainController.postBid);
 
+router.get('/about', mainController.getAboutPage);
+
 
 module.exports = router;

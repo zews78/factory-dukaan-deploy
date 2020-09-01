@@ -480,3 +480,11 @@ exports.removeFromWishList = async(req, res)=>{
 		.update({wishlist: firebase.firestore.FieldValue.arrayRemove(req.body.productId)});
 	res.json({status: 'removed'});
 };
+
+exports.getAboutPage = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('main/about.ejs', {
+		pageTitle: 'About Us | Factory-Dukaan',
+		auth
+	});
+};
