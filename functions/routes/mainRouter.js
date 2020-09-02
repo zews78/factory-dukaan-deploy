@@ -26,6 +26,7 @@ router.get('/requirement/:reqId', redirectTo, isAuth, mainController.getOneRequi
 router.post('/requirement/:reqId/bid/', isAuth, mainController.postBid);
 
 router.get('/about', mainController.getAboutPage);
+router.get('/terms', mainController.getTermsConditionsPage);
 
 
 module.exports = router;

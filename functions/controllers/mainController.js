@@ -488,3 +488,11 @@ exports.getAboutPage = async(req, res) => {
 		auth
 	});
 };
+
+exports.getTermsConditionsPage = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('main/terms.ejs', {
+		pageTitle: 'Terms & Conditions | Factory-Dukaan',
+		auth
+	});
+};
