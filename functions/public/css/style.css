@@ -354,10 +354,16 @@ header .fixed-top {
 }
 .pricing-container .pricing-card-title {
 	font-size: 1.88rem;
-	color: #e63946;
+	color: tomato;
 }
 .pricing-container .pricing-card-title .text-mute {
-	color: tomato;
+	font-size: 72px;
+	background: -webkit-linear-gradient(-45deg,wheat, tomato);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.pricing-container .card-body{
+	height: 21em;
 }
 .pricing-container .card-body a .btn-primary {
 	background-color: #000;
