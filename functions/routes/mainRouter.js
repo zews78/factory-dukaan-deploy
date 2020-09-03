@@ -27,6 +27,7 @@ router.post('/requirement/:reqId/bid/', isAuth, mainController.postBid);
 
 router.get('/about', mainController.getAboutPage);
 router.get('/terms', mainController.getTermsConditionsPage);
+router.get('/privacy', mainController.getPrivacyPolicyPage);
 
 
 module.exports = router;

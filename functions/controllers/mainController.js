@@ -496,3 +496,11 @@ exports.getTermsConditionsPage = async(req, res) => {
 		auth
 	});
 };
+
+exports.getPrivacyPolicyPage = async(req, res) => {
+	const auth = (await isAuth(req))[0];
+	res.render('main/privacy.ejs', {
+		pageTitle: 'Privacy Policy | Factory-Dukaan',
+		auth
+	});
+};

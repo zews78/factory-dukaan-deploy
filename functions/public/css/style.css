@@ -1016,7 +1016,8 @@ footer hr {
 	margin-bottom: 0 !important;
 }
 
-.terms-container {
+.terms-container,
+.privacy-container {
 	width: 85%;
 	margin-left: auto;
 	margin-right: auto;
@@ -1036,6 +1037,10 @@ footer hr {
 
 #terms-list-abc li {
 	list-style-type: lower-alpha;
+}
+
+#privacy-list li {
+	list-style-type: decimal;
 }
 
 /* @media (max-width: 600px) {
