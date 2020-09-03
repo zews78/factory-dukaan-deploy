@@ -3,6 +3,8 @@
 <%- include("../partials/headBody") %>
 <%- include("../partials/header") %>
 <div class="wrapper">
+    <div class="loader">
+    </div>
     <%- include("../partials/sidenav") %>
     <div class="main_content">
         <div class="header">
@@ -21,7 +23,7 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddProduct">Add Product</button>
             </div>
             <div class="add-product">
-                <button class='btn'style="background-color:#4DC247; "><a href="https://api.whatsapp.com/send?phone=+918619638640" style="color:white;">Whatsapp <i class='fab fa-whatsapp'></i></a></button>
+                <button class='btn'style="background-color:#4DC247; "><a href="https://api.whatsapp.com/send?phone=+918619638640" target="_blank" style="color:white;">Whatsapp <i class='fab fa-whatsapp'></i></a></button>
             </div>
             <div class="add-product">
                 <p>Having Trouble in adding product contact us on whatsapp </p>
@@ -349,18 +351,21 @@
         }if(document.getElementById(`specsTitle0`).value===null || document.getElementById(`specsTitle0`).value==="" || document.getElementById(`specsDesc0`).value===null || document.getElementById(`specsDesc0`).value===""){
             $('#specs-form').append('<p style="color:red">At Least One spec is required</p>')
         }else{
+            const loader = document.querySelector('.loader');
+            loader.className = 'loader'; // class "loader"
             const response=await axios({ 
             method:"POST",
             url:"/user/sellProduct",
             data:{
                 images:img_arr,
                 title:document.getElementById('addTitleInput').value,
-                price:document.getElementById('addPriceInput').value,
+                price:+document.getElementById('addPriceInput').value,
                 desc:document.getElementById('addDescInput').value,
                 keywords:document.getElementById('addKeywordsInput').value.split(','),
                 specs
             }
         });
+        loader.className = 'loader hidden'; // class "loader hidden"
 
         if(response.data.status==='success'){
             location.reload();
@@ -388,7 +393,10 @@
 
     const editHandler=async()=>{
       
-       try{const response=await axios({
+       try{
+            const loader = document.querySelector('.loader');
+            loader.className = 'loader'; // class "loader"
+            const response=await axios({
             method:"POST",
             url:"/user/updateProduct",
             data:{
@@ -402,6 +410,7 @@
                 
             }
         })
+        loader.className = 'loader hidden'; // class "loader hidden"
 
         console.log('wait...')
         if(response.data.status==='success'){
@@ -425,6 +434,8 @@
         console.log(deleteConfirmation)
         if(deleteConfirmation===this.id){
             try{
+            const loader = document.querySelector('.loader');
+            loader.className = 'loader'; // class "loader"
             const res=await axios({
                 method:"POST",
                 url:"/user/deleteProduct",
@@ -432,6 +443,7 @@
                     productId:this.id
                 }
             })
+            loader.className = 'loader hidden'; // class "loader hidden"
             if(res.data.status==='success'){
                 console.log('working')
                 location.reload();

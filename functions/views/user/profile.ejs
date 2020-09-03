@@ -48,7 +48,7 @@
                         <i class="fas fa-calendar" aria-hidden="true"></i> Plan Expires On:
                         <%= new Date(user.expiresOn._seconds*1000).toDateString() %> <br>
                         <%}else{%>
-                        <i class="fas fa-usd" aria-hidden="true"></i> No Active Plan <a href="/plan-details">Check Plan
+                        <i class="fas fa-usd" aria-hidden="true"></i> No Active Plan <a href="/pricing">Check Plan
                             Pricings</a> <br>
                         <% } %>
                         <% if (user.company.name) {%>

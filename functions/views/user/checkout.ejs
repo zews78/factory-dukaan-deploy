@@ -20,10 +20,19 @@ include("../partials/header") %>
         <p>Validity: 1 Month</p>
         <br />
         <br />
-        <ul>
-          <li>Benefits..</li>
-          <li>Benefits..</li>
-          <li>Benefits..</li>
+        <ul style="text-align: left; margin-left: 80px;">
+        <%if(sellingLimit==='Unlimited'){%>
+                <li>Sell <%= sellingLimit %> Number of Products</li>
+                <br/>
+            <%}
+            else{%>
+                <li>Sell Upto <%= sellingLimit %> Products</li>
+                <br/>
+            <%}%>
+          <li>Valid For <%= duration %> months</li>
+          <br/>
+          <li>Get Seller Contact Details </li>
+          <br/>
         </ul>
     
         <div class="order-button">

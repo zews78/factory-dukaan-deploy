@@ -181,21 +181,48 @@ exports.getUserPayment = async(req, res) => {
 			key_secret: config.razorpay.key_secret
 		});
 		let amount = {};
-
+		let sellingLimit;
+		let duration;
 		if(req.query.package === 'silver') {
-			amount = {amount: config.razorpay.silverPackage};
+			if(req.query.duration === 'half') {
+				amount = {amount: config.razorpay.silverPackage.half};
+				duration = 6;
+			}
+			if(req.query.duration === 'full') {
+				amount = {amount: config.razorpay.silverPackage.full};
+				duration = 12;
+			}
+			sellingLimit = 30;
 		}
 		if(req.query.package === 'gold') {
-			amount = {amount: config.razorpay.goldPackage};
+			if(req.query.duration === 'half') {
+				amount = {amount: config.razorpay.goldPackage.half};
+				duration = 6;
+			}
+			if(req.query.duration === 'full') {
+				amount = {amount: config.razorpay.goldPackage.full};
+				duration = 12;
+			}
+			sellingLimit = 50;
 		}
 		if(req.query.package === 'platinum') {
-			amount = {amount: config.razorpay.platinumPackage};
+			if(req.query.duration === 'half') {
+				amount = {amount: config.razorpay.platinumPackage.half};
+				duration = 6;
+			}
+			if(req.query.duration === 'full') {
+				amount = {amount: config.razorpay.platinumPackage.full};
+				duration = 12;
+			}
+			sellingLimit = 'Unlimited';
 		}
 		instance.orders.create(amount)
 			.then((data)=>{
 				res.render('user/checkout.ejs', {
 					orderData: data,
 					alreadyActivePlan: false,
+					sellingLimit,
+					duration,
 					pageTitle: 'User Plan | Factory Dukaan',
 					auth,
 					amount: amount,
@@ -221,15 +248,31 @@ exports.paymentVerification = async(req, res)=>{
 		.digest('hex');
 	let package = null;
 	let productLimit = null;
-	if(req.body.amount === config.razorpay.silverPackage) {
+	let duration;
+	if(req.body.amount === config.razorpay.silverPackage.half || req.body.amount === config.razorpay.silverPackage.full) {
+		if(req.body.amount === config.razorpay.silverPackage.half) {
+			duration = 6 * 30;
+		}else{
+			duration = 12 * 30;
+		}
 		package = 'Silver';
 		productLimit = config.razorpay.silverSellLimit;
 	}
-	if(req.body.amount === config.razorpay.goldPackage) {
+	if(req.body.amount === config.razorpay.goldPackage.half || req.body.amount === config.razorpay.goldPackage.full) {
+		if(req.body.amount === config.razorpay.goldPackage.half) {
+			duration = 6 * 30;
+		}else{
+			duration = 12 * 30;
+		}
 		package = 'Gold';
 		productLimit = config.razorpay.goldSellLimit;
 	}
-	if(req.body.amount === config.razorpay.platinumPackage) {
+	if(req.body.amount === config.razorpay.platinumPackage.half || req.body.amount === config.razorpay.platinumPackage.full) {
+		if(req.body.amount === config.razorpay.platinumPackage.half) {
+			duration = 6 * 30;
+		}else{
+			duration = 12 * 30;
+		}
 		package = 'Platinum';
 		productLimit = config.razorpay.platinumSellLimit;
 	}
@@ -240,7 +283,7 @@ exports.paymentVerification = async(req, res)=>{
 			.collection('users')
 			.doc(req.uid);
 		expiresOn.setDate(new Date()
-			.getDate() + 30);
+			.getDate() + duration);
 		try{ userRef
 			.update({
 				packPurchased: package,
@@ -435,4 +478,25 @@ exports.postReview = async(req, res)=>{
 		res.json({status: 'Alreayd Reviewed Please delete that review to create a new review'});
 	}
 
+};
+
+exports.getPlanValidities = async(req, res)=>{
+	const auth = (await isAuth(req))[0];
+	let plan = req.query.package;
+	let prices;
+	if(plan === 'silver') {
+		prices = config.razorpay.silverPackage;
+	}
+	if(plan === 'gold') {
+		prices = config.razorpay.goldPackage;
+	}
+	if(plan === 'platinum') {
+		prices = config.razorpay.platinumPackage;
+	}
+	res.render('main/validitySelection.ejs', {
+		auth,
+		prices,
+		plan,
+		pageTitle: 'Select Plan Duration | Factory Dukaan'
+	});
 };

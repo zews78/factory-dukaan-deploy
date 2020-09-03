@@ -1,0 +1,53 @@
+<%- include("../partials/start") %>
+<%- include("../partials/headBody") %>
+<%- include("../partials/header") %>
+<div class="wrapper">
+    <%- include("../partials/sidenav") %>
+    <div class="main_content">
+        <div class="content" style="text-align: center;">
+            
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4" style="text-transform:capitalize;"><%= plan %> Plan</h1>
+    <p class="lead">Please Select Plan Duration </p>
+</div>
+
+  <div class="pricing-container">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Half-Year Plan</h4>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title pricing-card-title"><p class="text-mute" style="font-size: 45px;">6 Months</p></h2>
+          <ul class="list-unstyled mt-3 mb-4">
+            <!-- <li><strong>Upto 50 Products</strong></li> -->
+            <hr>
+            <!-- <li>3 Months - ₹2500</li> -->
+            <li>₹<%= prices.half/100 %></li>
+            <li><br/> </li>
+          </ul>
+          <a href="/user/payment/?package=<%= plan %>&duration=half"><button type="button" class="btn btn-lg btn-block btn-primary">Buy</button></a>
+        </div>
+      </div>
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Full-Year Plan</h4>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title pricing-card-title"><p  class="text-mute" style="font-size: 45px;">12 Months</p></h2>
+          <ul class="list-unstyled mt-3 mb-4">
+            <!-- <li><strong>Unlimited Products</strong></li> -->
+            <hr>
+            <!-- <li>3 Months - ₹3000</li> -->
+            <li>₹<%= prices.full/100 %></li>
+            <li style="text-decoration: line-through; color:rgb(172, 172, 172); font-size: small;">₹<%= 2*prices.half/100 %></li>
+          </ul>
+          <a href="/user/payment/?package=<%= plan %>&duration=full"><button type="button" class="btn btn-lg btn-block btn-primary">Buy</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %> <%- include('../partials/end.ejs') %>

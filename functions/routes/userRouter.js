@@ -24,6 +24,7 @@ router.post('/review/:productId', userController.postReview);
 
 // PAYMENT ROUTES
 router.get('/payment', userController.getUserPayment);
+router.get('/payment/validity', userController.getPlanValidities);
 router.post('/payment/verify', userController.paymentVerification);
 router.get('/paymentSuccess', userController.getSuccessfulPayment);
 
