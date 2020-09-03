@@ -1037,3 +1037,12 @@ footer hr {
 #terms-list-abc li {
 	list-style-type: lower-alpha;
 }
+
+/* @media (max-width: 600px) {
+	footer .col-md-3 {
+		flex-direction: column;
+	}
+	.col-md-3 .col-sm-3 {
+		display: flex;
+	}
+} */
