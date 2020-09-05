@@ -380,10 +380,11 @@ header .fixed-top {
 }
 
 .carousel-item img {
-	position: absolute;
+	/* position: absolute;
 	top: 0;
-	left: 0;
-	object-fit: cover !important;
+	left: 0; */
+	height: 100%;
+	/* object-fit: cover !important; */
 }
 
 .search-container {
