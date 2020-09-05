@@ -402,7 +402,7 @@ exports.getOneRequirement = async(req, res) => {
 		.collection('requirements')
 		.doc(req.params.reqId)
 		.get();
-	console.log(requirement.data());
+	// console.log(requirement.data());
 	const reqUser = await firebase.firestore()
 		.collection('users')
 		.doc(requirement.data().uid)
