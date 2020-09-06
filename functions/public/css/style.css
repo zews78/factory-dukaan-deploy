@@ -496,7 +496,7 @@ header .fixed-top {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
+	/* align-items: center; */
 	margin-left: 0 !important;
 	margin-right: 0 !important;
 }
@@ -957,22 +957,17 @@ footer hr {
 
 .search-area {
 	width: 100%;
-	border: 3px solid #00b4cc;
+	border: 3px solid #2196f3;
 	border-right: none;
 	padding: 5px;
 	border-radius: 5px 0 0 5px;
 	outline: none;
-	/* color: #9dbfaf; */
 }
-
-/* .search-area:focus {
-	color: #00b4cc;
-} */
 
 .searchButton {
 	width: 40px;
-	border: 1px solid #00b4cc;
-	background: #00b4cc;
+	border: 1px solid #2196f3;
+	background: #2196f3;
 	text-align: center;
 	color: #fff;
 	border-radius: 0 5px 5px 0;
@@ -1044,11 +1039,11 @@ footer hr {
 	list-style-type: decimal;
 }
 
-/* @media (max-width: 600px) {
-	footer .col-md-3 {
-		flex-direction: column;
-	}
-	.col-md-3 .col-sm-3 {
-		display: flex;
-	}
-} */
+.col-container {
+	display: table; /* Make the container element behave like a table */
+	width: 100%; /* Set full-width to expand the whole page */
+}
+
+.col {
+	display: table-cell; /* Make elements inside the container behave like table cells */
+}
