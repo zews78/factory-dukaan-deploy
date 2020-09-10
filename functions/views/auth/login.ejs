@@ -3,63 +3,70 @@
 <%- include("../partials/header") %>
 <div class="loader">
 </div>
-<div>
-  <h2 class="text-center my-5">Log in</h2>
-  <div id="firebaseui-auth-container"></div>
-</div>
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBnmgKRfL7t71V9bdj45eADRmSz_VvYMAk",
-    authDomain: "factorydukaan-3107.firebaseapp.com",
-    databaseURL: "https://factorydukaan-3107.firebaseio.com",
-    projectId: "factorydukaan-3107",
-    storageBucket: "factorydukaan-3107.appspot.com",
-    messagingSenderId: "405186974524",
-    appId: "1:405186974524:web:5b453c80c90b407af10439",
-    measurementId: "G-0WYRS9LFHC"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const uiConfig = {
-    callbacks: {
-      signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-        const xhr = new XMLHttpRequest();
-        const url = "/login";
-        const loader = document.querySelector('.loader');
-        loader.className = 'loader'; // class "loader"
-        xhr.open("POST", url);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(authResult));
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState == XMLHttpRequest.DONE) {
-            window.location = xhr.responseURL;
-            
-          }
-        }
-        return false;
-      },
-    },
-    signInOptions: [
-      {
-        provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-        recaptchaParameters: {
-          type: "image", // 'audio'
-          size: "invisible", // 'invisible' or 'compact'
-          badge: "bottomright", // ' bottomright' or 'inline' applies to invisible.
-        },
-        defaultCountry: "IN",
-      },
-    ],
-  };
-  
- 
-  var ui = new firebaseui.auth.AuthUI(firebase.auth());
-  ui.start("#firebaseui-auth-container", uiConfig);
-</script>
 
+<div class="wrapper">
+  <%- include('../partials/sidenav.ejs') %>
+  <div class="main_content">
+    <div class="container">
+    <div>
+      <h2 class="text-center my-5">Log in</h2>
+      <div id="firebaseui-auth-container"></div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBnmgKRfL7t71V9bdj45eADRmSz_VvYMAk",
+        authDomain: "factorydukaan-3107.firebaseapp.com",
+        databaseURL: "https://factorydukaan-3107.firebaseio.com",
+        projectId: "factorydukaan-3107",
+        storageBucket: "factorydukaan-3107.appspot.com",
+        messagingSenderId: "405186974524",
+        appId: "1:405186974524:web:5b453c80c90b407af10439",
+        measurementId: "G-0WYRS9LFHC"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const uiConfig = {
+        callbacks: {
+          signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+            const xhr = new XMLHttpRequest();
+            const url = "/login";
+            const loader = document.querySelector('.loader');
+            loader.className = 'loader'; // class "loader"
+            xhr.open("POST", url);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(authResult));
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState == XMLHttpRequest.DONE) {
+                window.location = xhr.responseURL;
+                
+              }
+            }
+            return false;
+          },
+        },
+        signInOptions: [
+          {
+            provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+            recaptchaParameters: {
+              type: "image", // 'audio'
+              size: "invisible", // 'invisible' or 'compact'
+              badge: "bottomright", // ' bottomright' or 'inline' applies to invisible.
+            },
+            defaultCountry: "IN",
+          },
+        ],
+      };
+      
+    
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      ui.start("#firebaseui-auth-container", uiConfig);
+    </script>
+    </div>
+  </div>
+</div>
 <%- include("../partials/footer") %>
 <%- include("../partials/end") %>
