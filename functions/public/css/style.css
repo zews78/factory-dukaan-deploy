@@ -141,7 +141,17 @@ body {
 	}
 	#trade-area .text-area .trade-btns #require {
 		min-width: 99px;
-		margin: 5px 0 0 0;
+		/* margin: 5px 0 0 0; */
+	}
+
+	.trade-btns button {
+		margin-top: 5px;
+	}
+
+	@media screen and (max-width: 312px) {
+		#trade-area .text-area .trade-btns #require {
+			margin: 5px 0 0 0;
+		}
 	}
 
 	#trade-area .text-area .trade-header {
@@ -339,12 +349,17 @@ header .fixed-top {
 }
 
 .advertisement {
-	width: 80vw;
+	/* width: 80vw; */
 	/* height: 40vh; */
 	margin-top: 40px;
 	margin-bottom: 20px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.advertisement .container-fluid {
+	padding-right: 5px;
+	padding-left: 5px;
 }
 
 .pricing-container {
