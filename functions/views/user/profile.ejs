@@ -65,6 +65,9 @@
                         <i class="fas fa-user-plus"></i>Referral Code : <%= user.referralCode %> (refer to your friends
                         and get exciting benefits)<br>
                         <%} %>
+                        <% if (user.referredTo) {%>
+                            <i class="fa fa-share-alt"></i>Referred To : <%= user.referredTo %> <br>
+                        <%} %>
                         <i class="fas fa-phone-square-alt"></i><%= user.mobile %><br>
                         <i class="far fa-calendar-alt"></i>Joined on
                         <%= user.createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/') %>

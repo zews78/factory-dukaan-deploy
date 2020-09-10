@@ -42,6 +42,7 @@ exports.getLogin = async(req, res) => {
 
 exports.postLogin = async(req, res) => {
 	try {
+
 		if (req.body.additionalUserInfo.isNewUser) {
 			// Create a new user
 			const userData = {};

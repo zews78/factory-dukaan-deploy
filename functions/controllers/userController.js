@@ -92,25 +92,43 @@ exports.postUpdateUser = async(req, res) => {
 		.collection('users')
 		.doc(req.uid);
 	const userSnapshot = await user.get();
-	if(req.body.referralCode && !userSnapshot.referralCode) {
-		const referredBy = await firebase.firestore()
-			.collection('users')
-			.where('referralCode', '==', req.body.referralCode)
-			.get();
-		if(referredBy.empty) {
-			res.json({status: 'invalid referral code'});
+	if(!userSnapshot.data().name || !userSnapshot.data().address || !userSnapshot.data().company.name || !userSnapshot.data().company.address) {
+		let referredBy;
+		if(req.body.referralCode) {
+			referredBy = await firebase.firestore()
+				.collection('users')
+				.where('referralCode', '==', req.body.referralCode)
+				.get();
+		}
+		if(referredBy) {
+			if(referredBy.empty) {
+				res.json({status: 'invalid referral code'});
+			}else{
+				referredBy.forEach(async doc=>{
+
+					const referredByUser = await firebase.firestore()
+						.collection('users')
+						.doc(doc.id);
+					const referredByUserSnapshot = await referredByUser.get();
+					await referredByUser
+						.update({referredTo: referredByUserSnapshot.data().referredTo + 1});
+
+
+				});
+				try {
+					delete req.body.referralCode;
+					req.body.referralCode = randomString('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+					req.body.referredTo = 0;
+					req.body.createdOn = new Date();
+					req.body.wishlist = [];
+
+					await user.update(req.body);
+					res.redirect('/user/profile');
+				} catch (err) {
+					console.log(err);
+				}
+			}
 		}else{
-			referredBy.forEach(async doc=>{
-
-				const referredByUser = await firebase.firestore()
-					.collection('users')
-					.doc(doc.id);
-				const referredByUserSnapshot = await referredByUser.get();
-				await referredByUser
-					.update({referredTo: referredByUserSnapshot.data().referredTo + 1});
-
-
-			});
 			try {
 				delete req.body.referralCode;
 				req.body.referralCode = randomString('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
