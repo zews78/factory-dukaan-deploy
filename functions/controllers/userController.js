@@ -1,6 +1,6 @@
 const firebase = require('../firebase');
 const axios = require('axios');
-const config = require('../../config');
+const config = require('../config');
 const razorpay = require('razorpay');
 const keywordGenerator = require('../utils/keywordGenerator');
 const isAuth = require('../utils/isAuth');
