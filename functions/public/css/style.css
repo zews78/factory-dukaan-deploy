@@ -347,7 +347,12 @@ header .fixed-top {
 	transform: scale(1.4);
 	margin-left: 1rem;
 }
-
+@media screen and (min-width: 600px) {
+	.advertisement {
+		width: 77vw;
+		/* height: 40vh; */
+	}
+}
 .advertisement {
 	/* width: 80vw; */
 	/* height: 40vh; */
@@ -1021,7 +1026,7 @@ footer hr {
 	}
 	.mobile-view-search .search {
 		width: 60%;
-		margin-left: auto;
+		margin-left: 12vw;
 		margin-right: auto;
 	}
 }

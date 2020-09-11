@@ -345,7 +345,7 @@ exports.getPrdouctDetails = async(req, res)=>{
 		.collection('products')
 		.doc(req.params.productId)
 		.get();
-	console.log(prodDetails.data());
+	// console.log(prodDetails.data());
 
 	res.render('admin/product-details.ejs', {
 		pageTitle: 'Product Details - Admin',
