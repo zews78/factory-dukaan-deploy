@@ -759,42 +759,42 @@ footer hr {
 .checkout-card {
 	width: 360px;
 	height: 515px;
-	border-radius: 33px;
-	background: linear-gradient(
+	border-radius: 5px;
+	background: linear-gradient(-45deg,
 		rgb(247, 148, 29) 0%,
-		rgb(247, 148, 29) 10%,
+		rgb(247, 148, 29) 13%,
 		white 10%,
 		white 90%,
 		rgb(247, 148, 29) 90%,
 		rgb(247, 148, 29) 100%
 	);
 	border: 1px solid black;
-	position: absolute;
-	top: 0;
+	/* position: absolute; */
+	/* top: 0;
 	bottom: 0;
 	left: 0;
-	right: 0;
-
+	right: 0; */
+	margin-bottom: 9vw;
 	margin: auto;
 	text-align: center;
 }
 
 .order-button {
 	margin: 0;
-	position: absolute;
-	top: 90%;
-	left: 50%;
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+	/* position: absolute; */
+	/* top: 90%; */
+	/* left: 50%; */
+	/* -ms-transform: translate(-50%, -50%); */
+	/* transform: translate(-50%, -50%); */
 }
 
 .order-button button {
-	height: 50px;
+	height: 43px;
 	width: 150px;
 	background-color: #0398fc;
 	border: 1px solid black;
 	color: white;
-	border-radius: 15px;
+	border-radius: 4px;
 }
 
 .order-button button:hover {
@@ -803,9 +803,9 @@ footer hr {
 .order-button button:hover::after {
 	content: ">>";
 }
-.checkout-card li::before {
+/* .checkout-card li::before {
 	content: " \25C9";
-}
+} */
 .checkout-card p {
 	color: rgb(179, 179, 179);
 	font-size: 10px;

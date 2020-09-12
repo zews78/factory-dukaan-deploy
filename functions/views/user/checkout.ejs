@@ -12,29 +12,29 @@ include("../partials/header") %>
    
     <%}else{%>
       <div class="checkout-card">
-        <h4>Order Summary</h4>
+        <h4 style="padding: 10px;">Order Summary</h4>
         <br />
-        <h5><%= packageName %> Pack</h5>
+        <h5 style="color: #9bf6ff;"><%= packageName %> Pack</h5>
         <br />
-        <h5>₹ <%= amount.amount/100 %>.00</h5>
-        <p>Validity: 1 Month</p>
+        <h3 style="font-weight: bold;">₹ <%= amount.amount/100 %>.00</h3>
+        <!-- <p>Validity: 1 Month</p> -->
         <br />
         <br />
-        <ul style="text-align: left; margin-left: 80px;">
-        <%if(sellingLimit==='Unlimited'){%>
-                <li>Sell <%= sellingLimit %> Number of Products</li>
-                <br/>
-            <%}
-            else{%>
-                <li>Sell Upto <%= sellingLimit %> Products</li>
-                <br/>
-            <%}%>
-          <li>Valid For <%= duration %> months</li>
+        <ul style="text-align: left; margin-left: 76px; list-style-type: none;">
+          <%if(sellingLimit==='Unlimited'){%>
+            <li><i class="fas fa-carrot"></i>Sell <%= sellingLimit %> Number of Products</li>
+            <br/>
+          <%}
+          else{%>
+            <li><i class="fas fa-carrot"></i>Sell Upto <%= sellingLimit %> Products</li>
+            <br/>
+          <%}%>
+          <li><i class="fas fa-carrot"></i>Valid For <%= duration %> months</li>
           <br/>
-          <li>Get Seller Contact Details </li>
-          <br/>
+          <li><i class="fas fa-carrot"></i>Get Seller Contact Details </li>
         </ul>
-    
+        <br/>
+        
         <div class="order-button">
           <button id="rzp-button1">
             Proceed To Pay
@@ -45,6 +45,7 @@ include("../partials/header") %>
         <input type="hidden" id="amount" value="<%= amount.amount  %>" />
       </div>
     <% } %>
+    <br>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
