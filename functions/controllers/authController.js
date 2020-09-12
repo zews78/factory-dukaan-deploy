@@ -62,7 +62,7 @@ exports.postLogin = async(req, res) => {
 			httpOnly: true
 			// secure: true
 		};
-		res.cookie('session', sessionCookie, cookieOptions);
+		res.cookie('__session', sessionCookie, cookieOptions);
 		req.query.uid = req.body.user.uid;
 
 		res.redirect(url.format({
