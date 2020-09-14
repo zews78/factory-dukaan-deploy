@@ -368,12 +368,12 @@ header .fixed-top {
 }
 
 .pricing-container {
-	width: 60vw;
+	/* width: 60vw; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-left: auto;
-	margin-right: auto;
+	padding-left: 15px;
+	padding-right: 15;
 }
 .pricing-container .card-header {
 	background-color: #000;
@@ -572,6 +572,9 @@ header .fixed-top {
 	.profile-img {
 		width: 150px;
 	}
+	footer .row {
+		flex-direction: row !important;
+	}
 }
 
 .products-section {
@@ -755,12 +758,18 @@ footer hr {
 	border-right: 1px solid rgb(194, 194, 194);
 }
 
+footer .container-fluid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
 /* CHEKOUT PAGE STYLING */
 .checkout-card {
 	width: 360px;
 	height: 515px;
 	border-radius: 5px;
-	background: linear-gradient(-45deg,
+	background: linear-gradient(
+		-45deg,
 		rgb(247, 148, 29) 0%,
 		rgb(247, 148, 29) 13%,
 		white 10%,
