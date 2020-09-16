@@ -190,7 +190,7 @@ exports.getUserPayment = async(req, res) => {
 		res.render('user/checkout.ejs', {
 			alreadyActivePlan: true,
 			auth,
-			pageTitle: 'User Plan | Factory Dukaan',
+			pageTitle: 'User Plan',
 			user: user.data()
 		});
 	}else{
@@ -241,7 +241,7 @@ exports.getUserPayment = async(req, res) => {
 					alreadyActivePlan: false,
 					sellingLimit,
 					duration,
-					pageTitle: 'User Plan | Factory Dukaan',
+					pageTitle: 'User Plan',
 					auth,
 					amount: amount,
 					key_id: config.razorpay.key_id,
@@ -327,7 +327,7 @@ exports.getSuccessfulPayment = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
 	res.render('user/paymentSuccess.ejs', {
 		auth,
-		pageTitle: 'User Plan | Factory Dukaan'
+		pageTitle: 'User Plan'
 	});
 };
 
@@ -388,7 +388,7 @@ exports.getSellingPage = async(req, res)=>{
 
 	res.render('user/sell-page.ejs', {
 		auth,
-		pageTitle: 'Sell Page | Factory Dukaan',
+		pageTitle: 'Sell Page',
 		user: user.data(),
 		products,
 		productsId
@@ -515,6 +515,6 @@ exports.getPlanValidities = async(req, res)=>{
 		auth,
 		prices,
 		plan,
-		pageTitle: 'Select Plan Duration | Factory Dukaan'
+		pageTitle: 'Select Plan Duration'
 	});
 };

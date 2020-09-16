@@ -292,7 +292,7 @@ exports.postQuery = async(req, res) => {
 exports.getPlanDetails = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/plan-details.ejs', {
-		pageTitle: 'Plans | Factory-Dukaan',
+		pageTitle: 'Plans',
 		auth
 	});
 };
@@ -484,7 +484,7 @@ exports.removeFromWishList = async(req, res)=>{
 exports.getAboutPage = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/about.ejs', {
-		pageTitle: 'About Us | Factory-Dukaan',
+		pageTitle: 'About Us',
 		auth
 	});
 };
@@ -492,7 +492,7 @@ exports.getAboutPage = async(req, res) => {
 exports.getTermsConditionsPage = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/terms.ejs', {
-		pageTitle: 'Terms & Conditions | Factory-Dukaan',
+		pageTitle: 'Terms & Conditions',
 		auth
 	});
 };
@@ -500,7 +500,7 @@ exports.getTermsConditionsPage = async(req, res) => {
 exports.getPrivacyPolicyPage = async(req, res) => {
 	const auth = (await isAuth(req))[0];
 	res.render('main/privacy.ejs', {
-		pageTitle: 'Privacy Policy | Factory-Dukaan',
+		pageTitle: 'Privacy Policy',
 		auth
 	});
 };

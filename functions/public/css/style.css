@@ -765,7 +765,9 @@ footer .container-fluid {
 
 /* CHEKOUT PAGE STYLING */
 .checkout-card {
-	width: 360px;
+	width: 320px;
+	margin-left: auto;
+	margin-right: auto;
 	height: 515px;
 	border-radius: 5px;
 	background: linear-gradient(
