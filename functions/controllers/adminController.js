@@ -65,6 +65,7 @@ exports.getProducts = async(req, res) => {
 
 		if (products.length === 0) {
 			res.render('admin/products', {
+				pageTitle: 'Products - Admin',
 				products: [],
 				queryParams: req.query
 			});
@@ -179,6 +180,7 @@ exports.getUsers = async(req, res) => {
 
 		if (users.length === 0) {
 			res.render('admin/users', {
+				pageTitle: 'Users - Admin',
 				users: [],
 				queryParams: req.query
 			});
