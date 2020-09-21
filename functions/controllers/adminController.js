@@ -379,7 +379,8 @@ exports.editProductDetails = async(req, res) => {
 			images: req.body.img_url
 		});
 		// res.redirect('back');
-		// console.log();
+		// console.log(req.body.desc);
+		location.reload();
 		res.json({message: 'success'});
 	} catch(err) {
 		res.status(500)

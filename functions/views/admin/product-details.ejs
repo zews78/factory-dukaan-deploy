@@ -24,7 +24,8 @@
                 <p style="font-size: small;">* Please don't add any description in the product name</p><br>
                 <div class="row-control">
                     <h5>Specifications</h5>
-                    <button type="button" class="btnAddSpecs" data-toggle="modal" data-target="#ModalEditSpecification" >Edit Specs</button>
+                    <button type="button" class="btnAddSpecs" data-toggle="modal"
+                        data-target="#ModalEditSpecification">Edit Specs</button>
                 </div>
 
                 <div class="table-container" style="overflow-x:auto;">
@@ -58,7 +59,8 @@
                 </div>
 
                 <h5>Description</h5>
-                <textarea class="form-control" id="desc" rows="4"><%= prodDetails.desc %></textarea>
+                <input type="text" style="display:none;" value="<%= prodDetails.desc %>" id="nDesc">
+                <textarea onkeyup="changeTextArea()" class="form-control" id="desc" rows="4"><%= prodDetails.desc %></textarea>
             </div>
         </div><br>
 
@@ -68,9 +70,10 @@
                 <form>
                     <div class="form-group" id="custom_file" style="margin-bottom: 0;">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="addProductImages"
-                                accept=".jpg,.png" multiple data-show-upload="true" data-show-caption="true">
-                            <label class="custom-file-label" for="customFile"><i class="fas fa-upload"></i>Upload</label>
+                            <input type="file" class="custom-file-input" id="addProductImages" accept=".jpg,.png"
+                                multiple data-show-upload="true" data-show-caption="true">
+                            <label class="custom-file-label" for="customFile"><i
+                                    class="fas fa-upload"></i>Upload</label>
                             <div style="display: flex;"><progress style="display: none; margin: 3px;" value="0"
                                     max="100" id="uploader">0%</progress>
                                 <p id="prog_shot"></p>
@@ -99,47 +102,50 @@
                     <h5>Tags</h5>
                     <input type="text" class="form-control" id="prod_tags" name="product-name" placeholder="Enter a tag"
                         value="<%= prodDetails.keywords %>">
-                    <p style="font-size: small;">* Tags must be seperated by comma{,}</p>
+                        <p style="font-size: small;">* Tags must be seperated by comma{,}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="submit_det">
-            <button type="button" onclick="submitHandler()" class="btnSaveProduct"
-                style="margin-left: auto; margin-right: auto;">Save Product</button>
-        </div>
-    </div>
-</div><br>
-
-
-<!-- Modal - Edit Specifications -->
-<div id="ModalEditSpecification" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Specifications</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="submit_det">
+                <button type="button" onclick="submitHandler()" class="btnSaveProduct"
+                    style="margin-left: auto; margin-right: auto;">Save Product</button>
             </div>
+        </div>
+    </div><br>
 
-            <div class="modal-body">
-                <form action="/addreq" method="POST">
-                    <input type="text" id="specStore" value='' name="specs" style="display:none">
-                    <p id="specs_len" style="display:none"><%=Object.entries(prodDetails.specs).length%></p>
 
-                    <div class="form-group" id="specs-form">
-                        <%for(var i=0; i< Object.entries(prodDetails.specs).length; i++){%>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Specs</span>
+    <!-- Modal - Edit Specifications -->
+    <div id="ModalEditSpecification" class="modal fade">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Specifications</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="/addreq" method="POST">
+                        <input type="hidden" id="specStore" value='<%=prodDetails.specs%>' name="specs" >
+                        <p id="specs_len" style="display:none"><%=Object.entries(prodDetails.specs).length%></p>
+
+                        <div class="form-group" id="specs-form">
+                            <%for(var i=0; i< Object.entries(prodDetails.specs).length; i++){%>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Specs</span>
+                                </div>
+                                <input type="text" aria-label="First name" class="form-control border border-primary"
+                                    value="<%=Object.keys(prodDetails.specs)[i]%>" placeholder="Title"
+                                    id="specsTitle<%=i%>" required>
+                                <input type="text" aria-label="Last name" class="form-control border border-primary"
+                                    value="<%=Object.values(prodDetails.specs)[i]%>" placeholder="Description"
+                                    style="border-radius: 0;" id="specsDesc<%=i%>" required>
+                                <button style="border-radius: 0 6px 6px 0;" class="btn btn-sm btn-danger"
+                                    onclick="deleteSpecs('specsTitle<%=i%>')" type="button">
+                                    <span class="fa fa-trash fill"></span>
+                                </button>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control border border-primary" value="<%=Object.keys(prodDetails.specs)[i]%>"
-                                placeholder="Title" id="specsTitle<%=i%>" required>
-                            <input type="text" aria-label="Last name" class="form-control border border-primary" value="<%=Object.values(prodDetails.specs)[i]%>"
-                                placeholder="Description" style="border-radius: 0;" id="specsDesc<%=i%>" required>
-                            <button style="border-radius: 0 6px 6px 0;" class="btn btn-sm btn-danger" onclick="deleteSpecs('specsTitle<%=i%>')" type="button">
-                                <span class="fa fa-trash fill"></span>
-                            </button>
-                        </div>
-                        <%}%>
+                            <%}%>
                     </div>
 
                     <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button><br><br>
@@ -189,78 +195,83 @@
 
     var img_arr = [];
     var i_arr = document.getElementById('imgArrayX').innerText.split(',');
-    for(var i=0; i< i_arr.length; i++){
+    for (var i = 0; i < i_arr.length; i++) {
         img_arr.push(i_arr[i]);
     }
     console.log(img_arr);
+    // console.log(document.getElementById('specStore').value);
     // var i = 0;
     var fileButton = document.getElementById('addProductImages');
     var uploader = document.getElementById('uploader');
     var getId = document.getElementById('prog_shot');
 
 
-fileButton.addEventListener("change", function(e) {
-    // var i = 0;
-    console.log("i was detected");
-    // var getId = document.getElementById(`prog_shot${i}`);
-    getId.innerText = 'Uploading...';
-    getId.style.color = '#e76f51';
-    uploader.style.display = 'block';
-    //get file 
-    var file = e.target.files[0];
+    fileButton.addEventListener("change", function (e) {
+        // var i = 0;
+        console.log("i was detected");
+        // var getId = document.getElementById(`prog_shot${i}`);
+        getId.innerText = 'Uploading...';
+        getId.style.color = '#e76f51';
+        uploader.style.display = 'block';
+        //get file 
+        var file = e.target.files[0];
 
-    // create a storage ref
-    var storageRef = firebase.storage().ref('images/' + file.name);
+        // create a storage ref
+        var storageRef = firebase.storage().ref('images/' + file.name);
 
-    //upload files
-    var task = storageRef.put(file);
+        //upload files
+        var task = storageRef.put(file);
 
-    // console.log(file);
-    // console.log(task);
-    //update progress bar
-    task
-        .then(snapshot => snapshot.ref.getDownloadURL())
-        .then((url) => {
-            console.log(url);
-            img_arr.push(url);
-            $('#img_card').append(`<div class="card" style="position: relative;"><span class="close">&times;</span><img class="card-img-top" src="${url}" alt="Card image cap"></div>`);
-            console.log(img_arr);
-            document.getElementById('img_url').value = JSON.stringify(img_arr);
-            console.log(document.getElementById('img_url').value);
+        // console.log(file);
+        // console.log(task);
+        //update progress bar
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then((url) => {
+                console.log(url);
+                img_arr.push(url);
+                $('#img_card').append(`<div class="card" style="position: relative;"><span class="close">&times;</span><img class="card-img-top" src="${url}" alt="Card image cap"></div>`);
+                console.log(img_arr);
+                document.getElementById('img_url').value = JSON.stringify(img_arr);
+                console.log(document.getElementById('img_url').value);
 
+                // document.querySelector('#someImageTagID').src = url;
+            })
+            .catch(console.error);
+        task.on('state_changed',
+            function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                uploader.value = percentage;
+                if (percentage == 100) {
+                    // var getId = document.getElementById(`prog_shot${i}`);
+                    getId.innerText = "Done";
+                    getId.style.color = 'green';
+                }
 
-            // document.querySelector('#someImageTagID').src = url;
-        })
-        .catch(console.error);
-    task.on('state_changed',
-        function progress(snapshot) {
-            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            uploader.value = percentage;
-            if (percentage == 100) {
-                // var getId = document.getElementById(`prog_shot${i}`);
-                getId.innerText = "Done";
-                getId.style.color = 'green';
-            }
-
-        },
-        function error(err) {
-            console.log(err);
-        },
-        function complete() {
-            console.log('completed successfully');
-        })
+            },
+            function error(err) {
+                console.log(err);
+            },
+            function complete() {
+                console.log('completed successfully');
+            })
         // i++;
-});
+    });
 
-    function imgDel(i){
+    function imgDel(i) {
         $(`#imgNo${i}`).remove();
-        img_arr.splice(`${i}`,1);
+        img_arr.splice(`${i}`, 1);
         console.log(img_arr);
 
 
     }
 
+    // document.getElementById("desc").addEventListener("input", changeTextArea);
 
+    function changeTextArea() {
+        document.getElementById("nDesc").value = document.getElementById("desc").value;
+        // console.log('iwas hidnd');
+    };
 
     const submitHandler = () => {
         console.log('i was clicked');
@@ -272,11 +283,10 @@ fileButton.addEventListener("change", function(e) {
         xhr.send(JSON.stringify({
             uid: document.getElementById('prod-uid').innerText,
             title: document.getElementById('prod_name').value,
-            desc: document.getElementById('desc').innerHTML,
+            desc: document.getElementById('nDesc').value,
             keywords: document.getElementById('prod_tags').value,
             specs: document.getElementById('specStore').value,
             img_url: img_arr
-
         }));
         // xhr.onreadystatechange = function () {
         // 	if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -297,18 +307,31 @@ fileButton.addEventListener("change", function(e) {
         c = c + 1;
         counter++;
     }
-    function deleteSpecs(i){
+    function deleteSpecs(i) {
         console.log(i);
         $(`#${i}`).parent().remove();
         counter--;
     }
-
+    // var k = 0;
+    // var specs_obj = {};
+    // while (k < 15) {
+    //     if(document.getElementById(`specsTitle${k}`)){
+    //         var specsTitle = document.getElementById(`specsTitle${k}`);
+    //         var specsDesc = document.getElementById(`specsDesc${k}`);
+    //         specs_obj[specsTitle.value] = specsDesc.value;
+    //     }
+    //     i++;
+    // }
+    // console.log(specs_obj);
+    // console.log('holaaaa');
+    // document.getElementById('specStore').value = JSON.stringify(specs_obj);
+    window.addEventListener('load', submitx);
     function submitx() {
 
         var i = 0;
         var specs_obj = {};
         while (i < 15) {
-            if(document.getElementById(`specsTitle${i}`)){
+            if (document.getElementById(`specsTitle${i}`)) {
                 var specsTitle = document.getElementById(`specsTitle${i}`);
                 var specsDesc = document.getElementById(`specsDesc${i}`);
                 specs_obj[specsTitle.value] = specsDesc.value;
@@ -324,4 +347,4 @@ fileButton.addEventListener("change", function(e) {
 </script>
 
 <%- include('../partials/footer.ejs') %>
-<%- include('../partials/end.ejs') %>
+                            <%- include('../partials/end.ejs') %>
