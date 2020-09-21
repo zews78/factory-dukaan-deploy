@@ -64,15 +64,17 @@ include('../partials/admin/header.ejs') %>
 						</div>
 						<div class="col-1">
 							<label class="switch">
-								<input type="checkbox" id="subscription_toggle_<%= user.id %>"
-									onchange="updateSubscription('<%= user.id %>')" />
+                                <% if (user.packPurchased && user.expiresOn._seconds * 1000 > Date.now()) { %>
+                                        <input type="checkbox" id="subscription_toggle_<%= user.id %>" checked="true"
+                                        onchange="updateSubscription('<%= user.id %>')" />
+                                    <%} else { %>
+                                        <input type="checkbox" id="subscription_toggle_<%= user.id %>"
+                                        onchange="updateSubscription('<%= user.id %>')" />
+                                    <% } %>
 								<span class="slider"></span>
 							</label>
 						</div>
 						<div class="col-1 text-right">
-							<button class="btn btn-sm btn-warning" onclick="blockUser('<%= user.id %>')">
-								<span class="fa fa-ban"></span>
-							</button>
 							<button class="btn btn-sm btn-danger" onclick="deleteUser('<%= user.id %>')">
 								<span class="fa fa-trash"></span>
 							</button>
@@ -153,28 +155,7 @@ include('../partials/admin/header.ejs') %>
 		}
 	}
 
-	const blockUser = (userId) => {
-		const userListItem = document.getElementById('user_' + userId);
-		const xhr = new XMLHttpRequest();
-		const url = '/admin/user/' + userId + '/block';
-		xhr.open("POST", url);
-		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.send(JSON.stringify({
-			uid: userId,
-			block: !userListItem.classList.contains('text-warning')
-		}));
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == XMLHttpRequest.DONE) {
-				if (xhr.status === 200) {
-					if (userListItem.classList.contains('text-warning')) {
-						userListItem.classList.remove('text-warning');
-					} else {
-						userListItem.classList.add('text-warning');
-					}
-				}
-			}
-		}
-	}
+	
 </script>
 
 <%- include('../partials/end.ejs') %>

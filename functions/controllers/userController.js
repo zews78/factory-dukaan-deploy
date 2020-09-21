@@ -372,27 +372,32 @@ exports.getSellingPage = async(req, res)=>{
 		.collection('users')
 		.doc(req.uid)
 		.get();
-	const productsSnapshot = await firebase.firestore()
-		.collection('products')
-		.where('uid', '==', req.uid)
-		.get();
-	let products = [];
-	let productsId = [];
-	productsSnapshot.forEach(doc=>{
-		products.push(doc.data());
-	});
+	if(!user.data().packPurchased || user.data().expiresOn._seconds * 1000 < Date.now()) {
+		res.redirect('/pricing');
+	}else{
+		const productsSnapshot = await firebase.firestore()
+			.collection('products')
+			.where('uid', '==', req.uid)
+			.get();
+		let products = [];
+		let productsId = [];
+		productsSnapshot.forEach(doc=>{
+			products.push(doc.data());
+		});
 
-	productsSnapshot.forEach(doc=>{
-		productsId.push(doc.id);
-	});
+		productsSnapshot.forEach(doc=>{
+			productsId.push(doc.id);
+		});
 
-	res.render('user/sell-page.ejs', {
-		auth,
-		pageTitle: 'Sell Page',
-		user: user.data(),
-		products,
-		productsId
-	});
+		res.render('user/sell-page.ejs', {
+			auth,
+			pageTitle: 'Sell Page',
+			user: user.data(),
+			products,
+			productsId
+		});
+	}
+
 };
 
 exports.deleteProduct = async(req, res)=>{

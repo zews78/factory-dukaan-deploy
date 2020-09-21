@@ -294,19 +294,29 @@ exports.postUpdateSubscription = async(req, res) => {
 			.collection('users')
 			.doc(req.body.uid);
 		if (req.body.subscription) {
+			const expiresOn = new Date();
+			expiresOn.setDate(new Date()
+				.getDate() + +req.body.subscriptionValidity);
 			await userRef
 				.update({
 					subscriptions: firebase.firestore.FieldValue.arrayUnion({
-						start: firebase.firestore.Timestamp.now(),
-						end: firebase.firestore.Timestamp.fromMillis(firebase.firestore.Timestamp.now()
-							.toMillis() + +req.body.subscriptionValidity * 24 * 60 * 60 * 1000)
-					})
+						start: Date(Date.now()),
+						end: expiresOn,
+						nameOfPack: 'Silver'
+					}),
+					packPurchased: 'Silver',
+					expiresOn: expiresOn,
+					productLimit: 20
 				});
+
 		} else {
 			const userSnapshot = await userRef.get();
 			const subscriptions = userSnapshot.data().subscriptions;
-			subscriptions[subscriptions.length - 1].end = firebase.firestore.Timestamp.now();
-			await userRef.update({subscriptions});
+			subscriptions[subscriptions.length - 1].endedByAdmin = Date(Date.now());
+			await userRef.update({
+				subscriptions,
+				expiresOn: Date(Date.now())
+			});
 		}
 		res.json({message: 'success'});
 	} catch(err) {
