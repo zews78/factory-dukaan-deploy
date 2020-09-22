@@ -68,7 +68,7 @@ include('../partials/admin/header.ejs') %>
 						<div class="col-2"><%= product.title %></div>
 						<div class="col-2"><%= product.name %></div>
                         <div class="col-2"><%= product.price %></div>
-						<div class="col-2"><%= product.keywords %></div>
+						<div class="col-2" style="word-wrap: break-word;"><%= product.keywords %></div>
 						<div class="col-1 text-right">
 							<a href="/admin/product/<%= product.id %>">
 								<span class="fa fa-pencil-square-o"></span>
