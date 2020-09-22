@@ -54,15 +54,21 @@ exports.getProducts = async(req, res) => {
 
 		// Making products ready for passing to templating engine for rendering
 		const products = [];
-		productsSnapshot.forEach((product) => {
+		var dataFetching = new Promise((resolve)=>{ productsSnapshot.forEach(async(product) => {
+			const sellerDetail = await firebase.firestore()
+				.collection('users')
+				.doc(product.data().uid)
+				.get();
 			products.push({
 				id: product.id,
 				...product.data(),
-				createdOn: product.data().createdOn.toDate()
-					.toLocaleString()
+				ProductCreatedOn: product.data().createdOn
+					.toLocaleString(),
+				...sellerDetail.data()
 			});
-		});
-
+			resolve();
+		}); });
+		await dataFetching;
 		if (products.length === 0) {
 			res.render('admin/products', {
 				pageTitle: 'Products - Admin',

@@ -62,12 +62,13 @@ include('../partials/admin/header.ejs') %>
 							<span class="badge badge-<%= product.verified ? 'success' : 'danger' %>">
 								<%= product.verified ? 'Verified' : 'Not Verified' %>
 							</span>
-						</div>
-						<div class="col-2"><%= product.createdOn %></div>
+                        </div>
+                        
+						<div class="col-2"><%= new Date(product.createdOn._seconds*1000).toDateString() %></div>
 						<div class="col-2"><%= product.title %></div>
-						<div class="col-2"><%= product.sellerName %></div>
-						<div class="col-2">Rs.<%= product.price %></div>
-						<div class="col-2"><%= product.tags %></div>
+						<div class="col-2"><%= product.name %></div>
+                        <div class="col-2"><%= product.price %></div>
+						<div class="col-2"><%= product.keywords %></div>
 						<div class="col-1 text-right">
 							<a href="/admin/product/<%= product.id %>">
 								<span class="fa fa-pencil-square-o"></span>
