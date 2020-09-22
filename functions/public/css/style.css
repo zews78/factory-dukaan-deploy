@@ -380,7 +380,7 @@ header .fixed-top {
 	color: wheat;
 }
 .pricing-container .pricing-card-title {
-	font-size: 1.88rem;
+	font-size: 1.0rem;
 	color: tomato;
 }
 .pricing-container .pricing-card-title .text-mute {
@@ -390,8 +390,13 @@ header .fixed-top {
 	-webkit-text-fill-color: transparent;
 }
 .pricing-container .card-body {
-	height: 21em;
+	/* height: 21em; */
 }
+
+.card-body {
+	padding: 0.8rem;
+}
+
 .pricing-container .card-body a .btn-primary {
 	background-color: #000;
 	border-color: #000;
