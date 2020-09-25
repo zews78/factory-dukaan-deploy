@@ -14,8 +14,9 @@ body {
 }
 #trade-area {
 	display: flex;
-	margin: 12px 0 94px 4px;
+	margin: 0 0 0 4px;
 	padding: 10px;
+	height: 100vh;
 }
 .lang-select {
 	font-weight: lighter;
@@ -50,7 +51,8 @@ body {
 }
 #trade-area .text-area .trade-header {
 	font-size: 4vw;
-	width: 77%;
+	/* width: 77%; */
+	padding-top: 80px;
 	font-weight: bold;
 }
 #trade-area .text-area {
@@ -68,10 +70,10 @@ body {
 	color: #fff;
 }
 #trade-area .trade-img {
-	margin: 113px 59px 0 0;
+	/* margin: 113px 59px 0 0; */
 }
 #trade-area .trade-img img {
-	height: 24vw;
+	height: 30vw;
 }
 
 .wrapper {
@@ -118,11 +120,11 @@ body {
 	}
 	#trade-area .trade-img-mob img {
 		/* height: 10vw; */
-		height: 30vw;
+		height: 46vw;
 	}
 	#trade-area .trade-img-mob img {
-		height: 33vw;
-		margin: 19px -13px 0 0;
+		/* height: 33vw; */
+		/* margin: 19px -13px 0 0; */
 	}
 	#trade-area .text-area #head-img {
 		display: flex;
@@ -132,8 +134,8 @@ body {
 		font-size: 3.5vw;
 	}
 	#trade-area {
-		width: 93%;
-		margin: -9px 5px 5px 5px;
+		/* width: 93%; */
+		/* margin: -9px 5px 5px 5px; */
 		font-size: smaller;
 	}
 	#trade-area .text-area {
@@ -145,18 +147,19 @@ body {
 	}
 
 	.trade-btns button {
-		margin-top: 5px;
+		margin-top: 8px;
 	}
 
 	@media screen and (max-width: 312px) {
 		#trade-area .text-area .trade-btns #require {
-			margin: 5px 0 0 0;
+			margin: 8px 0 0 0;
 		}
 	}
 
 	#trade-area .text-area .trade-header {
 		font-size: 26px;
 		width: 55%;
+		padding-top: 0;
 	}
 	#search_group {
 		display: none;
