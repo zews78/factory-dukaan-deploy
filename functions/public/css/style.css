@@ -16,7 +16,7 @@ body {
 	display: flex;
 	margin: 0 0 0 4px;
 	padding: 10px;
-	height: 100vh;
+	/* height: 100vh; */
 }
 .lang-select {
 	font-weight: lighter;
@@ -52,7 +52,8 @@ body {
 #trade-area .text-area .trade-header {
 	font-size: 4vw;
 	/* width: 77%; */
-	padding-top: 80px;
+	padding-top: 40px;
+
 	font-weight: bold;
 }
 #trade-area .text-area {
@@ -73,7 +74,7 @@ body {
 	/* margin: 113px 59px 0 0; */
 }
 #trade-area .trade-img img {
-	height: 30vw;
+	height: 40vw;
 }
 
 .wrapper {
@@ -157,7 +158,7 @@ body {
 	}
 
 	#trade-area .text-area .trade-header {
-		font-size: 26px;
+		font-size: 18px;
 		width: 55%;
 		padding-top: 0;
 	}
