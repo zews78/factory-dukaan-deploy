@@ -51,7 +51,7 @@ body {
 }
 #trade-area .text-area .trade-header {
 	font-size: 3.8vw;
-	/* width: 77%; */
+	width: 77%;
 	padding-top: 40px;
 
 	font-weight: bold;
@@ -159,7 +159,7 @@ body {
 
 	#trade-area .text-area .trade-header {
 		font-size: 26px;
-		/* width: 55%; */
+		width: 55%;
 		padding-top: 0;
 	}
 	#trade-area .text-area .trade-header p {
