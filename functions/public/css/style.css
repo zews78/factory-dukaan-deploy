@@ -158,10 +158,15 @@ body {
 	}
 
 	#trade-area .text-area .trade-header {
-		font-size: 18px;
-		width: 55%;
+		font-size: 26px;
+		/* width: 55%; */
 		padding-top: 0;
 	}
+	#trade-area .text-area .trade-header p {
+		font-size: 12px !important;
+		margin-top: 5px;
+	}
+
 	#search_group {
 		display: none;
 	}
