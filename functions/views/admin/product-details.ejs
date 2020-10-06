@@ -162,7 +162,7 @@
     </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
@@ -273,31 +273,24 @@
         // console.log('iwas hidnd');
     };
 
-    const submitHandler = () => {
-        console.log('i was clicked');
-
-        const xhr = new XMLHttpRequest();
-        const url = '/admin/editProduct/';
-        xhr.open("POST", url);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify({
-            uid: document.getElementById('prod-uid').innerText,
+    const submitHandler = async () => {
+        const response=await axios({
+            method:"POST",
+            url:'/admin/editProduct/',
+            data:{
+                uid: document.getElementById('prod-uid').innerText,
             title: document.getElementById('prod_name').value,
             desc: document.getElementById('nDesc').value,
             keywords: document.getElementById('prod_tags').value,
             specs: document.getElementById('specStore').value,
             img_url: img_arr
-        }));
-        // xhr.onreadystatechange = function () {
-        // 	if (xhr.readyState == XMLHttpRequest.DONE) {
-        // 		if (xhr.status === 200) {
-        // 			const userListItem = document.getElementById('faq_' + faqId);
-        //             userListItem.classList += " d-none";
-        //             console.log(faqId + "->delted");
-        // 		}
-        // 	}
-        // }
-        // window.location.reload();
+            }
+        })
+        if(response.data.message==='success'){
+            location.reload();
+        }else{
+            console.error("SOMETHING WENT WRONG")
+        }
     }
     var counter = parseInt(document.getElementById('specs_len').innerText);
     var c = counter;

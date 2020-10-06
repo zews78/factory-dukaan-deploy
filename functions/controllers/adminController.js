@@ -380,13 +380,10 @@ exports.editProductDetails = async(req, res) => {
 		await userRef.update({
 			title: req.body.title,
 			desc: req.body.desc,
-			keywords: req.body.keywords,
+			keywords: keywordGenerator(req.body.title + ' ' + req.body.desc + ' ' + req.body.keywords),
 			specs: JSON.parse(req.body.specs),
 			images: req.body.img_url
 		});
-		// res.redirect('back');
-		// console.log(req.body.desc);
-		location.reload();
 		res.json({message: 'success'});
 	} catch(err) {
 		res.status(500)
