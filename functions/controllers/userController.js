@@ -433,6 +433,7 @@ exports.sellProduct = async(req, res)=>{
 
 	req.body.createdOn = new Date();
 	req.body.uid = req.uid;
+
 	const user =	await firebase.firestore()
 		.collection('users')
 		.doc(req.uid)
@@ -464,6 +465,7 @@ exports.sellProduct = async(req, res)=>{
 
 
 exports.postReview = async(req, res)=>{
+	console.log('POST REVIEW');
 	const productRef = await firebase.firestore()
 		.collection('products')
 		.doc(req.params.productId);

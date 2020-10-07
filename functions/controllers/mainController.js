@@ -143,16 +143,24 @@ exports.getProducts = async(req, res) => {
 };
 
 exports.getOneProduct = async(req, res) => {
-	const auth = (await isAuth(req))[0];
-
+	const userInfo = await isAuth(req);
+	const auth = userInfo[0];
+	req.uid = userInfo[1].uid;
+	let user;
+	let showReview;
+	if(req.uid) {
+		showReview = true;
+	}
 	const product = await firebase.firestore()
 		.collection('products')
 		.doc(req.params.productId)
 		.get();
-	const user = await firebase.firestore()
-		.collection('users')
-		.doc(req.uid)
-		.get();
+	if(req.uid) {
+		user = await firebase.firestore()
+			.collection('users')
+			.doc(req.uid)
+			.get();
+	}
 
 
 	const productReviews = product.data().reviews;
@@ -165,15 +173,14 @@ exports.getOneProduct = async(req, res) => {
 	let reviewed;
 	let inWishList;
 
-
-
-	if(user.data().wishlist.length > 0) {
-		for(let i = 0; i < user.data().wishlist.length; i++) {
-			if(product.id === user.data().wishlist[i]) {
-				inWishList = true;
+	if(req.uid) {
+		if(user.data().wishlist.length > 0) {
+			for(let i = 0; i < user.data().wishlist.length; i++) {
+				if(product.id === user.data().wishlist[i]) {
+					inWishList = true;
+				}
 			}
-		}
-	}
+		} }
 	if (productReviews) {
 		for (let i = 0; i < productReviews.length; i++) {
 			const review = {};
@@ -192,11 +199,6 @@ exports.getOneProduct = async(req, res) => {
 			reviews.push(review);
 		}
 	}
-
-
-	if (user.data().expiresOn._seconds * 1000 < Date.now()) {
-		console.log('PLEASE PURCHASE A PLAN');
-	}
 	res.render('main/productDetails.ejs', {
 		pageTitle: 'Product Details',
 		auth,
@@ -204,6 +206,7 @@ exports.getOneProduct = async(req, res) => {
 		productData: product.data(),
 		inWishList,
 		reviews,
+		showReview,
 		reviewed,
 		myReview,
 		sellerDetails: Seller.data(),
@@ -246,8 +249,6 @@ exports.getHelp = async(req, res) => {
 			.collection('q-a');
 		const snapshot = await FAQRef.get();
 		snapshot.forEach(doc => {
-			// console.log(doc.id, '=>', doc.data());
-			// const FAQ = doc.data();
 			FAQr.push({
 				id: doc.id,
 				...doc.data()
@@ -269,7 +270,6 @@ exports.postQuery = async(req, res) => {
 			.doc(req.uid)
 			.get();
 
-		// console.log(user.name);
 		var submitValue = {
 			type: req.body.Type,
 			title: req.body.Title,
@@ -282,7 +282,6 @@ exports.postQuery = async(req, res) => {
 		await firebase.firestore()
 			.collection('query')
 			.add(submitValue);
-		// console.log(submitValue);
 		console.log('Succesfully Submitted your Query/Complaint');
 		res.redirect('/help');
 	} catch (err) {
@@ -333,39 +332,6 @@ exports.getRequirement = async(req, res) => {
 exports.postAddRequirement = async(req, res) => {
 	try {
 
-		// firebase.firestore()
-		// var objx = new Object();
-		// var i = 0;
-		// while(req.body.title + i) {
-		// objx[req.body.title0] = req.body.value0;
-		// }
-		// console.log(JSON.parse(req.body.specs));
-
-
-		// var ref = storage()
-		// .ref();
-		// var file = event.target.files[0];
-		// var name = (+new Date()) + '-' + file.name;
-		// var metadata = {contentType: file.type};
-		// var task = ref.child(name)
-		// 	.put(file, metadata);
-		// task
-		// 	.then(snapshot => snapshot.ref.getDownloadURL())
-		// 	.then((url) => {
-		// 		console.log(url);
-		// 		// document.querySelector('#someImageTagID').src = url;
-		// 	})
-		// 	.catch(console.error);
-
-		// console.log(ref, file, name, metadata);
-
-		// if(req.body.img_url != '') {
-		// 	var imgx = JSON.parse(req.body.img_url);
-		// }
-		// else{
-		// 	var imgx = req.body.img_url;
-		// }
-
 		await firebase.firestore()
 			.collection('requirements')
 			.add({
@@ -378,16 +344,9 @@ exports.postAddRequirement = async(req, res) => {
 				desc: req.body.desc,
 				quantity: req.body.quantity,
 				createdOn: new Date(),
-				// audio: req.body.audio_url,
 				images: req.body.img_url == '' ? req.body.img_url : JSON.parse(req.body.img_url)
 			});
-		// console.log(tit);
-
-		// console.log(req.body.quantity);
-		// var c = req.body.audio_url;
-		// console.log('Succesfully created a req');
 		console.log(req.body);
-		// console.log(JSON.stringify(req.body.specs));
 		res.redirect('/requirement');
 	} catch (err) {
 		console.log(err);
@@ -402,7 +361,6 @@ exports.getOneRequirement = async(req, res) => {
 		.collection('requirements')
 		.doc(req.params.reqId)
 		.get();
-	// console.log(requirement.data());
 	const reqUser = await firebase.firestore()
 		.collection('users')
 		.doc(requirement.data().uid)

@@ -199,31 +199,21 @@
         img_arr.push(i_arr[i]);
     }
     console.log(img_arr);
-    // console.log(document.getElementById('specStore').value);
-    // var i = 0;
     var fileButton = document.getElementById('addProductImages');
     var uploader = document.getElementById('uploader');
     var getId = document.getElementById('prog_shot');
 
 
     fileButton.addEventListener("change", function (e) {
-        // var i = 0;
         console.log("i was detected");
-        // var getId = document.getElementById(`prog_shot${i}`);
         getId.innerText = 'Uploading...';
         getId.style.color = '#e76f51';
         uploader.style.display = 'block';
-        //get file 
+       
         var file = e.target.files[0];
-
-        // create a storage ref
-        var storageRef = firebase.storage().ref('images/' + file.name);
-
-        //upload files
+        var storageRef = firebase.storage().ref('images/' + file.name);        
         var task = storageRef.put(file);
 
-        // console.log(file);
-        // console.log(task);
         //update progress bar
         task
             .then(snapshot => snapshot.ref.getDownloadURL())
@@ -295,7 +285,6 @@
     var counter = parseInt(document.getElementById('specs_len').innerText);
     var c = counter;
     function specsHandler() {
-        // console.log(Object.entries(prodDetails.specs).length);
         $('#specs-form').append(`<div class="input-group ${c}"><div class="input-group-prepend"><span class="input-group-text">Specs</span></div> <input type="text" name="title${c}" aria-label="First name" class="form-control border border-primary" placeholder="Title${c}" id="specsTitle${c}"><input type="text" name="value${c}" aria-label="Last name" class="form-control border border-primary" placeholder="Description${c}" id="specsDesc${c}" style="border-radius: 0;"></div>`)
         c = c + 1;
         counter++;
@@ -305,19 +294,6 @@
         $(`#${i}`).parent().remove();
         counter--;
     }
-    // var k = 0;
-    // var specs_obj = {};
-    // while (k < 15) {
-    //     if(document.getElementById(`specsTitle${k}`)){
-    //         var specsTitle = document.getElementById(`specsTitle${k}`);
-    //         var specsDesc = document.getElementById(`specsDesc${k}`);
-    //         specs_obj[specsTitle.value] = specsDesc.value;
-    //     }
-    //     i++;
-    // }
-    // console.log(specs_obj);
-    // console.log('holaaaa');
-    // document.getElementById('specStore').value = JSON.stringify(specs_obj);
     window.addEventListener('load', submitx);
     function submitx() {
 
