@@ -36,7 +36,7 @@ exports.getUserProfile = async(req, res) => {
 				req_prod.push(productData);
 			});
 		}
-		console.log(req_prod);
+		// console.log(req_prod);
 
 		const productsSnapshot = await firebase.firestore()
 			.collection('products')
@@ -399,6 +399,7 @@ exports.getSellingPage = async(req, res)=>{
 		productsSnapshot.forEach(doc=>{
 			products.push(doc.data());
 		});
+		// console.log(products);
 
 		productsSnapshot.forEach(doc=>{
 			productsId.push(doc.id);
