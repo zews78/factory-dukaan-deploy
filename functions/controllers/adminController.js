@@ -226,7 +226,6 @@ exports.getUsers = async(req, res) => {
 				queryString += query + '=' + queryParams[query] + '&';
 			}
 		}
-
 		res.render('admin/users', {
 			pageTitle: 'Users - Admin',
 			users,

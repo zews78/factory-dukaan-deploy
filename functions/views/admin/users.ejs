@@ -40,12 +40,15 @@ include('../partials/admin/header.ejs') %>
 				<div href="#" class="list-group-item list-group-item-action bg-dark text-light">
 					<div class="row">
 						<div class="col-1">Account Opening Date</div>
-						<div class="col-2">Name</div>
-						<div class="col-2">Company's Name</div>
+                        <div class="col-1">Name</div>
+						<div class="col-1">Company's Name</div>
 						<div class="col-1 mr-25">Mobile Number</div>
 						<div class="col-2">Email</div>
 						<div class="col-1 mr-25">GST Number</div>
-						<div class="col-1">Subscription</div>
+						<div class="col-1">Plan</div>
+						<div class="col-1">Plan Expiry</div>
+						<div class="col-1 mr-25">GST Number</div>
+                        <div class="col-1">Subscription</div>
 					</div>
 				</div>
 				<% for (let user of users) { %>
@@ -53,8 +56,8 @@ include('../partials/admin/header.ejs') %>
 					id="user_<%= user.id %>">
 					<div class="row">
 						<div class="col-1"><%= user.createdOn %></div>
-						<div class="col-2"><%= user.name %></div>
-						<div class="col-2"><%= user.company && user.company.name %></div>
+                        <div class="col-1"><%= user.name %></div>
+						<div class="col-1"><%= user.company && user.company.name %></div>
 						<div class="col-1 mr-25"><%= user.mobile %></div>
 						<div class="col-2"><%= user.email %></div>
 						<div class="col-1 mr-25">
@@ -62,6 +65,8 @@ include('../partials/admin/header.ejs') %>
 								<%= user.gstNo || 'Not Verified' %>
 							</span>
 						</div>
+						<div class="col-1">some text</div>
+						<div class="col-1">some text</div>
 						<div class="col-1">
 							<label class="switch">
                                 <% if (user.packPurchased && user.expiresOn._seconds * 1000 > Date.now()) { %>
@@ -76,9 +81,10 @@ include('../partials/admin/header.ejs') %>
 						</div>
 						<div class="col-1 text-right">
 							<button class="btn btn-sm btn-danger" onclick="deleteUser('<%= user.id %>')">
-								<span class="fa fa-trash"></span>
-							</button>
-						</div>
+                                <span class="fa fa-trash"></span>
+                            </button>
+                        </div>
+                        
 					</div>
 				</div>
 				<% } %>

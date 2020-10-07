@@ -117,19 +117,6 @@
                                     
                                 </div>
                                 
-                                <!-- <div class="price-quote">
-                                    <div class="row">
-                                        <h5>Enter Product Quantity</h5>
-                                    </div>
-                                    <div class="row">
-                                        <label for="product-quantity"><strong> Quantity&nbsp; </strong></label>
-                                        <input type="text" name="quantity" id="product-quantity" class="quantity-text" placeholder="10">
-                                    </div>
-                                    <div class="row">
-                                        <button type="submit" class="btnPrice">Get Latest Price</button>
-                                    </div>
-                                </div> -->
-                                
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <div class="btn-group pull-right">
                                         
@@ -241,39 +228,45 @@
                                 </form>
                                 
                                 
-                                <%}else{%><form method="post" class="well padding-bottom-10" onsubmit="return false;">
-                                    <section class='rating-widget'>
-                                        <!-- Rating Stars Box -->
-                                        <div class='rating-stars text-center'>
-                                          <ul id='stars'>
-                                            <li class='star'  data-value='1'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' data-value='2'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' data-value='3'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' data-value='4'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' data-value='5'>
-                                              <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                          </ul>
-                                          <p id="rating-warning" style="color: red;"></p>
-                                        </div>
-                                      </section>
-                                      
-                                      <input type="hidden" id="rating" value='' />
-                                    <textarea rows="2" class="form-control" placeholder="Write a review" id="review" onchange="reviewBox()"></textarea>
-                                    <div class="margin-top-10">
-                                        <button type="button" class="btn btn-sm btn-primary pull-right" onclick="submitReviewHandler()">
-                                            Submit Review
-                                        </button>
-                                    </div>
-                                </form><% } %>
+                                <%}else{%>
+                                    <% if (showReview) { %>
+                                        <form method="post" class="well padding-bottom-10" onsubmit="return false;">
+                                            <section class='rating-widget'>
+                                                <!-- Rating Stars Box -->
+                                                <div class='rating-stars text-center'>
+                                                  <ul id='stars'>
+                                                    <li class='star'  data-value='1'>
+                                                      <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='2'>
+                                                      <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='3'>
+                                                      <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='4'>
+                                                      <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='5'>
+                                                      <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                  </ul>
+                                                  <p id="rating-warning" style="color: red;"></p>
+                                                </div>
+                                              </section>
+                                              
+                                              <input type="hidden" id="rating" value='' />
+                                            <textarea rows="2" class="form-control" placeholder="Write a review" id="review" onchange="reviewBox()"></textarea>
+                                            <div class="margin-top-10">
+                                                <button type="button" class="btn btn-sm btn-primary pull-right" onclick="submitReviewHandler()">
+                                                    Submit Review
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <%} else { %>
+                                            <p>Please Login To Post A Review <a href="/login">LOGIN</a></p>
+                                        <% } %>
+                                    <% } %>
                                 
                             
                             <br> <br>
@@ -430,9 +423,10 @@ const reviewBox=()=>{
 
 const submitReviewHandler=async ()=>{
     var productId= document.getElementById('productId').value ;
+    console.log(document.getElementById('rating').value);
     
-    if(document.getElementById('rating').value===''){
-        console.log('lease add star')
+    if(document.getElementById('rating').value==="NaN"){
+        console.log('Please Give A rating')
         document.getElementById('rating-warning').innerHTML='Please Give A Rating';
     }
     if(!document.getElementById('review').value){
@@ -448,12 +442,12 @@ const submitReviewHandler=async ()=>{
             review: document.getElementById('review').value
         }
     })
-    loader.className = 'loader hidden'; // class "loader hidden"
+    loader.className = 'loader hidden';
 
     if(res.data.status==='success'){
         location.reload();
     }else{
-        console.log(res.data);
+        console.log(res);
     }
     }
 
