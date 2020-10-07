@@ -24,6 +24,20 @@ exports.getUserProfile = async(req, res) => {
 			throw new Error('user not found');
 		}
 
+		const reqSnapshot = await firebase.firestore()
+			.collection('requirements')
+			.where('uid', '==', userId)
+			.get();
+		let req_prod = [];
+		if (!reqSnapshot.empty) {
+			reqSnapshot.forEach(product => {
+				let productData = product.data();
+				productData.id = product.id;
+				req_prod.push(productData);
+			});
+		}
+		console.log(req_prod);
+
 		const productsSnapshot = await firebase.firestore()
 			.collection('products')
 			.where('uid', '==', userId)
@@ -61,7 +75,8 @@ exports.getUserProfile = async(req, res) => {
 				...userSnapshot.data(),
 				id: userId
 			},
-			products
+			products,
+			req_prod
 		}); }
 
 };

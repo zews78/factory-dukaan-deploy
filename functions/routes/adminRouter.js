@@ -14,6 +14,9 @@ router.get('/query', adminController.getQuery);
 router.delete('/query', adminController.deleteQuery);
 router.post('/query/update-status', adminController.postUpdateStatus);
 
+router.get('/requirements', adminController.getReq);
+router.delete('/requirements', adminController.deleteReq);
+
 
 router.get('/products', adminController.getProducts);
 router.get('/product/:productId', adminController.getPrdouctDetails);

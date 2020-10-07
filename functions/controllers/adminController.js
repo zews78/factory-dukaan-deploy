@@ -527,6 +527,51 @@ exports.deleteQuery = async(req, res) => {
 	}
 };
 
+exports.getReq = async(req, res) => {
+	try{
+		var reqR = [];
+
+		const QueryRef = firebase.firestore()
+			.collection('requirements');
+		// const doc = await QueryRef.get();
+		// const Query = doc.data();
+
+		const snapshot = await QueryRef
+			.orderBy('createdOn', 'desc')
+			.get();
+		snapshot.forEach(doc => {
+			// console.log(doc.id, '=>', doc.data());
+			// const FAQ = doc.data();
+			reqR.push({
+				id: doc.id,
+				...doc.data(),
+				createdOn: doc.data().createdOn.toDate()
+					.toLocaleString()
+			});
+		});
+		// console.log(reqR);
+		res.render('admin/req.ejs', {
+			pageTitle: 'requirements - Admin',
+			reqR
+		});
+	} catch(err) {
+		console.log(err);
+	}
+};
+exports.deleteReq = async(req, res) => {
+	try {
+		const queryRef = firebase.firestore()
+			.collection('requirements')
+			.doc(req.body.uid);
+		await queryRef.delete();
+		res.json({message: 'success'});
+	} catch(err) {
+		res.status(500)
+			.json({message: 'failed'});
+	}
+};
+
+
 exports.postUpdateStatus = async(req, res) => {
 	try {
 		var status = req.body.status;

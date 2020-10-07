@@ -579,7 +579,14 @@ header .fixed-top {
 	width: 250px;
 }
 
+#req-def-img{
+	height: 19vw;
+	background-color: #f4f3ee;
+}
 @media screen and (max-width: 750px) {
+	#req-def-img{
+		height: 50vw;
+	}
 	.row {
 		flex-direction: column;
 	}

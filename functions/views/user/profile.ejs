@@ -136,7 +136,32 @@
             </div>
 
             <div id="my-requirements" class="tabcontent">
-                <div class="row">
+                <% if(req_prod.length > 0) { %>
+                    <div class="row">
+                        <% for (let prod in req_prod) { %>
+                            <div class="card">
+                                <%if(req_prod[prod].images){%>
+                                <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                                <%}else{%>
+                                    <img src="/images/product1.jpg" class="card-img-top" alt="...">
+                                <%}%>
+                                <div class="card-body text-center">
+                                    <p class="card-text" style="margin-bottom: 0;">Name: <%=req_prod[prod].product_name%></p>
+                                    <p class="card-text" style="margin-bottom: 0;">Price: <%=req_prod[prod].price%></p>
+                                    <p class="card-text" style="margin-bottom: 0;">Quantity: <%=req_prod[prod].quantity%></p>
+                                    <p class="card-text" style="margin-bottom: 0;">Material Used: <%=req_prod[prod].material_used%></p>
+                                    <small class="card-text">Posted on: <%=req_prod[prod].createdOn.toDate().toJSON().slice(0,10).replace(/-/g,'/')%></small>
+                                    <a href="/requirement/<%=req_prod[prod].id%>"><button type="button" class="btn btn-primary btn-sm">View More</button></a>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                    <% } else { %>
+                    <div class="text-center">
+                        <h3>You haven't created any Requirement.</h3>
+                    </div>
+                    <% } %>
+                <!-- <div class="row">
                     <div class="card">
                         <img src="/images/product1.jpg" class="card-img-top" alt="...">
                         <div class="card-body text-center">
@@ -169,7 +194,7 @@
                             <button type="button" class="btn btn-primary btn-sm">View More</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
