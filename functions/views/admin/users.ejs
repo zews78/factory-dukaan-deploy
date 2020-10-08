@@ -65,8 +65,13 @@ include('../partials/admin/header.ejs') %>
 								<%= user.gstNo || 'Not Verified' %>
 							</span>
 						</div>
-						<div class="col-1">some text</div>
-						<div class="col-1">some text</div>
+                        <% if (user.packPurchased && user.expiresOn._seconds * 1000 > Date.now()) { %>
+                            <div class="col-1"><%= user.packPurchased %></div>
+                            <div class="col-1"><%= new Date(user.expiresOn._seconds*1000).toDateString() %></div>
+                        <%}else { %>
+                            <div class="col-1">-</div>
+                            <div class="col-1">-</div>
+                            <% }%>
 						<div class="col-1">
 							<label class="switch">
                                 <% if (user.packPurchased && user.expiresOn._seconds * 1000 > Date.now()) { %>

@@ -95,9 +95,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Price</label>
+                        <label class="control-label">Price  (Please Provide Price of an individual piece)</label>
                         <div>
-                            <input type="text" class="form-control input-lg" name="company-name" id="priceInput">
+                            <input type="number" class="form-control input-lg" name="company-name" id="priceInput">
                         </div>
                     </div>
                     
@@ -162,9 +162,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Price</label>
+                        <label class="control-label">Price  (Please Provide Price of an individual piece)</label>
                         <div>
-                            <input type="text" required class="form-control input-lg" name="company-name" id="addPriceInput">
+                            <input type="number" required class="form-control input-lg" name="company-name" id="addPriceInput">
                         </div>
                     </div>
                     
@@ -204,11 +204,8 @@
                                     max="100" id="uploader">0%</progress>
                                 <p id="prog_shot"></p>
                             </div>
-                            <!-- <input type="button" onclick="uploadImage()"> -->
                         </div>
                     </div>
-                    <!-- <button type="button" class="btn btn-primary" onclick="imgHandler()">Add more</button> -->
-                    <!-- <input type="text" id="img_url" style="display: none;" value="" name="img_url"> -->
                     <div id="img_name" style="border: 1px solid #04599F;border-radius: 4px;"></div><br>
 
                     <div class="form-group">
@@ -386,7 +383,7 @@
         editButtons[i].onclick=async function(e){
             productId=this.id;
             document.getElementById('titleInput').value=document.getElementById(this.id+" title").value;
-            document.getElementById('priceInput').value=document.getElementById(this.id+" price").value;
+            document.getElementById('priceInput').value=+document.getElementById(this.id+" price").value;
             document.getElementById('descInput').innerText=document.getElementById(this.id+" desc").value;
             document.getElementById('productID').innerText="Product ID: "+" " + this.id;
         }

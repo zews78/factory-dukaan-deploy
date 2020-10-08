@@ -54,7 +54,7 @@
                             
                             <p><%= product.desc %></p>
                             <div class="product-bottom-details">
-                                <div class="product-price"><%= '₹ ' + product.price %></div>
+                                <div class="product-price"><%= '₹ ' + product.price %>/piece</div>
                                 <div class="product-links">
                                     <% if (product.inWishList) {%>
                                         <a href="#!" id="<%= product.id %>-wishlist" class="addToWishList"><i class="fa fa-heart" id="<%= product.id %>-heart" style="color:red "></i></a>
