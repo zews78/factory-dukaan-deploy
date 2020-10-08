@@ -63,6 +63,8 @@
                         <input type="hidden" name="product-id" value='<%= products[i].title %>' id='<%= productsId[i] %> title'/>
                         <input type="hidden" name="product-id" value='<%= products[i].price %>' id='<%= productsId[i] %> price'/>
                         <input type="hidden" name="product-id" value='<%= products[i].desc %>' id='<%= productsId[i] %> desc'/>
+                        <input type="hidden" name="product-id" value='<%= products[i].images %>' id='<%= productsId[i] %> img'/>
+                        
                         <div class="col-md-2">
                             <button type="button" class="btn btn-primary editButton" data-toggle="modal" data-target="#ModalEditForm1" id='<%= productsId[i] %>'>Edit</button>
                             <button type="button" class="btn btn-danger deleteButton" id='<%= productsId[i] %>' >Delete</button>
@@ -107,6 +109,7 @@
                             <textarea class="form-control"  rows="4" id="descInput"></textarea>
                         </div>
                     </div>
+                    <div style="display: none;" id="imgArrayXr"></div>
                     
 
 
@@ -175,24 +178,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label">Keywords <small>(seperated by comma)</small> </label>
-                        <div>
-                            <input type="text" required class="form-control input-lg" name="company-name" id="addKeywordsInput">
-                        </div>
-                    </div>
 
-                    <div class="form-group" id="specs-form">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                            <span class="input-group-text">Specifications</span>
-                            </div>
-                            <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0" required>
-                            <input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
-                        </div>
-                    </div>
-
-                    <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button>
 
                     <div class="form-group" id="custom_file" style="margin-bottom: 0;">
                         <label class="control-label">Product Images</label>
@@ -207,6 +193,26 @@
                         </div>
                     </div>
                     <div id="img_name" style="border: 1px solid #04599F;border-radius: 4px;"></div><br>
+
+                    <div class="form-group" id="specs-form">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">Specifications</span>
+                            </div>
+                            <input type="text" aria-label="First name" class="form-control border border-primary" placeholder="Title" id="specsTitle0" required>
+                            <input type="text" aria-label="Last name" class="form-control border border-primary" placeholder="Description" style="border-radius: 0;" id="specsDesc0" required>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="specsHandler()">Add more specs</button>
+
+                    <div class="form-group">
+                        <label class="control-label">Keywords <small>(seperated by comma)</small> </label>
+                        <div>
+                            <input type="text" required class="form-control input-lg" name="company-name" id="addKeywordsInput">
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <div>
@@ -386,12 +392,20 @@
             document.getElementById('priceInput').value=+document.getElementById(this.id+" price").value;
             document.getElementById('descInput').innerText=document.getElementById(this.id+" desc").value;
             document.getElementById('productID').innerText="Product ID: "+" " + this.id;
+            document.getElementById('imgArrayXr').innerText=document.getElementById(this.id+" img").value;
+            // console.log(document.getElementById(this.id+"img").value);
         }
     }
 
     const editHandler=async()=>{
       
        try{
+           var img_arrr = [];
+            var i_arr = document.getElementById('imgArrayXr').innerText.split(',');
+            for (var i = 0; i < i_arr.length; i++) {
+                img_arrr.push(i_arr[i]);
+            }
+            console.log(img_arrr);
             const loader = document.querySelector('.loader');
             loader.className = 'loader'; // class "loader"
             const response=await axios({
@@ -403,7 +417,7 @@
                     price:document.getElementById('priceInput').value,
                     title:document.getElementById('titleInput').value,
                     desc:document.getElementById('descInput').value,
-                    images: img_arr
+                    images: img_arrr
                 }
                 
             }
