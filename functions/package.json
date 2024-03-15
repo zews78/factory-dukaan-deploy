@@ -13,7 +13,7 @@
     "build": "babel functions -d dist"
   },
   "engines": {
-    "node": "20.10.0"
+    "node": "18"
   },
   "repository": {
     "type": "git",
