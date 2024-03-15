@@ -1,6 +1,7 @@
 const firebase = require('../firebase');
 const axios = require('axios');
-const config = require('../config');
+const config = require('../.config');
+// const x = require('../')D:\personal_projects\factory-dukaan\functions\.config
 const razorpay = require('razorpay');
 const keywordGenerator = require('../utils/keywordGenerator');
 const isAuth = require('../utils/isAuth');
@@ -216,7 +217,7 @@ exports.getUserPayment = async(req, res) => {
 		let amount = {};
 		let sellingLimit;
 		let duration;
-		if(req.query.package === 'silver') {
+		if(req.query.packageName === 'silver') {
 			if(req.query.duration === 'half') {
 				amount = {amount: config.razorpay.silverPackage.half};
 				duration = 6;
@@ -227,7 +228,7 @@ exports.getUserPayment = async(req, res) => {
 			}
 			sellingLimit = 30;
 		}
-		if(req.query.package === 'gold') {
+		if(req.query.packageName === 'gold') {
 			if(req.query.duration === 'half') {
 				amount = {amount: config.razorpay.goldPackage.half};
 				duration = 6;
@@ -238,7 +239,7 @@ exports.getUserPayment = async(req, res) => {
 			}
 			sellingLimit = 50;
 		}
-		if(req.query.package === 'platinum') {
+		if(req.query.packageName === 'platinum') {
 			if(req.query.duration === 'half') {
 				amount = {amount: config.razorpay.platinumPackage.half};
 				duration = 6;
@@ -260,8 +261,8 @@ exports.getUserPayment = async(req, res) => {
 					auth,
 					amount: amount,
 					key_id: config.razorpay.key_id,
-					packageName: req.query.package.charAt(0)
-						.toUpperCase() + req.query.package.slice(1)
+					packageName: req.query.packageName.charAt(0)
+						.toUpperCase() + req.query.packageName.slice(1)
 				});
 
 			})
@@ -279,16 +280,17 @@ exports.paymentVerification = async(req, res)=>{
 	var expectedSignature = crypto.createHmac('sha256', config.razorpay.key_secret)
 		.update(body.toString())
 		.digest('hex');
-	let package = null;
+	let packageName = null;
+	
 	let productLimit = null;
 	let duration;
 	if(req.body.amount === config.razorpay.silverPackage.half || req.body.amount === config.razorpay.silverPackage.full) {
-		if(req.body.amount === config.razorpay.silverPackage.half) {
+		if(req.body.amount === config.razorpay.packageName.half) {
 			duration = 6 * 30;
 		}else{
 			duration = 12 * 30;
 		}
-		package = 'Silver';
+		packageName = 'Silver';
 		productLimit = config.razorpay.silverSellLimit;
 	}
 	if(req.body.amount === config.razorpay.goldPackage.half || req.body.amount === config.razorpay.goldPackage.full) {
@@ -297,7 +299,7 @@ exports.paymentVerification = async(req, res)=>{
 		}else{
 			duration = 12 * 30;
 		}
-		package = 'Gold';
+		packageName = 'Gold';
 		productLimit = config.razorpay.goldSellLimit;
 	}
 	if(req.body.amount === config.razorpay.platinumPackage.half || req.body.amount === config.razorpay.platinumPackage.full) {
@@ -306,7 +308,7 @@ exports.paymentVerification = async(req, res)=>{
 		}else{
 			duration = 12 * 30;
 		}
-		package = 'Platinum';
+		packageName = 'Platinum';
 		productLimit = config.razorpay.platinumSellLimit;
 	}
 	const expiresOn = new Date();
@@ -319,13 +321,13 @@ exports.paymentVerification = async(req, res)=>{
 			.getDate() + duration);
 		try{ userRef
 			.update({
-				packPurchased: package,
+				packPurchased: packageName,
 				expiresOn: expiresOn,
 				productLimit,
 				subscriptions: firebase.firestore.FieldValue.arrayUnion({
 					start: Date(Date.now()),
 					end: expiresOn,
-					nameOfPack: package
+					nameOfPack: packageName
 				})
 			});
 		}catch(error) {
@@ -523,7 +525,7 @@ exports.postReview = async(req, res)=>{
 
 exports.getPlanValidities = async(req, res)=>{
 	const auth = (await isAuth(req))[0];
-	let plan = req.query.package;
+	let plan = req.query.packageName;
 	let prices;
 	if(plan === 'silver') {
 		prices = config.razorpay.silverPackage;

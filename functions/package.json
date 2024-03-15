@@ -9,10 +9,11 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "dev": "nodemon server.js -e js,ejs,css,json"
+    "dev": "nodemon server.js -e js,ejs,css,json",
+    "build": "babel functions -d dist"
   },
   "engines": {
-    "node": "10"
+    "node": "20.10.0"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
   },
   "homepage": "https://github.com/anirudhganwal06/factory-dukaan#readme",
   "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.24.0",
     "eslint": "^7.4.0",
     "eslint-plugin-promise": "^4.0.1",
     "firebase-functions-test": "^0.2.0",
