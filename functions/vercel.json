@@ -3,9 +3,12 @@
     "buildCommand": "npm run build",
     "devCommand": "npm start",
     "installCommand": "npm install",
+    "env": {
+      "PORT": "3001"
+    },
     "builds": [
       {
-        "src": "./server.js",
+        "src": "./index.js",
         "use": "@vercel/node"
       }
     ],

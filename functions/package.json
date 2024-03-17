@@ -2,15 +2,15 @@
   "name": "factory-dukaan",
   "version": "1.0.0",
   "description": "Connecting sellers and buyers",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint .",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
-    "start": "node server.js",
+    "start": "node index.js",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "dev": "nodemon server.js -e js,ejs,css,json",
+    "dev": "nodemon index.js -e js,ejs,css,json",
     "build": "babel ./ -d dist"
   },
   "engines": {

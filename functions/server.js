@@ -1,7 +1,4 @@
-
+const functions = require('firebase-functions');
 const app = require('./app');
 
-const port = 3001;
-app.listen(port, () => {
-	console.log(`Server Started on port ${port}`);
-});
+exports.app = functions.https.onRequest(app);

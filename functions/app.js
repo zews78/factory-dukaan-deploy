@@ -14,9 +14,20 @@ app.use(bodyParser.json());
 // parse cookies
 app.use(cookieParser());
 
+
 // Setting ejs as view engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+
+//set path
+const path = require('path');
+app.set('views', path.join(__dirname, 'views'));
+app.use('/css', express.static(path.join(__dirname, 'public/css')));
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
+app.use('/png', express.static(path.join(__dirname, 'public/images')));
+
+
 
 // importing all necessary routes
 
